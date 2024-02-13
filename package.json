@@ -32,12 +32,9 @@
     "primereact": "^10.0.5",
     "puppeteer": "^21.6.0",
     "react": "^18.2.0",
-    "react-big-calendar": "^1.8.6",
-    "react-calendar": "^4.8.0",
     "react-chartjs-2": "^5.2.0",
     "react-datepicker": "^4.25.0",
     "react-dom": "^18.2.0",
-    "react-full-calendar": "^0.12.3",
     "react-joyride": "^2.7.1",
     "react-owl-carousel": "^2.3.3",
     "react-pdf": "^7.6.0",
@@ -47,7 +44,6 @@
     "react-scheduler": "^0.1.0",
     "react-slick": "^0.30.1",
     "regenerator-runtime": "^0.13.11",
-    "require": "^0.4.4",
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
