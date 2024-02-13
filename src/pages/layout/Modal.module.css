@@ -1,0 +1,134 @@
+.modalWrapper {
+    position: fixed;
+    top: 50px;
+    right: 40px;
+    /* overflow: scroll; */
+}
+
+.modal{
+    min-width: 200px;
+    min-height: 200px;
+    background: white;
+    width: 20px;
+    height: 11.17px;
+    color: black;
+    font-size: 14px;
+    padding-top: 30px;
+    padding-left: 20px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    border-radius: 10px;
+    overflow: scroll;
+    /* border: 1px solid; */
+    box-shadow: 0 0 8px rgb(0,0,0,0.15);
+}
+
+
+.Settings{
+    padding-bottom: 10px;
+}
+
+.Avatar{
+    padding-bottom: 10px;
+}
+
+.Temperature{
+    padding-bottom: 10px;
+}
+
+.temperatureTokenBlock span ::before {
+    box-shadow: none !important;
+}
+
+.temperatureTokenBlock span {
+    box-shadow: none !important;
+    color: #00A7A6 !important;
+    max-width: 150px;
+}
+
+.temperatureTokenBlock span span:nth-child(3) {
+    background-color: #9FB5CA;
+}
+.temperatureTokenBlock span span:nth-child(5) {
+    background-color: #9FB5CA;
+}
+
+
+.avatarInputContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 3px;
+    min-width: 120px;
+    width: 120px;
+    height: 32px;
+    border-radius: 5px;  
+    border:1px solid #D0D5DD;
+    outline:0px;
+    font-family: var(--common-font-family);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    color: #000000;
+    cursor: pointer;
+    background-color: white;
+}
+.selectAvatar{
+    color:black !important;
+    white-space: nowrap;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    margin: 10px 5px;
+    display: flex;
+    align-items: center;
+}
+
+
+.imageAvtar{
+    border-radius: 100%;
+}
+.imageContainer {
+    position: absolute;
+    top: 44px;
+    /* bottom:100%; */
+    padding: 10px;
+    display: flex;
+    width: 160px;
+    height: auto;
+    border-radius: 8px;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #ddd;
+    z-index: 1;
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.recommendedQueries {
+    position: relative;
+  }
+  
+  .hovered-div {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 30%;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .hovered-div.open {
+    display: block;
+    left: 80%;
+  }
+  
+  .recommendation {
+    color:black !important;
+    padding-top: 15px;
+  }

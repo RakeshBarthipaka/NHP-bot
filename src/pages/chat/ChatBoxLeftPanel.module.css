@@ -1,0 +1,230 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.header {
+    background-color: var(--primary-color);
+    color: #f2f2f2;
+}
+
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 12px;
+    margin-left: 12px;
+    height: 55px;
+}
+
+.headerTitleContainer {
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
+    color: #f2f2f2;
+    text-decoration: none;
+}
+
+.headerLogo {
+    height: 40px;
+}
+
+.headerTitle {
+    margin-left: 12px;
+    font-weight: 600;
+}
+
+.headerNavList {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+}
+
+.headerNavPageLink {
+    color: #f2f2f2;
+    text-decoration: none;
+    opacity: 0.75;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    transition-duration: 500ms;
+    transition-property: opacity;
+}
+
+.headerNavPageLink:hover {
+    opacity: 1;
+}
+
+.headerNavPageLinkActive {
+    color: #f2f2f2;
+    text-decoration: none;
+}
+
+.headerNavLeftMargin {
+    margin-left: 20px;
+}
+
+.headerRightText {
+    font-weight: normal;
+    margin-left: 40px;
+}
+
+.microsoftLogo {
+    height: 23px;
+    font-weight: 600;
+}
+
+.githubLogo {
+    height: 20px;
+}
+
+.headerNavList li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--common-font-family);
+    font-weight: 700;
+    color: white;
+}
+
+.leftSidePanel {
+    position: fixed;
+    background: white;
+    width: 280px;
+    height: 100%;
+    margin-top: 56px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    overflow-y: scroll;
+    right: 0;
+}
+ 
+.leftSidePanel::-webkit-scrollbar {
+    width: 3px;
+}
+.leftSidePanel::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.leftSidePanel::-webkit-scrollbar-thumb {
+    background: rgba(86, 106, 127, 0.2);
+}
+.leftSidePanel::-webkit-scrollbar-thumb:hover {
+    background: rgba(86, 106, 127, 0.5);
+}
+
+.leftSidePanel ul {
+    list-style: none;
+    padding: 5px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.leftSidePanel ul li {
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.leftSidePanel ul li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 10px 0;
+    font-family: var(--common-font-family);
+    font-weight: 500;
+    text-decoration: none;
+    overflow: hidden;
+    color: var(--black-color);
+    font-size: 15px;
+    width: 100%; 
+}
+.leftSidePanel ul li a:hover {
+    font-weight: 600;
+}
+
+.leftSidePanelActive {
+    background: var(--active-color);
+    color: var(--white-color) !important;
+    fill: var(--white-color);
+}
+
+.hideFullLeftPanel {
+    width: 50px;
+}
+
+@media only screen and (max-width: 780px) {
+    .leftSidePanel {
+        width: 200px;
+        margin-top: 50px;
+        background: var(--primary-color);
+    }
+}
+
+
+
+.leftSidePanelSubmenu ul {
+    display: none;
+    position: absolute;
+    top: 230px;
+    left: 30px;
+    bottom: 0;
+    z-index: 9999;
+    gap: 5px;
+}
+
+.leftSidePanelSubmenuActive {
+    margin-bottom: 60px;
+}
+
+.leftSidePanelSubmenuActive ul {
+    display: block !important;
+}
+
+.leftSidePanelSubmenuHide {
+    width: 50px;
+    left: 0 !important;
+}
+
+.textleftPanelconLogo {
+    font-family: var(--common-font-family);
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+}
+
+
+
+.temperatureTokenBlock span ::before {
+    box-shadow: none !important;
+}
+.temperatureTokenBlock span {
+    box-shadow: none !important;
+}
+.temperatureTokenBlock p{
+    font-size: 14px;
+}
+
+
+@media (max-width: 724px) {
+    .leftSidePanel {
+        display: none;
+    }
+    .temperatureTokenBlock{
+        display: none !important;
+    }
+   
+
+    .textleftPanelconLogo {
+        padding: 0 10px !important;
+    }
+}
+
+
+.leftSidePanel .Mui-expanded {
+    margin: 0px;
+}
+.leftSidePanel .MuiPaper-root {
+    border-width: 1px 0 0 0 !important;
+}
+.leftSidePanel .MuiPaper-root:last-child {
+    border-bottom-width: 1px !important;
+}

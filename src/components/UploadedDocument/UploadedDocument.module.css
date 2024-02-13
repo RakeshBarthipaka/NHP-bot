@@ -1,0 +1,72 @@
+.UploadedDocumentTitle {
+    display: flex;
+    gap: .5rem;
+    font-size: 15px;
+    font-weight: 500;
+    align-items: center;
+}
+
+.UploadedDocumentTitle p {
+    margin: 0;
+    font-weight: 500;
+}
+
+.UploadedDocumentList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.UploadedDocumentItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 10px;
+    justify-content: center;
+    min-height: 40px;
+    cursor: pointer;
+    border-radius: 2px;
+    border: 1px solid var(--border-color);
+}
+
+.UploadedDocumentItem:hover {
+    outline: 2px solid var(--active-themes);
+}
+
+
+.UploadedDocumentItem p {
+    margin: 0;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.UploadedDocumentCreated {
+    font-size: 14px;
+    color: #ef8d0e !important;
+    font-weight: 500;
+}
+
+.UploadedDocumentFileBlock{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 780px) {
+    .UploadedDocumentBlock {
+        background:var(--primary-color) !important;
+    }
+}
+
+@media (max-width: 724px) {
+
+    .UploadedDocumentBlock {
+        display: none;
+        background:"var(--primary-color)"
+    }
+}
+
+.UploadedDocumentBlock {
+    margin: 0px;
+    border-width: 1px 0 !important;
+}

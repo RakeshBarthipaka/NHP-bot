@@ -1,0 +1,82 @@
+.carouselContainer {
+  max-width: 900px;
+  margin: 0 auto;
+  min-width: 100%;
+}
+
+.card {
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  border-radius: 8px;
+  text-align: center;
+  word-wrap: break-word;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex !important;
+  gap: .5rem;
+  flex-direction: column !important;
+}
+
+.cardInfo{
+  padding: 20px;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  padding-top: 5px;
+}
+
+.cardDetails {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding-left: 15px;
+}
+
+
+
+.cardTitle {
+  font-size: 1rem;
+  margin: 0px !important;
+  color: white;
+  font-weight: 600;
+  padding: 10px;
+}
+
+.cardText {
+  font-size: 15px;
+  margin: 0;
+  font-weight: bold;
+
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: var(--unilver-text-color) !important;
+}
+
+@media (max-width: 1150px) {
+  .carouselContainer {
+    max-width: 600px;
+  }
+
+  .cardTitle {
+    font-size: 1.1rem;
+  }
+
+  .cardText {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .carouselContainer {
+    max-width: 350px;
+    min-width: auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .carouselContainer {
+    max-width: 300px;
+  }
+}

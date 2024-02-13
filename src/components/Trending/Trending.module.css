@@ -1,0 +1,69 @@
+.recommendedFAQTitle {
+    display: flex;
+    gap: .5rem;
+    font-size: 15px;
+    font-weight: 500;
+    align-items: center;
+}
+
+.recommendedFAQTitle p {
+    margin: 0;
+    font-weight: 500;
+}
+
+.recommendedFAQList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.recommendedFAQItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 10px;
+    justify-content: center;
+    min-height: 40px;
+    cursor: pointer;
+    border-radius: 2px;
+    border: 1px solid var(--border-color);
+}
+
+.recommendedFAQItem:hover {
+    outline: 2px solid var(--active-themes);
+}
+
+
+.recommendedFAQItem p {
+    margin: 0;
+    font-weight: 500;
+    font-size: 13px;
+    text-transform: capitalize;
+
+}
+
+.recommendedFAQCreated {
+    font-size: 14px;
+    color: #ef8d0e !important;
+    font-weight: 500;
+}
+
+
+@media (max-width: 780px) {
+    .recommendedFAQBlock {
+        background:var(--primary-color) !important;
+    }
+}
+
+@media (max-width: 724px) {
+
+    .recommendedFAQBlock {
+        display: none;
+        background:"var(--primary-color)"
+    }
+}
+
+.recommendedFAQBlock {
+    margin: 0px;
+    border-width: 1px 0 0 0 !important;
+}

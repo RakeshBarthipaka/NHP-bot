@@ -1,0 +1,35 @@
+.chatHistoryList {
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.chatHistoryItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 16px;
+    justify-content: center;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    background-color: white;
+    user-select: none;
+    border-radius: 5px;
+}
+
+.chatHistoryItem p {
+    margin: 0;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+
+}
+
+.chatHistoryCreated {
+    font-size: 14px !important;
+    color: #ef8d0e !important;
+    font-weight: 500;
+    display: flex;
+    gap: .3rem;
+}

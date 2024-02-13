@@ -1,0 +1,29 @@
+.thoughtProcess {
+  font-family: var(--common-font-family);
+  word-wrap: break-word;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+/* Custom scrollbar styles */
+.AnalysisPanelModalScrollbar {
+  max-height: 500px;
+  /* Set max height for scrollbar */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ffbf80 transparent;
+  /* Set scrollbar color */
+}
+
+/* Track */
+.AnalysisPanelModalScrollbar::-webkit-scrollbar {
+  width: 8px;
+  /* Set scrollbar width */
+}
+
+/* Handle */
+.AnalysisPanelModalScrollbar::-webkit-scrollbar-thumb {
+  background-color: #ffbf80;
+  /* Set scrollbar thumb color */
+  border-radius: 4px;
+}

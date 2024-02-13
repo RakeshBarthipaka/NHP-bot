@@ -1,0 +1,266 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.header {
+    color: #f2f2f2;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+}
+
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    height: 55px;
+    margin: 0 2rem;
+}
+
+.headerTitleContainer {
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
+    color: #f2f2f2;
+    text-decoration: none;
+}
+
+.headerLogo {
+    height: 40px;
+}
+
+.headerTitle {
+    margin-left: 12px;
+    font-weight: 600;
+}
+
+.headerNavList {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    list-style: none;
+    padding-left: 0;
+    margin: 0px;
+    gap: 1rem;
+}
+
+.headerNavPageLink {
+    color: #f2f2f2;
+    text-decoration: none;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    transition-duration: 500ms;
+    transition-property: opacity;
+}
+
+.headerNavPageLink:hover {
+    opacity: 1;
+}
+
+.headerNavPageLinkActive {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 9px 12px;
+    gap: 24px;
+    height: 55px;
+    background: var(--active-color);
+}
+
+.headerNavLeftMargin {
+    margin-left: 20px;
+}
+
+.headerRightText {
+    font-weight: normal;
+    margin-left: 40px;
+}
+
+.microsoftLogo {
+    height: 23px;
+    font-weight: 600;
+}
+
+.githubLogo {
+    height: 20px;
+}
+
+.headerNavList li a,
+.headerNavList li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--common-font-family);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--link-color);
+    margin-right: 12px;
+    text-decoration: none;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: rgb(255 255 255 / 90%);
+}
+
+.headerContainerMobile {
+    display: none !important;
+}
+
+.navListMobile {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    padding: 1rem !important;
+}
+
+.navListMobile a {
+    text-decoration: none;
+    font-weight: bold;
+    background: -webkit-linear-gradient(left, #cf8d7c, #9445ab);
+    background: linear-gradient(90deg, #cf8d7c, #9445ab);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    border: 1px solid var(--border-color);
+    font-size: 14px;
+    display: flex;
+    padding: 9px 12px;
+    gap: 20px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;   
+    
+}
+
+
+
+.headerContainerMobile p,
+.headerContainerMobile button svg
+{
+    background: -webkit-linear-gradient(left, #cf8d7c, #9445ab);
+    background: linear-gradient(90deg, #cf8d7c, #9445ab);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    fill:  var(--svg-color);
+    font-weight: bold;
+}
+
+@media (max-width: 924px) {
+    .headerContainerMobile {
+        display: block !important;
+        box-shadow: none !important;
+
+    }
+    .headerContainerMobileLogo{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .headerContainerMobileLogo a { 
+        text-decoration: none;
+    }
+    
+}
+
+@media (max-width: 924px) {
+    .headerContainer {
+        display: none !important;
+    }
+}
+
+.lanuageDropdown {
+    display: flex;
+    gap: 5px;
+    padding: 0 5px;
+    cursor: pointer;
+    align-items: center;
+}
+
+.lanuageChoose{
+    display: flex;
+    align-items: center;
+}
+.lanuageChoose p {
+    display: flex;
+    align-items: center;
+}
+
+.lanuageDropdownList {
+    position: absolute;
+    top: 60px;
+    padding: 0 10px;
+    background-color: white;
+    box-shadow: 2px 4px 12px rgb(0,0,0,0.15);
+    border-radius: 5px;
+    z-index: 999;
+}
+
+.lanuageDropdownItemList{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.lanuageDropdownItemList p{
+    margin: 8px;
+    padding: 5px;
+    background: -webkit-linear-gradient(left, #cf8d7c, #9445ab);
+    background: linear-gradient(90deg, #cf8d7c, #9445ab);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    fill:  var(--svg-color);
+    font-weight: bold;
+}
+
+.lanuageChoose p span svg{
+    color: #9445ab;
+    font-weight: bold;
+}
+
+.imageContainer {
+    position: absolute;
+    top:55px;
+    padding: 10px;
+    display: flex;
+    width: 80px;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    z-index: 1;
+    justify-content: center;
+    /* border: 1px solid #e8dede; */
+    box-shadow: 2px 4px 12px rgb(0,0,0,0.15);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.avatarSelect{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    
+}
+
+.themesDropdownList {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    position: absolute;
+    top: 55px;
+    /* border: 1px solid #e8dede; */
+    padding: 0px 10px;
+    box-shadow: 2px 4px 12px rgb(0,0,0,0.15);
+    border-radius: 5px;
+
+}
+.themesDropdownList p{
+    margin: 8px 15px 10px;
+    
+}

@@ -1,0 +1,67 @@
+.fileViewContainer {
+    position: fixed;
+    background: white;
+    width: 250px;
+    height: 100%;
+    margin-top: 56px;
+    border: 1px solid var(--border-color);
+    margin-right: 280px;
+    z-index: 999;
+    right: 0;
+}
+
+.fileViewRead{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    max-width: 250px;
+    flex-direction: column;
+}
+
+.CloseFileView{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: end;
+    padding: 5px;
+    border-bottom: 1px solid #e2bde1;
+}
+.CloseFileView svg{
+    padding: 3px;
+    color: #a537a3;
+}
+
+/* Define the scrollbar styles */
+
+.customScrollbar {
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #dcdcdc #f5f5f5;
+  
+    /* Webkit-based browsers */
+    scrollbar-width: thin;
+    scrollbar-color: #dcdcdc #f5f5f5;
+  
+    /* Scrollbar Track */
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+  
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: #f5f5f5;
+    }
+  
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: #dcdcdc;
+      border-radius: 3px;
+    }
+  
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: #c0c0c0;
+    }
+  }

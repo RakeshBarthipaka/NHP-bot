@@ -1,0 +1,163 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #F9FAFB;
+    --active-color: #EFF3FF;
+    --white-color: #ffffff;
+    --black-color: #000000;
+    --background-color: #F9FAFB;
+    --card-background-color: #ffffff;
+    --border-color: #e9e4e4;
+    --link-color: #003A75;
+    --svg-color: #bd36ad;
+
+    /* Font family */
+    --common-font-family: "Inter";
+    
+    --theme-red : red;
+    --theme-blue : #5551ff;
+    --theme-orange : orange;
+    --theme-black : black;
+    --theme-green : #32D74B;
+    --active-themes: orange;
+
+}
+
+.theme-red{
+    background-color : var(--theme-red)
+}
+.theme-blue{
+    background-color : var(--theme-blue)
+}
+.theme-orange{
+    background-color : var(--theme-orange)
+}
+.theme-black{
+    background-color : var(--theme-black)
+}
+.theme-green{
+    background-color : var(--theme-green)
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Inter";
+}
+
+html {
+    background: var(--background-color);
+    font-family: var(--common-font-family);
+}
+
+#root {
+    height: 100%;
+}
+
+
+.text-center {
+    text-align: center;
+}
+
+.productImageList {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+    background: #f8f8f8;
+    flex-flow: wrap;
+    padding: 1rem;
+}
+
+
+
+.productList {
+    display: flex;
+    margin-bottom: 2rem;
+    gap: 20px;
+    overflow-x: hidden;
+    max-width: 600px;
+    padding: 1rem;
+
+}
+
+
+.productItem {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    align-items: center;
+    padding-bottom: 1.2rem;
+    min-width: 260px;
+    background-color: aliceblue;
+}
+
+.productItem .boldTag {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.productItem a {
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    border: 1px solid;
+    padding: 8px 15px;
+    background: black;
+    color: white;
+    border-radius: 5px;
+}
+
+.owl-item {
+    padding: 10px;
+}
+
+.primaryColor {
+    background: -webkit-linear-gradient(left, #cf8d7c, #9445ab);
+    background: linear-gradient(90deg, #cf8d7c, #9445ab);
+    color: transparent;
+}
+
+/* CSS use to hide PDf View File */
+.react-pdf__Page {
+    margin-bottom: .8rem;
+}
+
+.react-pdf__Page__textContent,
+.react-pdf__Page__annotations {
+    display: none !important;
+}
+
+/* CSS use to hide PDf View File */
+
+.slick-track{
+    display: flex !important;
+    gap: 10px !important;
+    padding: 10px 0;
+  }
+.available{
+    background: #47c7d2 !important;
+}
+.react-calendar__month-view__weekdays__weekday abbr{
+    text-decoration: none;
+}
+
+*::-webkit-scrollbar {
+    width: 12px;
+}
+
+*::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+.MuiAccordion-root {
+    border: 1px solid var(--active-themes) !important;
+}

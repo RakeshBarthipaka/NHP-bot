@@ -1,0 +1,39 @@
+.generateTableDiv {
+    display: block;
+    max-width: 100%;
+    overflow: auto;
+    padding: 30px 10px;
+}
+ 
+
+.generateTableDiv {
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #dcdcdc #f5f5f5;
+  
+    /* Webkit-based browsers */
+    scrollbar-width: thin;
+    scrollbar-color: #dcdcdc #f5f5f5;
+  
+    /* Scrollbar Track */
+    &::-webkit-scrollbar {
+      width: 3px;
+      height: 3px;
+    }
+  
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: #f5f5f5;
+    }
+  
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: #dcdcdc;
+      border-radius: 3px;
+    }
+  
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: #c0c0c0;
+    }
+  }
