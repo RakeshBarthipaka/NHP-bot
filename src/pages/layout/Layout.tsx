@@ -20,6 +20,7 @@ const Layout = (props: any) => {
     const [userName, setUserName] = useState("CG-Chat");
     const [dropdwonLanguage, setDropdwonLanguage] = useState<boolean>(false);
     const [theme, toggleTheme] = useState<boolean>(false);
+    const [settings, toggleSettings] = useState<boolean>(false);
     const [Language, setLanguage] = useState<string>(`${localStorage.getItem("language") || "English"}`);
     const dispatch = useDispatch();
     const { color: themesColor, class: themeClass } = useSelector((state: any) => state.theme.color)
@@ -92,39 +93,37 @@ const Layout = (props: any) => {
         <div className={styles.layout}>
             <header className={`${styles.header} ${themeClass}`} role={"banner"} >
                 <div className={styles.headerContainer}>
+                    <div className={styles.brandLogo}>
+                        <NavLink to="" onClick={() => dispatch(set_history(false as any))} className={styles.headerNavPageLink}>
+                            <img src={props.projectData && props.projectData.projectLogoPath ? props.projectData.projectLogoPath : CGLenseLogo} height={40} />
+                        </NavLink>
+                    </div>
                     <nav>
                         <ul className={styles.headerNavList}>
 
                             <li>
-                                <NavLink to="" onClick={() => dispatch(set_history(false as any))} className={styles.headerNavPageLink}>
-                                    <img src={props.projectData && props.projectData.projectLogoPath ? props.projectData.projectLogoPath : CGLenseLogo} height={40} />
-                                </NavLink>
+                               
                             </li>
                             <li>
                                 <NavLink to="" onClick={resetChat} >
-                                    <i className="material-icons">add</i>
-                                    New Chat
+                                    <i className="material-icons-outlined">add_comment</i>
+                                    NEW CHAT
                                 </NavLink>
                             </li>
 
                             <li className='resetChatTourGuide'>
                                 <NavLink to="" onClick={resetChat}>
                                     <i className="material-icons">rotate_left</i>
-                                    Reset Chat
+                                    RESET CHAT
                                 </NavLink>
                             </li>
                             <li>
                                 <NavLink to="" onClick={showHistory} >
                                     <i className="material-icons">history</i>
-                                    Chat History
+                                    CHAT HISTORY
                                 </NavLink>
                             </li>
 
-
-                        </ul>
-                    </nav>
-                    <div className={styles.profileMenu}>
-                        <ul className={styles.headerNavList}>
                             <li>
                                 <div
                                     className={`${styles.avatarSelect}`}
@@ -132,8 +131,11 @@ const Layout = (props: any) => {
                                         setDropDown(!dropDown);
                                     }}
                                 >
-                                    <img src={selectedAvatars.icon} width={30} height={30} />
+                                    <span>
+                                        <img src={selectedAvatars.icon} width={24} height={24} />
                                     {dropDown ? <ChevronUp20Regular style={{ color: "white" }} /> : <ChevronDown20Regular style={{ color: "white" }} />}
+                                    </span>
+                                        AVATAR
 
                                 </div>
                                 {dropDown && (
@@ -153,37 +155,17 @@ const Layout = (props: any) => {
                                 )}
                             </li>
 
-                            <li>
-                                <div className={styles.lanuageDropdown}>
-                                    <div className={styles.lanuageChoose} onClick={() => {
-                                        toggleTheme(!theme);
-                                    }}>
-                                        <p>{themesColor}<span>{theme ? <ChevronUp20Regular style={{ color: "white" }} /> : <ChevronDown20Regular style={{ color: "white" }} />} </span></p>
-                                    </div>
-
-                                    <div className={styles.themesDropdownList} >
-                                        {
-                                            theme && (
-                                                ColorList.map((color, i) => (
-                                                    <p style={{ color: color.colorCode }}
-                                                        onClick={(e) => {
-                                                            onColorChange(color)
-                                                            toggleTheme(false);
-                                                        }}>{color.color}
-                                                    </p>
-                                                ))
-                                            )
-                                        }
-                                    </div>
-                                </div>
-                            </li>
-
+                        </ul>
+                    </nav>
+                    <div className={styles.profileMenu}>
+                        <ul className={styles.headerNavList}>
+                            
                             <li>
                                 <div className={styles.lanuageDropdown}>
                                     <div className={styles.lanuageChoose} onClick={() => {
                                         setDropdwonLanguage(!dropdwonLanguage);
                                     }}>
-                                        <img src={LanguageIcon && LanguageIcon.icon} width={20} height={20} />
+                                        {/* <img src={LanguageIcon && LanguageIcon.icon} width={20} height={20} /> */}
                                         <p>{Language} <span>{dropdwonLanguage ? <ChevronUp20Regular style={{ color: "white" }} /> : <ChevronDown20Regular style={{ color: "white" }} />} </span></p>
                                     </div>
 
@@ -205,11 +187,49 @@ const Layout = (props: any) => {
                                     </div>
                                 </div>
                             </li>
+                            <li>
+                                <NavLink to="/" className={styles.headerNavPageLink} onClick={() => {
+                                        toggleSettings(!settings);
+                                    }}>
+                                    <i className="material-icons-outlined">settings</i> 
+                                </NavLink>
+                                        {
+                                            settings && (
+                                                <div className={styles.settingsDropdown} >
+                                                    <div className={styles.colorsList}>
+                                                        <h6>Themes</h6>
+                                                        {
+                                                            ColorList.map((color, i) => (
+                                                                <p
+                                                                    onClick={(e) => {
+                                                                        onColorChange(color)
+                                                                        toggleSettings(false);
+                                                                    }}>
+                                                                    <span style={{ background: color.colorCode }}></span>
+                                                                </p>
+                                                            ))
+                                                        }
+                                                    </div>
 
+                                                    <div className={styles.layoutStyle}>
+                                                        <h6>Layout</h6>
+                                                        <div className={styles.layoutBox}>
+                                                            <span></span>
+                                                            <span></span>
+                                                        </div>
+                                                        <div className={styles.layoutBox}>
+                                                            <span></span>
+                                                            <span></span>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                             )
+                                        }
+                            </li>
                             <li>
                                 <NavLink to="/" className={styles.headerNavPageLink}>
-                                    <i className="material-icons">account_circle</i>
-                                    Welcome
+                                    <i className="material-icons-outlined">help</i> 
                                 </NavLink>
                             </li>
                         </ul>

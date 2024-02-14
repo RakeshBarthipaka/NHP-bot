@@ -12,11 +12,24 @@
     z-index: 999;
 }
 
+.header::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 20%,  rgba(0,0,0,0) 50%);
+    /* background: linear-gradient(90deg, rgba(255,255,255,1) 36.33%, rgba(83, 118, 240, 0) 89.52%); */
+
+    z-index: -1;
+}
+
 .headerContainer {
     display: flex;
-    justify-content: space-between;
-    height: 55px;
-    margin: 0 2rem;
+    /* justify-content: space-between; */
+    height: 60px;
+    margin: 0 1rem;
 }
 
 .headerTitleContainer {
@@ -186,6 +199,7 @@
 .lanuageChoose p {
     display: flex;
     align-items: center;
+    font-size: 14px;
 }
 
 .lanuageDropdownList {
@@ -241,10 +255,12 @@
 
 .avatarSelect{
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     justify-content: center;
-    
+    cursor: pointer;
+    font-size: 12px;
 }
 
 .themesDropdownList {
@@ -263,4 +279,102 @@
 .themesDropdownList p{
     margin: 8px 15px 10px;
     
+}
+
+.brandLogo {
+    margin-top: 6px;
+    margin-left: 15px;
+    margin-right: auto;
+}
+.profileMenu {
+    border-left: 1px solid rgb(255 255 255 / 51%);
+}
+
+.headerContainer nav .headerNavList li a {
+    flex-direction: column;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 500;
+}
+.headerContainer nav .headerNavList li a i {
+    font-size: 28px;
+}
+.avatarSelect span { 
+    display: flex;
+    align-items: center;
+}
+.avatarSelect img { 
+    border-radius: 50%;
+    background: #fff;
+    padding: 1px;
+}
+.avatarSelect svg {
+    width: 14px;
+}
+.lanuageChoose svg{ 
+    width: 16px;
+}
+
+.settingsDropdown {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    position: absolute;
+    top: 55px; 
+    right: 55px;
+    width: 250px;
+    padding: 0px 10px;
+    box-shadow: 2px 4px 12px rgb(0,0,0,0.15);
+    border-radius: 5px;
+}
+.colorsList {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 0;
+}
+
+.settingsDropdown h6 {
+    width: 100%;
+    margin: 5px 0 15px;
+    color: #000;
+    font-size: 14px;
+}
+.colorsList p {
+    margin: 5px;
+    cursor: pointer;
+}
+.colorsList span {
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+.layoutStyle {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 0;
+    width: 100%;
+    margin-bottom: 15px;
+}
+.layoutBox {
+    display: flex;
+    margin: 0 15px 0 5px;
+    cursor: pointer;
+}
+.layoutBox span {
+    display: block;
+    height: 20px;
+    border: 1px solid #444; 
+    margin-right: 2px;
+}
+.layoutBox span:nth-child(1) { 
+    width: 10px;
+}
+.layoutBox span:nth-child(2) { 
+    width: 30px;
+}
+.layoutBox:nth-child(2) {
+    flex-direction: row-reverse;
 }
