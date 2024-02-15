@@ -1,7 +1,7 @@
-import GermanLangIcon from "../assets/language/German.png"
-import FranceLangIcon from "../assets/language/France.png"
-import ItalyLangIcon from "../assets/language/Italy.png"
-import EnglishIcon from "../assets/language/English.png"
+import GermanLangIcon from "../assets/language/german.png"
+import FranceLangIcon from "../assets/language/france.png"
+import ItalyLangIcon from "../assets/language/italy.png"
+import EnglishIcon from "../assets/language/english.png"
 
 
 export const languageList = [

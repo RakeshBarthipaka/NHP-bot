@@ -198,7 +198,7 @@ export const Answer = ({
                 <Stack.Item grow>
 
                     <div className={styles.answerText} dangerouslySetInnerHTML={{ __html: sanitizedAnswerHtml }}></div>
-                    <GenerateTable></GenerateTable>
+                    {/* <GenerateTable></GenerateTable> */}
 
                     {/* { answer.patientemail && answer.patientemail.length > 0 &&  !answer.patientemailconfirm &&
                         <EmailConfirm onExampleClicked={onExampleClicked} patientemail={answer.patientemail}/>

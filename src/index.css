@@ -149,14 +149,14 @@ html {
     text-decoration: none;
 }
 
-*::-webkit-scrollbar {
+/* *::-webkit-scrollbar {
     width: 12px;
 }
 
 *::-webkit-scrollbar {
     width: 12px;
     height: 12px;
-}
+} */
 
 .MuiAccordion-root {
     border: 1px solid var(--active-themes) !important;

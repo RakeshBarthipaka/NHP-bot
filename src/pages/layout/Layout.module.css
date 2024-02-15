@@ -1,7 +1,6 @@
 .layout {
     display: flex;
     flex-direction: column;
-    height: 100%;
 }
 
 .header {
@@ -377,4 +376,11 @@
 }
 .layoutBox:nth-child(2) {
     flex-direction: row-reverse;
+}
+
+.mainContent {
+    margin-top: 60px;
+    min-height: calc(100vh - 60px);
+    background-image: url(../../../static/assets/chat_bg.png); 
+    background-repeat: repeat;
 }

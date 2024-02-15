@@ -8,7 +8,7 @@ import { UploadedDocumentView } from "../../components/UploadedDocument";
 import PreviousThreads from "../../components/Threads/Threads";
 import { TrendingQuestionAnswer } from "../../components/Trending";
 import { useSelector } from "react-redux";
-import { styled } from "@mui/material/styles";
+import { styled } from "@mui/material/styles"; 
 
 
 interface Props {
@@ -61,6 +61,8 @@ const ChatBoxLeftPanel = ({ onClearChatClicked, onExampleClicked, onShowHistoryC
     return (
         (
             <>
+                 
+                     
                 <div className={`${styles.leftSidePanel} `} >
                     <TrendingQuestionAnswer onExampleClicked={onExampleClicked} />
                     <PreviousThreads threadCallBack={showThreads} activeThread={activeThread} setActiveThread={setActiveThread} chatData={chatData} />
@@ -116,6 +118,7 @@ const ChatBoxLeftPanel = ({ onClearChatClicked, onExampleClicked, onShowHistoryC
                         </div>
                     </Box>
                 </div>
+                
             </>
         )
     );

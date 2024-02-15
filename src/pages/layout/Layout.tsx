@@ -11,7 +11,7 @@ import { set_history, set_answers, set_QnA, set_recommendedQnA, set_latestQuesti
 import { languageList } from '../../utils/languages';
 import { ColorList } from '../../utils/colors'
 import azureSpeakerVoiceList from "../../utils/azureSpeakerVoiceList";
-
+import { Grid } from '@mui/material';
 
 
 const Layout = (props: any) => {
@@ -237,7 +237,9 @@ const Layout = (props: any) => {
                 </div>
                 <MobileNavBar ></MobileNavBar>
             </header>
-            <Outlet context={{ isFullLeftPanelOpen: isFullLeftPanelOpen }} />
+            <Grid container direction="row-reverse" className={styles.mainContent}>
+                <Outlet context={{ isFullLeftPanelOpen: isFullLeftPanelOpen }} />
+            </Grid>
         </div>
     );
 };

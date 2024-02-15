@@ -17,7 +17,7 @@ export const SuggesedQuestion = ({
 
         <Stack className={styles.recommendedQuestionBlock}>
             <Stack horizontal horizontalAlign="space-between">
-                <h3>Tell me what’s on your mind, or pick a suggestion </h3>
+                <h3>Tell me what’s on your mind, or pick a suggestion  </h3>
             </Stack>
             <Stack className={styles.recommendedQuestionList} >
                 {recommenededQuestionList.map((x, i) => {

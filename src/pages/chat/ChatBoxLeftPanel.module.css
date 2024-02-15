@@ -87,6 +87,7 @@
 
 .leftSidePanel {
     position: fixed;
+    /* position: relative; */
     background: white;
     width: 280px;
     height: 100%;
@@ -94,7 +95,7 @@
     border: 1px solid var(--border-color);
     overflow: hidden;
     overflow-y: scroll;
-    right: 0;
+    right: -280px;
 }
  
 .leftSidePanel::-webkit-scrollbar {

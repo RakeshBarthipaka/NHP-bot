@@ -90,7 +90,7 @@ export const ChatHistory: React.FC = () => {
     };
 
     return (
-        <div style={{ height: 400, width: '80%', backgroundColor: 'white', marginTop: '3rem' }}>
+        <div style={{ height: 400, backgroundColor: 'white', marginTop: '3rem' }}>
             <DataGrid
                 columns={[
                     ...columns,

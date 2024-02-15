@@ -26,6 +26,7 @@ import MultiItemCarousel from "../../components/Common/MultiItemCarousel";
 import { useDispatch, useSelector } from "react-redux";
 import { set_history, set_answers, set_QnA, set_recommendedQnA, set_latestQuestion } from "./chatSlice";
 import UserLocationSave from "./UserLocationSave";
+import { Grid } from "@mui/material";
 
 
 
@@ -363,7 +364,7 @@ const Chat = (props: any) => {
 
             <ChatBoxLeftPanel onShowHistoryClicked={onShowHistoryClicked} onClearChatClicked={clearChat} onExampleClicked={onExampleClicked}
                 chatData={localChatData} onFileViewURLClicked={onFileViewURLClicked} showThreads={updateQandA} />
-            <UserGuide />
+            <UserGuide /> 
             {
                 isUserTourGuide && (
                     <UserLocationSave />
@@ -378,184 +379,225 @@ const Chat = (props: any) => {
 
             {
                 !showHistory && (
-                    <div className={styles.container}>
-                        <div className={styles.chatRoot}>
-                            <div className={styles.chatContainer}>
-                                <div className={styles.chatInput} >
-                                    {/* <h1 style={{ marginTop: "100px", marginBottom:"50px" }} className={styles.chatEmptyStateTitle}>Get started with CGLense</h1> */}
-                                    <QuestionInput onSelectChatBotTypes={chatBotVoice => handleSelectedSpeakerData(JSON.parse(chatBotVoice))} clearOnSend placeholder="Enter your prompt here" disabled={isLoading} onSend={question => makeApiRequest(question)}
-                                        handleMicClick={handleMicClick}
-                                        handleSpeakerClick={handleSpeakerClick}
-                                        isListen={isListen}
-                                        isSpeakerOn={isSpeakerOn}
-                                        chatBotVoice={chatBotVoice}
-                                    />
+                    <Grid container item direction="row" justifyContent="center" xs={12}>
 
-                                </div>
+                        <Grid container item xs={12} md={12}>
+                            <Grid container item justifyContent="center" xs={12}>
+                                <Grid item xs={12} md={10}> 
+                                    <div className={styles.chatInput} >
+                                        {/* <h1 style={{ marginTop: "100px", marginBottom:"50px" }} className={styles.chatEmptyStateTitle}>Get started with CGLense</h1> */}
+                                        <QuestionInput onSelectChatBotTypes={chatBotVoice => handleSelectedSpeakerData(JSON.parse(chatBotVoice))} clearOnSend placeholder="Enter your prompt here" disabled={isLoading} onSend={question => makeApiRequest(question)}
+                                            handleMicClick={handleMicClick}
+                                            handleSpeakerClick={handleSpeakerClick}
+                                            isListen={isListen}
+                                            isSpeakerOn={isSpeakerOn}
+                                            chatBotVoice={chatBotVoice}
+                                        />
 
-                                {!latestQuestion ? (
-                                    <div className={styles.chatEmptyState}>
-                                        {/* <MultiItemCarousel /> */}
-                                        <ExampleList onExampleClicked={onExampleClicked} chatBotTypes={chatBotVoice.VoiceName} projectData={props.projectData} />
                                     </div>
-                                ) : (
-                                    <>
-                                        <div className={styles.ChatHR}></div>
-                                        <div className={styles.chatMessageStream}>
-                                            {answers.map((answer: any, index: number) => (
-                                                <div key={index}>
-                                                    <UserChatMessage message={answer[0]} />
-                                                    <div className={styles.chatMessageGpt}>
-                                                        <Answer
-                                                            key={index}
-                                                            answer={answer[1]}
-                                                            isSelected={selectedAnswer === index && activeAnalysisPanelTab !== undefined}
-                                                            onCitationClicked={c => onShowCitation(c, index)}
-                                                            onThoughtProcessClicked={() => onToggleTab(AnalysisPanelTabs.ThoughtProcessTab, index)}
-                                                            onSupportingContentClicked={() => onToggleTab(AnalysisPanelTabs.SupportingContentTab, index)}
-                                                            onFollowupQuestionClicked={q => makeApiRequest(q)}
-                                                            showFollowupQuestions={useSuggestFollowupQuestions && answers.length - 1 === index
-                                                            }
-                                                            questionAnswersList={questionAnswersList}
-                                                            onLogsContentClicked={() => onLogsContentClicked()}
-                                                            projectData={props.projectData}
-                                                            onExampleClicked={onExampleClicked}
-                                                        />
-                                                    </div>
+                                    <div className={styles.ChatHR}></div>
+                                </Grid>
+
+                                <Grid item xs={12} md={7}> 
+                                    {!latestQuestion ? (
+                                        <Grid item >
+                                            <div className={styles.chatEmptyState}>
+                                                {/* <MultiItemCarousel /> */}
+                                                <ExampleList onExampleClicked={onExampleClicked} chatBotTypes={chatBotVoice.VoiceName} projectData={props.projectData} />
+                                            </div>
+                                        </Grid>
+                                        
+
+                                    ) : (
+                                        <>
+                                            <Grid item >
+                                                
+                                                <div className={styles.chatMessageStream}>
+                                                    {answers.map((answer: any, index: number) => (
+                                                        <div key={index}>
+                                                            <UserChatMessage message={answer[0]} />
+                                                            <div className={styles.chatMessageGpt}>
+                                                                <Answer
+                                                                    key={index}
+                                                                    answer={answer[1]}
+                                                                    isSelected={selectedAnswer === index && activeAnalysisPanelTab !== undefined}
+                                                                    onCitationClicked={c => onShowCitation(c, index)}
+                                                                    onThoughtProcessClicked={() => onToggleTab(AnalysisPanelTabs.ThoughtProcessTab, index)}
+                                                                    onSupportingContentClicked={() => onToggleTab(AnalysisPanelTabs.SupportingContentTab, index)}
+                                                                    onFollowupQuestionClicked={q => makeApiRequest(q)}
+                                                                    showFollowupQuestions={useSuggestFollowupQuestions && answers.length - 1 === index
+                                                                    }
+                                                                    questionAnswersList={questionAnswersList}
+                                                                    onLogsContentClicked={() => onLogsContentClicked()}
+                                                                    projectData={props.projectData}
+                                                                    onExampleClicked={onExampleClicked}
+                                                                />
+                                                            </div>
 
 
+                                                        </div>
+                                                    ))}
+                                                    {isLoading && (
+                                                        <>
+                                                            <UserChatMessage message={latestQuestion} />
+                                                            <div className={styles.chatMessageGptMinWidth}>
+                                                                <AnswerLoading projectData={props.projectData} />
+                                                            </div>
+                                                        </>
+                                                    )}
+                                                    {error ? (
+                                                        <>
+                                                            <UserChatMessage message={latestQuestion} />
+                                                            <div className={styles.chatMessageGptMinWidth}>
+                                                                <AnswerError error={error.toString()} onRetry={() => makeApiRequest(latestQuestion)} />
+                                                            </div>
+                                                        </>
+                                                    ) : null}
+                                                    <div ref={chatMessageStreamEnd} />
                                                 </div>
-                                            ))}
-                                            {isLoading && (
-                                                <>
-                                                    <UserChatMessage message={latestQuestion} />
-                                                    <div className={styles.chatMessageGptMinWidth}>
-                                                        <AnswerLoading projectData={props.projectData} />
-                                                    </div>
-                                                </>
-                                            )}
-                                            {error ? (
-                                                <>
-                                                    <UserChatMessage message={latestQuestion} />
-                                                    <div className={styles.chatMessageGptMinWidth}>
-                                                        <AnswerError error={error.toString()} onRetry={() => makeApiRequest(latestQuestion)} />
-                                                    </div>
-                                                </>
-                                            ) : null}
-                                            <div ref={chatMessageStreamEnd} />
-                                        </div>
+                                            </Grid>
+                                        </>
+                                    )}
+
+                                    {recommenededQuestionList && recommenededQuestionList.length > 0 &&
+                                        <SuggesedQuestion onRecommendedQuestionClicked={onRecommendedQuestionClicked} recommenededQuestionList={recommenededQuestionList} />
+                                    }
+                                
+                                </Grid>
+                                {/* <Grid item> 
+                                    <div>
+                                        <h3>Company info</h3> 
+                                        CGLense AI, your advanced visual companion! Empowering businesses across sectors with cutting-edge image analysis, object recognition, and custom insights. Experience precise AI solutions for diverse industries. Uncover image enhancement tools, metadata extraction, and deep learning capabilities. Seamlessly integrate with workflows for heightened efficiency. From precise visual data interpretation to tailored solutions, CGLense AI bot streamlines operations. Explore the potential of images with unparalleled accuracy. Simplify complexities, elevate decision-making, and harness the true power of visual data. Your key to unlocking innovation, driving progress, and transforming how you perceive and utilize visual information - that`s CGLense AI.
+                                    </div>
+                                    <div>
+                                        <h3>About Chatbot</h3> 
+                                        "As for the CGLense Navigation Tool with ChatGPT integration, it represents an innovative approach to enhancing the online visual experience for CGLense users. The tool harnesses ChatGPT, an advanced conversational AI model, enabling natural language interactions. It simplifies product searches, offers personalized recommendations, and aids in order tracking, returns, and real-time customer support. This integration aims to streamline visual exploration, elevate user satisfaction, and provide comprehensive assistance, redefining how users engage with visual data through CGLense."
+                                    </div>
+                                </Grid> */}
+
+
+                                {/* <div className={styles.chatContainer}>
+
+                                </div> */}
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                {answers.length > 0 && activeAnalysisPanelTab && (
+
+                                    <>
+                                        <AnalysisPanelPopUp onActiveTabChanged={(x: any) => onToggleTab(x, selectedAnswer)} answer={answers[selectedAnswer][1]} activeTab={activeAnalysisPanelTab} />
                                     </>
+
                                 )}
 
-                                {recommenededQuestionList && recommenededQuestionList.length > 0 &&
-                                    <SuggesedQuestion onRecommendedQuestionClicked={onRecommendedQuestionClicked} recommenededQuestionList={recommenededQuestionList} />
-                                }
+                                <Panel
+                                    headerText="Configure answer generation"
+                                    isOpen={isConfigPanelOpen}
+                                    isBlocking={false}
+                                    onDismiss={() => setIsConfigPanelOpen(false)}
+                                    closeButtonAriaLabel="Close"
+                                    onRenderFooterContent={() => <DefaultButton onClick={() => setIsConfigPanelOpen(false)}>Close</DefaultButton>}
+                                    isFooterAtBottom={true}
+                                >
+                                    <TextField
+                                        className={styles.chatSettingsSeparator}
+                                        defaultValue={promptTemplate}
+                                        label="Override prompt template"
+                                        multiline
+                                        autoAdjustHeight
+                                        onChange={onPromptTemplateChange}
+                                    />
 
+                                    <SpinButton
+                                        className={styles.chatSettingsSeparator}
+                                        label="Retrieve this many documents from search:"
+                                        min={1}
+                                        max={50}
+                                        defaultValue={retrieveCount.toString()}
+                                        onChange={onRetrieveCountChange}
+                                    />
+                                    <TextField className={styles.chatSettingsSeparator} label="Exclude category" onChange={onExcludeCategoryChanged} />
+                                    <Checkbox
+                                        className={styles.chatSettingsSeparator}
+                                        checked={useSemanticRanker}
+                                        label="Use semantic ranker for retrieval"
+                                        onChange={onUseSemanticRankerChange}
+                                    />
+                                    <Checkbox
+                                        className={styles.chatSettingsSeparator}
+                                        checked={useSemanticCaptions}
+                                        label="Use query-contextual summaries instead of whole documents"
+                                        onChange={onUseSemanticCaptionsChange}
+                                        disabled={!useSemanticRanker}
+                                    />
+                                    <Checkbox
+                                        className={styles.chatSettingsSeparator}
+                                        checked={useSuggestFollowupQuestions}
+                                        label="Suggest follow-up questions"
+                                        onChange={onUseSuggestFollowupQuestionsChange}
+                                    />
+                                </Panel>
 
-                            </div>
-
-                            {answers.length > 0 && activeAnalysisPanelTab && (
-
-                                <>
-                                    <AnalysisPanelPopUp onActiveTabChanged={(x: any) => onToggleTab(x, selectedAnswer)} answer={answers[selectedAnswer][1]} activeTab={activeAnalysisPanelTab} />
-                                </>
-
-                            )}
-
-                            <Panel
-                                headerText="Configure answer generation"
-                                isOpen={isConfigPanelOpen}
-                                isBlocking={false}
-                                onDismiss={() => setIsConfigPanelOpen(false)}
-                                closeButtonAriaLabel="Close"
-                                onRenderFooterContent={() => <DefaultButton onClick={() => setIsConfigPanelOpen(false)}>Close</DefaultButton>}
-                                isFooterAtBottom={true}
-                            >
-                                <TextField
-                                    className={styles.chatSettingsSeparator}
-                                    defaultValue={promptTemplate}
-                                    label="Override prompt template"
-                                    multiline
-                                    autoAdjustHeight
-                                    onChange={onPromptTemplateChange}
-                                />
-
-                                <SpinButton
-                                    className={styles.chatSettingsSeparator}
-                                    label="Retrieve this many documents from search:"
-                                    min={1}
-                                    max={50}
-                                    defaultValue={retrieveCount.toString()}
-                                    onChange={onRetrieveCountChange}
-                                />
-                                <TextField className={styles.chatSettingsSeparator} label="Exclude category" onChange={onExcludeCategoryChanged} />
-                                <Checkbox
-                                    className={styles.chatSettingsSeparator}
-                                    checked={useSemanticRanker}
-                                    label="Use semantic ranker for retrieval"
-                                    onChange={onUseSemanticRankerChange}
-                                />
-                                <Checkbox
-                                    className={styles.chatSettingsSeparator}
-                                    checked={useSemanticCaptions}
-                                    label="Use query-contextual summaries instead of whole documents"
-                                    onChange={onUseSemanticCaptionsChange}
-                                    disabled={!useSemanticRanker}
-                                />
-                                <Checkbox
-                                    className={styles.chatSettingsSeparator}
-                                    checked={useSuggestFollowupQuestions}
-                                    label="Suggest follow-up questions"
-                                    onChange={onUseSuggestFollowupQuestionsChange}
-                                />
-                            </Panel>
-
-                            {showLogsView &&
-                                <div className={styles.LogsDataBlock}>
-                                    <h2>Logs data</h2>
-                                    <div className={styles.LogsDataList}>
-                                        {
-                                            dummyLogsData.map((item, i) => (
-                                                <div className={styles.LogsDataItem}>
-                                                    <div className={styles.LogsDataText}>
-                                                        <p className={styles.LogsDataTextheading}>Query</p>
-                                                        <p>{item.query}</p>
+                                {showLogsView &&
+                                    <div className={styles.LogsDataBlock}>
+                                        <h2>Logs data</h2>
+                                        <div className={styles.LogsDataList}>
+                                            {
+                                                dummyLogsData.map((item, i) => (
+                                                    <div className={styles.LogsDataItem}>
+                                                        <div className={styles.LogsDataText}>
+                                                            <p className={styles.LogsDataTextheading}>Query</p>
+                                                            <p>{item.query}</p>
+                                                        </div>
+                                                        <div className={styles.LogsDataText}>
+                                                            <p className={styles.LogsDataTextheading}>Stage</p>
+                                                            <p>{item.stage}</p>
+                                                        </div>
+                                                        <div className={styles.LogsDataText}>
+                                                            <p className={styles.LogsDataTextheading}>Tokens</p>
+                                                            <p>{item.tokens}</p>
+                                                        </div>
+                                                        <div className={styles.LogsDataText}>
+                                                            <p className={styles.LogsDataTextheading}>Timestamp</p>
+                                                            <p>{item.time}</p>
+                                                        </div>
                                                     </div>
-                                                    <div className={styles.LogsDataText}>
-                                                        <p className={styles.LogsDataTextheading}>Stage</p>
-                                                        <p>{item.stage}</p>
-                                                    </div>
-                                                    <div className={styles.LogsDataText}>
-                                                        <p className={styles.LogsDataTextheading}>Tokens</p>
-                                                        <p>{item.tokens}</p>
-                                                    </div>
-                                                    <div className={styles.LogsDataText}>
-                                                        <p className={styles.LogsDataTextheading}>Timestamp</p>
-                                                        <p>{item.time}</p>
-                                                    </div>
-                                                </div>
-                                            ))
-                                        }
+                                                ))
+                                            }
+
+                                        </div>
 
                                     </div>
+                                }
 
-                                </div>
-                            }
+                            </Grid>
 
-                        </div>
-                    </div>
+                        </Grid>
+
+                        {/* <div className={styles.container}>
+                            <div className={styles.chatRoot}>
+                                
+                            </div>
+                        </div> */}
+                    </Grid>
                 )
             }
 
             {
                 showHistory && (
-                    <div className={FileViewerURL ? styles.containerFileView : styles.container}>
-                        <div className={styles.chatRoot}>
-                            <div className={styles.chatContainer}>
-                                <ChatHistory />
+                    <Grid container item direction="row" justifyContent="center" xs={12} sm={12}>
+                        <Grid item xs={11} md={10}>
+                            <ChatHistory />
+                        </Grid>
+
+                        {/* <div className={FileViewerURL ? styles.containerFileView : styles.container}>
+                            <div className={styles.chatRoot}>
+                                <div className={styles.chatContainer}>
+                                    <ChatHistory />
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </div> */}
+                    </Grid>
                 )
             }
 
