@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { Checkbox, Panel, DefaultButton, TextField, SpinButton, Stack } from "@fluentui/react";
+import { Checkbox, Panel, DefaultButton, TextField, SpinButton, Stack, Sticky } from "@fluentui/react";
 import { chatApi, Approaches, AskResponse, ChatRequest, ChatTurn, ChartJSApi } from "../../api";
 import { Answer, AnswerError, AnswerLoading } from "../../components/Answer";
 import { QuestionInput } from "../../components/QuestionInput";
@@ -381,105 +381,89 @@ const Chat = (props: any) => {
                 !showHistory && (
                     <Grid container item direction="row" justifyContent="center" xs={12}>
 
-                        <Grid container item xs={12} md={12}>
-                            <Grid container item justifyContent="center" xs={12}>
-                                <Grid item xs={12} md={10}> 
-                                    <div className={styles.chatInput} >
-                                        {/* <h1 style={{ marginTop: "100px", marginBottom:"50px" }} className={styles.chatEmptyStateTitle}>Get started with CGLense</h1> */}
-                                        <QuestionInput onSelectChatBotTypes={chatBotVoice => handleSelectedSpeakerData(JSON.parse(chatBotVoice))} clearOnSend placeholder="Enter your prompt here" disabled={isLoading} onSend={question => makeApiRequest(question)}
-                                            handleMicClick={handleMicClick}
-                                            handleSpeakerClick={handleSpeakerClick}
-                                            isListen={isListen}
-                                            isSpeakerOn={isSpeakerOn}
-                                            chatBotVoice={chatBotVoice}
-                                        />
+                        <Grid item xs={12} md={11} className={styles.chatInputBlock}>
+                            <div className={styles.chatInput} >
+                                {/* <h1 style={{ marginTop: "100px", marginBottom:"50px" }} className={styles.chatEmptyStateTitle}>Get started with CGLense</h1> */}
+                                <QuestionInput onSelectChatBotTypes={chatBotVoice => handleSelectedSpeakerData(JSON.parse(chatBotVoice))} clearOnSend placeholder="Enter your prompt here" disabled={isLoading} onSend={question => makeApiRequest(question)}
+                                    handleMicClick={handleMicClick}
+                                    handleSpeakerClick={handleSpeakerClick}
+                                    isListen={isListen}
+                                    isSpeakerOn={isSpeakerOn}
+                                    chatBotVoice={chatBotVoice}
+                                />
 
-                                    </div>
-                                    <div className={styles.ChatHR}></div>
-                                </Grid>
+                            </div>
+                            {/* <div className={styles.ChatHR}></div> */}
+                        </Grid>
 
-                                <Grid item xs={12} md={7}> 
-                                    {!latestQuestion ? (
+                        <Grid container item justifyContent="center" xs={12} md={12}>
+                            <Grid item xs={12} md={7}>
+                                {!latestQuestion ? (
+                                    <Grid item >
+                                        <div className={styles.chatEmptyState}>
+                                            {/* <MultiItemCarousel /> */}
+                                            <ExampleList onExampleClicked={onExampleClicked} chatBotTypes={chatBotVoice.VoiceName} projectData={props.projectData} />
+                                        </div>
+                                    </Grid>
+
+
+                                ) : (
+                                    <>
                                         <Grid item >
-                                            <div className={styles.chatEmptyState}>
-                                                {/* <MultiItemCarousel /> */}
-                                                <ExampleList onExampleClicked={onExampleClicked} chatBotTypes={chatBotVoice.VoiceName} projectData={props.projectData} />
+
+                                            <div className={styles.chatMessageStream}>
+                                                {answers.map((answer: any, index: number) => (
+                                                    <div key={index}>
+                                                        <UserChatMessage message={answer[0]} />
+                                                        <div className={styles.chatMessageGpt}>
+                                                            <Answer
+                                                                key={index}
+                                                                answer={answer[1]}
+                                                                isSelected={selectedAnswer === index && activeAnalysisPanelTab !== undefined}
+                                                                onCitationClicked={c => onShowCitation(c, index)}
+                                                                onThoughtProcessClicked={() => onToggleTab(AnalysisPanelTabs.ThoughtProcessTab, index)}
+                                                                onSupportingContentClicked={() => onToggleTab(AnalysisPanelTabs.SupportingContentTab, index)}
+                                                                onFollowupQuestionClicked={q => makeApiRequest(q)}
+                                                                showFollowupQuestions={useSuggestFollowupQuestions && answers.length - 1 === index
+                                                                }
+                                                                questionAnswersList={questionAnswersList}
+                                                                onLogsContentClicked={() => onLogsContentClicked()}
+                                                                projectData={props.projectData}
+                                                                onExampleClicked={onExampleClicked}
+                                                            />
+                                                        </div>
+
+
+                                                    </div>
+                                                ))}
+                                                {isLoading && (
+                                                    <>
+                                                        <UserChatMessage message={latestQuestion} />
+                                                        <div className={styles.chatMessageGptMinWidth}>
+                                                            <AnswerLoading projectData={props.projectData} />
+                                                        </div>
+                                                    </>
+                                                )}
+                                                {error ? (
+                                                    <>
+                                                        <UserChatMessage message={latestQuestion} />
+                                                        <div className={styles.chatMessageGptMinWidth}>
+                                                            <AnswerError error={error.toString()} onRetry={() => makeApiRequest(latestQuestion)} />
+                                                        </div>
+                                                    </>
+                                                ) : null}
+                                                <div ref={chatMessageStreamEnd} />
                                             </div>
                                         </Grid>
-                                        
+                                    </>
+                                )}
 
-                                    ) : (
-                                        <>
-                                            <Grid item >
-                                                
-                                                <div className={styles.chatMessageStream}>
-                                                    {answers.map((answer: any, index: number) => (
-                                                        <div key={index}>
-                                                            <UserChatMessage message={answer[0]} />
-                                                            <div className={styles.chatMessageGpt}>
-                                                                <Answer
-                                                                    key={index}
-                                                                    answer={answer[1]}
-                                                                    isSelected={selectedAnswer === index && activeAnalysisPanelTab !== undefined}
-                                                                    onCitationClicked={c => onShowCitation(c, index)}
-                                                                    onThoughtProcessClicked={() => onToggleTab(AnalysisPanelTabs.ThoughtProcessTab, index)}
-                                                                    onSupportingContentClicked={() => onToggleTab(AnalysisPanelTabs.SupportingContentTab, index)}
-                                                                    onFollowupQuestionClicked={q => makeApiRequest(q)}
-                                                                    showFollowupQuestions={useSuggestFollowupQuestions && answers.length - 1 === index
-                                                                    }
-                                                                    questionAnswersList={questionAnswersList}
-                                                                    onLogsContentClicked={() => onLogsContentClicked()}
-                                                                    projectData={props.projectData}
-                                                                    onExampleClicked={onExampleClicked}
-                                                                />
-                                                            </div>
+                                {recommenededQuestionList && recommenededQuestionList.length > 0 &&
+                                    <SuggesedQuestion onRecommendedQuestionClicked={onRecommendedQuestionClicked} recommenededQuestionList={recommenededQuestionList} />
+                                }
 
-
-                                                        </div>
-                                                    ))}
-                                                    {isLoading && (
-                                                        <>
-                                                            <UserChatMessage message={latestQuestion} />
-                                                            <div className={styles.chatMessageGptMinWidth}>
-                                                                <AnswerLoading projectData={props.projectData} />
-                                                            </div>
-                                                        </>
-                                                    )}
-                                                    {error ? (
-                                                        <>
-                                                            <UserChatMessage message={latestQuestion} />
-                                                            <div className={styles.chatMessageGptMinWidth}>
-                                                                <AnswerError error={error.toString()} onRetry={() => makeApiRequest(latestQuestion)} />
-                                                            </div>
-                                                        </>
-                                                    ) : null}
-                                                    <div ref={chatMessageStreamEnd} />
-                                                </div>
-                                            </Grid>
-                                        </>
-                                    )}
-
-                                    {recommenededQuestionList && recommenededQuestionList.length > 0 &&
-                                        <SuggesedQuestion onRecommendedQuestionClicked={onRecommendedQuestionClicked} recommenededQuestionList={recommenededQuestionList} />
-                                    }
-                                
-                                </Grid>
-                                {/* <Grid item> 
-                                    <div>
-                                        <h3>Company info</h3> 
-                                        CGLense AI, your advanced visual companion! Empowering businesses across sectors with cutting-edge image analysis, object recognition, and custom insights. Experience precise AI solutions for diverse industries. Uncover image enhancement tools, metadata extraction, and deep learning capabilities. Seamlessly integrate with workflows for heightened efficiency. From precise visual data interpretation to tailored solutions, CGLense AI bot streamlines operations. Explore the potential of images with unparalleled accuracy. Simplify complexities, elevate decision-making, and harness the true power of visual data. Your key to unlocking innovation, driving progress, and transforming how you perceive and utilize visual information - that`s CGLense AI.
-                                    </div>
-                                    <div>
-                                        <h3>About Chatbot</h3> 
-                                        "As for the CGLense Navigation Tool with ChatGPT integration, it represents an innovative approach to enhancing the online visual experience for CGLense users. The tool harnesses ChatGPT, an advanced conversational AI model, enabling natural language interactions. It simplifies product searches, offers personalized recommendations, and aids in order tracking, returns, and real-time customer support. This integration aims to streamline visual exploration, elevate user satisfaction, and provide comprehensive assistance, redefining how users engage with visual data through CGLense."
-                                    </div>
-                                </Grid> */}
-
-
-                                {/* <div className={styles.chatContainer}>
-
-                                </div> */}
                             </Grid>
+
 
                             <Grid item xs={12}>
                                 {answers.length > 0 && activeAnalysisPanelTab && (

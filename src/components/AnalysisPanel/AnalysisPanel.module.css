@@ -27,3 +27,17 @@
   /* Set scrollbar thumb color */
   border-radius: 4px;
 }
+
+
+/*Drawer styles*/
+/* .drawerContentDiv .MuiDrawer-paper {
+  max-width: 600px;
+} */
+
+.drawerContent {
+  padding: 25px 30px;
+  background: #F2F2F7;
+  margin: 15px;
+  border-radius: 15px;
+  font-size: 14px;
+}

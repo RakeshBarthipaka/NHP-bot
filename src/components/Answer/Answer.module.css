@@ -199,7 +199,7 @@ sup {
     margin: 0 -20px -20px;
 }
 
-.IconCustomColor button {
+.IconCustomColor button, .IconCustomColor a {
     padding: 4px;
     gap: 2px;
     width: 28px;
@@ -227,6 +227,10 @@ sup {
     span i {
         color: #FF453A;
     }
+}
+
+.IconCustomColor a svg{
+    width: 20px;
 }
 
 .IconCustomColor button span i {

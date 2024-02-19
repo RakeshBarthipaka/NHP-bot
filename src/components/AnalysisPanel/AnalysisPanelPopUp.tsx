@@ -8,6 +8,7 @@ import {
   DialogContent,
   DialogActions,
   Button,
+  Toolbar,
 } from '@mui/material';
 import {
   EmojiObjects as EmojiObjectsIcon,
@@ -17,6 +18,11 @@ import DOMPurify from 'dompurify';
 import { SupportingContent } from '../SupportingContent';
 import styles from '../AnalysisPanel/AnalysisPanel.module.css';
 import { useSelector } from "react-redux";
+
+import { Drawer } from '@mui/material';
+// import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import PsychologyAltOutlinedIcon from '@mui/icons-material/PsychologyAltOutlined';
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 
 
 interface TabPanelProps {
@@ -47,7 +53,8 @@ function CustomTabPanel(props: TabPanelProps) {
 }
 
 export default function AnalysisPanelPopUp(props: any) {
-  let activePanel = props.activeTab === 'thoughtProcess' ? 0 : 1;
+  // let activePanel = props.activeTab === 'thoughtProcess' ? 0 : 1;
+  let activePanel = props.activeTab;
   const [openModal, setOpenModal] = useState(true);
   const [value, setValue] = useState(activePanel);
   const {colorCode} = useSelector((state:any)=>state.theme.color)
@@ -65,7 +72,53 @@ export default function AnalysisPanelPopUp(props: any) {
 
   return (
     <div>
-      <Dialog open={openModal} onClose={handleCloseModal} fullWidth maxWidth="md">
+      <Drawer
+        anchor='right'
+        open={openModal}
+        onClose={handleCloseModal}
+        className={styles.drawerContentDiv}
+
+        PaperProps={{
+          sx: { width: "600px", maxWidth: '90%' },
+        }}
+      >
+        {value == 'thoughtProcess' ? (
+          <div>
+            <Toolbar sx={{ background: colorCode, color: '#fff' }}> 
+              <PsychologyAltOutlinedIcon sx={{ marginRight: '10px'}}/>
+              <Typography variant="h6"  sx={{ fontSize: '18px' }} noWrap component="div">
+                Thought Process
+              </Typography>
+            </Toolbar>
+
+            <div className={styles.drawerContent}>
+
+              <div dangerouslySetInnerHTML={{ __html: sanitizedThoughts }} />
+            </div>
+          </div>
+        ) : (
+          <div>
+            <Toolbar sx={{ background: colorCode, color: '#fff' }}>
+              <DescriptionOutlinedIcon sx={{ marginRight: '10px'}}/>
+              <Typography variant="h6" sx={{ fontSize: '18px' }} noWrap component="div">
+                Suggested Content
+              </Typography>
+            </Toolbar>
+
+            <div className={styles.drawerContent}>
+
+              <SupportingContent supportingContent={props.answer.data_points} />
+            </div>
+          </div>
+
+        )
+
+        }
+
+
+      </Drawer>
+
+      {/* <Dialog open={openModal} onClose={handleCloseModal} fullWidth maxWidth="md">
         <DialogContent  className={styles.AnalysisPanelModalScrollbar}>
           <Tabs
             sx={{
@@ -98,7 +151,9 @@ export default function AnalysisPanelPopUp(props: any) {
             Close
           </Button>
         </DialogActions>
-      </Dialog>
+      </Dialog> */}
+
+
     </div>
   );
 }

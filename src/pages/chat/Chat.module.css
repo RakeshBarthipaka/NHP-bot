@@ -409,7 +409,7 @@ p {
     }
     .chatMessageGpt a{
         overflow: hidden !important;
-        width: 150px !important;
+        /* width: 150px !important; */
         display: flex;
     }
 
@@ -442,4 +442,12 @@ p {
     z-index: 9999;
     display: flex;
     flex-direction: column;
+}
+
+.chatInputBlock {
+    position: sticky;
+    top: 60px;
+    backdrop-filter: blur(4px);
+    background-color: rgb(255 255 255 / 50%);
+    z-index: 11;
 }

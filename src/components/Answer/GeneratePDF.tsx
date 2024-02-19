@@ -1,6 +1,7 @@
 import React from 'react';
 import { PDFDownloadLink, Page, Text, View, Document, StyleSheet, Font, Image, Link } from '@react-pdf/renderer';
 import { IconButton } from '@fluentui/react';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 
 
 // Define styles with types
@@ -164,7 +165,9 @@ const DownloadPDF: React.FC<{ pdfData: MyDocumentProps[] }> = ({ pdfData }) => (
         'Loading'
       ) : (
         <>
-          <IconButton title="Export" iconProps={{ iconName: 'TextDocument' }} /> Export PDF
+          <FileDownloadOutlinedIcon />
+          {/* <IconButton title="Export" iconProps={{ iconName: 'FileDownloadOutlinedIcon' }} />
+           Export PDF */}
         </>
       )
     }

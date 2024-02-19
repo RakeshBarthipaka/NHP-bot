@@ -243,15 +243,34 @@ export const Answer = ({
                             disabled={true}
                             onClick={() => likeDisLikeAnswerToggle("DISLIKE")}
                         />
-                        <div className={styles.dropdown}>
+
+                        <IconButton 
+                            iconProps={{ iconName: "Copy" }}
+                            title="Copy Data"
+                            ariaLabel="Copy Data"
+                            // disabled={true}
+                            onClick={() => copyChatData()}
+                        />
+                        <DownloadPDF pdfData={questionAnswersList} />
+
+                        <IconButton 
+                            iconProps={{ iconName: "Mail" }}
+                            title="Export to PDF"
+                            ariaLabel="Export to PDF"
+                            // disabled={true}
+                            onClick={() => copyChatData()}
+                        />
+
+                        {/* <div className={styles.dropdown}>
                             <IconButton
                                 style={shareIconStyle.display === "block" ? IconActiveStyles : IconStyles}
                                 iconProps={{ iconName: "Share" }}
                                 title="Share"
                                 ariaLabel="Share"
-                                disabled={true}
+                                // disabled={true}
                                 onClick={() => shareDropDownToggle()}
                             />
+
                             <div style={shareIconStyle} className={styles.dropdownContent}>
                                 <Link to="/" title="Copy Data" onClick={() => copyChatData()} >
                                     <IconButton
@@ -268,14 +287,15 @@ export const Answer = ({
                                     Draft in Email
                                 </Link>
                             </div>
-                        </div>
+                        </div> */}
+                        
                         <IconButton
                             style={IconStyles}
                             iconProps={{ iconName: "Lightbulb" }}
                             title="Show thought process"
                             ariaLabel="Show thought process"
                             onClick={() => onThoughtProcessClicked()}
-                            disabled={true}
+                            // disabled={true}
                         />
                         <IconButton
                             style={IconStyles}
@@ -283,7 +303,7 @@ export const Answer = ({
                             title="Show supporting content"
                             ariaLabel="Show supporting content"
                             onClick={() => onSupportingContentClicked()}
-                            disabled={true}
+                            // disabled={true}
                         />
 
                        
