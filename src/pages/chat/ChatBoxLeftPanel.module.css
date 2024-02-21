@@ -91,13 +91,18 @@
     background: white;
     width: 280px;
     height: 100%;
-    margin-top: 56px;
+    top: 60px;
     border: 1px solid var(--border-color);
     overflow: hidden;
-    overflow-y: scroll;
-    right: -280px;
+    overflow-y: scroll; 
+    z-index: 999;
+    transition: 0.7s;
+    transform: translateX(310px);
 }
- 
+
+.leftSidePanel.open {
+    transform: translateX(0px);
+}
 .leftSidePanel::-webkit-scrollbar {
     width: 3px;
 }

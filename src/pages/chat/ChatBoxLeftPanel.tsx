@@ -24,6 +24,8 @@ const ChatBoxLeftPanel = ({ onClearChatClicked, onExampleClicked, onShowHistoryC
     let chatGPTToken = localStorage.getItem("chatGPTToken") ? localStorage.getItem("chatGPTToken") : 0;
     let chatTemperature = localStorage.getItem("chatTemperature") ? localStorage.getItem("chatTemperature") : 0;
     const [activeThread, setActiveThread] = useState<string | null>(null);
+    const [isRightPanelOpen, setIsRightPanelOpen] = useState(false);
+
     const { colorCode } = useSelector((state: any) => state.theme.color);
     const ThemedSlider = styled(Slider)`
         color: ${colorCode};

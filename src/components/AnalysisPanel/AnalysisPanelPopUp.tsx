@@ -114,45 +114,7 @@ export default function AnalysisPanelPopUp(props: any) {
         )
 
         }
-
-
       </Drawer>
-
-      {/* <Dialog open={openModal} onClose={handleCloseModal} fullWidth maxWidth="md">
-        <DialogContent  className={styles.AnalysisPanelModalScrollbar}>
-          <Tabs
-            sx={{
-              '.Mui-selected': {
-                color: 'white !important',
-              },
-              '.MuiTabs-scroller':{
-                background:colorCode
-              }
-            }}
-            centered
-            value={value}
-            TabIndicatorProps={{ style: { background: colorCode } }}
-            onChange={handleChange}
-            aria-label="tabs inside modal"
-          >
-            <Tab sx={{ color: 'white' }} icon={<EmojiObjectsIcon />} label="Thought Process" />
-            <Tab sx={{ color: 'white' }} icon={<ContentPasteIcon />} label="Supporting Content" />
-          </Tabs>
-
-          <CustomTabPanel value={value} index={0}>
-            <div dangerouslySetInnerHTML={{ __html: sanitizedThoughts }} />
-          </CustomTabPanel>
-          <CustomTabPanel value={value} index={1}>
-            <SupportingContent supportingContent={props.answer.data_points} />
-          </CustomTabPanel>
-        </DialogContent>
-        <DialogActions sx={{ justifyContent: 'center' }}>
-          <Button sx={{ color: 'white', background:colorCode }}  onClick={handleCloseModal}>
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog> */}
-
 
     </div>
   );

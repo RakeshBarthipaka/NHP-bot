@@ -380,6 +380,7 @@
 
 .mainContent {
     margin-top: 60px;
+    padding: 0 1.5rem;
     min-height: calc(100vh - 60px);
     background-image: url(../../../static/assets/chat_bg.png); 
     background-repeat: repeat;

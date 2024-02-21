@@ -27,6 +27,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { set_history, set_answers, set_QnA, set_recommendedQnA, set_latestQuestion } from "./chatSlice";
 import UserLocationSave from "./UserLocationSave";
 import { Grid } from "@mui/material";
+import KpiWidget from "../../components/KpiWidget/KpiWidget";
 
 
 
@@ -364,7 +365,7 @@ const Chat = (props: any) => {
 
             <ChatBoxLeftPanel onShowHistoryClicked={onShowHistoryClicked} onClearChatClicked={clearChat} onExampleClicked={onExampleClicked}
                 chatData={localChatData} onFileViewURLClicked={onFileViewURLClicked} showThreads={updateQandA} />
-            <UserGuide /> 
+            <UserGuide />
             {
                 isUserTourGuide && (
                     <UserLocationSave />
@@ -379,9 +380,9 @@ const Chat = (props: any) => {
 
             {
                 !showHistory && (
-                    <Grid container item direction="row" justifyContent="center" xs={12}>
+                    <Grid container item direction="row" justifyContent="center" alignItems="flex-start" sx={{ height: "100%" }}>
 
-                        <Grid item xs={12} md={11} className={styles.chatInputBlock}>
+                        <Grid item xs={12} className={styles.chatInputBlock}>
                             <div className={styles.chatInput} >
                                 {/* <h1 style={{ marginTop: "100px", marginBottom:"50px" }} className={styles.chatEmptyStateTitle}>Get started with CGLense</h1> */}
                                 <QuestionInput onSelectChatBotTypes={chatBotVoice => handleSelectedSpeakerData(JSON.parse(chatBotVoice))} clearOnSend placeholder="Enter your prompt here" disabled={isLoading} onSend={question => makeApiRequest(question)}
@@ -393,76 +394,76 @@ const Chat = (props: any) => {
                                 />
 
                             </div>
-                            {/* <div className={styles.ChatHR}></div> */}
+
                         </Grid>
 
-                        <Grid container item justifyContent="center" xs={12} md={12}>
-                            <Grid item xs={12} md={7}>
+                        <Grid container item justifyContent="center" xs={12} md={12} spacing={4}>
+
+                            <Grid item xs={12} md={7} >
+                                <KpiWidget />
                                 {!latestQuestion ? (
-                                    <Grid item >
-                                        <div className={styles.chatEmptyState}>
-                                            {/* <MultiItemCarousel /> */}
-                                            <ExampleList onExampleClicked={onExampleClicked} chatBotTypes={chatBotVoice.VoiceName} projectData={props.projectData} />
-                                        </div>
-                                    </Grid>
+                                    <div className={styles.chatEmptyState}>
+                                        <ExampleList onExampleClicked={onExampleClicked} chatBotTypes={chatBotVoice.VoiceName} projectData={props.projectData} />
+                                    </div>
+
 
 
                                 ) : (
                                     <>
-                                        <Grid item >
 
-                                            <div className={styles.chatMessageStream}>
-                                                {answers.map((answer: any, index: number) => (
-                                                    <div key={index}>
-                                                        <UserChatMessage message={answer[0]} />
-                                                        <div className={styles.chatMessageGpt}>
-                                                            <Answer
-                                                                key={index}
-                                                                answer={answer[1]}
-                                                                isSelected={selectedAnswer === index && activeAnalysisPanelTab !== undefined}
-                                                                onCitationClicked={c => onShowCitation(c, index)}
-                                                                onThoughtProcessClicked={() => onToggleTab(AnalysisPanelTabs.ThoughtProcessTab, index)}
-                                                                onSupportingContentClicked={() => onToggleTab(AnalysisPanelTabs.SupportingContentTab, index)}
-                                                                onFollowupQuestionClicked={q => makeApiRequest(q)}
-                                                                showFollowupQuestions={useSuggestFollowupQuestions && answers.length - 1 === index
-                                                                }
-                                                                questionAnswersList={questionAnswersList}
-                                                                onLogsContentClicked={() => onLogsContentClicked()}
-                                                                projectData={props.projectData}
-                                                                onExampleClicked={onExampleClicked}
-                                                            />
-                                                        </div>
-
-
+                                        <div className={styles.chatMessageStream}>
+                                            {answers.map((answer: any, index: number) => (
+                                                <div key={index}>
+                                                    <UserChatMessage message={answer[0]} />
+                                                    <div className={styles.chatMessageGpt}>
+                                                        <Answer
+                                                            key={index}
+                                                            answer={answer[1]}
+                                                            isSelected={selectedAnswer === index && activeAnalysisPanelTab !== undefined}
+                                                            onCitationClicked={c => onShowCitation(c, index)}
+                                                            onThoughtProcessClicked={() => onToggleTab(AnalysisPanelTabs.ThoughtProcessTab, index)}
+                                                            onSupportingContentClicked={() => onToggleTab(AnalysisPanelTabs.SupportingContentTab, index)}
+                                                            onFollowupQuestionClicked={q => makeApiRequest(q)}
+                                                            showFollowupQuestions={useSuggestFollowupQuestions && answers.length - 1 === index
+                                                            }
+                                                            questionAnswersList={questionAnswersList}
+                                                            onLogsContentClicked={() => onLogsContentClicked()}
+                                                            projectData={props.projectData}
+                                                            onExampleClicked={onExampleClicked}
+                                                        />
                                                     </div>
-                                                ))}
-                                                {isLoading && (
-                                                    <>
-                                                        <UserChatMessage message={latestQuestion} />
-                                                        <div className={styles.chatMessageGptMinWidth}>
-                                                            <AnswerLoading projectData={props.projectData} />
-                                                        </div>
-                                                    </>
-                                                )}
-                                                {error ? (
-                                                    <>
-                                                        <UserChatMessage message={latestQuestion} />
-                                                        <div className={styles.chatMessageGptMinWidth}>
-                                                            <AnswerError error={error.toString()} onRetry={() => makeApiRequest(latestQuestion)} />
-                                                        </div>
-                                                    </>
-                                                ) : null}
-                                                <div ref={chatMessageStreamEnd} />
-                                            </div>
-                                        </Grid>
+
+
+                                                </div>
+                                            ))}
+                                            {isLoading && (
+                                                <>
+                                                    <UserChatMessage message={latestQuestion} />
+                                                    <div className={styles.chatMessageGptMinWidth}>
+                                                        <AnswerLoading projectData={props.projectData} />
+                                                    </div>
+                                                </>
+                                            )}
+                                            {error ? (
+                                                <>
+                                                    <UserChatMessage message={latestQuestion} />
+                                                    <div className={styles.chatMessageGptMinWidth}>
+                                                        <AnswerError error={error.toString()} onRetry={() => makeApiRequest(latestQuestion)} />
+                                                    </div>
+                                                </>
+                                            ) : null}
+                                            <div ref={chatMessageStreamEnd} />
+                                        </div>
                                     </>
                                 )}
-
-                                {recommenededQuestionList && recommenededQuestionList.length > 0 &&
-                                    <SuggesedQuestion onRecommendedQuestionClicked={onRecommendedQuestionClicked} recommenededQuestionList={recommenededQuestionList} />
-                                }
-
                             </Grid>
+
+                            {/* {recommenededQuestionList && recommenededQuestionList.length > 0 &&
+                                    <SuggesedQuestion onRecommendedQuestionClicked={onRecommendedQuestionClicked} recommenededQuestionList={recommenededQuestionList} />
+                                } */}
+
+
+
 
 
                             <Grid item xs={12}>
@@ -557,12 +558,6 @@ const Chat = (props: any) => {
                             </Grid>
 
                         </Grid>
-
-                        {/* <div className={styles.container}>
-                            <div className={styles.chatRoot}>
-                                
-                            </div>
-                        </div> */}
                     </Grid>
                 )
             }
@@ -573,14 +568,6 @@ const Chat = (props: any) => {
                         <Grid item xs={11} md={10}>
                             <ChatHistory />
                         </Grid>
-
-                        {/* <div className={FileViewerURL ? styles.containerFileView : styles.container}>
-                            <div className={styles.chatRoot}>
-                                <div className={styles.chatContainer}>
-                                    <ChatHistory />
-                                </div>
-                            </div>
-                        </div> */}
                     </Grid>
                 )
             }
