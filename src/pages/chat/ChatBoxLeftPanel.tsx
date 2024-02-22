@@ -10,6 +10,12 @@ import { TrendingQuestionAnswer } from "../../components/Trending";
 import { useSelector } from "react-redux";
 import { styled } from "@mui/material/styles"; 
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+import LeaderBoard from "../../assets/images/LeaderBoard.svg"
+import DeepAnalysis from "../../assets/images/DeepAnalysis.svg"
+import Analytics from "../../assets/images/Analytics.svg"
+import ChatThreads from "../../assets/images/ChatThreads.svg"
+import Uploads from "../../assets/images/Uploads.svg"
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
  
 
 
@@ -70,12 +76,34 @@ const ChatBoxLeftPanel = ({ onClearChatClicked, onExampleClicked, onShowHistoryC
     return (
         (
             <>
-                 
-                     
                 <div className={`${styles.leftSidePanel} ` + (isRightPanelOpen ? styles.show : '')} >
                     <div className={styles.sidePanelBtn} onClick={toggleisRightPanelOpen} >
                         <ArrowLeftIcon/>
                     </div>
+                    <div className={styles.iconContainer}>
+                        <img src={LeaderBoard} alt="Leader Board" />
+                        <p className={styles.labelName}>Leader Board</p>
+                    </div>
+                    <div className={styles.iconContainer}>
+                        <img src={DeepAnalysis} alt="Deep Analysis" />
+                        <p className={styles.labelName}>Deep Analysis</p>
+                    </div>
+                    <div className={styles.iconContainer}>
+                        <img src={Analytics} alt="Analytics" />
+                        <p className={styles.labelName}>Analytics</p>
+                    </div>
+                    <div className={styles.iconContainer}>
+                        <img src={ChatThreads} alt="Chat Threads" />
+                        <p className={styles.labelName}>Chat Threads</p>
+                    </div>
+                    <div className={styles.iconContainer}>
+                        <img src={Uploads} alt="Uploads" />
+                        <p className={styles.labelName}>Uploads</p>
+                    </div>
+
+                    {/* <div>
+                        <OpenInNewIcon/>
+                    </div> */}
 
                     
 

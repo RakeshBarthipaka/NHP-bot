@@ -252,3 +252,12 @@
 .leftSidePanel.show .sidePanelBtn svg{
     transform: rotate(180deg);
 }
+
+.labelName{
+    margin: 0px;
+    padding: 0px;
+}
+.iconContainer{
+    padding: 5px;
+    cursor: pointer;
+}
