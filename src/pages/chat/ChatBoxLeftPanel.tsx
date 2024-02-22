@@ -9,6 +9,7 @@ import PreviousThreads from "../../components/Threads/Threads";
 import { TrendingQuestionAnswer } from "../../components/Trending";
 import { useSelector } from "react-redux";
 import { styled } from "@mui/material/styles"; 
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 
 
 interface Props {
@@ -60,13 +61,23 @@ const ChatBoxLeftPanel = ({ onClearChatClicked, onExampleClicked, onShowHistoryC
         onClearChatClicked();
     };
 
+    const toggleisRightPanelOpen = () => { 
+        setIsRightPanelOpen(current => !current);
+        console.log(isRightPanelOpen)
+      };
+
     return (
         (
             <>
                  
                      
-                <div className={`${styles.leftSidePanel} `} >
-                    <TrendingQuestionAnswer onExampleClicked={onExampleClicked} />
+                <div className={`${styles.leftSidePanel} ` + (isRightPanelOpen ? styles.show : '')} >
+                    <div className={styles.sidePanelBtn} onClick={toggleisRightPanelOpen} >
+                        <ArrowLeftIcon/>
+                    </div>
+                    
+
+                    {/* <TrendingQuestionAnswer onExampleClicked={onExampleClicked} />
                     <PreviousThreads threadCallBack={showThreads} activeThread={activeThread} setActiveThread={setActiveThread} chatData={chatData} />
 
                     <RecommendedFAQ onExampleClicked={onExampleClicked} />
@@ -118,7 +129,7 @@ const ChatBoxLeftPanel = ({ onClearChatClicked, onExampleClicked, onShowHistoryC
                                 ]}
                             />
                         </div>
-                    </Box>
+                    </Box> */}
                 </div>
                 
             </>

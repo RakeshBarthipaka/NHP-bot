@@ -89,7 +89,7 @@
     position: fixed;
     /* position: relative; */
     background: white;
-    width: 280px;
+    width: 130px;
     height: 100%;
     top: 60px;
     border: 1px solid var(--border-color);
@@ -97,12 +97,13 @@
     overflow-y: scroll; 
     z-index: 999;
     transition: 0.7s;
-    transform: translateX(310px);
+    transform: translateX(130px);
 }
 
-.leftSidePanel.open {
-    transform: translateX(0px);
+.leftSidePanel.show {
+    transform: translateX(30px);
 }
+
 .leftSidePanel::-webkit-scrollbar {
     width: 3px;
 }
@@ -233,4 +234,21 @@
 }
 .leftSidePanel .MuiPaper-root:last-child {
     border-bottom-width: 1px !important;
+}
+
+.sidePanelBtn{
+    display: flex;
+        position: absolute;
+        left: 0px;
+        top: 45%;
+        background: var(--active-themes);
+        color: #fff;
+        width: 22px;
+        height: 48px;
+        align-items: center;
+        cursor: pointer;
+}
+
+.leftSidePanel.show .sidePanelBtn svg{
+    transform: rotate(180deg);
 }

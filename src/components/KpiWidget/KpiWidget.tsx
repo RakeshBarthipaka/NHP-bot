@@ -133,7 +133,7 @@ const KpiWidget = () => {
         setSelectedKpis(ids);
         // console.log(ids);
         setKpiSlides(getKpiSlides(ids, result));
-
+        setOpenKpiModal(false)
     };
 
 
@@ -157,8 +157,7 @@ const KpiWidget = () => {
                 anchor='right'
                 className={styles.drawerContentDiv}
                 open={openKpiModal}
-                onClose={() => setOpenKpiModal(false)}
-                // open={() => setOpenKpiModal(true)}
+                onClose={() => setOpenKpiModal(false)} 
                 PaperProps={{
                     sx: { width: "500px", maxWidth: '90%' },
                 }}

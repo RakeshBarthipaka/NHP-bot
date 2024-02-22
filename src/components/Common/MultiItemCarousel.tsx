@@ -36,7 +36,7 @@ const MultiItemCarousel = (props: any) => {
         speed: 500,
         slidesToShow: 4,
         slidesToScroll: 1,
-       
+        
         responsive: [
             {
                 breakpoint: 1400,

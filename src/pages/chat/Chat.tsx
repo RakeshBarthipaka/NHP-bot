@@ -399,7 +399,7 @@ const Chat = (props: any) => {
 
                         <Grid container item justifyContent="center" xs={12} md={12} spacing={4}>
 
-                            <Grid item xs={12} md={7} >
+                            <Grid item xs={12} md={6} >
                                 <KpiWidget />
                                 {!latestQuestion ? (
                                     <div className={styles.chatEmptyState}>
@@ -457,6 +457,12 @@ const Chat = (props: any) => {
                                     </>
                                 )}
                             </Grid>
+
+                                                
+                            {/* <Grid item xs={12} md={6} className={styles.chatRightContent}>
+                                
+                            </Grid> */}
+
 
                             {/* {recommenededQuestionList && recommenededQuestionList.length > 0 &&
                                     <SuggesedQuestion onRecommendedQuestionClicked={onRecommendedQuestionClicked} recommenededQuestionList={recommenededQuestionList} />
