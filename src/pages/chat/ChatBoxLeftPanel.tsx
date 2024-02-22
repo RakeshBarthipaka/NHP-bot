@@ -10,6 +10,7 @@ import { TrendingQuestionAnswer } from "../../components/Trending";
 import { useSelector } from "react-redux";
 import { styled } from "@mui/material/styles"; 
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+ 
 
 
 interface Props {
@@ -75,6 +76,7 @@ const ChatBoxLeftPanel = ({ onClearChatClicked, onExampleClicked, onShowHistoryC
                     <div className={styles.sidePanelBtn} onClick={toggleisRightPanelOpen} >
                         <ArrowLeftIcon/>
                     </div>
+
                     
 
                     {/* <TrendingQuestionAnswer onExampleClicked={onExampleClicked} />

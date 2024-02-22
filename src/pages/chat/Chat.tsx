@@ -28,6 +28,7 @@ import { set_history, set_answers, set_QnA, set_recommendedQnA, set_latestQuesti
 import UserLocationSave from "./UserLocationSave";
 import { Grid } from "@mui/material";
 import KpiWidget from "../../components/KpiWidget/KpiWidget";
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 
 
 
@@ -50,7 +51,8 @@ const Chat = (props: any) => {
     const [activeAnalysisPanelTab, setActiveAnalysisPanelTab] = useState<AnalysisPanelTabs | undefined>(undefined);
 
     const [selectedAnswer, setSelectedAnswer] = useState<number>(0);
-
+    const [ischatRightContent, setchatRightContent] = useState<boolean>(false);
+    
     let getDisclaimer = localStorage.getItem("Disclaimer") || false;
     const [showDisclaimer, setShowDisclaimer] = useState<any>(getDisclaimer);
     const [disclaimerstyle, setDisclaimerstyle] = useState<any>({ color: "gray", borderRadius: "8px", padding: "20px" });
@@ -360,6 +362,11 @@ const Chat = (props: any) => {
 
     const isUserTourGuide = localStorage.getItem("isUserTourGuide") ? localStorage.getItem("isUserTourGuide") : false;
 
+    const toggleChatRightContent  = () => { 
+        setchatRightContent(current => !current);
+        console.log(ischatRightContent)
+      };
+
     return (
         <>
 
@@ -382,7 +389,7 @@ const Chat = (props: any) => {
                 !showHistory && (
                     <Grid container item direction="row" justifyContent="center" alignItems="flex-start" sx={{ height: "100%" }}>
 
-                        <Grid item xs={12} className={styles.chatInputBlock}>
+                        <Grid item xs={11} md={11} className={styles.chatInputBlock}>
                             <div className={styles.chatInput} >
                                 {/* <h1 style={{ marginTop: "100px", marginBottom:"50px" }} className={styles.chatEmptyStateTitle}>Get started with CGLense</h1> */}
                                 <QuestionInput onSelectChatBotTypes={chatBotVoice => handleSelectedSpeakerData(JSON.parse(chatBotVoice))} clearOnSend placeholder="Enter your prompt here" disabled={isLoading} onSend={question => makeApiRequest(question)}
@@ -397,7 +404,7 @@ const Chat = (props: any) => {
 
                         </Grid>
 
-                        <Grid container item justifyContent="center" xs={12} md={12} spacing={4}>
+                        <Grid container item justifyContent="center" xs={12} md={11} spacing={4}>
 
                             <Grid item xs={12} md={6} >
                                 <KpiWidget />
@@ -458,10 +465,18 @@ const Chat = (props: any) => {
                                 )}
                             </Grid>
 
+                            {
+                                ischatRightContent &&
+
+                                <Grid item xs={12} md={6} className={styles.chatRightContent}>
+                                    <div className={styles.sidePanelBtn} onClick={toggleChatRightContent} >
+                                        <ArrowLeftIcon />
+                                    </div>
+
+
+                                </Grid>
+                            }
                                                 
-                            {/* <Grid item xs={12} md={6} className={styles.chatRightContent}>
-                                
-                            </Grid> */}
 
 
                             {/* {recommenededQuestionList && recommenededQuestionList.length > 0 &&
