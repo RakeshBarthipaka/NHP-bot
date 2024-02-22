@@ -453,5 +453,28 @@ p {
 }
 
 .chatRightContent {
-
+    position: relative; 
+    min-height: 100%;
+    transition: 0.7s;
+}
+.chatRightContent::before {
+    content: ' ';
+    position: absolute;
+    height: 100%;
+    width: 2px;
+    background: rgba(83, 118, 240, 0.2);
+    left: 22px;
+    top: 0;
+}
+.sidePanelBtn{
+    display: flex;
+        position: absolute;
+        left: 0px;
+        top: 45%;
+        background: var(--active-themes);
+        color: #fff;
+        width: 22px;
+        height: 48px;
+        align-items: center;
+        cursor: pointer;
 }

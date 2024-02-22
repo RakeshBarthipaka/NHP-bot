@@ -404,7 +404,7 @@ const Chat = (props: any) => {
 
                         </Grid>
 
-                        <Grid container item justifyContent="center" xs={12} md={11} spacing={4}>
+                        <Grid container item justifyContent="center" xs={12} md={11} >
 
                             <Grid item xs={12} md={6} >
                                 <KpiWidget />
@@ -466,7 +466,7 @@ const Chat = (props: any) => {
                             </Grid>
 
                             {
-                                ischatRightContent &&
+                                !ischatRightContent &&
 
                                 <Grid item xs={12} md={6} className={styles.chatRightContent}>
                                     <div className={styles.sidePanelBtn} onClick={toggleChatRightContent} >
