@@ -26,7 +26,7 @@ const MostAskedQuestion = (props: any) => {
   return (
     <>
        <Box
-                        marginLeft={3}
+                        marginX={1}
                         sx={boxStyle}
                         onClick={toggleAnswerDisplay}
                     >
@@ -67,7 +67,7 @@ const MostAskedQuestion = (props: any) => {
                         )
                     }
                     <Box
-                        marginLeft={3}
+                        marginX={1}
                         sx={boxStyle}
                     >
                         <Box sx={{
@@ -84,7 +84,7 @@ const MostAskedQuestion = (props: any) => {
                         </Box>
                     </Box>
                     <Box
-                        marginLeft={3}
+                        marginX={1}
                         sx={boxStyle}
                     >
                         <Box sx={{
@@ -101,7 +101,7 @@ const MostAskedQuestion = (props: any) => {
                         </Box>
                     </Box>
                     <Box
-                        marginLeft={3}
+                        marginX={1}
                         sx={boxStyle}
                     >
                         <Box sx={{
@@ -118,7 +118,7 @@ const MostAskedQuestion = (props: any) => {
                         </Box>
                     </Box>
                     <Box
-                        marginLeft={3}
+                        marginX={1}
                         sx={boxStyle}
                     >
                         <Box sx={{
@@ -135,7 +135,7 @@ const MostAskedQuestion = (props: any) => {
                         </Box>
                     </Box>
                     <Box
-                        marginLeft={3}
+                        marginX={1}
                         sx={boxStyle}
                     >
                         <Box sx={{
@@ -152,7 +152,7 @@ const MostAskedQuestion = (props: any) => {
                         </Box>
                     </Box>
                     <Box
-                        marginLeft={3}
+                        marginX={1}
                         sx={boxStyle}
                     >
                         <Box sx={{

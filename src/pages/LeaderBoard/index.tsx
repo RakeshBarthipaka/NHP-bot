@@ -14,7 +14,7 @@ import MostLikedAnswer from './MostLikedAnswer';
 const LeaderBoard = (props: any) => {
   return (
     <>
-        <Box marginLeft={3} sx={{ width: '100%'}}>
+        <Box marginLeft={3} sx={{ width: '100%', padding: '5px 15px'}}>
             <Typography variant="h6" fontWeight="bold" color="#0C099C" gutterBottom>
                 Leader Board
             </Typography>

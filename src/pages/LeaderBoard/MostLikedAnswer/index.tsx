@@ -15,7 +15,7 @@ const boxStyle = {
 
 const MostLikedAnswer = () => {
   return (
-    <Box marginLeft={3}
+    <Box marginX={1}
     sx={boxStyle}>
         <Box>
             <Box sx={{
