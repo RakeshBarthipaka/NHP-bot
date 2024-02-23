@@ -29,7 +29,7 @@ import UserLocationSave from "./UserLocationSave";
 import { Grid } from "@mui/material";
 import KpiWidget from "../../components/KpiWidget/KpiWidget";
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
-
+import LeaderBoard from "../LeaderBoard";
 
 
 const Chat = (props: any) => {
@@ -371,7 +371,7 @@ const Chat = (props: any) => {
         <>
 
             <ChatBoxLeftPanel onShowHistoryClicked={onShowHistoryClicked} onClearChatClicked={clearChat} onExampleClicked={onExampleClicked}
-                chatData={localChatData} onFileViewURLClicked={onFileViewURLClicked} showThreads={updateQandA} />
+                chatData={localChatData} onFileViewURLClicked={onFileViewURLClicked} showThreads={updateQandA} toggleChatRightContent={toggleChatRightContent}/>
             <UserGuide />
             {
                 isUserTourGuide && (
@@ -473,6 +473,7 @@ const Chat = (props: any) => {
                                         <ArrowLeftIcon />
                                     </div>
 
+                                    <LeaderBoard/>
 
                                 </Grid>
                             }

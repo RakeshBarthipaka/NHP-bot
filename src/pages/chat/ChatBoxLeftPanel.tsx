@@ -24,11 +24,12 @@ interface Props {
     onExampleClicked: (value: string) => void;
     onShowHistoryClicked: (value: boolean) => void;
     onFileViewURLClicked: (value: string) => void;
+    toggleChatRightContent: () => void;
     chatData: Array<Object>;
     showThreads: (value: any) => void;
 }
 
-const ChatBoxLeftPanel = ({ onClearChatClicked, onExampleClicked, onShowHistoryClicked, onFileViewURLClicked, chatData, showThreads }: Props) => {
+const ChatBoxLeftPanel = ({ onClearChatClicked, onExampleClicked, onShowHistoryClicked, onFileViewURLClicked, chatData, showThreads, toggleChatRightContent }: Props) => {
     let chatGPTToken = localStorage.getItem("chatGPTToken") ? localStorage.getItem("chatGPTToken") : 0;
     let chatTemperature = localStorage.getItem("chatTemperature") ? localStorage.getItem("chatTemperature") : 0;
     const [activeThread, setActiveThread] = useState<string | null>(null);
@@ -80,7 +81,7 @@ const ChatBoxLeftPanel = ({ onClearChatClicked, onExampleClicked, onShowHistoryC
                     <div className={styles.sidePanelBtn} onClick={toggleisRightPanelOpen} >
                         <ArrowLeftIcon/>
                     </div>
-                    <div className={styles.iconContainer}>
+                    <div className={styles.iconContainer} onClick={toggleChatRightContent}>
                         <img src={LeaderBoard} alt="Leader Board" />
                         <p className={styles.labelName}>Leader Board</p>
                     </div>
