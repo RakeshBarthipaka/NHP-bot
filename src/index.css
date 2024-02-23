@@ -161,3 +161,19 @@ html {
 .MuiAccordion-root {
     border: 1px solid var(--active-themes) !important;
 }
+
+.rowReverse .shiftingContainer {
+    flex-direction: row-reverse !important;
+     
+}
+.rowReverse .shiftingContainer .sidePanelBtn {
+    right: 0px;
+    left: auto;
+}
+.rowReverse .shiftingContainer .chatRightContent::before {
+    right: 22px;
+    left: auto;
+}
+.shiftingContainer {
+    height: calc(100vh - 170px);
+}

@@ -97,11 +97,12 @@
     overflow-y: scroll; 
     z-index: 999;
     transition: 0.7s;
-    transform: translateX(130px);
+    transform: translateX(106px);
+    right: 0;
 }
 
 .leftSidePanel.show {
-    transform: translateX(30px);
+    transform: translateX(10px);
 }
 
 .leftSidePanel::-webkit-scrollbar {

@@ -1,6 +1,8 @@
 .layout {
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .header {
@@ -322,15 +324,16 @@
     position: absolute;
     top: 55px; 
     right: 55px;
-    width: 250px;
-    padding: 0px 10px;
+    width: 300px;
+    padding: 0px;
     box-shadow: 2px 4px 12px rgb(0,0,0,0.15);
     border-radius: 5px;
 }
 .colorsList {
     display: flex;
     flex-wrap: wrap;
-    padding: 10px 0;
+    padding: 10px 20px;
+    width: 100%;
 }
 
 .settingsDropdown h6 {
@@ -353,20 +356,28 @@
 .layoutStyle {
     display: flex;
     flex-wrap: wrap;
-    padding: 10px 0;
+    padding: 10px 20px;
     width: 100%;
     margin-bottom: 15px;
+    border-top: 1px solid rgba(222, 222, 222, 1);
 }
 .layoutBox {
     display: flex;
+    justify-content: space-between;
+    gap: 2px;
     margin: 0 15px 0 5px;
     cursor: pointer;
+}
+.layoutBox.active {
+    border: 1px solid #000;
 }
 .layoutBox span {
     display: block;
     height: 20px;
-    border: 1px solid #444; 
-    margin-right: 2px;
+    border: 1px solid #444;  
+}
+.layoutBox.active span {
+    border-width: 2px;
 }
 .layoutBox span:nth-child(1) { 
     width: 10px;
@@ -384,4 +395,30 @@
     min-height: calc(100vh - 60px);
     background-image: url(../../../static/assets/chat_bg.png); 
     background-repeat: repeat;
+}
+.rowReverse .shiftingContainer{
+    flex-direction: row-reverse !important;
+}
+
+.accessibilitySlider {
+    display: block;
+    width: 100%;
+    padding: 10px 20px 25px;
+    border-top: 1px solid rgba(222, 222, 222, 1);
+}
+.advancedChatSugges {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    border-top: 1px solid rgba(222, 222, 222, 1);
+}
+.advancedChatSugges p {
+    display: flex;
+    gap: 2px;
+    color: rgba(102, 102, 102, 1);
+    margin: 0;
+    font-size: 12px;
+}
+.advancedChatSugges p svg {
+    font-size: 18px;
 }

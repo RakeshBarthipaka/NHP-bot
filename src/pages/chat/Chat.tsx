@@ -52,7 +52,8 @@ const Chat = (props: any) => {
 
     const [selectedAnswer, setSelectedAnswer] = useState<number>(0);
     const [ischatRightContent, setchatRightContent] = useState<boolean>(false);
-    
+ 
+ 
     let getDisclaimer = localStorage.getItem("Disclaimer") || false;
     const [showDisclaimer, setShowDisclaimer] = useState<any>(getDisclaimer);
     const [disclaimerstyle, setDisclaimerstyle] = useState<any>({ color: "gray", borderRadius: "8px", padding: "20px" });
@@ -367,11 +368,12 @@ const Chat = (props: any) => {
         console.log(ischatRightContent)
       };
 
+    
+
     return (
         <>
 
-            <ChatBoxLeftPanel onShowHistoryClicked={onShowHistoryClicked} onClearChatClicked={clearChat} onExampleClicked={onExampleClicked}
-                chatData={localChatData} onFileViewURLClicked={onFileViewURLClicked} showThreads={updateQandA} />
+            
             <UserGuide />
             {
                 isUserTourGuide && (
@@ -389,7 +391,7 @@ const Chat = (props: any) => {
                 !showHistory && (
                     <Grid container item direction="row" justifyContent="center" alignItems="flex-start" sx={{ height: "100%" }}>
 
-                        <Grid item xs={11} md={11} className={styles.chatInputBlock}>
+                        <Grid item xs={12} md={11} className={styles.chatInputBlock}>
                             <div className={styles.chatInput} >
                                 {/* <h1 style={{ marginTop: "100px", marginBottom:"50px" }} className={styles.chatEmptyStateTitle}>Get started with CGLense</h1> */}
                                 <QuestionInput onSelectChatBotTypes={chatBotVoice => handleSelectedSpeakerData(JSON.parse(chatBotVoice))} clearOnSend placeholder="Enter your prompt here" disabled={isLoading} onSend={question => makeApiRequest(question)}
@@ -404,71 +406,80 @@ const Chat = (props: any) => {
 
                         </Grid>
 
-                        <Grid container item justifyContent="center" xs={12} md={11} >
-
-                            <Grid item xs={12} md={6} >
+                        <Grid container item justifyContent="center" xs={12} md={11} className="shiftingContainer">
+                                
+                            <Grid item xs={12} sm={12} md={6} >
                                 <KpiWidget />
-                                {!latestQuestion ? (
-                                    <div className={styles.chatEmptyState}>
-                                        <ExampleList onExampleClicked={onExampleClicked} chatBotTypes={chatBotVoice.VoiceName} projectData={props.projectData} />
-                                    </div>
-
-
-
-                                ) : (
-                                    <>
-
-                                        <div className={styles.chatMessageStream}>
-                                            {answers.map((answer: any, index: number) => (
-                                                <div key={index}>
-                                                    <UserChatMessage message={answer[0]} />
-                                                    <div className={styles.chatMessageGpt}>
-                                                        <Answer
-                                                            key={index}
-                                                            answer={answer[1]}
-                                                            isSelected={selectedAnswer === index && activeAnalysisPanelTab !== undefined}
-                                                            onCitationClicked={c => onShowCitation(c, index)}
-                                                            onThoughtProcessClicked={() => onToggleTab(AnalysisPanelTabs.ThoughtProcessTab, index)}
-                                                            onSupportingContentClicked={() => onToggleTab(AnalysisPanelTabs.SupportingContentTab, index)}
-                                                            onFollowupQuestionClicked={q => makeApiRequest(q)}
-                                                            showFollowupQuestions={useSuggestFollowupQuestions && answers.length - 1 === index
-                                                            }
-                                                            questionAnswersList={questionAnswersList}
-                                                            onLogsContentClicked={() => onLogsContentClicked()}
-                                                            projectData={props.projectData}
-                                                            onExampleClicked={onExampleClicked}
-                                                        />
-                                                    </div>
-
-
-                                                </div>
-                                            ))}
-                                            {isLoading && (
-                                                <>
-                                                    <UserChatMessage message={latestQuestion} />
-                                                    <div className={styles.chatMessageGptMinWidth}>
-                                                        <AnswerLoading projectData={props.projectData} />
-                                                    </div>
-                                                </>
-                                            )}
-                                            {error ? (
-                                                <>
-                                                    <UserChatMessage message={latestQuestion} />
-                                                    <div className={styles.chatMessageGptMinWidth}>
-                                                        <AnswerError error={error.toString()} onRetry={() => makeApiRequest(latestQuestion)} />
-                                                    </div>
-                                                </>
-                                            ) : null}
-                                            <div ref={chatMessageStreamEnd} />
+                                <div className={styles.chatContainer}>
+                                    {!latestQuestion ? (
+                                        <div className={styles.chatEmptyState}>
+                                            <ExampleList onExampleClicked={onExampleClicked} chatBotTypes={chatBotVoice.VoiceName} projectData={props.projectData} />
                                         </div>
-                                    </>
-                                )}
+
+
+
+                                    ) : (
+                                        <>
+
+                                            <div className={styles.chatMessageStream}>
+                                                {answers.map((answer: any, index: number) => (
+                                                    <div key={index}>
+                                                        <UserChatMessage message={answer[0]} />
+                                                        <div className={styles.chatMessageGpt}>
+                                                            <Answer
+                                                                key={index}
+                                                                answer={answer[1]}
+                                                                isSelected={selectedAnswer === index && activeAnalysisPanelTab !== undefined}
+                                                                onCitationClicked={c => onShowCitation(c, index)}
+                                                                onThoughtProcessClicked={() => onToggleTab(AnalysisPanelTabs.ThoughtProcessTab, index)}
+                                                                onSupportingContentClicked={() => onToggleTab(AnalysisPanelTabs.SupportingContentTab, index)}
+                                                                onFollowupQuestionClicked={q => makeApiRequest(q)}
+                                                                showFollowupQuestions={useSuggestFollowupQuestions && answers.length - 1 === index
+                                                                }
+                                                                questionAnswersList={questionAnswersList}
+                                                                onLogsContentClicked={() => onLogsContentClicked()}
+                                                                projectData={props.projectData}
+                                                                onExampleClicked={onExampleClicked}
+                                                            />
+                                                        </div>
+
+
+                                                    </div>
+                                                ))}
+                                                {isLoading && (
+                                                    <>
+                                                        <UserChatMessage message={latestQuestion} />
+                                                        <div className={styles.chatMessageGptMinWidth}>
+                                                            <AnswerLoading projectData={props.projectData} />
+                                                        </div>
+                                                    </>
+                                                )}
+                                                {error ? (
+                                                    <>
+                                                        <UserChatMessage message={latestQuestion} />
+                                                        <div className={styles.chatMessageGptMinWidth}>
+                                                            <AnswerError error={error.toString()} onRetry={() => makeApiRequest(latestQuestion)} />
+                                                        </div>
+                                                    </>
+                                                ) : null}
+                                                <div ref={chatMessageStreamEnd} />
+                                            </div>
+                                        </>
+                                    )}
+
+
+                                    {recommenededQuestionList && recommenededQuestionList.length > 0 &&
+                                        <SuggesedQuestion onRecommendedQuestionClicked={onRecommendedQuestionClicked} recommenededQuestionList={recommenededQuestionList} />
+                                    }
+
+                                </div>
+
                             </Grid>
 
                             {
                                 !ischatRightContent &&
 
-                                <Grid item xs={12} md={6} className={styles.chatRightContent}>
+                                <Grid item xs={12} sm={12} md={6} className={styles.chatRightContent}>
                                     <div className={styles.sidePanelBtn} onClick={toggleChatRightContent} >
                                         <ArrowLeftIcon />
                                     </div>
@@ -479,9 +490,7 @@ const Chat = (props: any) => {
                                                 
 
 
-                            {/* {recommenededQuestionList && recommenededQuestionList.length > 0 &&
-                                    <SuggesedQuestion onRecommendedQuestionClicked={onRecommendedQuestionClicked} recommenededQuestionList={recommenededQuestionList} />
-                                } */}
+                            
 
 
 
@@ -593,6 +602,8 @@ const Chat = (props: any) => {
                 )
             }
 
+            <ChatBoxLeftPanel onShowHistoryClicked={onShowHistoryClicked} onClearChatClicked={clearChat} onExampleClicked={onExampleClicked}
+                            chatData={localChatData} onFileViewURLClicked={onFileViewURLClicked} showThreads={updateQandA} />
         </>
 
     );
