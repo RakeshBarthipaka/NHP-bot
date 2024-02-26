@@ -8,16 +8,14 @@ import { UploadedDocumentView } from "../../components/UploadedDocument";
 import PreviousThreads from "../../components/Threads/Threads";
 import { TrendingQuestionAnswer } from "../../components/Trending";
 import { useSelector } from "react-redux";
-import { styled } from "@mui/material/styles"; 
-import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
-import LeaderBoard from "../../assets/images/LeaderBoard.svg"
-import DeepAnalysis from "../../assets/images/DeepAnalysis.svg"
-import Analytics from "../../assets/images/Analytics.svg"
-import ChatThreads from "../../assets/images/ChatThreads.svg"
-import Uploads from "../../assets/images/Uploads.svg"
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
- 
-
+import { styled } from "@mui/material/styles";
+import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
+import LeaderBoard from "../../assets/images/LeaderBoard.svg";
+import DeepAnalysis from "../../assets/images/DeepAnalysis.svg";
+import Analytics from "../../assets/images/Analytics.svg";
+import ChatThreads from "../../assets/images/ChatThreads.svg";
+import Uploads from "../../assets/images/Uploads.svg";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 interface Props {
     onClearChatClicked: () => void;
@@ -25,11 +23,23 @@ interface Props {
     onShowHistoryClicked: (value: boolean) => void;
     onFileViewURLClicked: (value: string) => void;
     toggleChatRightContent: () => void;
+    toggleLeaderBoard: () => void;
+    toggleUploads: () => void;
     chatData: Array<Object>;
     showThreads: (value: any) => void;
 }
 
-const ChatBoxLeftPanel = ({ onClearChatClicked, onExampleClicked, onShowHistoryClicked, onFileViewURLClicked, chatData, showThreads, toggleChatRightContent }: Props) => {
+const ChatBoxLeftPanel = ({
+    onClearChatClicked,
+    onExampleClicked,
+    onShowHistoryClicked,
+    onFileViewURLClicked,
+    chatData,
+    showThreads,
+    toggleChatRightContent,
+    toggleLeaderBoard,
+    toggleUploads
+}: Props) => {
     let chatGPTToken = localStorage.getItem("chatGPTToken") ? localStorage.getItem("chatGPTToken") : 0;
     let chatTemperature = localStorage.getItem("chatTemperature") ? localStorage.getItem("chatTemperature") : 0;
     const [activeThread, setActiveThread] = useState<string | null>(null);
@@ -40,8 +50,9 @@ const ChatBoxLeftPanel = ({ onClearChatClicked, onExampleClicked, onShowHistoryC
         color: ${colorCode};
         & .MuiSlider-mark {
             color: ${colorCode};
-            opacity:0.4;
-        },
+            opacity: 0.4;
+        }
+        ,
         & .MuiSlider-markActive {
             background-color: ${colorCode};
         }
@@ -69,46 +80,55 @@ const ChatBoxLeftPanel = ({ onClearChatClicked, onExampleClicked, onShowHistoryC
         onClearChatClicked();
     };
 
-    const toggleisRightPanelOpen = () => { 
+    const toggleisRightPanelOpen = () => {
         setIsRightPanelOpen(current => !current);
-        console.log(isRightPanelOpen)
-      };
+        console.log(isRightPanelOpen);
+    };
 
     return (
-        (
-            <>
-                <div className={`${styles.leftSidePanel} ` + (isRightPanelOpen ? styles.show : '')} >
-                    <div className={styles.sidePanelBtn} onClick={toggleisRightPanelOpen} >
-                        <ArrowLeftIcon/>
-                    </div>
-                    <div className={styles.iconContainer} onClick={toggleChatRightContent}>
-                        <img src={LeaderBoard} alt="Leader Board" />
-                        <p className={styles.labelName}>Leader Board</p>
-                    </div>
-                    <div className={styles.iconContainer}>
-                        <img src={DeepAnalysis} alt="Deep Analysis" />
-                        <p className={styles.labelName}>Deep Analysis</p>
-                    </div>
-                    <div className={styles.iconContainer}>
-                        <img src={Analytics} alt="Analytics" />
-                        <p className={styles.labelName}>Analytics</p>
-                    </div>
-                    <div className={styles.iconContainer}>
-                        <img src={ChatThreads} alt="Chat Threads" />
-                        <p className={styles.labelName}>Chat Threads</p>
-                    </div>
-                    <div className={styles.iconContainer}>
-                        <img src={Uploads} alt="Uploads" />
-                        <p className={styles.labelName}>Uploads</p>
-                    </div>
+        <>
+            <div className={`${styles.leftSidePanel} ` + (isRightPanelOpen ? styles.show : "")}>
+                <div className={styles.sidePanelBtn} onClick={toggleisRightPanelOpen}>
+                    <ArrowLeftIcon />
+                </div>
+                <div
+                    className={styles.iconContainer}
+                    onClick={() => {
+                        toggleisRightPanelOpen();
+                        toggleLeaderBoard();
+                    }}
+                >
+                    <img src={LeaderBoard} alt="Leader Board" />
+                    <p className={styles.labelName}>Leader Board</p>
+                </div>
+                <div className={styles.iconContainer}>
+                    <img src={DeepAnalysis} alt="Deep Analysis" />
+                    <p className={styles.labelName}>Deep Analysis</p>
+                </div>
+                <div className={styles.iconContainer}>
+                    <img src={Analytics} alt="Analytics" />
+                    <p className={styles.labelName}>Analytics</p>
+                </div>
+                <div className={styles.iconContainer}>
+                    <img src={ChatThreads} alt="Chat Threads" />
+                    <p className={styles.labelName}>Chat Threads</p>
+                </div>
+                <div
+                    className={styles.iconContainer}
+                    onClick={() => {
+                        toggleisRightPanelOpen();
+                        toggleUploads();
+                    }}
+                >
+                    <img src={Uploads} alt="Uploads" />
+                    <p className={styles.labelName}>Uploads</p>
+                </div>
 
-                    {/* <div>
+                {/* <div>
                         <OpenInNewIcon/>
                     </div> */}
 
-                    
-
-                    {/* <TrendingQuestionAnswer onExampleClicked={onExampleClicked} />
+                {/* <TrendingQuestionAnswer onExampleClicked={onExampleClicked} />
                     <PreviousThreads threadCallBack={showThreads} activeThread={activeThread} setActiveThread={setActiveThread} chatData={chatData} />
 
                     <RecommendedFAQ onExampleClicked={onExampleClicked} />
@@ -161,10 +181,8 @@ const ChatBoxLeftPanel = ({ onClearChatClicked, onExampleClicked, onShowHistoryC
                             />
                         </div>
                     </Box> */}
-                </div>
-                
-            </>
-        )
+            </div>
+        </>
     );
 };
 
