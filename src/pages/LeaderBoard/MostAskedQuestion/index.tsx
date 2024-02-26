@@ -5,18 +5,7 @@ import "react-tabs/style/react-tabs.css";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
-import style from "../../LeaderBoard/LeaderBoard.module.scss";
-
-const boxStyle = {
-    width: "auto",
-    p: 1,
-    bgcolor: "#5376F033",
-    color: "#333333",
-    borderRadius: 2,
-    fontSize: "0.8rem",
-    marginBottom: "0.5rem",
-    cursor: "pointer"
-};
+//import style from "../../LeaderBoard/LeaderBoard.module.scss";
 
 const MostAskedQuestion = (props: any) => {
     const [isDisplayAnswer, setIsDisplayAnswer] = useState<boolean>(false);
@@ -26,7 +15,7 @@ const MostAskedQuestion = (props: any) => {
     };
     return (
         <>
-            <Box marginX={1} sx={boxStyle} onClick={toggleAnswerDisplay}>
+            <Box className="question-box" onClick={toggleAnswerDisplay}>
                 <Box
                     sx={{
                         width: "23px",
@@ -48,28 +37,33 @@ const MostAskedQuestion = (props: any) => {
                         />
                     )}
                 </Box>
-                <Box>
-                    <Typography fontSize={12}>Show recommended Queries after one Queries that info come from history</Typography>
-                    <Typography fontSize={11} fontWeight="bold" color="#0C099C">
-                        requested by: Vishnu &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested on: 22/01/2024 &nbsp;&nbsp;&nbsp;
-                        <RemoveRedEyeOutlinedIcon sx={{ color: "#435241", fontSize: 20 }} /> 9
+                <Box className="question-text">
+                    <Typography className="question">Show recommended Queries after one Queries that info come from history</Typography>
+                    <Typography className="otherInfo">
+                        requested by: Vishnu &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested on: 22/01/2024
+                        <span>
+                            <RemoveRedEyeOutlinedIcon className="viewIcon" />
+                        </span>{" "}
+                        9
                     </Typography>
                 </Box>
             </Box>
             {isDisplayAnswer && (
-                <Box marginLeft={3} marginBottom={3} bgcolor="#F2F2F7" color="#000000" padding={2}>
-                    <Typography fontSize="0.7rem">
-                        Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are in the process of
-                        improving your finances, there are a few other approaches to your lifestyle that you can implement that will improve your financial
-                        position further. Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are
-                        in the process of improving your finances, there are a few other approaches to your lifestyle that you can implement that will improve
-                        your financial position further. These approaches are meant to advance your financial standing and be a boost to your financial
-                        improvements. Your plan for paying off your outstanding debts is similar to your plan for paying off your loans. Debts should be one of
-                        your top priorities now that you are attempting to jump start financial growth.
-                    </Typography>
-                </Box>
+                <div className="answer-container">
+                    <Box>
+                        <Typography>
+                            Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are in the process
+                            of improving your finances, there are a few other approaches to your lifestyle that you can implement that will improve your
+                            financial position further. Financial growth is an aspect of improving your personal finances and becoming more financially stable.
+                            When you are in the process of improving your finances, there are a few other approaches to your lifestyle that you can implement
+                            that will improve your financial position further. These approaches are meant to advance your financial standing and be a boost to
+                            your financial improvements. Your plan for paying off your outstanding debts is similar to your plan for paying off your loans.
+                            Debts should be one of your top priorities now that you are attempting to jump start financial growth.
+                        </Typography>
+                    </Box>
+                </div>
             )}
-            <Box marginX={1} sx={boxStyle}>
+            <Box className="question-box">
                 <Box
                     sx={{
                         width: "23px",
@@ -83,15 +77,18 @@ const MostAskedQuestion = (props: any) => {
                         }}
                     />
                 </Box>
-                <Box>
-                    <Typography fontSize={12}>What is the return policy to t-shirts?</Typography>
-                    <Typography fontSize={11} fontWeight="bold" color="#0C099C">
-                        requested by: Vishnu &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested on: 22/01/2024 &nbsp;&nbsp;&nbsp;
-                        <RemoveRedEyeOutlinedIcon sx={{ color: "#435241", fontSize: 20 }} /> 9
+                <Box className="question-text">
+                    <Typography className="question">Show recommended Queries after one Queries that</Typography>
+                    <Typography className="otherInfo">
+                        requested by: Vishnu &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested on: 22/01/2024
+                        <span>
+                            <RemoveRedEyeOutlinedIcon className="viewIcon" />
+                        </span>{" "}
+                        9
                     </Typography>
                 </Box>
             </Box>
-            <Box marginX={1} sx={boxStyle}>
+            <Box className="question-box">
                 <Box
                     sx={{
                         width: "23px",
@@ -105,15 +102,18 @@ const MostAskedQuestion = (props: any) => {
                         }}
                     />
                 </Box>
-                <Box>
-                    <Typography fontSize={12}>Show recommended Queries after one Queries that info come from history</Typography>
-                    <Typography fontSize={11} fontWeight="bold" color="#0C099C">
-                        requested by: Vishnu &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested on: 22/01/2024 &nbsp;&nbsp;&nbsp;
-                        <RemoveRedEyeOutlinedIcon sx={{ color: "#435241", fontSize: 20 }} /> 9
+                <Box className="question-text">
+                    <Typography className="question">Show recommended Queries after one come from history</Typography>
+                    <Typography className="otherInfo">
+                        requested by: Vishnu &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested on: 22/01/2024
+                        <span>
+                            <RemoveRedEyeOutlinedIcon className="viewIcon" />
+                        </span>{" "}
+                        9
                     </Typography>
                 </Box>
             </Box>
-            <Box marginX={1} sx={boxStyle}>
+            <Box className="question-box">
                 <Box
                     sx={{
                         width: "23px",
@@ -127,15 +127,18 @@ const MostAskedQuestion = (props: any) => {
                         }}
                     />
                 </Box>
-                <Box>
-                    <Typography fontSize={12}>Show recommended Queries after one Queries that info come from history</Typography>
-                    <Typography fontSize={11} fontWeight="bold" color="#0C099C">
-                        requested by: Vishnu &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested on: 22/01/2024 &nbsp;&nbsp;&nbsp;
-                        <RemoveRedEyeOutlinedIcon sx={{ color: "#435241", fontSize: 20 }} /> 9
+                <Box className="question-text">
+                    <Typography className="question">Show recommended Queries after one Queries that</Typography>
+                    <Typography className="otherInfo">
+                        requested by: Vishnu &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested on: 22/01/2024
+                        <span>
+                            <RemoveRedEyeOutlinedIcon className="viewIcon" />
+                        </span>{" "}
+                        9
                     </Typography>
                 </Box>
             </Box>
-            <Box marginX={1} sx={boxStyle}>
+            <Box className="question-box">
                 <Box
                     sx={{
                         width: "23px",
@@ -149,15 +152,18 @@ const MostAskedQuestion = (props: any) => {
                         }}
                     />
                 </Box>
-                <Box>
-                    <Typography fontSize={12}>Show recommended Queries after one Queries that info come from history</Typography>
-                    <Typography fontSize={11} fontWeight="bold" color="#0C099C">
-                        requested by: Vishnu &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested on: 22/01/2024 &nbsp;&nbsp;&nbsp;
-                        <RemoveRedEyeOutlinedIcon sx={{ color: "#435241", fontSize: 20 }} /> 9
+                <Box className="question-text">
+                    <Typography className="question">Show recommended one Queries that info come from history</Typography>
+                    <Typography className="otherInfo">
+                        requested by: Vishnu &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested on: 22/01/2024
+                        <span>
+                            <RemoveRedEyeOutlinedIcon className="viewIcon" />
+                        </span>{" "}
+                        9
                     </Typography>
                 </Box>
             </Box>
-            <Box marginX={1} sx={boxStyle}>
+            <Box className="question-box">
                 <Box
                     sx={{
                         width: "23px",
@@ -171,15 +177,18 @@ const MostAskedQuestion = (props: any) => {
                         }}
                     />
                 </Box>
-                <Box>
-                    <Typography fontSize={12}>Show recommended Queries after one Queries that info come from history</Typography>
-                    <Typography fontSize={11} fontWeight="bold" color="#0C099C">
-                        requested by: Vishnu &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested on: 22/01/2024 &nbsp;&nbsp;&nbsp;
-                        <RemoveRedEyeOutlinedIcon sx={{ color: "#435241", fontSize: 20 }} /> 9
+                <Box className="question-text">
+                    <Typography className="question">Show recommended Queries after come from history</Typography>
+                    <Typography className="otherInfo">
+                        requested by: Vishnu &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested on: 22/01/2024
+                        <span>
+                            <RemoveRedEyeOutlinedIcon className="viewIcon" />
+                        </span>{" "}
+                        9
                     </Typography>
                 </Box>
             </Box>
-            <Box marginX={1} sx={boxStyle}>
+            <Box className="question-box">
                 <Box
                     sx={{
                         width: "23px",
@@ -193,11 +202,14 @@ const MostAskedQuestion = (props: any) => {
                         }}
                     />
                 </Box>
-                <Box>
-                    <Typography fontSize={12}>Show recommended Queries after one Queries that info come from history</Typography>
-                    <Typography fontSize={11} fontWeight="bold" color="#0C099C">
-                        requested by: Vishnu &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested on: 22/01/2024 &nbsp;&nbsp;&nbsp;
-                        <RemoveRedEyeOutlinedIcon sx={{ color: "#435241", fontSize: 20 }} /> 9
+                <Box className="question-text">
+                    <Typography className="question">Show recommended Queries after one Queries that info come from history</Typography>
+                    <Typography className="otherInfo">
+                        requested by: Vishnu &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested on: 22/01/2024
+                        <span>
+                            <RemoveRedEyeOutlinedIcon className="viewIcon" />
+                        </span>{" "}
+                        9
                     </Typography>
                 </Box>
             </Box>
