@@ -5,6 +5,7 @@ import 'react-tabs/style/react-tabs.css';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined';
+import style from '../../LeaderBoard/LeaderBoard.module.scss'
 
 const boxStyle = {
     width: 'auto',
@@ -46,7 +47,7 @@ const MostAskedQuestion = (props: any) => {
                         
                         </Box>
                         <Box>
-                            <Typography fontSize={12}>Show recommended Queries after one Queries that info come from history</Typography>
+                            <Typography fontSize={12} className={style.mycont}>Show recommended Queries after one Queries that info come from history</Typography>
                             <Typography fontSize={11} fontWeight="bold" color="#0C099C">requested by: Vishnu  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested on: 22/01/2024
                             &nbsp;&nbsp;&nbsp;<RemoveRedEyeOutlinedIcon sx={{color:"#435241", fontSize:20}}/> 9
                             </Typography>
