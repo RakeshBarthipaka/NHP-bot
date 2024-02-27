@@ -166,14 +166,41 @@ html {
     flex-direction: row-reverse !important;
      
 }
+.shiftingContainer > div:nth-child(2) {
+    position: relative;    
+}
+.shiftingContainer > div:nth-child(2)::before {
+    content: ' ';
+    position: absolute;
+    height: 100%;
+    width: 2px;
+    background: rgba(83, 118, 240, 0.2);
+    left: 22px;
+    top: 0;
+}
+
+.shiftingContainer .sidePanelBtn {
+    display: flex;
+        position: absolute;
+        left: 0px;
+        top: 45%;
+        background: var(--active-themes);
+        color: #fff;
+        width: 22px;
+        height: 48px;
+        align-items: center;
+        cursor: pointer;
+}
 .rowReverse .shiftingContainer .sidePanelBtn {
     right: 0px;
     left: auto;
 }
-.rowReverse .shiftingContainer .chatRightContent::before {
+.rowReverse .shiftingContainer > div:nth-child(2)::before {
     right: 22px;
     left: auto;
 }
+
 .shiftingContainer {
     height: calc(100vh - 170px);
+    overflow-y: scroll;
 }

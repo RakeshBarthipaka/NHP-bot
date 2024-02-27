@@ -48,10 +48,17 @@ const Layout = (props: any) => {
         background-color: rgba(217, 217, 217, 1);
     },
     & .MuiSlider-markLabel {
-        top: 15px;
+        top: 15px;        
+    }
+    &.fontSizeSlider .MuiSlider-markLabel {
+        font-size: 12px;
 
-        &::first-child {
-            font-size: 12px;
+        &[data-index="0"] {
+            font-size: 10px;
+        }
+
+        &[data-index="2"] {
+            font-size: 14px;
         }
     }
 `;
@@ -135,6 +142,36 @@ const setChatGPTToken = (value: number) => {
     //   function valueLabelFormat(value: number) {
     //     return marks.findIndex((mark) => mark.value === value) + 1;
     //   }
+
+    const fontChange = (event: any, value: any) => {
+        const textElements: any = document.querySelectorAll('.accessibility-plugin-ac');
+
+        for (let i = 0; i < textElements.length; i++) {
+            const fontsizevalue: any = window.getComputedStyle(textElements[i], null).getPropertyValue('font-size');
+            let currentFontSize: any;
+
+            currentFontSize = parseInt(fontsizevalue.replace('px', ''));
+
+            if (textElements[i].getAttribute('default-font-size') === null) {
+
+                const att = document.createAttribute('default-font-size');
+
+                att.value = currentFontSize.toString();
+
+                textElements[i].setAttributeNode(att);
+
+            }
+
+            currentFontSize = value;
+
+
+            textElements[i].style.fontSize = currentFontSize + 'px';
+
+        }
+
+        console.log(value);
+    };
+    
       
 
     return (
@@ -281,18 +318,20 @@ const setChatGPTToken = (value: number) => {
                                                         <h6>Accessibility</h6>
                                                         <Box sx={{ width: 225 }}>
                                                             <ThemedSlider
+                                                                className="fontSizeSlider"
                                                                 aria-label="Accessibility values"
                                                                 track={false}
                                                                 defaultValue={14} 
                                                                 getAriaValueText={valuetext}
+                                                                onChange={fontChange}
                                                                 step={null}
-                                                                valueLabelDisplay="auto" 
-                                                                min={12}
-                                                                max={16}
+                                                                valueLabelDisplay="off"  
+                                                                min={13}
+                                                                max={15}
                                                                 size="small"
                                                                 marks={[
                                                                     {
-                                                                        value: 12,
+                                                                        value: 13,
                                                                         label: "AZ"
                                                                     },
                                                                     {
@@ -300,7 +339,7 @@ const setChatGPTToken = (value: number) => {
                                                                         label: "AZ"
                                                                     },
                                                                     {
-                                                                        value: 16,
+                                                                        value: 15,
                                                                         label: "AZ"
                                                                     },
                                                                 ]}

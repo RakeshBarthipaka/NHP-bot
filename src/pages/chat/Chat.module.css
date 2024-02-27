@@ -51,7 +51,7 @@
     padding: 2px;
 } */
 
-.chatEmptyState {
+/* .chatEmptyState {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -59,7 +59,7 @@
     align-items: center;
     max-height: 1024px;
     top: 25%;
-    /* position: fixed; */
+    
 }
 
 .chatEmptyState img {
@@ -94,18 +94,18 @@
     text-align: center;
     color: #000000;
 
-}
+} */
 
-@media only screen and (max-height: 780px) {
-    /* .chatEmptyState {
+/* @media only screen and (max-height: 780px) {
+    .chatEmptyState {
         padding-top: 0;
-    } */
+    }
 
     .chatEmptyStateTitle {
         font-size: 36px;
         margin-bottom: 0px;
     }
-}
+} */
 
 .chatMessageStream {
     flex-grow: 1;
@@ -438,7 +438,7 @@ p {
     position: sticky;
     top: 60px;
     backdrop-filter: blur(4px);
-    background-color: rgb(255 255 255 / 80%);
+    /* background-color: rgb(255 255 255 / 80%); */
     z-index: 11;
 }
 
@@ -446,8 +446,9 @@ p {
     position: relative; 
     min-height: 100%;
     transition: 0.7s;
+    padding: 0 24px;
 }
-.chatRightContent::before {
+/* .chatRightContent::before {
     content: ' ';
     position: absolute;
     height: 100%;
@@ -455,8 +456,8 @@ p {
     background: rgba(83, 118, 240, 0.2);
     left: 22px;
     top: 0;
-}
-.sidePanelBtn{
+} */
+/* .sidePanelBtn{
     display: flex;
         position: absolute;
         left: 0px;
@@ -467,9 +468,50 @@ p {
         height: 48px;
         align-items: center;
         cursor: pointer;
+} */
+
+.chatEmptyState {
+    align-items: center;
+}
+.chatEmptyState > div:nth-child(1) {
+    padding: 10px 15px;
+    text-align: center;
+}
+.chatEmptyState > div:nth-child(1) h4 {
+    font-size: 16px;
+    color: var(--active-themes);
+}
+.chatEmptyState > div:nth-child(1) p {
+    color: rgba(174, 174, 174, 1);
+    font-size: 14px;
+    margin: 0 0 5px;
+}
+
+.chatEmptyState > div:nth-child(2) {
+    padding: 10px 15px;
+    border-left: 2px solid rgba(83, 118, 240, 0.2);
 }
 
 .chatContainer {
     max-height: calc(100vh - 340px);
     overflow-y: scroll;
+
+}
+
+.infoCard {
+    display: block;
+    background: rgba(242, 242, 247, 1);
+    padding: 10px 25px 20px;
+    border-radius: 15px 20px;
+    margin-top: 15px;
+}
+
+.infoCard h3 {
+    font-size: 14px;
+    color: var(--active-themes);
+}
+.infoCard p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.65;
 }

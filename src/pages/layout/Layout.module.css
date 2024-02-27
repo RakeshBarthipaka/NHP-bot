@@ -393,7 +393,8 @@
     margin-top: 60px;
     padding: 0 1.5rem;
     min-height: calc(100vh - 60px);
-    background-image: url(../../../static/assets/chat_bg.png); 
+    max-height: calc(100vh - 60px);
+    /* background-image: url(../../../static/assets/chat_bg.png);  */
     background-repeat: repeat;
 }
 .rowReverse .shiftingContainer{
@@ -417,8 +418,8 @@
     gap: 2px;
     color: rgba(102, 102, 102, 1);
     margin: 0;
-    font-size: 12px;
+    font-size: 13px;
 }
 .advancedChatSugges p svg {
-    font-size: 18px;
+    font-size: 16px;
 }
