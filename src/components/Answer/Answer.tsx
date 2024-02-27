@@ -232,7 +232,7 @@ export const Answer = ({
                             iconProps={{ iconName: "like" }}
                             title="Good response"
                             ariaLabel="Like Answer"
-                            disabled={true}
+                            // disabled={true}
                             onClick={() => likeDisLikeAnswerToggle("LIKE")}
                         />
                         <IconButton
@@ -240,7 +240,7 @@ export const Answer = ({
                             iconProps={{ iconName: "dislike" }}
                             title="Bad Response"
                             ariaLabel="Dislike Answer"
-                            disabled={true}
+                            // disabled={true}
                             onClick={() => likeDisLikeAnswerToggle("DISLIKE")}
                         />
 

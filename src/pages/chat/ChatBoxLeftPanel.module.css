@@ -98,7 +98,9 @@
     overflow-y: scroll; 
     z-index: 999;
     transition: 0.7s;
-    transform: translateX(120px);
+    /* transform: translateX(120px); */
+    transform: translateX(106px);
+    right: 0;
 }
 
 .leftSidePanel::before { 
@@ -109,10 +111,11 @@
     background: rgba(83, 118, 240, 0.2);
     left: 22px;
     top: 0; 
+    
 }
 
 .leftSidePanel.show {
-    transform: translateX(30px);
+    transform: translateX(10px);
 }
 
 .leftSidePanel::-webkit-scrollbar {
@@ -278,4 +281,9 @@
     border: 1px solid rgba(12, 9, 156, 1);
     text-align: center;
     border-width: 0 0 1px 0px;
+}
+@media only screen and (max-width: 900px) {
+    .leftSidePanel {
+        display: none;
+    }
 }

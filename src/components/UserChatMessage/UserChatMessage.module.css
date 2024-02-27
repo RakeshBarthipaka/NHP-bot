@@ -9,7 +9,9 @@
 }
 
 .message {
-    padding: 15px 30px;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 12px 32px 12px 24px;
     background: var(--active-themes); 
     color: #fff;
     border-radius: 25px;
@@ -37,10 +39,10 @@
     content: "";
     position: absolute;
     width: 40px;
-    height: 50px;
+    height: 38px;
     background: var(--active-themes);
     /* clip-path: polygon(0 0, 0 47%, 100% 0); */
     clip-path: polygon(0 0, 100% 0%, 59% 0, 100% 0, 59% 32%, 59% 69%, 0 70%);
-    right: -15px;
+    right: -17px;
     top: 0;
 }
