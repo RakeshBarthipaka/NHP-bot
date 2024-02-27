@@ -7,14 +7,11 @@ import { ExampleList } from "../../components/Example";
 import { UserChatMessage } from "../../components/UserChatMessage";
 import { AnalysisPanel, AnalysisPanelTabs } from "../../components/AnalysisPanel";
 import styles from "./Chat.module.css";
-import ChatBoxLeftPanel from './ChatBoxLeftPanel'
-import {
-    speakText, muteAudio,
-    unmuteAudio,
-} from "../../utils/azureCustomSpeechSynthesis"
-import { speechToTextStart, speechToTextStop } from "../../utils/azureSpeechRecognizer"
+import ChatBoxLeftPanel from "./ChatBoxLeftPanel";
+import { speakText, muteAudio, unmuteAudio } from "../../utils/azureCustomSpeechSynthesis";
+import { speechToTextStart, speechToTextStop } from "../../utils/azureSpeechRecognizer";
 import azureSpeakerVoiceList from "../../utils/azureSpeakerVoiceList";
-import { getLocalStorageData, setLocalStorageData } from "../../utils/clientStorage"
+import { getLocalStorageData, setLocalStorageData } from "../../utils/clientStorage";
 import { NavLink } from "react-router-dom";
 import { ChatHistory } from "../../components/ChatHistory";
 import { SuggesedQuestion } from "../../components/Answer/SuggesedQuestion";
@@ -28,9 +25,8 @@ import { set_history, set_answers, set_QnA, set_recommendedQnA, set_latestQuesti
 import UserLocationSave from "./UserLocationSave";
 import { Grid } from "@mui/material";
 import KpiWidget from "../../components/KpiWidget/KpiWidget";
-import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import LeaderBoard from "../LeaderBoard";
-
 
 const Chat = (props: any) => {
     const [isConfigPanelOpen, setIsConfigPanelOpen] = useState(false);
@@ -40,7 +36,7 @@ const Chat = (props: any) => {
     const [useSemanticCaptions, setUseSemanticCaptions] = useState<boolean>(false);
     const [excludeCategory, setExcludeCategory] = useState<string>("");
     const [useSuggestFollowupQuestions, setUseSuggestFollowupQuestions] = useState<boolean>(false);
-    const [threads, scrollThreads] = useState(false)
+    const [threads, scrollThreads] = useState(false);
     const chatMessageStreamEnd = useRef<HTMLDivElement | null>(null);
     const [localChatData, setLocalChatData] = useState([]);
 
@@ -52,26 +48,30 @@ const Chat = (props: any) => {
 
     const [selectedAnswer, setSelectedAnswer] = useState<number>(0);
     const [ischatRightContent, setchatRightContent] = useState<boolean>(false);
-    
+    const [isLeaderBoard, setIsLeaderBoard] = useState<boolean>(false);
+    const [isUpload, setIsUpload] = useState<boolean>(false);
+
     let getDisclaimer = localStorage.getItem("Disclaimer") || false;
     const [showDisclaimer, setShowDisclaimer] = useState<any>(getDisclaimer);
     const [disclaimerstyle, setDisclaimerstyle] = useState<any>({ color: "gray", borderRadius: "8px", padding: "20px" });
-    const [disabledButton, setDisabledButton] = useState<boolean>(true)
+    const [disabledButton, setDisabledButton] = useState<boolean>(true);
     const [isListen, setisListen] = useState<boolean>(false);
     const [transcriptValue, setTranscriptValue] = useState("");
     const [isSpeakerOn, setisSpeakerOn] = useState(true);
     let speakerData: any = getLocalStorageData("speakerData");
     const [chatBotVoice, setChatBotVoice] = useState<any>(speakerData ? JSON.parse(speakerData) : azureSpeakerVoiceList[0]);
     const [showLogsView, setShowLogsView] = useState(false);
-    const projectHeadingText = props.projectData && props.projectData.chatbotInsideText || "Get started with CGLense"
-    const projectInsideImage = props.projectData && props.projectData.chatbotInsideImage || "https://covalenseaccessibility.blob.core.windows.net/ai-portal/CGLENSE_AI_BOT_INSIDE_LOGO.png";
+    const projectHeadingText = (props.projectData && props.projectData.chatbotInsideText) || "Get started with CGLense";
+    const projectInsideImage =
+        (props.projectData && props.projectData.chatbotInsideImage) ||
+        "https://covalenseaccessibility.blob.core.windows.net/ai-portal/CGLENSE_AI_BOT_INSIDE_LOGO.png";
     const [FileViewerURL, setFileViewerURL] = useState("");
     const answers = useSelector((state: any) => state.chat.answers);
     const questionAnswersList = useSelector((state: any) => state.chat.qnA);
-    const showHistory = useSelector((state: any) => state.chat.showHistory)
-    const recommenededQuestionList = useSelector((state: any) => state.chat.recommendedQuestions)
-    const latestQuestion = useSelector((state: any) => state.chat.latestQuestion)
-    const lastQuestionRef = useRef<string>("")
+    const showHistory = useSelector((state: any) => state.chat.showHistory);
+    const recommenededQuestionList = useSelector((state: any) => state.chat.recommendedQuestions);
+    const latestQuestion = useSelector((state: any) => state.chat.latestQuestion);
+    const lastQuestionRef = useRef<string>("");
     const dispatch = useDispatch();
 
     let handleMicClick = () => {
@@ -95,8 +95,8 @@ const Chat = (props: any) => {
     };
 
     let handleSelectedSpeakerData = (voiceData: any) => {
-        setChatBotVoice(voiceData)
-        setLocalStorageData("speakerData", voiceData)
+        setChatBotVoice(voiceData);
+        setLocalStorageData("speakerData", voiceData);
     };
 
     useEffect(() => {
@@ -107,73 +107,71 @@ const Chat = (props: any) => {
         }
     }, [transcriptValue]);
 
-
     useEffect(() => {
-        const getLocal = localStorage.getItem("Disclaimer")
-        getLocal ? setShowDisclaimer(true) : setShowDisclaimer(false)
+        const getLocal = localStorage.getItem("Disclaimer");
+        getLocal ? setShowDisclaimer(true) : setShowDisclaimer(false);
         setTimeout(() => {
-            setDisabledButton(false)
-            setDisclaimerstyle({ color: "white", borderRadius: "8px", padding: "20px", backgroundColor: "#0344a8" })
+            setDisabledButton(false);
+            setDisclaimerstyle({ color: "white", borderRadius: "8px", padding: "20px", backgroundColor: "#0344a8" });
         }, 4000);
-    }, [])
+    }, []);
 
     const buttonClick = () => {
-        setShowDisclaimer(true)
+        setShowDisclaimer(true);
         localStorage.setItem("Disclaimer", "ture");
-    }
+    };
 
     const cleanChartData = (chart: any) => {
         let chartData = null;
         try {
             chartData = JSON.parse(chart);
-            return chartData
+            return chartData;
+        } catch (err) {
+            chartData = null;
         }
-        catch (err) {
-            chartData = null
-        }
-        return chartData
-    }
+        return chartData;
+    };
 
     const updateQandA = (data: any) => {
-        clearChat()
-        let threadList = data.map((d: any) => [d.question, d.answer])
-        dispatch(set_answers([...threadList] as any))
+        clearChat();
+        let threadList = data.map((d: any) => [d.question, d.answer]);
+        dispatch(set_answers([...threadList] as any));
         lastQuestionRef.current = data[0].question;
-        dispatch(set_latestQuestion(lastQuestionRef.current as any))
-        dispatch(set_QnA(data as any))
-        onShowHistoryClicked(false)
-        scrollThreads(true)
-        setLocalChatData(data)
-    }
+        dispatch(set_latestQuestion(lastQuestionRef.current as any));
+        dispatch(set_QnA(data as any));
+        onShowHistoryClicked(false);
+        scrollThreads(true);
+        setLocalChatData(data);
+    };
 
     const makeThreadAPICall = async (qAndA: any) => {
         const currentTimestamp = Date.now();
         if (qAndA.length === 1) {
-            localStorage.removeItem("currentThread")
+            localStorage.removeItem("currentThread");
         }
-        let userID = localStorage.getItem("userID")
-        let currentThread = localStorage.getItem("currentThread")
+        let userID = localStorage.getItem("userID");
+        let currentThread = localStorage.getItem("currentThread");
         if (!userID) {
             userID = JSON.stringify(currentTimestamp);
-            localStorage.setItem("userID", userID)
+            localStorage.setItem("userID", userID);
         }
         if (!currentThread) {
-            currentThread = JSON.stringify(`${currentTimestamp}`)
-            localStorage.setItem("currentThread", currentThread)
+            currentThread = JSON.stringify(`${currentTimestamp}`);
+            localStorage.setItem("currentThread", currentThread);
         }
         const payload = {
-            "user_id": userID,
-            "thread_id": `${JSON.parse(currentThread)}`,
-            "thread_name": `${qAndA[0].question}`,
-            "user_query": `${JSON.parse(currentThread)}`,
-            "bot_response": qAndA
-        }
-        const res = await postApiWithJson(payload, "api/v1/chat-thread/chat-thread-create")
-    }
+            user_id: userID,
+            thread_id: `${JSON.parse(currentThread)}`,
+            thread_name: `${qAndA[0].question}`,
+            user_query: `${JSON.parse(currentThread)}`,
+            bot_response: qAndA
+        };
+        const res = await postApiWithJson(payload, "api/v1/chat-thread/chat-thread-create");
+    };
 
     const makeApiRequest = async (question: string) => {
         lastQuestionRef.current = question;
-        dispatch(set_latestQuestion(lastQuestionRef.current as any))
+        dispatch(set_latestQuestion(lastQuestionRef.current as any));
         let chatGPTToken = localStorage.getItem("chatGPTToken") ? localStorage.getItem("chatGPTToken") : 0;
         let chatTemperature = localStorage.getItem("chatTemperature") ? localStorage.getItem("chatTemperature") : 0;
         let selectedLanguage = localStorage.getItem("language") ? localStorage.getItem("language") : "English";
@@ -184,18 +182,17 @@ const Chat = (props: any) => {
         let longitude = localStorage.getItem("longitude") ? localStorage.getItem("longitude") : 0;
         let userLocation = localStorage.getItem("userLocation") ? localStorage.getItem("userLocation") : "Auckland";
 
-
-        dispatch(set_recommendedQnA([] as any))
+        dispatch(set_recommendedQnA([] as any));
         error && setError(undefined);
         setIsLoading(true);
         setActiveCitation(undefined);
         setActiveAnalysisPanelTab(undefined);
 
         const currentTimestamp = Date.now();
-        let userID = localStorage.getItem("userID")
+        let userID = localStorage.getItem("userID");
         if (!userID) {
             userID = JSON.stringify(currentTimestamp);
-            localStorage.setItem("userID", userID)
+            localStorage.setItem("userID", userID);
         }
 
         try {
@@ -224,25 +221,27 @@ const Chat = (props: any) => {
             };
             const result = await chatApi(request);
             if (result.exchange_id) {
-                let answersList = [...answers, [question, result]]
-                let qnAList = [...questionAnswersList, {
-                    question: question,
-                    answer: result
-                }]
+                let answersList = [...answers, [question, result]];
+                let qnAList = [
+                    ...questionAnswersList,
+                    {
+                        question: question,
+                        answer: result
+                    }
+                ];
                 dispatch(set_answers(answersList as any));
                 dispatch(set_QnA(qnAList as any));
                 if (isSpeakerOn) {
-                    speakText([result.answer], chatBotVoice.value)
+                    speakText([result.answer], chatBotVoice.value);
                 }
-                dispatch(set_recommendedQnA(result.recommended_question as any))
+                dispatch(set_recommendedQnA(result.recommended_question as any));
                 let qAndA = [...localChatData];
                 //@ts-ignore
-                qAndA.push({ "question": question, "answer": result })
-                setLocalChatData(qAndA)
-                makeThreadAPICall(qAndA)
-                localStorage.removeItem("appointmentData")
-            }
-            else {
+                qAndA.push({ question: question, answer: result });
+                setLocalChatData(qAndA);
+                makeThreadAPICall(qAndA);
+                localStorage.removeItem("appointmentData");
+            } else {
                 setError("No Data found");
             }
         } catch (e) {
@@ -254,15 +253,15 @@ const Chat = (props: any) => {
 
     const clearChat = () => {
         lastQuestionRef.current = "";
-        dispatch(set_latestQuestion(lastQuestionRef.current as any))
+        dispatch(set_latestQuestion(lastQuestionRef.current as any));
         error && setError(undefined);
         setActiveCitation(undefined);
         setActiveAnalysisPanelTab(undefined);
-        dispatch(set_answers([] as any))
-        dispatch(set_QnA([] as any))
-        dispatch(set_recommendedQnA([] as any))
+        dispatch(set_answers([] as any));
+        dispatch(set_QnA([] as any));
+        dispatch(set_recommendedQnA([] as any));
         setLocalChatData([]);
-        scrollThreads(false)
+        scrollThreads(false);
     };
 
     useEffect(() => chatMessageStreamEnd.current?.scrollIntoView({ behavior: "smooth" }), [isLoading, threads]);
@@ -314,288 +313,282 @@ const Chat = (props: any) => {
         setSelectedAnswer(index);
     };
 
-
     const onShowHistoryClicked = (isHistory: any) => {
-        dispatch(set_history(isHistory))
+        dispatch(set_history(isHistory));
     };
 
     const onLogsContentClicked = () => {
         if (!showLogsView) {
-            setShowLogsView(true)
-        }
-        else {
-            setShowLogsView(false)
+            setShowLogsView(true);
+        } else {
+            setShowLogsView(false);
         }
     };
 
     const dummyLogsData = [
         {
-            "id": "0",
-            "request_id": "1",
-            "query": "show me some good italian restraunts",
-            "stage": "optimize_layer",
-            "tokens": "1697108146827",
-            "time": "1697108146827"
-
+            id: "0",
+            request_id: "1",
+            query: "show me some good italian restraunts",
+            stage: "optimize_layer",
+            tokens: "1697108146827",
+            time: "1697108146827"
         },
 
         {
-            "id": "1",
-            "request_id": "1",
-            "query": "show me some good italian restraunts",
-            "stage": "optimize_layer",
-            "tokens": "1697108146827",
-            "time": "1697108146827"
-
+            id: "1",
+            request_id: "1",
+            query: "show me some good italian restraunts",
+            stage: "optimize_layer",
+            tokens: "1697108146827",
+            time: "1697108146827"
         }
-
-    ]
+    ];
 
     const onRecommendedQuestionClicked = (recommendedQuestion: string) => {
         makeApiRequest(recommendedQuestion);
-        dispatch(set_recommendedQnA([] as any))
+        dispatch(set_recommendedQnA([] as any));
     };
 
     const onFileViewURLClicked = (fileURL: string) => {
-        setFileViewerURL(fileURL)
+        setFileViewerURL(fileURL);
     };
 
     const isUserTourGuide = localStorage.getItem("isUserTourGuide") ? localStorage.getItem("isUserTourGuide") : false;
 
-    const toggleChatRightContent  = () => { 
+    const toggleChatRightContent = () => {
         setchatRightContent(current => !current);
-        console.log(ischatRightContent)
-      };
+        if (!ischatRightContent) {
+            setIsLeaderBoard(false);
+            setIsUpload(false);
+        }
+    };
+
+    const toggleLeaderBoard = () => {
+        if (!ischatRightContent) {
+            toggleChatRightContent();
+        }
+        if (!isLeaderBoard) {
+            setIsLeaderBoard(true);
+        }
+        setIsUpload(false);
+    };
+
+    const toggleUploads = () => {
+        if (!ischatRightContent) {
+            toggleChatRightContent();
+        }
+        if (!isUpload) {
+            setIsUpload(true);
+        }
+        setIsLeaderBoard(false);
+    };
 
     return (
         <>
-
-            <ChatBoxLeftPanel onShowHistoryClicked={onShowHistoryClicked} onClearChatClicked={clearChat} onExampleClicked={onExampleClicked}
-                chatData={localChatData} onFileViewURLClicked={onFileViewURLClicked} showThreads={updateQandA} toggleChatRightContent={toggleChatRightContent}/>
+            <ChatBoxLeftPanel
+                onShowHistoryClicked={onShowHistoryClicked}
+                onClearChatClicked={clearChat}
+                onExampleClicked={onExampleClicked}
+                chatData={localChatData}
+                onFileViewURLClicked={onFileViewURLClicked}
+                showThreads={updateQandA}
+                toggleChatRightContent={toggleChatRightContent}
+                toggleLeaderBoard={toggleLeaderBoard}
+                toggleUploads={toggleUploads}
+            />
             <UserGuide />
-            {
-                isUserTourGuide && (
-                    <UserLocationSave />
-                )
-            }
+            {isUserTourGuide && <UserLocationSave />}
 
-            {
-                FileViewerURL && (
-                    <FileViewer fileURL={FileViewerURL} onFileViewURLClicked={onFileViewURLClicked} />
-                )
-            }
+            {FileViewerURL && <FileViewer fileURL={FileViewerURL} onFileViewURLClicked={onFileViewURLClicked} />}
 
-            {
-                !showHistory && (
-                    <Grid container item direction="row" justifyContent="center" alignItems="flex-start" sx={{ height: "100%" }}>
+            {!showHistory && (
+                <Grid container item direction="row" justifyContent="center" alignItems="flex-start" sx={{ height: "100%" }}>
+                    <Grid item xs={11} md={11} className={styles.chatInputBlock}>
+                        <div className={styles.chatInput}>
+                            {/* <h1 style={{ marginTop: "100px", marginBottom:"50px" }} className={styles.chatEmptyStateTitle}>Get started with CGLense</h1> */}
+                            <QuestionInput
+                                onSelectChatBotTypes={chatBotVoice => handleSelectedSpeakerData(JSON.parse(chatBotVoice))}
+                                clearOnSend
+                                placeholder="Enter your prompt here"
+                                disabled={isLoading}
+                                onSend={question => makeApiRequest(question)}
+                                handleMicClick={handleMicClick}
+                                handleSpeakerClick={handleSpeakerClick}
+                                isListen={isListen}
+                                isSpeakerOn={isSpeakerOn}
+                                chatBotVoice={chatBotVoice}
+                            />
+                        </div>
+                    </Grid>
 
-                        <Grid item xs={11} md={11} className={styles.chatInputBlock}>
-                            <div className={styles.chatInput} >
-                                {/* <h1 style={{ marginTop: "100px", marginBottom:"50px" }} className={styles.chatEmptyStateTitle}>Get started with CGLense</h1> */}
-                                <QuestionInput onSelectChatBotTypes={chatBotVoice => handleSelectedSpeakerData(JSON.parse(chatBotVoice))} clearOnSend placeholder="Enter your prompt here" disabled={isLoading} onSend={question => makeApiRequest(question)}
-                                    handleMicClick={handleMicClick}
-                                    handleSpeakerClick={handleSpeakerClick}
-                                    isListen={isListen}
-                                    isSpeakerOn={isSpeakerOn}
-                                    chatBotVoice={chatBotVoice}
-                                />
-
-                            </div>
-
+                    <Grid container item justifyContent="center" xs={12} md={11}>
+                        <Grid item xs={12} md={6}>
+                            <KpiWidget />
+                            {!latestQuestion ? (
+                                <div className={styles.chatEmptyState}>
+                                    <ExampleList onExampleClicked={onExampleClicked} chatBotTypes={chatBotVoice.VoiceName} projectData={props.projectData} />
+                                </div>
+                            ) : (
+                                <>
+                                    <div className={styles.chatMessageStream}>
+                                        {answers.map((answer: any, index: number) => (
+                                            <div key={index}>
+                                                <UserChatMessage message={answer[0]} />
+                                                <div className={styles.chatMessageGpt}>
+                                                    <Answer
+                                                        key={index}
+                                                        answer={answer[1]}
+                                                        isSelected={selectedAnswer === index && activeAnalysisPanelTab !== undefined}
+                                                        onCitationClicked={c => onShowCitation(c, index)}
+                                                        onThoughtProcessClicked={() => onToggleTab(AnalysisPanelTabs.ThoughtProcessTab, index)}
+                                                        onSupportingContentClicked={() => onToggleTab(AnalysisPanelTabs.SupportingContentTab, index)}
+                                                        onFollowupQuestionClicked={q => makeApiRequest(q)}
+                                                        showFollowupQuestions={useSuggestFollowupQuestions && answers.length - 1 === index}
+                                                        questionAnswersList={questionAnswersList}
+                                                        onLogsContentClicked={() => onLogsContentClicked()}
+                                                        projectData={props.projectData}
+                                                        onExampleClicked={onExampleClicked}
+                                                    />
+                                                </div>
+                                            </div>
+                                        ))}
+                                        {isLoading && (
+                                            <>
+                                                <UserChatMessage message={latestQuestion} />
+                                                <div className={styles.chatMessageGptMinWidth}>
+                                                    <AnswerLoading projectData={props.projectData} />
+                                                </div>
+                                            </>
+                                        )}
+                                        {error ? (
+                                            <>
+                                                <UserChatMessage message={latestQuestion} />
+                                                <div className={styles.chatMessageGptMinWidth}>
+                                                    <AnswerError error={error.toString()} onRetry={() => makeApiRequest(latestQuestion)} />
+                                                </div>
+                                            </>
+                                        ) : null}
+                                        <div ref={chatMessageStreamEnd} />
+                                    </div>
+                                </>
+                            )}
                         </Grid>
 
-                        <Grid container item justifyContent="center" xs={12} md={11} >
+                        {ischatRightContent && (
+                            <Grid item xs={12} md={6} className={styles.chatRightContent}>
+                                <div className={styles.sidePanelBtn} onClick={toggleChatRightContent}>
+                                    <ArrowLeftIcon />
+                                </div>
 
-                            <Grid item xs={12} md={6} >
-                                <KpiWidget />
-                                {!latestQuestion ? (
-                                    <div className={styles.chatEmptyState}>
-                                        <ExampleList onExampleClicked={onExampleClicked} chatBotTypes={chatBotVoice.VoiceName} projectData={props.projectData} />
-                                    </div>
-
-
-
-                                ) : (
-                                    <>
-
-                                        <div className={styles.chatMessageStream}>
-                                            {answers.map((answer: any, index: number) => (
-                                                <div key={index}>
-                                                    <UserChatMessage message={answer[0]} />
-                                                    <div className={styles.chatMessageGpt}>
-                                                        <Answer
-                                                            key={index}
-                                                            answer={answer[1]}
-                                                            isSelected={selectedAnswer === index && activeAnalysisPanelTab !== undefined}
-                                                            onCitationClicked={c => onShowCitation(c, index)}
-                                                            onThoughtProcessClicked={() => onToggleTab(AnalysisPanelTabs.ThoughtProcessTab, index)}
-                                                            onSupportingContentClicked={() => onToggleTab(AnalysisPanelTabs.SupportingContentTab, index)}
-                                                            onFollowupQuestionClicked={q => makeApiRequest(q)}
-                                                            showFollowupQuestions={useSuggestFollowupQuestions && answers.length - 1 === index
-                                                            }
-                                                            questionAnswersList={questionAnswersList}
-                                                            onLogsContentClicked={() => onLogsContentClicked()}
-                                                            projectData={props.projectData}
-                                                            onExampleClicked={onExampleClicked}
-                                                        />
-                                                    </div>
-
-
-                                                </div>
-                                            ))}
-                                            {isLoading && (
-                                                <>
-                                                    <UserChatMessage message={latestQuestion} />
-                                                    <div className={styles.chatMessageGptMinWidth}>
-                                                        <AnswerLoading projectData={props.projectData} />
-                                                    </div>
-                                                </>
-                                            )}
-                                            {error ? (
-                                                <>
-                                                    <UserChatMessage message={latestQuestion} />
-                                                    <div className={styles.chatMessageGptMinWidth}>
-                                                        <AnswerError error={error.toString()} onRetry={() => makeApiRequest(latestQuestion)} />
-                                                    </div>
-                                                </>
-                                            ) : null}
-                                            <div ref={chatMessageStreamEnd} />
-                                        </div>
-                                    </>
-                                )}
+                                {isLeaderBoard && <LeaderBoard />}
+                                {isUpload && <h1>Hiii</h1>}
                             </Grid>
+                        )}
 
-                            {
-                                !ischatRightContent &&
-
-                                <Grid item xs={12} md={6} className={styles.chatRightContent}>
-                                    <div className={styles.sidePanelBtn} onClick={toggleChatRightContent} >
-                                        <ArrowLeftIcon />
-                                    </div>
-
-                                    <LeaderBoard/>
-
-                                </Grid>
-                            }
-                                                
-
-
-                            {/* {recommenededQuestionList && recommenededQuestionList.length > 0 &&
+                        {/* {recommenededQuestionList && recommenededQuestionList.length > 0 &&
                                     <SuggesedQuestion onRecommendedQuestionClicked={onRecommendedQuestionClicked} recommenededQuestionList={recommenededQuestionList} />
                                 } */}
 
-
-
-
-
-                            <Grid item xs={12}>
-                                {answers.length > 0 && activeAnalysisPanelTab && (
-
-                                    <>
-                                        <AnalysisPanelPopUp onActiveTabChanged={(x: any) => onToggleTab(x, selectedAnswer)} answer={answers[selectedAnswer][1]} activeTab={activeAnalysisPanelTab} />
-                                    </>
-
-                                )}
-
-                                <Panel
-                                    headerText="Configure answer generation"
-                                    isOpen={isConfigPanelOpen}
-                                    isBlocking={false}
-                                    onDismiss={() => setIsConfigPanelOpen(false)}
-                                    closeButtonAriaLabel="Close"
-                                    onRenderFooterContent={() => <DefaultButton onClick={() => setIsConfigPanelOpen(false)}>Close</DefaultButton>}
-                                    isFooterAtBottom={true}
-                                >
-                                    <TextField
-                                        className={styles.chatSettingsSeparator}
-                                        defaultValue={promptTemplate}
-                                        label="Override prompt template"
-                                        multiline
-                                        autoAdjustHeight
-                                        onChange={onPromptTemplateChange}
+                        <Grid item xs={12}>
+                            {answers.length > 0 && activeAnalysisPanelTab && (
+                                <>
+                                    <AnalysisPanelPopUp
+                                        onActiveTabChanged={(x: any) => onToggleTab(x, selectedAnswer)}
+                                        answer={answers[selectedAnswer][1]}
+                                        activeTab={activeAnalysisPanelTab}
                                     />
+                                </>
+                            )}
 
-                                    <SpinButton
-                                        className={styles.chatSettingsSeparator}
-                                        label="Retrieve this many documents from search:"
-                                        min={1}
-                                        max={50}
-                                        defaultValue={retrieveCount.toString()}
-                                        onChange={onRetrieveCountChange}
-                                    />
-                                    <TextField className={styles.chatSettingsSeparator} label="Exclude category" onChange={onExcludeCategoryChanged} />
-                                    <Checkbox
-                                        className={styles.chatSettingsSeparator}
-                                        checked={useSemanticRanker}
-                                        label="Use semantic ranker for retrieval"
-                                        onChange={onUseSemanticRankerChange}
-                                    />
-                                    <Checkbox
-                                        className={styles.chatSettingsSeparator}
-                                        checked={useSemanticCaptions}
-                                        label="Use query-contextual summaries instead of whole documents"
-                                        onChange={onUseSemanticCaptionsChange}
-                                        disabled={!useSemanticRanker}
-                                    />
-                                    <Checkbox
-                                        className={styles.chatSettingsSeparator}
-                                        checked={useSuggestFollowupQuestions}
-                                        label="Suggest follow-up questions"
-                                        onChange={onUseSuggestFollowupQuestionsChange}
-                                    />
-                                </Panel>
+                            <Panel
+                                headerText="Configure answer generation"
+                                isOpen={isConfigPanelOpen}
+                                isBlocking={false}
+                                onDismiss={() => setIsConfigPanelOpen(false)}
+                                closeButtonAriaLabel="Close"
+                                onRenderFooterContent={() => <DefaultButton onClick={() => setIsConfigPanelOpen(false)}>Close</DefaultButton>}
+                                isFooterAtBottom={true}
+                            >
+                                <TextField
+                                    className={styles.chatSettingsSeparator}
+                                    defaultValue={promptTemplate}
+                                    label="Override prompt template"
+                                    multiline
+                                    autoAdjustHeight
+                                    onChange={onPromptTemplateChange}
+                                />
 
-                                {showLogsView &&
-                                    <div className={styles.LogsDataBlock}>
-                                        <h2>Logs data</h2>
-                                        <div className={styles.LogsDataList}>
-                                            {
-                                                dummyLogsData.map((item, i) => (
-                                                    <div className={styles.LogsDataItem}>
-                                                        <div className={styles.LogsDataText}>
-                                                            <p className={styles.LogsDataTextheading}>Query</p>
-                                                            <p>{item.query}</p>
-                                                        </div>
-                                                        <div className={styles.LogsDataText}>
-                                                            <p className={styles.LogsDataTextheading}>Stage</p>
-                                                            <p>{item.stage}</p>
-                                                        </div>
-                                                        <div className={styles.LogsDataText}>
-                                                            <p className={styles.LogsDataTextheading}>Tokens</p>
-                                                            <p>{item.tokens}</p>
-                                                        </div>
-                                                        <div className={styles.LogsDataText}>
-                                                            <p className={styles.LogsDataTextheading}>Timestamp</p>
-                                                            <p>{item.time}</p>
-                                                        </div>
-                                                    </div>
-                                                ))
-                                            }
+                                <SpinButton
+                                    className={styles.chatSettingsSeparator}
+                                    label="Retrieve this many documents from search:"
+                                    min={1}
+                                    max={50}
+                                    defaultValue={retrieveCount.toString()}
+                                    onChange={onRetrieveCountChange}
+                                />
+                                <TextField className={styles.chatSettingsSeparator} label="Exclude category" onChange={onExcludeCategoryChanged} />
+                                <Checkbox
+                                    className={styles.chatSettingsSeparator}
+                                    checked={useSemanticRanker}
+                                    label="Use semantic ranker for retrieval"
+                                    onChange={onUseSemanticRankerChange}
+                                />
+                                <Checkbox
+                                    className={styles.chatSettingsSeparator}
+                                    checked={useSemanticCaptions}
+                                    label="Use query-contextual summaries instead of whole documents"
+                                    onChange={onUseSemanticCaptionsChange}
+                                    disabled={!useSemanticRanker}
+                                />
+                                <Checkbox
+                                    className={styles.chatSettingsSeparator}
+                                    checked={useSuggestFollowupQuestions}
+                                    label="Suggest follow-up questions"
+                                    onChange={onUseSuggestFollowupQuestionsChange}
+                                />
+                            </Panel>
 
-                                        </div>
-
+                            {showLogsView && (
+                                <div className={styles.LogsDataBlock}>
+                                    <h2>Logs data</h2>
+                                    <div className={styles.LogsDataList}>
+                                        {dummyLogsData.map((item, i) => (
+                                            <div className={styles.LogsDataItem}>
+                                                <div className={styles.LogsDataText}>
+                                                    <p className={styles.LogsDataTextheading}>Query</p>
+                                                    <p>{item.query}</p>
+                                                </div>
+                                                <div className={styles.LogsDataText}>
+                                                    <p className={styles.LogsDataTextheading}>Stage</p>
+                                                    <p>{item.stage}</p>
+                                                </div>
+                                                <div className={styles.LogsDataText}>
+                                                    <p className={styles.LogsDataTextheading}>Tokens</p>
+                                                    <p>{item.tokens}</p>
+                                                </div>
+                                                <div className={styles.LogsDataText}>
+                                                    <p className={styles.LogsDataTextheading}>Timestamp</p>
+                                                    <p>{item.time}</p>
+                                                </div>
+                                            </div>
+                                        ))}
                                     </div>
-                                }
-
-                            </Grid>
-
+                                </div>
+                            )}
                         </Grid>
                     </Grid>
-                )
-            }
+                </Grid>
+            )}
 
-            {
-                showHistory && (
-                    <Grid container item direction="row" justifyContent="center" xs={12} sm={12}>
-                        <Grid item xs={11} md={10}>
-                            <ChatHistory />
-                        </Grid>
+            {showHistory && (
+                <Grid container item direction="row" justifyContent="center" xs={12} sm={12}>
+                    <Grid item xs={11} md={10}>
+                        <ChatHistory />
                     </Grid>
-                )
-            }
-
+                </Grid>
+            )}
         </>
-
     );
 };
 
