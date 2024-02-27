@@ -17,7 +17,7 @@ const MultiItemCarousel = (props: any) => {
         const { className, style, onClick } = props;
         return (
             <div className={className} onClick={onClick} style={{ top: '25%' }}>
-                <ArrowForwardIosOutlinedIcon style={{ ...style, color: "#F1F1F1", fontSize: "38px", marginLeft: "-15px" }} />
+                <ArrowForwardIosOutlinedIcon style={{ ...style, color: "#F1F1F1", fontSize: "36px", marginLeft: "-15px" }} />
             </div>
         );
     }
@@ -26,7 +26,7 @@ const MultiItemCarousel = (props: any) => {
         const { className, style, onClick } = props;
         return (
             <div className={className} onClick={onClick} style={{ top: '25%' }}>
-                <ArrowBackIosOutlinedIcon style={{ ...style, color: "#F1F1F1", fontSize: "38px", marginLeft: "-5px" }} />
+                <ArrowBackIosOutlinedIcon style={{ ...style, color: "#F1F1F1", fontSize: "36px", marginLeft: "-5px" }} />
             </div>
         );
     }
@@ -34,7 +34,7 @@ const MultiItemCarousel = (props: any) => {
     const settings = {
         infinite: false,
         speed: 500,
-        slidesToShow: 3,
+        slidesToShow: 4,
         slidesToScroll: 1,
         
         responsive: [
@@ -51,17 +51,23 @@ const MultiItemCarousel = (props: any) => {
                 }
               },
               {
-                breakpoint: 600,
+                breakpoint: 900,
+                settings: {
+                  slidesToShow: 4
+                }
+              },
+              {
+                breakpoint: 700,
+                settings: {
+                  slidesToShow: 3
+                }
+              },
+              {
+                breakpoint: 520,
                 settings: {
                   slidesToShow: 2
                 }
               },
-              {
-                breakpoint: 480,
-                settings: {
-                  slidesToShow: 1
-                }
-              }
         ],
         nextArrow: <SlickNextArrow />,
         prevArrow: <SlickPrevArrow />
@@ -77,6 +83,7 @@ const MultiItemCarousel = (props: any) => {
                 .slick-next svg  {
                     color: #E5E5EA !important; /* Dark blue arrow color */
                 }
+                
             `,
                 styleSheet.cssRules.length
             );

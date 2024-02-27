@@ -12,6 +12,12 @@ import { languageList } from '../../utils/languages';
 import { ColorList } from '../../utils/colors'
 import azureSpeakerVoiceList from "../../utils/azureSpeakerVoiceList";
 import { Box, Grid, Slider, Tooltip, styled } from '@mui/material';
+
+import AddCommentOutlinedIcon from '@mui/icons-material/AddCommentOutlined';
+import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
+import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined'; 
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import InfoIcon from '@mui/icons-material/Info';
 import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
 import ThermostatIcon from '@mui/icons-material/Thermostat';
@@ -191,20 +197,23 @@ const setChatGPTToken = (value: number) => {
                             </li>
                             <li>
                                 <NavLink to="" onClick={resetChat} >
-                                    <i className="material-icons-outlined">add_comment</i>
+                                    {/* <i className="material-icons-outlined">add_comment</i> */}
+                                    <AddCommentOutlinedIcon />
                                     NEW CHAT
                                 </NavLink>
                             </li>
 
                             <li className='resetChatTourGuide'>
                                 <NavLink to="" onClick={resetChat}>
-                                    <i className="material-icons">rotate_left</i>
+                                    {/* <i className="material-icons">rotate_left</i> */}
+                                    <ModeCommentOutlinedIcon />
                                     RESET CHAT
                                 </NavLink>
                             </li>
                             <li>
                                 <NavLink to="" onClick={showHistory} >
-                                    <i className="material-icons">history</i>
+                                    {/* <i className="material-icons">history</i> */}
+                                    <QuestionAnswerOutlinedIcon />
                                     CHAT HISTORY
                                 </NavLink>
                             </li>
@@ -276,7 +285,8 @@ const setChatGPTToken = (value: number) => {
                                 <NavLink to="/" className={styles.headerNavPageLink} onClick={() => {
                                         toggleSettings(!settings);
                                     }}>
-                                    <i className="material-icons-outlined">settings</i> 
+                                    {/* <i className="material-icons-outlined">settings</i>  */}
+                                    <SettingsOutlinedIcon />
                                 </NavLink>
                                         {
                                             settings && (
@@ -417,7 +427,8 @@ const setChatGPTToken = (value: number) => {
                             </li>
                             <li>
                                 <NavLink to="/" className={styles.headerNavPageLink}>
-                                    <i className="material-icons-outlined">help</i> 
+                                    {/* <i className="material-icons-outlined">help</i>  */}
+                                    <HelpOutlineOutlinedIcon />
                                 </NavLink>
                             </li>
                         </ul>

@@ -87,6 +87,7 @@
 }
 
 .kpiCard {
+  height: 100%;
   background: rgba(83, 118, 240, 0.1);
     border: 2px solid rgba(83, 118, 240, 0.8);
     border-radius: 20px;
@@ -165,7 +166,7 @@ p.negative {
       right: -5px;
       top: 25%;
       color: #E5E5EA ;
-      font-size: 72px !important;
+      font-size: 64px !important;
       /* color: "#F1F1F1", fontSize: "50px"  */
 }
 

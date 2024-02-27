@@ -253,3 +253,9 @@
 .leftSidePanel.show .sidePanelBtn svg{
     transform: rotate(180deg);
 }
+
+@media only screen and (max-width: 900px) {
+    .leftSidePanel {
+        display: none;
+    }
+}

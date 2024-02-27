@@ -441,7 +441,7 @@ const Chat = (props: any) => {
 
                                 ) : (
                                     <>
-                                        <Grid item xs={12} sm={12} md={6} >
+                                        <Grid item xs={12} sm={12} md={!ischatRightContent ? 6 : 8} >
 
                                             <KpiWidget />
                                             <div className={styles.chatContainer}>
@@ -497,7 +497,7 @@ const Chat = (props: any) => {
                                         {
                                             !ischatRightContent &&
 
-                                            <Grid item xs={12} sm={12} md={6} className={styles.chatRightContent}>
+                                            <Grid item xs={12} sm={12} md={6} className={styles.chatRightContent} display={{ xs: "none", md: "block" }}>
                                                 <div className="sidePanelBtn" onClick={toggleChatRightContent} >
                                                     <ArrowLeftIcon />
                                                 </div>

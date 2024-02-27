@@ -19,7 +19,7 @@
     --theme-red : #FF453A;
     --theme-blue : #5376F0;
     --theme-orange : #FF9843;
-    --theme-black : black;
+    --theme-black : #000;
     --theme-green : #32D74B;
     --active-themes: #5376F0;
 
@@ -203,4 +203,14 @@ html {
 .shiftingContainer {
     height: calc(100vh - 170px);
     overflow-y: scroll;
+}
+.slick-track {
+    display: flex !important;
+}
+
+.slick-slide {
+    height: inherit !important;
+}
+.slick-slide > div {
+    height: 100%;
 }

@@ -5,6 +5,10 @@ import styles from "./QuestionInput.module.css";
 import azureSpeakerVoiceList from "../../utils/azureSpeakerVoiceList";
 import { useSelector } from "react-redux";
 
+import VolumeUpOutlinedIcon from '@mui/icons-material/VolumeUpOutlined';
+import VolumeOffOutlinedIcon from '@mui/icons-material/VolumeOffOutlined';
+import KeyboardVoiceOutlinedIcon from '@mui/icons-material/KeyboardVoiceOutlined';
+import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 
 interface Props {
     onSend: (question: string) => void;
@@ -70,13 +74,16 @@ export const QuestionInput = ({ onSend, disabled, placeholder, clearOnSend, onSe
 
             <div className={`${styles.questionInputMicSpeakerBtn} speechServiceTourGuide`}>
                 {isListen ? (
-                    <Mic28Filled className={`${styles.microphoneRecognize} ${themeClass}`} onClick={handleMicClick} />
+                    // <Mic28Filled className={`${styles.microphoneRecognize} ${themeClass}`} onClick={handleMicClick} />
+                    <KeyboardVoiceOutlinedIcon className={`${styles.microphoneRecognize} ${themeClass}`} onClick={handleMicClick}  />
                 ) : <Mic28Filled primaryFill={colorCode} onClick={handleMicClick} />
                 }
                 {isSpeakerOn ? (
-                    <Speaker028Filled className={`${styles.speakersoundAnimation} ${themeClass}`} onClick={handleSpeakerClick} />
-                ) : <SpeakerMute28Filled primaryFill={colorCode} onClick={handleSpeakerClick} />
-
+                    // <Speaker028Filled className={`${styles.speakersoundAnimation} ${themeClass}`} onClick={handleSpeakerClick} />
+                    <VolumeUpOutlinedIcon className={`${styles.speakersoundAnimation} ${themeClass}`} onClick={handleSpeakerClick}/>
+                ) : 
+                // <SpeakerMute28Filled primaryFill={colorCode} onClick={handleSpeakerClick} />
+                <VolumeOffOutlinedIcon sx={{color: colorCode}} onClick={handleSpeakerClick}/>
                 }
             </div>
 
@@ -86,7 +93,8 @@ export const QuestionInput = ({ onSend, disabled, placeholder, clearOnSend, onSe
                     aria-label="Ask question button"
                     onClick={sendQuestion}
                 >
-                    <Send28Filled primaryFill={colorCode} />
+                    {/* <Send28Filled primaryFill={colorCode} /> */}
+                    <SendOutlinedIcon sx={{color: "#fff"}}/>
                 </div>
             </div>
         </Stack>
