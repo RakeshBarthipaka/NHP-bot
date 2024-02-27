@@ -86,3 +86,78 @@
         }
     }
 }
+.LikedAnswerpanel{
+padding:10px;
+background-color: #F2F2F7;
+padding:10px 20px 0px 20px;
+border-radius: 0px 30px 30px 30px;
+.likedQuestion{
+    background-color: #fff;
+    padding:20px;
+    border-radius:20px;
+    }
+    .questionText{
+        font-size:14px;
+        color:#0C099C;
+    }
+    .otherOptions{
+        font-size:12px;
+        color:#5376F0;
+        font-weight: bold;
+        line-height:30px;
+    }
+    .answerText{
+        font-size:14px;
+        color:#2a2a2a;
+        span{
+            cursor: pointer;
+        }
+    }
+    .viewIcon{
+        border:1px solid #0C099C;
+        border-radius: 20px;
+        display: inline-block;
+        padding:0px 10px;
+        display: inline-flex;
+        font-weight: bold;
+    }
+    .thumbUp{
+        border:1px solid #2AC141;
+        border-radius: 20px;
+        display: inline-block;
+        padding:0px 10px;
+        display: inline-flex;
+        font-weight: bold;
+            svg{
+                color:#2AC141;
+                transform:rotate(0) translate(0);
+            }
+        &:hover{
+            background-color: #2AC141;
+            color:#fff;
+            svg{
+                color:#fff;
+                transform:rotate(-5deg) translate(0px, -1px);
+            }
+        }
+    }
+    .thumbDown{
+        border:1px solid #FF453A;
+        border-radius: 20px;
+        display: inline-block;
+        padding:0px 10px;
+        background-color: #fff;
+        display: inline-flex;
+        font-weight: bold;
+        svg{
+            color:#FF453A;
+        }
+        &:hover{
+            background-color: #FF453A;
+            color:#fff;
+            svg{
+                color:#fff
+            }
+        }
+    }
+}
