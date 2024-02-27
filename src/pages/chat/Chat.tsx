@@ -27,6 +27,7 @@ import { Grid } from "@mui/material";
 import KpiWidget from "../../components/KpiWidget/KpiWidget";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import LeaderBoard from "../LeaderBoard";
+import Uploads from "../Uploads";
 
 const Chat = (props: any) => {
     const [isConfigPanelOpen, setIsConfigPanelOpen] = useState(false);
@@ -480,9 +481,8 @@ const Chat = (props: any) => {
                                 <div className={styles.sidePanelBtn} onClick={toggleChatRightContent}>
                                     <ArrowLeftIcon />
                                 </div>
-
                                 {isLeaderBoard && <LeaderBoard />}
-                                {isUpload && <h1>Hiii</h1>}
+                                {isUpload && <Uploads />}
                             </Grid>
                         )}
 
