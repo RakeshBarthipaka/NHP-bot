@@ -199,6 +199,12 @@ sup {
     margin: 0 -20px -20px;
 }
 
+.iconDivider {
+    border: 1px solid rgba(222, 222, 222, 1);
+    margin-left: 10px !important;
+    height: auto !important;
+}
+
 .IconCustomColor button, .IconCustomColor a {
     padding: 4px;
     gap: 2px;

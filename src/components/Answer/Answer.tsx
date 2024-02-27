@@ -1,4 +1,4 @@
-import { useMemo, useState, useRef, useEffect } from "react";
+import { useMemo, useState, useRef, useEffect, useContext } from "react";
 import { Stack, IconButton, IStackProps, MessageBar, MessageBarType } from "@fluentui/react";
 import DOMPurify from "dompurify";
 import styles from "./Answer.module.css";
@@ -19,10 +19,11 @@ import ScheduleAppointment from "../Appointment/AppointmentBooking";
 import { EmailConfirm } from "../Appointment/EmailConfirm";
 import HospitalList from "../Appointment/HospitalList";
 import {
-    Button,
+    Button, Divider,
 } from '@mui/material';
 import { useSelector } from "react-redux";
 import { GenerateTable } from "../Tables/GenerateTable";
+import { TagsList } from "../TagsList/TagsList";
 
 
 interface Props {
@@ -187,7 +188,7 @@ export const Answer = ({
     const IconActiveStyles = { backgroundColor: "lightgray", borderRadius: "8px" }
 
     return (
-
+        <>
         <Stack verticalAlign="space-between" {...SpacingColumnProps} className={` ${styles.answerContainerDiv}`}>
             <Stack.Item>
                 <Stack horizontal horizontalAlign="space-between">
@@ -243,7 +244,7 @@ export const Answer = ({
                             disabled={true}
                             onClick={() => likeDisLikeAnswerToggle("DISLIKE")}
                         />
-
+                        <Divider className={styles.iconDivider} orientation="vertical" />
                         <IconButton 
                             iconProps={{ iconName: "Copy" }}
                             title="Copy Data"
@@ -251,7 +252,7 @@ export const Answer = ({
                             // disabled={true}
                             onClick={() => copyChatData()}
                         />
-                        <DownloadPDF pdfData={questionAnswersList} />
+                        <DownloadPDF  pdfData={questionAnswersList} />
 
                         <IconButton 
                             iconProps={{ iconName: "Mail" }}
@@ -260,6 +261,7 @@ export const Answer = ({
                             // disabled={true}
                             onClick={() => copyChatData()}
                         />
+                        <Divider className={styles.iconDivider} orientation="vertical" />
 
                         {/* <div className={styles.dropdown}>
                             <IconButton
@@ -347,7 +349,7 @@ export const Answer = ({
                     />
                 </>
             }
-
-        </Stack>
+    </Stack>
+    </>
     );
 };

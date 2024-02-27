@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import { Checkbox, Panel, DefaultButton, TextField, SpinButton, Stack, Sticky } from "@fluentui/react";
 import { chatApi, Approaches, AskResponse, ChatRequest, ChatTurn, ChartJSApi } from "../../api";
 import { Answer, AnswerError, AnswerLoading } from "../../components/Answer";
@@ -27,8 +27,14 @@ import { Grid } from "@mui/material";
 import KpiWidget from "../../components/KpiWidget/KpiWidget";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import LeaderBoard from "../LeaderBoard";
+import { KeywordAnalysis } from "../../components/KeywordAnalysis/KeywordAnalysis";
+import { DeepAnalysis } from "../../components/DeepAnalysis/DeepAnalysis";
+import { TagsList } from "../../components/TagsList/TagsList";
+
 
 const Chat = (props: any) => {
+    const [tagName, setTagName] = useState("");
+    const [tagClicked,setTagClicked] = useState(false);
     const [isConfigPanelOpen, setIsConfigPanelOpen] = useState(false);
     const [promptTemplate, setPromptTemplate] = useState<string>("");
     const [retrieveCount, setRetrieveCount] = useState<number>(3);
@@ -382,6 +388,7 @@ const Chat = (props: any) => {
             setIsUpload(true);
         }
         setIsLeaderBoard(false);
+        console.log(ischatRightContent);
     };
 
     return (
@@ -451,6 +458,8 @@ const Chat = (props: any) => {
                                                         onExampleClicked={onExampleClicked}
                                                     />
                                                 </div>
+
+                                                <TagsList setTagName={setTagName} setTagClicked={setTagClicked}/>
                                             </div>
                                         ))}
                                         {isLoading && (
@@ -480,15 +489,16 @@ const Chat = (props: any) => {
                                 <div className={styles.sidePanelBtn} onClick={toggleChatRightContent}>
                                     <ArrowLeftIcon />
                                 </div>
-
+                                {/* {tagClicked && <KeywordAnalysis tagName={tagName} />}
+                                {!tagClicked && <DeepAnalysis />} */}
                                 {isLeaderBoard && <LeaderBoard />}
-                                {isUpload && <h1>Hiii</h1>}
+                                {/* {isUpload && <Uploads />} */}
                             </Grid>
                         )}
 
-                        {/* {recommenededQuestionList && recommenededQuestionList.length > 0 &&
-                                    <SuggesedQuestion onRecommendedQuestionClicked={onRecommendedQuestionClicked} recommenededQuestionList={recommenededQuestionList} />
-                                } */}
+                        {recommenededQuestionList && recommenededQuestionList.length > 0 && (
+                            <SuggesedQuestion onRecommendedQuestionClicked={onRecommendedQuestionClicked} recommenededQuestionList={recommenededQuestionList} />
+                        )}
 
                         <Grid item xs={12}>
                             {answers.length > 0 && activeAnalysisPanelTab && (
