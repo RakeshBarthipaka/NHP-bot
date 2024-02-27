@@ -18,23 +18,28 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const tagsList = [
     {
-        tagName: "Finance 5"
+        tagName: "Finance",
+        tagCount: 12,
     },
     {
-        tagName: "Market 12"
+        tagName: "Market",
+        tagCount: 5,
     },
     {
-        tagName: "Investment 9"
+        tagName: "Investment",
+        tagCount: 2,
     },
     {
-        tagName: "Business 4"
+        tagName: "Business",
+        tagCount: 7,
     },
     {
-        tagName: "Plans 2"
+        tagName: "Plans",
+        tagCount: 6,
     }
 ];
 
-export const TagsList = ({setTagClicked, setTagName}: any) => {
+export const TagsList = ({setTagClicked, setTagName, toggleKeywordAnalysis}: any) => {
 
     return (
         <Stack direction="row" alignItems={"end"} justifyContent={"end"} spacing={2} marginRight={8}>
@@ -46,6 +51,7 @@ export const TagsList = ({setTagClicked, setTagName}: any) => {
                                 tag.tagName,
                                 );
                                 setTagClicked(true);
+                                toggleKeywordAnalysis();
                         }}
                         className={styles.tagsStyle}
                     >

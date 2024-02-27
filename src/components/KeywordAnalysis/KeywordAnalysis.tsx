@@ -10,52 +10,52 @@ import DownloadPDF from "../Answer/GeneratePDF";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
 import StackedBarChart from "../BarChart/BarChart";
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import SortOutlinedIcon from "@mui/icons-material/SortOutlined";
+import KeywordList from "./KeywordList";
 
 interface Props {
     tagName: string;
 }
 
-export const KeywordAnalysis = ({tagName}: Props) => {
-
-    console.log(tagName, 'tagggg');
+export const KeywordAnalysis = ({ tagName }: Props) => {
+    console.log(tagName, "tagggg");
 
     const shareIconStyles = {};
 
     const IconStyles = { color: "blue", borderRadius: "8px" };
     const IconActiveStyles = { backgroundColor: "lightgray", borderRadius: "8px" };
 
-
-      function copyTableToClipboard() {
+    function copyTableToClipboard() {
         window?.getSelection()?.removeAllRanges();
         let range = document.createRange();
-        const gridContainer: any = document.querySelector('.forMakingPdf');
+        const gridContainer: any = document.querySelector(".forMakingPdf");
         range.selectNode(gridContainer);
         window?.getSelection()?.addRange(range);
-        document.execCommand('copy');
+        document.execCommand("copy");
         window?.getSelection()?.removeAllRanges();
-      }
+    }
 
-      const downloadAsPdf = () => {
-
-        const gridContainer: any = document.querySelector('.forMakingPdf');
+    const downloadAsPdf = () => {
+        const gridContainer: any = document.querySelector(".forMakingPdf");
 
         html2canvas(gridContainer).then(canvas => {
-          const imgData = canvas.toDataURL('image/png');
-          const pdf = new jsPDF();
-          const imgWidth = 210; // A4 size
-          const imgHeight = canvas.height * imgWidth / canvas.width;
-          pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-          pdf.save('datagrid.pdf');
+            const imgData = canvas.toDataURL("image/png");
+            const pdf = new jsPDF();
+            const imgWidth = 210; // A4 size
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+            pdf.save("datagrid.pdf");
         });
-      };
+    };
 
     return (
         <Grid xs={12} padding={3}>
             <div
-            className="forMakingPdf"
+                className="forMakingPdf"
                 style={{
                     width: "100%",
                     paddingBottom: "24px"
@@ -66,24 +66,19 @@ export const KeywordAnalysis = ({tagName}: Props) => {
                     <TroubleshootIcon className={styles.headerIcon} /> <span className={styles.headerText}>KEYWORD ANALYSIS</span>{" "}
                 </Box>
                 <Box paddingBottom={2}>
-                <hr className={styles.verticalLineStyle} />
-                </Box>
-                
-                <Box paddingLeft={2}>
-                    <span>Country UOM details for the last 5 years</span>
+                    <hr className={styles.verticalLineStyle} />
                 </Box>
 
                 <Box paddingLeft={3} paddingTop={4}>
                     <Stack
-                    className="stackShareOptions"
+                        className="stackShareOptions"
                         direction="row"
                         alignContent="center"
                         alignItems="center"
                         justifyContent="space-between"
+                        justifyItems={"center"}
                         paddingLeft={2}
                         sx={{
-                            //paddingBottom: "20px",
-                            background: "#F2F2F7",
                             padding: "15px 15px"
                         }}
                     >
@@ -103,12 +98,19 @@ export const KeywordAnalysis = ({tagName}: Props) => {
                                     border: "1px"
                                 }}
                             >
-                                <Button>%</Button>
-                                <Button variant="outlined">{tagName}</Button>
+                                <Button>{tagName}</Button>
+                                <Button variant="outlined">5</Button>
                             </ButtonGroup>
                         </Box>
 
-                        <Box
+                        <Box>
+                            {/* <p className={styles.headerText}>The keyword ‘Market’ is linked to 12 questions. </p> 
+<span className={styles.subHeaderText}>Please have a quick review each question and you may get the answer what you are looking for.</span> */}
+                            The keyword ‘Market’ is linked to 12 questions. Please have a quick review each question and you may get the answer what you are
+                            looking for.
+                        </Box>
+
+                        {/* <Box
                             sx={{
                                 display: "flex"
                             }}
@@ -147,9 +149,24 @@ export const KeywordAnalysis = ({tagName}: Props) => {
                                     <ShareOutlinedIcon  />
                                 </Avatar>
                             </span>
+                        </Box> */}
+                    </Stack>
+                    <hr className={styles.verticalLineStyle} />
+                    <Stack alignContent="center" alignItems="center" justifyItems={"center"} justifyContent={"end"} direction={"row"}>
+                        <Box display={"flex"} justifyContent={"center"}>
+                            <span className={styles.iconText}>
+                                <VisibilityOutlinedIcon />
+                            </span>
+                            <span className={styles.iconText}>By Views</span>
+                            <span className={styles.iconText}>
+                                <SortOutlinedIcon />
+                            </span>
+                            <span className={styles.iconText}>By Date</span>
                         </Box>
                     </Stack>
-
+                </Box>
+                <Box paddingLeft={3} paddingTop={4}>
+                    <KeywordList />
                 </Box>
             </div>
         </Grid>

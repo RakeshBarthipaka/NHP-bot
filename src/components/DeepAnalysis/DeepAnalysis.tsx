@@ -1,6 +1,6 @@
 import { Avatar, Box, Button, ButtonGroup, Grid, Stack } from "@mui/material";
 import styles from "./DeepAnalysis.module.css";
-import TroubleshootIcon from "@mui/icons-material/Troubleshoot";
+import TroubleshootOutlinedIcon from '@mui/icons-material/TroubleshootOutlined'; 
 import { Icon, IconButton } from "@fluentui/react";
 import { GenerateTable } from "../Tables/GenerateTable";
 import { GridColDef, DataGrid, GridCellParams } from "@mui/x-data-grid";
@@ -155,7 +155,7 @@ export const DeepAnalysis = () => {
             >
                 <Box paddingLeft={3} paddingBottom={2} className={styles.header}>
                     {" "}
-                    <TroubleshootIcon className={styles.headerIcon} /> <span className={styles.headerText}>DEEP ANALYSIS</span>{" "}
+                    <TroubleshootOutlinedIcon className={styles.headerIcon} /> <span className={styles.headerText}>DEEP ANALYSIS</span>{" "}
                 </Box>
                 <Box paddingBottom={2}>
                 <hr className={styles.verticalLineStyle} />

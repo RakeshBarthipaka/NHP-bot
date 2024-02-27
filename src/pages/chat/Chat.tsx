@@ -55,6 +55,8 @@ const Chat = (props: any) => {
     const [selectedAnswer, setSelectedAnswer] = useState<number>(0);
     const [ischatRightContent, setchatRightContent] = useState<boolean>(false);
     const [isLeaderBoard, setIsLeaderBoard] = useState<boolean>(false);
+    const [isDeepAnalysis, setIsDeepAnalysis] = useState<boolean>(false);
+    const [isKeywordAnalysis, setIsKeywordAnalysis] = useState<boolean>(false);
     const [isUpload, setIsUpload] = useState<boolean>(false);
 
     let getDisclaimer = localStorage.getItem("Disclaimer") || false;
@@ -367,6 +369,8 @@ const Chat = (props: any) => {
         if (!ischatRightContent) {
             setIsLeaderBoard(false);
             setIsUpload(false);
+            setIsDeepAnalysis(false);
+            setIsKeywordAnalysis(false);
         }
     };
 
@@ -378,6 +382,8 @@ const Chat = (props: any) => {
             setIsLeaderBoard(true);
         }
         setIsUpload(false);
+        setIsDeepAnalysis(false);
+        setIsKeywordAnalysis(false);
     };
 
     const toggleUploads = () => {
@@ -388,8 +394,34 @@ const Chat = (props: any) => {
             setIsUpload(true);
         }
         setIsLeaderBoard(false);
-        console.log(ischatRightContent);
+        setIsDeepAnalysis(false);
+        setIsKeywordAnalysis(false);
     };
+
+    const toggleDeepAnalysis = () => {
+        if (!ischatRightContent) {
+            toggleChatRightContent();
+        }
+        if (!isDeepAnalysis) {
+            setIsDeepAnalysis(true);
+        }
+        setIsUpload(false);
+        setIsLeaderBoard(false);
+        setIsKeywordAnalysis(false);
+    }
+
+    
+    const toggleKeywordAnalysis = () => {
+        if (!ischatRightContent) {
+            toggleChatRightContent();
+        }
+        if (!isKeywordAnalysis) {
+            setIsKeywordAnalysis(true);
+        }
+        setIsUpload(false);
+        setIsLeaderBoard(false);
+        setIsDeepAnalysis(false);
+    }
 
     return (
         <>
@@ -403,6 +435,7 @@ const Chat = (props: any) => {
                 toggleChatRightContent={toggleChatRightContent}
                 toggleLeaderBoard={toggleLeaderBoard}
                 toggleUploads={toggleUploads}
+                toggleDeepAnalysis={toggleDeepAnalysis}
             />
             <UserGuide />
             {isUserTourGuide && <UserLocationSave />}
@@ -459,7 +492,7 @@ const Chat = (props: any) => {
                                                     />
                                                 </div>
 
-                                                <TagsList setTagName={setTagName} setTagClicked={setTagClicked}/>
+                                                <TagsList toggleKeywordAnalysis={toggleKeywordAnalysis} setTagName={setTagName} setTagClicked={setTagClicked}/>
                                             </div>
                                         ))}
                                         {isLoading && (
@@ -489,8 +522,8 @@ const Chat = (props: any) => {
                                 <div className={styles.sidePanelBtn} onClick={toggleChatRightContent}>
                                     <ArrowLeftIcon />
                                 </div>
-                                {/* {tagClicked && <KeywordAnalysis tagName={tagName} />}
-                                {!tagClicked && <DeepAnalysis />} */}
+                                {isKeywordAnalysis && <KeywordAnalysis tagName={tagName} />}
+                                {isDeepAnalysis && <DeepAnalysis />}
                                 {isLeaderBoard && <LeaderBoard />}
                                 {/* {isUpload && <Uploads />} */}
                             </Grid>
