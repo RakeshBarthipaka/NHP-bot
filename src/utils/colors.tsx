@@ -1,20 +1,20 @@
 export const ColorList = [
     {
         color:"Red",
-        colorCode: "red",
+        colorCode: "#FF453A",
         class : "theme-red"
     },
     {
         color:"Blue",
-        colorCode: "#5551ff",
+        colorCode: "#5376F0",
         class : "theme-blue"
     }, {
         color:"Orange",
-        colorCode: "orange",
+        colorCode: "#FF9843",
         class : "theme-orange"
     }, {
         color:"Black",
-        colorCode: "black",
+        colorCode: "#000",
         class : "theme-black"
     },
     {

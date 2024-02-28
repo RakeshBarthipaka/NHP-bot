@@ -33,18 +33,22 @@
 
 .answerText {
     font-family: var(--common-font-family);
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 400;
-    line-height: 22px;
+    line-height: 1.5;
     letter-spacing: 0px;
     padding-top: 16px;
     padding-bottom: 16px;
     white-space: pre-line;
-    color: #000000;
-    padding: 25px 20px;
+    color: #000000; 
     
 }
-
+.answerText a {
+    word-break: break-all;
+}
+.answerText ul {
+    padding-left: 25px;
+}
 .answerText table {
     border-collapse: collapse;
 }
