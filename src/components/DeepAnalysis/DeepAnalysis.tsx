@@ -3,7 +3,7 @@ import styles from "./DeepAnalysis.module.css";
 import TroubleshootOutlinedIcon from '@mui/icons-material/TroubleshootOutlined'; 
 import { Icon, IconButton } from "@fluentui/react";
 import { GenerateTable } from "../Tables/GenerateTable";
-import { GridColDef, DataGrid, GridCellParams } from "@mui/x-data-grid";
+import { GridColDef, DataGrid, GridCellParams, GridRenderCellParams } from "@mui/x-data-grid";
 import { cp } from "fs";
 import clsx from "clsx";
 import DownloadPDF from "../Answer/GeneratePDF";
@@ -19,6 +19,24 @@ import html2canvas from 'html2canvas';
 //     // value: string;
 //     // onClick: (value: string) => void;
 // }
+
+const getColor = (value: number) => {
+  
+    if(value > 20) {
+return " rgba(50, 215, 75, 1)";
+
+    } 
+    if(value > 0 && value < 20 ){
+        return "inherit";
+    }
+
+    if (value < 0) {
+ return "rgba(255, 69, 58, 1)";
+
+
+    }
+
+  };
 
 export const DeepAnalysis = () => {
     const columns: GridColDef[] = [
@@ -43,46 +61,111 @@ export const DeepAnalysis = () => {
             headerName: "2019",
             sortable: false,
             width: 130,
-            disableColumnMenu: true
+            disableColumnMenu: true,
+            renderCell: (params: GridRenderCellParams) => {
+                const color: any = getColor(params.value);
+          
+                return (
+                  <Box
+                    sx={{
+                      color: color,
+                    }}
+                  >
+                    {params.value}
+                  </Box>
+                );
+              },
         },
         {
-            field: "2019",
-            headerName: "2019",
+            field: "2020",
+            headerName: "2020",
             sortable: false,
             width: 130,
-            disableColumnMenu: true
+            disableColumnMenu: true,
+            renderCell: (params: GridRenderCellParams) => {
+                const color: any = getColor(params.value);
+          
+                return (
+                  <Box
+                    sx={{
+                      color: color,
+                    }}
+                  >
+                    {params.value}
+                  </Box>
+                );
+              },
         },
         {
-            field: "2019",
-            headerName: "2019",
+            field: "2021",
+            headerName: "2021",
             sortable: false,
             width: 130,
-            disableColumnMenu: true
+            disableColumnMenu: true,
+            renderCell: (params: GridRenderCellParams) => {
+                const color: any = getColor(params.value);
+          
+                return (
+                  <Box
+                    sx={{
+                      color: color,
+                    }}
+                  >
+                    {params.value}
+                  </Box>
+                );
+              },
         },
         {
-            field: "2019",
-            headerName: "2019",
+            field: "2022",
+            headerName: "2022",
             sortable: false,
             width: 130,
-            disableColumnMenu: true
+            disableColumnMenu: true,
+            renderCell: (params: GridRenderCellParams) => {
+                const color: any = getColor(params.value);
+          
+                return (
+                  <Box
+                    sx={{
+                      color: color,
+                    }}
+                  >
+                    {params.value}
+                  </Box>
+                );
+              },
         },
         {
-            field: "2019",
-            headerName: "2019",
+            field: "2023",
+            headerName: "2023",
             sortable: false,
             width: 130,
-            disableColumnMenu: true
+            disableColumnMenu: true,
+            renderCell: (params: GridRenderCellParams) => {
+                const color: any = getColor(params.value);
+          
+                return (
+                  <Box
+                    sx={{
+                      color: color,
+                    }}
+                  >
+                    {params.value}
+                  </Box>
+                );
+              },
         }
     ];
 
     const rows = [
-        { id: 1, Country: "India", 2019: "15 k" },
-        { id: 2, Country: "India", 2019: "15 k" },
-        { id: 3, Country: "India", 2019: "15 k" },
-        { id: 4, Country: "India", 2019: "15 k" },
-        { id: 5, Country: "India", 2019: "15 k" },
-        { id: 6, Country: "India", 2019: "15 k" },
-        { id: 6, Country: "India", 2019: "15 1k" }
+        { id: 1, Country: "India",2019: "15", 2020: "10", 2021: "43",2022: "77", 2023: "36" },
+        { id: 2, Country: "India",2019: "28", 2020: "10", 2021: "-43",2022: "77", 2023: "36" },
+        { id: 3, Country: "India",2019: "-10", 2020: "10", 2021: "43",2022: "77", 2023: "36" },
+        { id: 4, Country: "India",2019: "33", 2020: "-10", 2021: "43",2022: "-77", 2023: "36" },
+        { id: 5, Country: "India",2019: "22", 2020: "10", 2021: "43",2022: "77", 2023: "36" },
+        { id: 6, Country: "India",2019: "-64", 2020: "10", 2021: "43",2022: "77", 2023: "-36" },
+        { id: 7, Country: "India",2019: "56", 2020: "10", 2021: "43",2022: "77", 2023: "36" },
     ];
 
     const summary = [
@@ -110,15 +193,6 @@ export const DeepAnalysis = () => {
         navigator.clipboard.writeText("tessss");
     };
 
-    // const copyTableToClipboard = () => {
-    //     const table: any = document.querySelector('.MuiDataGrid-root');
-    //     const range = document.createRange();
-    //     range.selectNode(table);
-    //     window?.getSelection()?.removeAllRanges(); // Clear previous selections
-    //     window?.getSelection()?.addRange(range);
-    //     document.execCommand('copy');
-    //     window?.getSelection()?.removeAllRanges(); // Clear the range selection
-    //   };
 
       function copyTableToClipboard() {
         window?.getSelection()?.removeAllRanges();
