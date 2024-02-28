@@ -439,7 +439,7 @@ const Chat = (props: any) => {
                             
 
 
-                                {!latestQuestion ? (
+                                {!ischatRightContent && !latestQuestion ? (
                                     <>
                                         <Grid container item xs={12} className={styles.chatEmptyState} spacing={2}>
                                             <Grid item xs={12} md={6}> 
@@ -661,4 +661,4 @@ const Chat = (props: any) => {
     );
 };
 
-export default Chat;
+export default Chat; 
