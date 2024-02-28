@@ -317,7 +317,7 @@ export const DeepAnalysis = () => {
                                     <FileDownloadOutlinedIcon />
                                 </Avatar>
                             </span>
-                            <span onClick={() => {}}>
+                            {/* <span onClick={() => {}}>
                                 <Avatar sx={{ bgcolor: "#E1E5F2",
                                  color: "rgba(12, 9, 156, 1)", "&:hover": {
                                             backgroundColor: "#0027B0",
@@ -326,13 +326,14 @@ export const DeepAnalysis = () => {
                                         } }}>
                                     <ShareOutlinedIcon  />
                                 </Avatar>
-                            </span>
+                            </span> */}
                         </Box>
                     </Stack>
 
                     <DataGrid
                         hideFooter
                         sx={{
+                            overflowX: "scroll !important",
                             "& .first-column.cell": {
                                 backgroundColor: "#F2F2F7"
                             },
@@ -360,8 +361,6 @@ export const DeepAnalysis = () => {
                         }}
                         rows={rows}
                         columns={columns}
-                        columnThreshold={6}
-                        rowThreshold={6}
                         disableRowSelectionOnClick
                         disableColumnFilter
                         hideFooterSelectedRowCount

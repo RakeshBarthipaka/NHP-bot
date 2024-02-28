@@ -190,7 +190,7 @@ const KeywordList = (props: any) => {
                                                     <FileDownloadOutlinedIcon />
                                                 </Avatar>
                                             </span>
-                                            <span onClick={() => {}}>
+                                            {/* <span onClick={() => {}}>
                                                 <Avatar
                                                     sx={{
                                                         bgcolor: "#E1E5F2",
@@ -203,7 +203,7 @@ const KeywordList = (props: any) => {
                                                 >
                                                     <ShareOutlinedIcon />
                                                 </Avatar>
-                                            </span>
+                                            </span> */}
                                         </Box>
                                         <Box display={"flex"}>
                                             <div className={styles.viewIcon}>
