@@ -99,7 +99,7 @@
     z-index: 999;
     transition: 0.7s;
     /* transform: translateX(120px); */
-    transform: translateX(106px);
+    transform: translateX(98px);
     right: 0;
 }
 
@@ -272,15 +272,20 @@
     padding: 0px;
     font-size: 14px;
     line-height: 1.25;
-    color: rgba(12, 9, 156, 1);
+    color:  var(--active-themes);
 }
 .iconContainer{ 
     padding: 10px 15px;
     cursor: pointer;
     background: #fff;
-    border: 1px solid rgba(12, 9, 156, 1);
+    border: 1px solid var(--active-themes);
     text-align: center;
     border-width: 0 0 1px 0px;
+}
+
+.iconContainer svg {
+    font-size: 28px;
+    color: var(--active-themes);
 }
 @media only screen and (max-width: 900px) {
     .leftSidePanel {

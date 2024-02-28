@@ -11,17 +11,19 @@ import "react-tabs/style/react-tabs.css";
 import MostAskedQuestion from "./MostAskedQuestion";
 import MostLikedAnswer from "./MostLikedAnswer";
 import "../LeaderBoard/LeaderBoard.scss";
-import LeaderBoardIcon from "../../assets/images/LeaderBoard.svg";
+// import LeaderBoardIcon from "../../assets/images/LeaderBoard.svg";
+import LeaderboardOutlinedIcon from '@mui/icons-material/LeaderboardOutlined';
 
 const LeaderBoard = (props: any) => {
     return (
         <>
-            <Box marginLeft={3} sx={{ width: "100%", padding: "5px 15px" }}>
+            <Box  sx={{ width: "100%", padding: "5px 15px" }}>
                 <Box className="leader-board-heading">
-                    <img src={LeaderBoardIcon} alt="Uploads" />
+                    {/* <img src={LeaderBoardIcon} alt="Uploads" /> */}
+                    <LeaderboardOutlinedIcon />
                     <h3 className="disply-page-title">Leader Board</h3>
                 </Box>
-                <Divider />
+               
                 <Tabs>
                     <TabList>
                         <Tab>Most Asked Questions</Tab>

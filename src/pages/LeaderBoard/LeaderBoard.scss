@@ -9,19 +9,23 @@
 .leader-board-heading{
     display: flex;
     align-items:center;
-    img{
-        width: 31px;
-        height: 31px;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid rgba(83, 118, 240, 0.2);
+
+    svg {
+        font-size: 28px;
+        color: var(--active-themes);
         margin-right: 6px;
     }
 }
 
 .react-tabs__tab--selected {
-    background: #0027B0 !important;
-    border-bottom: 1px solid #0027B0 !important;
+    background: var(--active-themes) !important;
+    border-bottom: 1px solid var(--active-themes) !important;
     color: #fff !important;
     border-radius: 5px 5px 0 0;
-    height: 49px !important;
+    height: 43px !important;
 }
 
 .react-tabs__tab {
@@ -32,22 +36,24 @@
     cursor: pointer;
     background-color: #DDE4FC;
     color: #333333;
-    height: 48px;
+    height: 42px;
+    font-size: 14px;
     border-radius: 30px 30px 0px 0px;
-    border-bottom: 2px solid #0027B0 !important;
+    border-bottom: 2px solid var(--active-themes) !important;
     bottom: -3px !important;
 }
 
 .react-tabs__tab-list {
-    border-bottom: 2px solid #0027B0;
+    border-bottom: 2px solid var(--active-themes);
 }
 
 .disply-page-title {
     text-transform: uppercase;
-    color: #0C099C;
+    color: var(--active-themes);
     font-size: 18px;
     font-weight: bold;
     line-height: 40px;
+    margin: 0;
 }
 
 .answer-container {
@@ -99,16 +105,19 @@
 .LikedAnswerpanel{
 padding:10px;
 background-color: #F2F2F7;
-padding:10px 20px 0px 20px;
+padding: 10px 15px 0px 15px;
 border-radius: 0px 30px 30px 30px;
 .likedQuestion{
     background-color: #fff;
     padding:20px;
     border-radius:20px;
+    margin-bottom: 15px;
+    
     }
     .questionText{
         font-size:14px;
         color:#0C099C;
+        margin-bottom: 10px;
     }
     .otherOptions{
         font-size:12px;
@@ -127,20 +136,41 @@ border-radius: 0px 30px 30px 30px;
         border:1px solid #0C099C;
         border-radius: 20px;
         display: inline-block;
-        padding:0px 10px;
+        padding: 2px 8px;
         display: inline-flex;
         font-weight: bold;
+        font-size: 12px;
+        align-items: center;
+        gap: 6px;
+        line-height: 1;
+
+        span {
+            padding: 0;
+        }
+        svg{ 
+            font-size: 18px;
+        }
     }
     .thumbUp{
         border:1px solid #2AC141;
         border-radius: 20px;
         display: inline-block;
-        padding:0px 10px;
+        padding: 2px 8px;
+        margin-left: 5px;
         display: inline-flex;
         font-weight: bold;
+        font-size: 12px;
+        align-items: center;
+        gap: 6px;
+        line-height: 1;
+
+        span {
+            padding: 0;
+        }
             svg{
                 color:#2AC141;
                 transform:rotate(0) translate(0);
+                font-size: 18px;
             }
         &:hover{
             background-color: #2AC141;
@@ -155,12 +185,23 @@ border-radius: 0px 30px 30px 30px;
         border:1px solid #FF453A;
         border-radius: 20px;
         display: inline-block;
-        padding:0px 10px;
+        padding: 2px 8px;
+        margin-left: 5px;
         background-color: #fff;
         display: inline-flex;
         font-weight: bold;
+        font-size: 12px;
+        align-items: center;
+        gap: 6px;
+        line-height: 1;
+
+        span {
+            padding: 0;
+        }
+
         svg{
             color:#FF453A;
+            font-size: 18px;
         }
         &:hover{
             background-color: #FF453A;

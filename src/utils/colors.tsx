@@ -6,7 +6,7 @@ export const ColorList = [
     },
     {
         color:"Blue",
-        colorCode: "#5376F0",
+        colorCode: "#0027B0",
         class : "theme-blue"
     }, {
         color:"Orange",

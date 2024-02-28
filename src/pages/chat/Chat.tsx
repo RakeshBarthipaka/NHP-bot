@@ -529,9 +529,10 @@ const Chat = (props: any) => {
                                                 <div className="sidePanelBtn" onClick={toggleChatRightContent} >
                                                     <ArrowLeftIcon />
                                                 </div>
-                                                {isLeaderBoard && <LeaderBoard />}
-                                                {isUpload && <Uploads />}
-
+                                                <div className={styles.featuresContentDiv}>
+                                                    {isLeaderBoard && <LeaderBoard />}
+                                                    {isUpload && <Uploads />}
+                                                </div>
                                             </Grid>
                                         }
                                     </>

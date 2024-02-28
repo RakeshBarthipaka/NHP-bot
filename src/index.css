@@ -17,11 +17,11 @@
     --common-font-family: "Inter";
     
     --theme-red : #FF453A;
-    --theme-blue : #5376F0;
+    --theme-blue : #0027B0;
     --theme-orange : #FF9843;
     --theme-black : #000;
     --theme-green : #32D74B;
-    --active-themes: #5376F0;
+    --active-themes: #0027B0;
 
 }
 
@@ -191,9 +191,15 @@ html {
         align-items: center;
         cursor: pointer;
 }
+.shiftingContainer .sidePanelBtn svg {
+    transform: rotate(180deg);
+}
 .rowReverse .shiftingContainer .sidePanelBtn {
     right: 0px;
     left: auto;
+}
+.rowReverse .shiftingContainer .sidePanelBtn svg {
+    transform: none;
 }
 .rowReverse .shiftingContainer > div:nth-child(2)::before {
     right: 22px;

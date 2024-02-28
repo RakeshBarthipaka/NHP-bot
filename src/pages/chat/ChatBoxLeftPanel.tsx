@@ -17,6 +17,13 @@ import ChatThreads from "../../assets/images/ChatThreads.svg";
 import Uploads from "../../assets/images/Uploads.svg";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
+
+import LeaderboardOutlinedIcon from '@mui/icons-material/LeaderboardOutlined';
+import TroubleshootOutlinedIcon from '@mui/icons-material/TroubleshootOutlined';
+import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
+import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
+import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined'; 
+
 interface Props {
     onClearChatClicked: () => void;
     onExampleClicked: (value: string) => void;
@@ -98,19 +105,23 @@ const ChatBoxLeftPanel = ({
                         toggleLeaderBoard();
                     }}
                 >
-                    <img src={LeaderBoard} alt="Leader Board" />
+                    {/* <img src={LeaderBoard} alt="Leader Board" /> */}
+                    <LeaderboardOutlinedIcon />
                     <p className={styles.labelName}>Leader Board</p>
                 </div>
                 <div className={styles.iconContainer}>
-                    <img src={DeepAnalysis} alt="Deep Analysis" />
+                    {/* <img src={DeepAnalysis} alt="Deep Analysis" /> */}
+                    <TroubleshootOutlinedIcon />
                     <p className={styles.labelName}>Deep Analysis</p>
                 </div>
                 <div className={styles.iconContainer}>
-                    <img src={Analytics} alt="Analytics" />
+                    {/* <img src={Analytics} alt="Analytics" /> */}
+                    <TimelineOutlinedIcon />
                     <p className={styles.labelName}>Analytics</p>
                 </div>
                 <div className={styles.iconContainer}>
-                    <img src={ChatThreads} alt="Chat Threads" />
+                    {/* <img src={ChatThreads} alt="Chat Threads" /> */}
+                    <ForumOutlinedIcon />
                     <p className={styles.labelName}>Chat Threads</p>
                 </div>
                 <div
@@ -120,7 +131,8 @@ const ChatBoxLeftPanel = ({
                         toggleUploads();
                     }}
                 >
-                    <img src={Uploads} alt="Uploads" />
+                    {/* <img src={Uploads} alt="Uploads" /> */}
+                    <CloudUploadOutlinedIcon />
                     <p className={styles.labelName}>Uploads</p>
                 </div>
 
