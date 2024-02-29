@@ -17,12 +17,11 @@ import ChatThreads from "../../assets/images/ChatThreads.svg";
 import Uploads from "../../assets/images/Uploads.svg";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
-
-import LeaderboardOutlinedIcon from '@mui/icons-material/LeaderboardOutlined';
-import TroubleshootOutlinedIcon from '@mui/icons-material/TroubleshootOutlined';
-import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
-import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
-import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined'; 
+import LeaderboardOutlinedIcon from "@mui/icons-material/LeaderboardOutlined";
+import TroubleshootOutlinedIcon from "@mui/icons-material/TroubleshootOutlined";
+import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
+import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
+import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 
 interface Props {
     onClearChatClicked: () => void;
@@ -32,6 +31,7 @@ interface Props {
     toggleChatRightContent: () => void;
     toggleLeaderBoard: () => void;
     toggleUploads: () => void;
+    toggleDeepAnalysis: () => void;
     chatData: Array<Object>;
     showThreads: (value: any) => void;
 }
@@ -45,7 +45,8 @@ const ChatBoxLeftPanel = ({
     showThreads,
     toggleChatRightContent,
     toggleLeaderBoard,
-    toggleUploads
+    toggleUploads,
+    toggleDeepAnalysis
 }: Props) => {
     let chatGPTToken = localStorage.getItem("chatGPTToken") ? localStorage.getItem("chatGPTToken") : 0;
     let chatTemperature = localStorage.getItem("chatTemperature") ? localStorage.getItem("chatTemperature") : 0;
@@ -109,9 +110,14 @@ const ChatBoxLeftPanel = ({
                     <LeaderboardOutlinedIcon />
                     <p className={styles.labelName}>Leader Board</p>
                 </div>
-                <div className={styles.iconContainer}>
-                    {/* <img src={DeepAnalysis} alt="Deep Analysis" /> */}
-                    <TroubleshootOutlinedIcon />
+                <div
+                    onClick={() => {
+                        toggleisRightPanelOpen();
+                        toggleDeepAnalysis();
+                    }}
+                    className={styles.iconContainer}
+                >
+                    <img src={DeepAnalysis} alt="Deep Analysis" />
                     <p className={styles.labelName}>Deep Analysis</p>
                 </div>
                 <div className={styles.iconContainer}>

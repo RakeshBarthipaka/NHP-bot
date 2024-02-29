@@ -21,7 +21,6 @@ export default function App() {
     const [projectData, setProjectData] = useState("");
     const [latitude, setLatitude] = useState<number | null>(0);
     const [longitude, setLongitude] = useState<number | null>(0);
-  
 
     const getProjectData = async () => {
         try {
@@ -78,7 +77,9 @@ export default function App() {
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <React.StrictMode>
         <Provider store={store}>
+           
         <App />
+       
         </Provider>
     </React.StrictMode>
 );
