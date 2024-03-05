@@ -474,7 +474,7 @@ const Chat = (props: any) => {
     return (
         <>
             <UserGuide />
-            {isUserTourGuide && <UserLocationSave />}
+            {/* {isUserTourGuide && <UserLocationSave />} */}
 
             {FileViewerURL && <FileViewer fileURL={FileViewerURL} onFileViewURLClicked={onFileViewURLClicked} />}
 
