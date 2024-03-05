@@ -133,3 +133,59 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.chatThreadBox{
+    background-color: #5376F033;
+    padding: 10px 0px;
+    color: #0C099C;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius:15px;
+}
+.assignBtn{
+    width: 100px;
+    background-color: #BBBBBB;
+    color: #000000;
+    text-align: center;
+    padding: 10px 0px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+.chatThreadAssignedBox{
+    border: 1px solid #898989;
+    margin-top: 12px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.chatThreadAssignedBox p{
+    margin-bottom: 5px;
+}
+
+.chatThreadAssignedBox p span{
+    color:#5376F0
+}
+.addMoreTopicsBox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.addMoreTopicsBox .textSpan{
+    color:#0C099C;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.postSpan{
+    background-color: #0C099C;
+    color: #FFFFFF;
+    font-weight: 300;
+    text-align: center;
+    padding: 5px 25px;
+    border-radius: 22px;
+    cursor: pointer;
+}
