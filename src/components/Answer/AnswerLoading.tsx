@@ -2,7 +2,7 @@ import { Stack } from "@fluentui/react";
 import { animated, useSpring } from "@react-spring/web";
 import styles from "./Answer.module.css";
 import LogoWhiteTransparent from "../../assets/CGLense_app_logo_v3.png";
-
+import CglenseInsightLogo from "../../assets/cglense_icon_logo.png";
 
 export const AnswerLoading = (props:any) => {
 
@@ -16,7 +16,7 @@ export const AnswerLoading = (props:any) => {
             <Stack.Item>
                 <Stack horizontal horizontalAlign="space-between"  className={styles.answerLogo}>
                 {/* <img src={props.projectData?props.projectData.projectLogoPath:LogoWhiteTransparent} width="100%" height={props.projectData?props.projectData.projectLogoHeight:"30px"} /> */}
-                <img src="static\assets\cglense_icon_logo.png" width="40px" />
+                <img src={CglenseInsightLogo} width="40px" />
                 </Stack>
             </Stack.Item>
             <Stack className={styles.answerContainer} verticalAlign="space-between">
