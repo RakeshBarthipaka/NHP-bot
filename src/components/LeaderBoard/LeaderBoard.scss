@@ -212,3 +212,26 @@ border-radius: 0px 30px 30px 30px;
         }
     }
 }
+
+.iconText{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: rgba(12, 9, 156, 1);
+}
+
+.asked-question-top-box{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+.IconElemt{
+    cursor: pointer;
+}
+.liked-ans-top-box{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}

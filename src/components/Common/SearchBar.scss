@@ -1,0 +1,27 @@
+.searchBar {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid rgba(216, 216, 220, 1) !important;
+    border-radius: 25px;
+    padding: 4px 10px !important;
+}
+.searchIcon {
+    background: var(--active-themes);
+    height: 100%;
+    position: absolute;
+    right: 0;
+    border-radius: 0 25px 25px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    top: 0;
+    margin: 0px;
+    width: 36px;
+
+    svg {
+        color: #fff;
+    }
+}

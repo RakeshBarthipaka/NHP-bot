@@ -6,6 +6,7 @@ import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
 //import style from "../../LeaderBoard/LeaderBoard.module.scss";
+import { MostAskedQuestion as Questions } from "../../../utils/MockData";
 
 const MostAskedQuestion = (props: any) => {
     const [isDisplayAnswer, setIsDisplayAnswer] = useState<boolean>(false);
@@ -13,6 +14,9 @@ const MostAskedQuestion = (props: any) => {
     const toggleAnswerDisplay = () => {
         setIsDisplayAnswer(!isDisplayAnswer);
     };
+
+    console.log("Questions========:", Questions);
+
     return (
         <>
             <Box className="question-box" onClick={toggleAnswerDisplay}>

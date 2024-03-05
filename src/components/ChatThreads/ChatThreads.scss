@@ -1,0 +1,135 @@
+.chat-thread-container{
+    width: 100%;
+    padding: 5px 15px;
+
+    .heading{
+        display: flex;
+        align-items:center;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+        border-bottom: 2px solid rgba(83, 118, 240, 0.2);
+    
+        svg {
+            font-size: 28px;
+            color: var(--active-themes);
+            margin-right: 6px;
+        }
+    }
+}
+.file-count{
+    background-color: #5376F0;
+    padding: 8px;
+    border-radius: 30px;
+    color: #FFFFFF;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    width: 28%;
+}
+
+.grid-container{
+    .thread-box{
+        background-color: #F2F2F7;
+        padding:20px;
+        border-radius:20px;
+        margin-bottom: 15px;
+        cursor: pointer;
+        }
+        .questionText{
+            font-size:14px;
+            color:#0C099C;
+            margin-bottom: 10px;
+        }
+        .otherOptions{
+            font-size:12px;
+            color:#5376F0;
+            font-weight: bold;
+            line-height:30px;
+        }
+        .viewIcon{
+            border:1px solid #0C099C;
+            border-radius: 20px;
+            display: inline-block;
+            padding: 2px 8px;
+            display: inline-flex;
+            font-weight: bold;
+            font-size: 12px;
+            align-items: center;
+            gap: 6px;
+            line-height: 1;
+    
+            span {
+                padding: 0;
+            }
+            svg{ 
+                font-size: 18px;
+            }
+        }
+        .thumbUp{
+            border:1px solid #2AC141;
+            border-radius: 20px;
+            display: inline-block;
+            padding: 2px 8px;
+            margin-left: 5px;
+            display: inline-flex;
+            font-weight: bold;
+            font-size: 12px;
+            align-items: center;
+            gap: 6px;
+            line-height: 1;
+    
+            span {
+                padding: 0;
+            }
+                svg{
+                    color:#2AC141;
+                    transform:rotate(0) translate(0);
+                    font-size: 18px;
+                }
+            &:hover{
+                background-color: #2AC141;
+                color:#fff;
+                svg{
+                    color:#fff;
+                    transform:rotate(-5deg) translate(0px, -1px);
+                }
+            }
+        }
+        .thumbDown{
+            border:1px solid #FF453A;
+            border-radius: 20px;
+            display: inline-block;
+            padding: 2px 8px;
+            margin-left: 5px;
+            background-color: #fff;
+            display: inline-flex;
+            font-weight: bold;
+            font-size: 12px;
+            align-items: center;
+            gap: 6px;
+            line-height: 1;
+    
+            span {
+                padding: 0;
+            }
+    
+            svg{
+                color:#FF453A;
+                font-size: 18px;
+            }
+            &:hover{
+                background-color: #FF453A;
+                color:#fff;
+                svg{
+                    color:#fff
+                }
+            }
+        }
+    }
+
+.thread-icon-container{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+}

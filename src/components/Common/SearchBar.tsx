@@ -2,9 +2,9 @@ import * as React from "react";
 import FormControl, { useFormControl } from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import FormHelperText from "@mui/material/FormHelperText";
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { TextField } from "@mui/material";
-
+import "./SearchBar.scss";
 
 /* function MyFormHelperText() {
     const { focused } = useFormControl() || {};
@@ -23,13 +23,12 @@ import { TextField } from "@mui/material";
 const SearchBar = () => {
     return (
         <form noValidate autoComplete="off">
-            <FormControl  hiddenLabel sx={{ width: "25ch" }} className="searchBar">
+            <FormControl hiddenLabel sx={{ width: "25ch" }} className="searchBar">
                 {/* <OutlinedInput placeholder="Please enter text" /> */}
                 {/* <MyFormHelperText /> */}
-                <TextField variant="standard" placeholder="Please enter text"  
-                InputProps={{ disableUnderline: true,  }} /> 
+                <TextField variant="standard" placeholder="Please enter text" InputProps={{ disableUnderline: true }} />
                 <span className="searchIcon">
-                <SearchOutlinedIcon />
+                    <SearchOutlinedIcon />
                 </span>
             </FormControl>
         </form>

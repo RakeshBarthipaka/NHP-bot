@@ -34,6 +34,7 @@ interface Props {
     toggleDeepAnalysis: () => void;
     chatData: Array<Object>;
     showThreads: (value: any) => void;
+    toggleChatThreads: () => void;
 }
 
 const ChatBoxLeftPanel = ({
@@ -46,7 +47,8 @@ const ChatBoxLeftPanel = ({
     toggleChatRightContent,
     toggleLeaderBoard,
     toggleUploads,
-    toggleDeepAnalysis
+    toggleDeepAnalysis,
+    toggleChatThreads
 }: Props) => {
     let chatGPTToken = localStorage.getItem("chatGPTToken") ? localStorage.getItem("chatGPTToken") : 0;
     let chatTemperature = localStorage.getItem("chatTemperature") ? localStorage.getItem("chatTemperature") : 0;
@@ -125,8 +127,13 @@ const ChatBoxLeftPanel = ({
                     <TimelineOutlinedIcon />
                     <p className={styles.labelName}>Analytics</p>
                 </div>
-                <div className={styles.iconContainer}>
-                    {/* <img src={ChatThreads} alt="Chat Threads" /> */}
+                <div
+                    className={styles.iconContainer}
+                    onClick={() => {
+                        toggleisRightPanelOpen();
+                        toggleChatThreads();
+                    }}
+                >
                     <ForumOutlinedIcon />
                     <p className={styles.labelName}>Chat Threads</p>
                 </div>
