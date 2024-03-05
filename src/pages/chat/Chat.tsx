@@ -470,7 +470,7 @@ const Chat = (props: any) => {
                     </Grid>
 
                     <Grid container item justifyContent="center" xs={12} md={11} className="shiftingContainer">
-                        {!latestQuestion ? (
+                        {!latestQuestion && !ischatRightContent ? (
                             <>
                                 <Grid container item xs={12} className={styles.chatEmptyState} spacing={2}>
                                     <Grid item xs={12} md={6}>
@@ -483,7 +483,7 @@ const Chat = (props: any) => {
                                     <Grid item xs={12} md={6}>
                                         <img src="static\assets\CGLense_app_logo_v3-btO_FX8F.png" alt="" style={{ height: "42px", marginTop: "15px" }} />
                                         <div className={styles.infoCard}>
-                                            <h3 className="accessibility-plugin-ac">COMPANY INFO </h3>
+                                            <h3 className="accessibility-plugin-ac">COMPANY INFO</h3>
                                             <p className="accessibility-plugin-ac">
                                                 CGLense AI, your advanced visual companion! Empowering businesses across sectors with cutting-edge image
                                                 analysis, object recognition, and custom insights. Experience precise AI solutions for diverse industries.
