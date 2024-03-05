@@ -36,15 +36,15 @@ export const KeywordAnalysis = ({ tagName }: Props) => {
                     paddingBottom: "24px"
                 }}
             >
-                <Box paddingLeft={3} paddingBottom={2} className={styles.header}>
+                <Box paddingLeft={3} className={styles.header}>
                     {" "}
                     <TroubleshootIcon className={styles.headerIcon} /> <span className={styles.headerText}>KEYWORD ANALYSIS</span>{" "}
                 </Box>
-                <Box paddingBottom={2}>
+                <Box>
                     <hr className={styles.verticalLineStyle} />
                 </Box>
 
-                <Box paddingLeft={3} paddingTop={4}>
+                <Box paddingLeft={3} paddingTop={2}>
                     <Stack
                         className="stackShareOptions"
                         direction="row"
@@ -53,6 +53,7 @@ export const KeywordAnalysis = ({ tagName }: Props) => {
                         justifyContent="space-between"
                         justifyItems={"center"}
                         paddingLeft={2}
+                        gap={2}
                         sx={{
                             padding: "15px 15px"
                         }}
@@ -60,7 +61,7 @@ export const KeywordAnalysis = ({ tagName }: Props) => {
                         <Box
                             sx={{
                                 display: "flex",
-                                gap: "10px"
+                                gap: "10px",
                             }}
                         >
                             <ButtonGroup
@@ -68,13 +69,41 @@ export const KeywordAnalysis = ({ tagName }: Props) => {
                                 size="small"
                                 variant="contained"
                                 aria-label="Disabled button group"
-                                style={{
-                                    borderRadius: "10px",
-                                    border: "1px"
+                                sx={{
+                                    border: "1px",
+                                    background: "rgba(12, 9, 156, 1)",
+                                    borderRadius: "20px",
+                                    paddingTop: '1px',
+                                    paddingBottom: '1px',
+                                    '& .firstButton':{
+                                        fontSize: '12px !important',
+                                        padding: '6px 14px',
+                                        "&.MuiButtonBase-root:hover": {
+                                            bgcolor: "transparent"
+                                          }
+                                    },
+                                    '& .secondButton':{
+                                        fontSize: '12px !important',
+                                        padding: '2px 4px !important',
+                                        marginTop: '2px',
+                                        marginRight: '2px',
+                                        height: '28px !important',
+                                        "&:hover": {
+                                            bgcolor: "rgba(255, 255, 255, 1) !important"
+                                          },
+                                    }
                                 }}
                             >
-                                <Button>{tagName}</Button>
-                                <Button variant="outlined">5</Button>
+                                <Button className="firstButton" sx={{
+                                    borderRadius: "20px !important",
+                                    background: "rgba(12, 9, 156, 1)",
+                                    border: 'none !important',
+                                   
+                                }}>{tagName}</Button>
+                                <Button  className="secondButton" sx={{
+                                    borderRadius: "20px !important",
+                                    background: "rgba(255, 255, 255, 1)",
+                                }} variant="outlined">5</Button>
                             </ButtonGroup>
                         </Box>
 
@@ -84,7 +113,9 @@ export const KeywordAnalysis = ({ tagName }: Props) => {
                         </Box>
 
                     </Stack>
+                    <Box>
                     <hr className={styles.verticalLineStyle} />
+                </Box>
                     <Stack alignContent="center" alignItems="center" justifyItems={"center"} justifyContent={"end"} direction={"row"}>
                         <Box display={"flex"} justifyContent={"center"}>
                             <span className={styles.iconText}>

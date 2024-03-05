@@ -16,6 +16,7 @@ import Analytics from "../../assets/images/Analytics.svg";
 import ChatThreads from "../../assets/images/ChatThreads.svg";
 import Uploads from "../../assets/images/Uploads.svg";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import TroubleshootOutlinedIcon from '@mui/icons-material/TroubleshootOutlined'; 
 
 interface Props {
     onClearChatClicked: () => void;
@@ -107,7 +108,10 @@ const ChatBoxLeftPanel = ({
                     toggleisRightPanelOpen();
                     toggleDeepAnalysis();
                 }} className={styles.iconContainer}>
-                    <img src={DeepAnalysis} alt="Deep Analysis" />
+                    <TroubleshootOutlinedIcon sx={{
+                        color: '#0C099C',
+                    }} />
+                    {/* <img src={DeepAnalysis} alt="Deep Analysis" /> */}
                     <p className={styles.labelName}>Deep Analysis</p>
                 </div>
                 <div className={styles.iconContainer}>

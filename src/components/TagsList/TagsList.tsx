@@ -42,7 +42,7 @@ const tagsList = [
 export const TagsList = ({setTagClicked, setTagName, toggleKeywordAnalysis}: any) => {
 
     return (
-        <Stack direction="row" alignItems={"end"} justifyContent={"end"} spacing={2} marginRight={8}>
+        <Stack direction="row" alignItems={"end"} justifyContent={"end"} marginBottom={3} spacing={2} marginRight={8}>
             {tagsList.map(tag => {
                 return (
                     <Item
@@ -55,7 +55,7 @@ export const TagsList = ({setTagClicked, setTagName, toggleKeywordAnalysis}: any
                         }}
                         className={styles.tagsStyle}
                     >
-                        {tag.tagName}
+                        {tag.tagName} <b className={styles.tagCount}>{tag.tagCount}</b>
                     </Item>
                 );
             })}

@@ -25,12 +25,12 @@ import { set_history, set_answers, set_QnA, set_recommendedQnA, set_latestQuesti
 import UserLocationSave from "./UserLocationSave";
 import { Grid } from "@mui/material";
 import KpiWidget from "../../components/KpiWidget/KpiWidget";
-import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import LeaderBoard from "../LeaderBoard";
 import { KeywordAnalysis } from "../../components/KeywordAnalysis/KeywordAnalysis";
 import { DeepAnalysis } from "../../components/DeepAnalysis/DeepAnalysis";
 import { TagsList } from "../../components/TagsList/TagsList";
 import Uploads from "../Uploads";
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 const Chat = (props: any) => {
     const [tagName, setTagName] = useState("");
@@ -187,9 +187,11 @@ const Chat = (props: any) => {
         let appointmentData = localStorage.getItem("appointmentData") ? localStorage.getItem("appointmentData") : "";
         let patientemail = localStorage.getItem("patientemail") ? localStorage.getItem("patientemail") : "";
         let patientemailconfirm = Boolean(localStorage.getItem("patientemailconfirm")) ? Boolean(localStorage.getItem("patientemailconfirm")) : false;
-        let latitude = localStorage.getItem("latitude") ? localStorage.getItem("latitude") : 0;
-        let longitude = localStorage.getItem("longitude") ? localStorage.getItem("longitude") : 0;
-        let userLocation = localStorage.getItem("userLocation") ? localStorage.getItem("userLocation") : "Auckland";
+        //let latitude = localStorage.getItem("latitude") ? localStorage.getItem("latitude") : 0;
+       // let longitude = localStorage.getItem("longitude") ? localStorage.getItem("longitude") : 0;
+        //let userLocation = localStorage.getItem("userLocation") ? localStorage.getItem("userLocation") : "Auckland";
+
+        console.log(chatGPTToken, 'chatgpttokens');
 
         dispatch(set_recommendedQnA([] as any));
         error && setError(undefined);
@@ -224,9 +226,9 @@ const Chat = (props: any) => {
                 appointmentData: appointmentData,
                 patientemail: patientemail,
                 patientemailconfirm: patientemailconfirm,
-                longitude: longitude,
-                latitude: latitude,
-                userLocation: userLocation
+                // longitude: longitude,
+                // latitude: latitude,
+                // userLocation: userLocation
             };
             const result = await chatApi(request);
             if (result.exchange_id) {
@@ -499,6 +501,7 @@ const Chat = (props: any) => {
                                             {answers.map((answer: any, index: number) => (
                                                 <div key={index}>
                                                     <UserChatMessage message={answer[0]} />
+                                                    <TagsList toggleKeywordAnalysis={toggleKeywordAnalysis} setTagName={setTagName} setTagClicked={setTagClicked}/>
                                                     <div className={styles.chatMessageGpt}>
                                                         <Answer
                                                             key={index}
@@ -515,7 +518,6 @@ const Chat = (props: any) => {
                                                             onExampleClicked={onExampleClicked}
                                                         />
                                                     </div>
-                                                    <TagsList toggleKeywordAnalysis={toggleKeywordAnalysis} setTagName={setTagName} setTagClicked={setTagClicked}/>
                                                 </div>
                                             ))}
                                             {isLoading && (
@@ -547,7 +549,7 @@ const Chat = (props: any) => {
                                 {ischatRightContent && (
                                     <Grid item xs={12} sm={12} md={6} className={styles.chatRightContent} display={{ xs: "none", md: "block" }}>
                                         <div className="sidePanelBtn" onClick={toggleChatRightContent}>
-                                            <ArrowLeftIcon />
+                                            <ArrowRightIcon />
                                         </div>
                                         {isLeaderBoard && <LeaderBoard />}
                                         {isUpload && <Uploads />}

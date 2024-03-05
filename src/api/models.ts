@@ -57,9 +57,9 @@ export type ChatRequest = {
     appointmentData:any
     patientemail:any
     patientemailconfirm:boolean,
-    latitude:any,
-    longitude:any,
-    userLocation:any,
+    // latitude:any,
+    // longitude:any,
+    // userLocation:any,
 };
 
 

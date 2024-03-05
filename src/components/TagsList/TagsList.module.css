@@ -1,8 +1,12 @@
 .tagsStyle {
  border-radius: 18px !important;
  background-color: rgba(225, 229, 242, 0.8) !important;
- color: rgba(51, 51, 51, 1);
+ color: rgba(51, 51, 51, 1) !important;
  font-size: 12px !important;
  font-weight: 400;
  padding: 10px 12px !important;
+}
+
+.tagCount{
+    font-weight: 700;
 }

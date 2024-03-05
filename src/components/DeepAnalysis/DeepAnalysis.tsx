@@ -13,6 +13,7 @@ import StackedBarChart from "../BarChart/BarChart";
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { useState } from "react";
 
 // interface Props {
 //     text: string;
@@ -20,25 +21,26 @@ import html2canvas from 'html2canvas';
 //     // onClick: (value: string) => void;
 // }
 
-const getColor = (value: number) => {
+const getColor = (value: any) => {
+
+    console.log(value, 'valueeee');
   
-    if(value > 20) {
+    if(Number(value.replace("%", "")) > 20) {
 return " rgba(50, 215, 75, 1)";
 
     } 
-    if(value > 0 && value < 20 ){
+    if(Number(value.replace("%", "")) > 0 && Number(value.replace("%", "")) < 20 ){
         return "inherit";
     }
 
-    if (value < 0) {
+    if (Number(value.replace("%", "")) < 0) {
  return "rgba(255, 69, 58, 1)";
-
-
     }
 
   };
 
 export const DeepAnalysis = () => {
+    const [isValue, setIsValue] = useState<boolean>(false);
     const columns: GridColDef[] = [
         {
             field: "Country",
@@ -168,6 +170,16 @@ export const DeepAnalysis = () => {
         { id: 7, Country: "India",2019: "56", 2020: "10", 2021: "43",2022: "77", 2023: "36" },
     ];
 
+    const rowsPercentage = [
+        { id: 1, Country: "India",2019: "15%", 2020: "10%", 2021: "43%",2022: "77%", 2023: "36%" },
+        { id: 2, Country: "India",2019: "28%", 2020: "10%", 2021: "-43%",2022: "77%", 2023: "36%" },
+        { id: 3, Country: "India",2019: "-10%", 2020: "10%", 2021: "43%",2022: "77%", 2023: "36%" },
+        { id: 4, Country: "India",2019: "33%", 2020: "-10%", 2021: "43%",2022: "-77%", 2023: "36%" },
+        { id: 5, Country: "India",2019: "22%", 2020: "10%", 2021: "43%",2022: "77%", 2023: "36%" },
+        { id: 6, Country: "India",2019: "-64%", 2020: "10%", 2021: "43%",2022: "77%", 2023: "-36%" },
+        { id: 7, Country: "India",2019: "56%", 2020: "10%", 2021: "43%",2022: "77%", 2023: "36%" },
+    ];
+
     const summary = [
         {
             text: "India has shown fluctuation with significant declines in 2020 and subsequent improvement in the following years."
@@ -263,14 +275,47 @@ export const DeepAnalysis = () => {
                                 disableElevation
                                 size="small"
                                 variant="contained"
-                                aria-label="Disabled button group"
-                                style={{
-                                    borderRadius: "10px",
-                                    border: "1px"
+                                aria-label="button group"
+
+                                sx={{
+                                    border: "1px solid rgba(12, 9, 156, 1)",
+                                    background: "rgba(255, 255, 255, 1)",
+                                    borderRadius: "20px",
+                                    paddingTop: '2px',
+                                    paddingBottom: '1px',
+                                    maxHeight: '32px',
+                                    overflow: 'hidden',
+                                    '& .secondButton':{
+                                        fontSize: '12px !important',
+                                        padding: '6px 12px',
+                                        border: 'none',
+                                        borderRadius: "8px",
+                                        marginLeft: isValue ?  '3px' : '6px',
+                                        marginRight: isValue ? '6px' : '6px',
+                                        color: "rgba(12, 9, 156, 1)",
+                                        bgcolor: "rgba(255, 255, 255, 1)",
+                                        "&.MuiButtonBase-root:hover": {
+                                            bgcolor: "rgba(255, 255, 255, 1)"
+                                          },
+                                          
+                                    },
+                                    '& .firstButton':{
+                                        borderRadius: "8px",
+                                        fontSize: '12px !important',
+                                        padding: '12px 24px !important',
+                                        marginTop: '1px',
+                                        marginLeft: isValue ?  '3px' : '6px',
+                                        marginRight: isValue ? '6px' : '3px',
+                                        height: '24px !important',
+                                        background: 'rgba(12, 9, 156, 1)',
+                                        "&:hover": {
+                                            bgcolor: "rgba(12, 9, 156, 1) !important"
+                                          },
+                                    }
                                 }}
                             >
-                                <Button>%</Button>
-                                <Button variant="outlined">Value</Button>
+                                <Button  onClick={()=> setIsValue(false)} className={ isValue ? "secondButton" : "firstButton"}>%</Button>
+                                <Button  onClick={()=> setIsValue(true)} className={ isValue ? "firstButton" : "secondButton"}>Value</Button>
                             </ButtonGroup>
                             <ButtonGroup
                                 disableElevation
@@ -359,7 +404,7 @@ export const DeepAnalysis = () => {
                             //     backgroundColor: "unset",
                             // },
                         }}
-                        rows={rows}
+                        rows={isValue ?rows : rowsPercentage} 
                         columns={columns}
                         disableRowSelectionOnClick
                         disableColumnFilter
