@@ -51,15 +51,15 @@ export async function chatApi(options: ChatRequest): Promise<AskResponse> {
                 suggest_followup_questions: options.overrides?.suggestFollowupQuestions
             },
             temperature: options.temperature,
-            token: options.temperature,
+            token: options.token,
             language: options.language,
             userID: options.userID,
             appointmentData:options.appointmentData,
             patientemail:options.patientemail,
             patientemailconfirm:options.patientemailconfirm,
-            longitude:options.longitude,
-            latitude:options.latitude,
-            userLocation:options.userLocation
+            // longitude:options.longitude,
+            // latitude:options.latitude,
+            // userLocation:options.userLocation
         })
     });
 

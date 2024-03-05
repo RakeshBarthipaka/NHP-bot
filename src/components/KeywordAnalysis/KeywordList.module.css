@@ -1,7 +1,7 @@
 
 
 .answer-container {
-    padding: 20px;
+    padding: 10px;
     background-color: #F2F2F7;
     color: #2a2a2a;
     font-size: 14px !important;
@@ -48,49 +48,67 @@
 }
 
 .viewIcon{
-    border:1px solid #0C099C;
+    border:1px solid rgba(83, 118, 240, 1);
     border-radius: 20px;
-    display: inline-block;
-    padding:0px 10px;
-    display: inline-flex;
+    padding:5px 10px !important;
+    display: flex;
+    justify-content: "center";
     font-weight: bold;
+    div{
+        margin-left: 3px;
+    }
+    svg{
+        color:rgba(83, 118, 240, 1);
+        transform:rotate(0) translate(0);
+    }
+
 }
 .thumbUp{
-    border:1px solid #2AC141;
+    border:1px solid rgba(42, 193, 65, 1);
     border-radius: 20px;
-    display: inline-block;
-    padding:0px 10px;
+    padding:5px 10px;
     display: inline-flex;
     font-weight: bold;
+    div{
+        margin-left: 3px;
+    }
         svg{
-            color:#2AC141;
+            color:rgba(42, 193, 65, 1);
             transform:rotate(0) translate(0);
         }
-    &:hover{
+    /* &:hover{
         background-color: #2AC141;
         color:#fff;
         svg{
             color:#fff;
             transform:rotate(-5deg) translate(0px, -1px);
         }
-    }
+    } */
 }
 .thumbDown{
-    border:1px solid #FF453A;
+    border:1px solid rgba(255, 69, 58, 1);
     border-radius: 20px;
-    display: inline-block;
-    padding:0px 10px;
+    padding:5px 10px;
     background-color: #fff;
     display: inline-flex;
     font-weight: bold;
-    svg{
-        color:#FF453A;
+    div{
+        margin-left: 3px;
     }
-    &:hover{
+    svg{
+        color:rgba(255, 69, 58, 1);
+    }
+    /* &:hover{
         background-color: #FF453A;
         color:#fff;
         svg{
             color:#fff
         }
-    }
+    } */
+}
+
+.iconContainer{
+    background-color: #fff;
+    padding:4px;
+    border-radius:20px;
 }

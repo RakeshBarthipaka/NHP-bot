@@ -19,9 +19,9 @@ import jsPDF from "jspdf";
 const KeywordList = (props: any) => {
     const [isDisplayAnswer, setIsDisplayAnswer] = useState<number>();
     const [isDisplayAnswerToggle, setIsDisplayAnswerToggle] = useState<boolean>(false);
+    const [activeBackground, setActiveBackground] = useState<false>();
 
     const toggleAnswerDisplay = (id: any) => {
-
         if(isDisplayAnswer === id  && isDisplayAnswerToggle === true){
             setIsDisplayAnswerToggle(false);
         }
@@ -29,6 +29,9 @@ const KeywordList = (props: any) => {
             setIsDisplayAnswerToggle(true);
         }
         else if (isDisplayAnswer !== id && isDisplayAnswerToggle !== true){
+            setIsDisplayAnswerToggle(true);
+        }
+        else if (isDisplayAnswer === id && isDisplayAnswerToggle !== true){
             setIsDisplayAnswerToggle(true);
         }
         
@@ -104,7 +107,13 @@ const KeywordList = (props: any) => {
                         <Box className="question-box" onClick={() => {setIsDisplayAnswer(tag.id);
                         //setIsDisplayAnswerToggle(!isDisplayAnswerToggle);
                         toggleAnswerDisplay(tag.id);
-                        }}>
+                        }}
+                        
+                        sx={{
+                            backgroundColor: isDisplayAnswerToggle && isDisplayAnswer === tag.id ?  "rgba(83, 118, 240, 1)" : "rgba(83, 118, 240, 0.2)",
+                            color: isDisplayAnswerToggle && isDisplayAnswer === tag.id ?  "rgba(255, 255, 255, 1) !important" : "rgba(51, 51, 51, 1) !important",
+                                                }}
+                        >
                             <Box
                                 sx={{
                                     width: "23px",
@@ -127,11 +136,18 @@ const KeywordList = (props: any) => {
                                 )}
                             </Box>
                             <Box className="question-text">
-                                <Typography className="question">{tag.query}</Typography>
-                                <Typography className="otherInfo">
+                                <Typography sx={{
+                                    color: isDisplayAnswerToggle && isDisplayAnswer === tag.id ?  "rgba(255, 255, 255, 1) !important" : "rgba(51, 51, 51, 1) !important",
+                                }} className="question">{tag.query}</Typography>
+                                <Typography sx={{
+                                    color: isDisplayAnswerToggle && isDisplayAnswer === tag.id ?  "rgba(30, 255, 241, 0.8) !important" : "rgba(12, 9, 156, 1) !important",
+                                    
+                                }} className="otherInfo">
                                     requested by: {tag.requestedBy} requested on: {tag.requestedDate}
                                     <span>
-                                        <RemoveRedEyeOutlinedIcon className="viewIcon" />
+                                        <RemoveRedEyeOutlinedIcon sx={{
+                                            color: isDisplayAnswerToggle && isDisplayAnswer === tag.id ?  "rgba(30, 255, 241, 0.8) !important" : "rgba(12, 9, 156, 1) !important",
+                                        }}  className="viewIcon" />
                                     </span>{" "}
                                     9
                                 </Typography>
@@ -139,8 +155,7 @@ const KeywordList = (props: any) => {
                         </Box>
                         {isDisplayAnswer === tag.id && isDisplayAnswerToggle && (
                             <div className="answer-container">
-                                <Box>
-                                    <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"}>
+                                    <Stack className={styles.iconContainer} direction={"row"} alignItems={"center"} justifyContent={"space-between"}>
                                         <Box
                                             sx={{
                                                 display: "flex"
@@ -205,29 +220,27 @@ const KeywordList = (props: any) => {
                                                 </Avatar>
                                             </span> */}
                                         </Box>
-                                        <Box display={"flex"}>
+                                        <Box gap={1} display={"flex"}>
                                             <div className={styles.viewIcon}>
-                                                <span>
-                                                    <RemoveRedEyeOutlinedIcon />
-                                                </span>
-                                                <span>9</span>
+                                                    <RemoveRedEyeOutlinedIcon fontSize="small" />
+                                                    <div>9</div>
                                             </div>
                                             <div className={styles.thumbUp}>
-                                                <span>
-                                                    <ThumbUpOutlinedIcon />
-                                                </span>
-                                                <span>2</span>
+                                          
+                                                    <ThumbUpOutlinedIcon fontSize="small" />
+                                               
+                                                <div>9</div>
                                             </div>
                                             <div className={styles.thumbDown}>
-                                                <span>
-                                                    <ThumbDownAltOutlinedIcon />
-                                                </span>
-                                                <span>2</span>
+                                                
+                                                    <ThumbDownAltOutlinedIcon fontSize="small" />
+                                               
+                                                <div>9</div>
                                             </div>
                                         </Box>
                                     </Stack>
-                                    <Typography className="tagAnswers">{tag.answer}</Typography>
-                                </Box>
+                                    <Typography padding={2} className="tagAnswers">{tag.answer}</Typography>
+
                             </div>
                         )}
                     </>

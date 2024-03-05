@@ -3,12 +3,7 @@ import { Stack, IconButton, IStackProps, MessageBar, MessageBarType } from "@flu
 import DOMPurify from "dompurify";
 import styles from "./Answer.module.css";
 
-import {
-    AskResponse,
-    feedBackApi,
-    feedbackRequest,
-    exportChatbotApi,
-} from "../../api";
+import { AskResponse, feedBackApi, feedbackRequest, exportChatbotApi } from "../../api";
 import { parseAnswerToHtml } from "./AnswerParser";
 import { Link } from "react-router-dom";
 import LogoWhiteTransparent from "../../assets/CGLense_app_logo_v3.png";
@@ -18,13 +13,17 @@ import AppointmentsBookingList from "../Appointment/AppointmentsBookingList";
 import ScheduleAppointment from "../Appointment/AppointmentBooking";
 import { EmailConfirm } from "../Appointment/EmailConfirm";
 import HospitalList from "../Appointment/HospitalList";
-import {
-    Button, Divider,
-} from '@mui/material';
+import { Avatar, Button, Divider } from "@mui/material";
 import { useSelector } from "react-redux";
 import { GenerateTable } from "../Tables/GenerateTable";
 import { TagsList } from "../TagsList/TagsList";
-
+import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
+import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
+import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
+import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
+import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
+import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
+import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
 
 interface Props {
     answer: AskResponse;
@@ -36,29 +35,21 @@ interface Props {
     onLogsContentClicked: () => void;
     showFollowupQuestions?: boolean;
     questionAnswersList: [];
-    projectData: any,
+    projectData: any;
     onExampleClicked: (value: string) => void;
 }
 
-
 const AlertBoxError = () => (
-    <MessageBar
-        messageBarType={MessageBarType.error}
-        isMultiline={false}
-    >
+    <MessageBar messageBarType={MessageBarType.error} isMultiline={false}>
         API Request Error
     </MessageBar>
 );
 
 const AlertBoxSuccess = () => (
-    <MessageBar
-        messageBarType={MessageBarType.success}
-        isMultiline={false}
-    >
+    <MessageBar messageBarType={MessageBarType.success} isMultiline={false}>
         Thank you for your feedback
     </MessageBar>
 );
-
 
 export const Answer = ({
     answer,
@@ -79,47 +70,42 @@ export const Answer = ({
 
     const [showAlertBox, setShowAlertBox] = useState(false);
     const [errorTypes, setErrorTypes] = useState("error");
-    const [showLike, setShowLike] = useState(false)
-    const [showDisLike, setShowDisLike] = useState(false)
-    const [showCommentBox, setshowCommentBox] = useState(false)
+    const [showLike, setShowLike] = useState(false);
+    const [showDisLike, setShowDisLike] = useState(false);
+    const [showCommentBox, setshowCommentBox] = useState(false);
     const messageRef = useRef<HTMLDivElement>(null);
     const [shareIconStyle, setShareIconStyle] = useState<any>({ display: "none" });
-
 
     useEffect(() => {
         if (messageRef.current) {
             messageRef.current.scrollIntoView({
                 behavior: "smooth",
                 block: "start",
-                inline: "nearest",
+                inline: "nearest"
             });
         }
     });
 
-
     const shareDropDownToggle = () => {
         if (shareIconStyle.display === "block") {
-            setShareIconStyle({ display: "none" })
+            setShareIconStyle({ display: "none" });
+        } else {
+            setShareIconStyle({ display: "block" });
         }
-        else {
-            setShareIconStyle({ display: "block" })
-        }
-    }
+    };
 
     const copyChatData = async () => {
         navigator.clipboard.writeText(answer.answer);
-        setShareIconStyle({ display: "none" })
-    }
+        setShareIconStyle({ display: "none" });
+    };
 
     const likeDisLikeAnswerToggle = (user_reaction: string) => {
-
         if (user_reaction === "DISLIKE") {
             if (showDisLike) {
                 setShowDisLike(false);
-                setshowCommentBox(false)
-            }
-            else {
-                setshowCommentBox(true)
+                setshowCommentBox(false);
+            } else {
+                setshowCommentBox(true);
                 setShowLike(false);
             }
         }
@@ -128,16 +114,15 @@ export const Answer = ({
             if (showLike) {
                 setShowDisLike(false);
                 setShowLike(false);
-                setshowCommentBox(false)
-            }
-            else {
+                setshowCommentBox(false);
+            } else {
                 setShowDisLike(false);
                 setShowLike(true);
-                setshowCommentBox(false)
-                likeDisLikeAnswer(user_reaction)
+                setshowCommentBox(false);
+                likeDisLikeAnswer(user_reaction);
             }
         }
-    }
+    };
 
     const likeDisLikeAnswer = async (user_reaction: string) => {
         const request: feedbackRequest = {
@@ -152,57 +137,50 @@ export const Answer = ({
             const result = await feedBackApi(request);
             if (result.status === "PASS") {
                 if (user_reaction === "LIKE") {
-                    setShowAlertBox(true)
-                    setErrorTypes("success")
+                    setShowAlertBox(true);
+                    setErrorTypes("success");
                     setTimeout(() => {
-                        setErrorTypes("error")
-                        setShowAlertBox(false)
-                    }, 4000)
+                        setErrorTypes("error");
+                        setShowAlertBox(false);
+                    }, 4000);
                 }
-            }
-
-            else {
-                setShowAlertBox(true)
+            } else {
+                setShowAlertBox(true);
                 setTimeout(() => {
-                    setShowAlertBox(false)
-                }, 4000)
+                    setShowAlertBox(false);
+                }, 4000);
             }
-        }
-        catch (e) {
-            setShowAlertBox(true)
+        } catch (e) {
+            setShowAlertBox(true);
             setTimeout(() => {
-                setShowAlertBox(false)
-            }, 4000)
+                setShowAlertBox(false);
+            }, 4000);
         }
-
     };
-
 
     const SpacingColumnProps: Partial<IStackProps> = {
         tokens: { childrenGap: 20 },
-        styles: { root: { padding: 15 } },
-
+        styles: { root: { padding: 15 } }
     };
 
-    const IconStyles = { color: "blue", borderRadius: "8px" }
-    const IconActiveStyles = { backgroundColor: "lightgray", borderRadius: "8px" }
+    const IconStyles = { color: "blue", borderRadius: "8px" };
+    const IconActiveStyles = { backgroundColor: "lightgray", borderRadius: "8px" };
 
     return (
         <>
-        <Stack verticalAlign="space-between" {...SpacingColumnProps} className={` ${styles.answerContainerDiv}`}>
-            <Stack.Item>
+            <Stack verticalAlign="space-between" {...SpacingColumnProps} className={` ${styles.answerContainerDiv}`}>
+                <Stack.Item>
                 <Stack horizontal horizontalAlign="space-between" className={styles.answerLogo}>
                     {/* <img src={projectData ? projectData.projectLogoPath : LogoWhiteTransparent} width="100%" height={projectData ? projectData.projectLogoHeight : "30px"} /> */}
                     <img src="static\assets\cglense_icon_logo.png" width="40px" />
                 </Stack>
-            </Stack.Item>
-            <Stack className={`${styles.answerContainer} ${isSelected && styles.selected}`} verticalAlign="space-between">
-                <Stack.Item grow>
+                </Stack.Item>
+                <Stack className={`${styles.answerContainer} ${isSelected && styles.selected}`} verticalAlign="space-between">
+                    <Stack.Item grow>
+                        <div className={styles.answerText} dangerouslySetInnerHTML={{ __html: sanitizedAnswerHtml }}></div>
+                        {/* <GenerateTable></GenerateTable> */}
 
-                    <div className={styles.answerText} dangerouslySetInnerHTML={{ __html: sanitizedAnswerHtml }}></div>
-                    {/* <GenerateTable></GenerateTable> */}
-
-                    {/* { answer.patientemail && answer.patientemail.length > 0 &&  !answer.patientemailconfirm &&
+                        {/* { answer.patientemail && answer.patientemail.length > 0 &&  !answer.patientemailconfirm &&
                         <EmailConfirm onExampleClicked={onExampleClicked} patientemail={answer.patientemail}/>
                     }
                     { answer.appointmentlimit  &&
@@ -223,48 +201,84 @@ export const Answer = ({
                             <AppointmentsBookingList events={answer.appointmentlist} onExampleClicked={onExampleClicked} />
                         )
                     } */}
+                    </Stack.Item>
 
-                </Stack.Item>
-
-
-                <Stack>
-                    <div className={` ${styles.IconCustomColor}`}>
-                        <IconButton
+                    <Stack>
+                        <div className={` ${styles.IconCustomColor}`}>
+                            {/* <IconButton
                             style={showLike ? IconActiveStyles : IconStyles}
                             iconProps={{ iconName: "like" }}
                             title="Good response"
                             ariaLabel="Like Answer"
                             // disabled={true}
                             onClick={() => likeDisLikeAnswerToggle("LIKE")}
-                        />
-                        <IconButton
+                        /> */}
+                            {/* <span onClick={downloadAsPdf}></span> */}
+                            <span onClick={() => likeDisLikeAnswerToggle("LIKE")}>
+                                <Avatar sx={{ bgcolor: "rgba(42, 193, 65, 0.2)", color: "rgba(42, 193, 65, 1)" }}>
+                                    {" "}
+                                    <ThumbUpAltOutlinedIcon />
+                                </Avatar>
+                            </span>
+                            <span onClick={() => likeDisLikeAnswerToggle("DISLIKE")}>
+                                <Avatar sx={{ bgcolor: "rgba(255, 69, 58, 0.2)", color: "rgba(255, 69, 58, 1)" }}>
+                                    {" "}
+                                    <ThumbDownAltOutlinedIcon />
+                                </Avatar>
+                            </span>
+
+                            {/* <IconButton
                             style={showDisLike ? IconActiveStyles : IconStyles}
                             iconProps={{ iconName: "dislike" }}
                             title="Bad Response"
                             ariaLabel="Dislike Answer"
                             // disabled={true}
                             onClick={() => likeDisLikeAnswerToggle("DISLIKE")}
-                        />
-                        <Divider className={styles.iconDivider} orientation="vertical" />
-                        <IconButton 
-                            iconProps={{ iconName: "Copy" }}
-                            title="Copy Data"
-                            ariaLabel="Copy Data"
-                            // disabled={true}
-                            onClick={() => copyChatData()}
-                        />
-                        <DownloadPDF  pdfData={questionAnswersList} />
+                        /> */}
+                            <Divider className={styles.iconDivider} orientation="vertical" />
+                            <span title="Copy Data"
+                                 onClick={() => copyChatData()}>
+                            <Avatar  sx={{ bgcolor: "rgba(83, 118, 240, 0.2)", color: "rgba(83, 118, 240, 1)", "&:hover": {
+                                            backgroundColor: "#0027B0",
+                                                color: ' rgba(30, 255, 241, 0.8)'
+                                            
+                                        } }}>
+                                    {" "}
+                                    <ContentCopyOutlinedIcon />
+                                </Avatar>
+                            </span>
+                           
+                            {/* <IconButton
+                                iconProps={{ iconName: "Copy" }}
+                                title="Copy Data"
+                                ariaLabel="Copy Data"
+                                // disabled={true}
+                                onClick={() => copyChatData()}
+                            /> */}
+                            <span>
+                            <DownloadPDF pdfData={questionAnswersList} />
+                            </span>
+                            <span onClick={() => copyChatData()}>
+                            <Avatar sx={{bgcolor: "rgba(83, 118, 240, 0.2)", color: "rgba(83, 118, 240, 1)", "&:hover": {
+                                            backgroundColor: "#0027B0",
+                                                color: ' rgba(30, 255, 241, 0.8)'
+                                            
+                                        } }}>
+                                    {" "}
+                                    <MailOutlineOutlinedIcon />
+                                </Avatar>
+                            </span>
 
-                        <IconButton 
-                            iconProps={{ iconName: "Mail" }}
-                            title="Export to PDF"
-                            ariaLabel="Export to PDF"
-                            // disabled={true}
-                            onClick={() => copyChatData()}
-                        />
-                        <Divider className={styles.iconDivider} orientation="vertical" />
+                            {/* <IconButton
+                            //     iconProps={{ iconName: "Mail" }}
+                            //     title="Export to PDF"
+                            //     ariaLabel="Export to PDF"
+                            //     // disabled={true}
+                            //     onClick={() => copyChatData()}
+                            // /> */}
+                            <Divider className={styles.iconDivider} orientation="vertical" />
 
-                        {/* <div className={styles.dropdown}>
+                            {/* <div className={styles.dropdown}>
                             <IconButton
                                 style={shareIconStyle.display === "block" ? IconActiveStyles : IconStyles}
                                 iconProps={{ iconName: "Share" }}
@@ -291,66 +305,94 @@ export const Answer = ({
                                 </Link>
                             </div>
                         </div> */}
-                        
-                        <IconButton
-                            style={IconStyles}
-                            iconProps={{ iconName: "Lightbulb" }}
-                            title="Show thought process"
-                            ariaLabel="Show thought process"
-                            onClick={() => onThoughtProcessClicked()}
-                            // disabled={true}
-                        />
-                        <IconButton
-                            style={IconStyles}
-                            iconProps={{ iconName: "ClipboardList" }}
-                            title="Show supporting content"
-                            ariaLabel="Show supporting content"
-                            onClick={() => onSupportingContentClicked()}
-                            // disabled={true}
-                        />
+                        <span onClick={() => onThoughtProcessClicked()} >
+                            <Avatar sx={{ bgcolor: "rgba(83, 118, 240, 1)", color: "rgba(255, 255, 255, 1)", "&:hover": {
+                                            backgroundColor: "#0027B0",
+                                                color: ' rgba(30, 255, 241, 0.8)'
+                                            
+                                        } }}>
+                                    {" "}
+                                    <PsychologyOutlinedIcon  />
+                                </Avatar>
+                            </span>
+                            <span onClick={() => onSupportingContentClicked()}>
+                            <Avatar sx={{ bgcolor: "rgba(83, 118, 240, 1)", color: "rgba(255, 255, 255, 1)", "&:hover": {
+                                            backgroundColor: "#0027B0",
+                                                color: ' rgba(30, 255, 241, 0.8)'
+                                            
+                                        } }}>
+                                    {" "}
+                                    <AssignmentOutlinedIcon />
+                                </Avatar>
+                            </span>
+                            
 
-                       
-                    </div>
+                            <span onClick={() => onSupportingContentClicked()}>
+                            <Avatar sx={{ bgcolor: "rgba(83, 118, 240, 1)", color: "rgba(255, 255, 255, 1)", "&:hover": {
+                                            backgroundColor: "#0027B0",
+                                                color: ' rgba(30, 255, 241, 0.8)'
+                                            
+                                        } }}>
+                                    {" "}
+                                    <HistoryOutlinedIcon  />
+                                </Avatar>
+                            </span>
+
+                            {/* <IconButton
+                                style={IconStyles}
+                                iconProps={{ iconName: "Lightbulb" }}
+                                title="Show thought process"
+                                ariaLabel="Show thought process"
+                                onClick={() => onThoughtProcessClicked()}
+                                // disabled={true}
+                            />
+                            <IconButton
+                                style={IconStyles}
+                                iconProps={{ iconName: "ClipboardList" }}
+                                title="Show supporting content"
+                                ariaLabel="Show supporting content"
+                                onClick={() => onSupportingContentClicked()}
+                                // disabled={true}
+                            /> */}
+                        </div>
+                    </Stack>
+
+                    {showAlertBox && <Stack style={{ marginTop: "15px" }}>{errorTypes === "success" ? <AlertBoxSuccess /> : <AlertBoxError />}</Stack>}
+
+                    {!!parsedAnswer.followupQuestions.length && showFollowupQuestions && onFollowupQuestionClicked && (
+                        <Stack.Item>
+                            <Stack
+                                horizontal
+                                wrap
+                                className={`${!!parsedAnswer.citations.length ? styles.followupQuestionsList : ""}`}
+                                tokens={{ childrenGap: 6 }}
+                            >
+                                <span className={styles.followupQuestionLearnMore}>Follow-up questions:</span>
+                                {parsedAnswer.followupQuestions.map((x, i) => {
+                                    return (
+                                        <a key={i} className={styles.followupQuestion} title={x} onClick={() => onFollowupQuestionClicked(x)}>
+                                            {`${x}`}
+                                        </a>
+                                    );
+                                })}
+                            </Stack>
+                        </Stack.Item>
+                    )}
                 </Stack>
 
-                {
-                    showAlertBox && (
-                        <Stack style={{ marginTop: "15px" }}>
-                            {errorTypes === "success" ?
-                                (
-                                    <AlertBoxSuccess />
-                                ) : (
-                                    <AlertBoxError />
-                                )}
-                        </Stack>
-                    )
-                }
-
-
-                {!!parsedAnswer.followupQuestions.length && showFollowupQuestions && onFollowupQuestionClicked && (
-                    <Stack.Item>
-                        <Stack horizontal wrap className={`${!!parsedAnswer.citations.length ? styles.followupQuestionsList : ""}`} tokens={{ childrenGap: 6 }}>
-                            <span className={styles.followupQuestionLearnMore}>Follow-up questions:</span>
-                            {parsedAnswer.followupQuestions.map((x, i) => {
-                                return (
-                                    <a key={i} className={styles.followupQuestion} title={x} onClick={() => onFollowupQuestionClicked(x)}>
-                                        {`${x}`}
-                                    </a>
-                                );
-                            })}
-                        </Stack>
-                    </Stack.Item>
+                {showCommentBox && (
+                    <>
+                        <DislikeAnswerForm
+                            setShowDisLike={setShowDisLike}
+                            setErrorTypes={setErrorTypes}
+                            setShowAlertBox={setShowAlertBox}
+                            answer={answer}
+                            showCommentBox={showCommentBox}
+                            setshowCommentBox={setshowCommentBox}
+                        />
+                    </>
                 )}
             </Stack>
-
-            {
-                showCommentBox &&
-                <>
-                    <DislikeAnswerForm setShowDisLike={setShowDisLike} setErrorTypes={setErrorTypes} setShowAlertBox={setShowAlertBox} answer={answer} showCommentBox={showCommentBox} setshowCommentBox={setshowCommentBox}
-                    />
-                </>
-            }
-    </Stack>
-    </>
+        </>
     );
 };
