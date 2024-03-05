@@ -107,10 +107,10 @@ const MultiItemCarousel = ({KpiSlides, toggleChatRightContent, toggleKpiAnalysis
                 <Slider  {...settings} className={styles.slider}>
                     {Slides.map((card, index) => (
                         <div data-index={index} key={index} className={styles.kpiCard}   
-                        // onClick={() => {
-                        //     toggleisRightPanelOpen();
-                        //     toggleKpiAnalysis();
-                        // }}
+                        onClick={() => {
+                            toggleisRightPanelOpen();
+                            toggleKpiAnalysis();
+                        }}
                         >
                             <h5>{card.kpiname}</h5>
                             <h4>{card.kpivalue}</h4>

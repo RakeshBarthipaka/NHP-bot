@@ -9,10 +9,169 @@ import StackedBarChart from "../BarChart/BarChart";
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { GridColDef, DataGrid, GridCellParams, GridRenderCellParams } from "@mui/x-data-grid";
+import clsx from "clsx";
+
+const getColor = (value: any) => {
+
+    console.log(value, 'valueeee');
+  
+    if(Number(value.replace("%", "")) > 20) {
+return " rgba(50, 215, 75, 1)";
+
+    } 
+    if(Number(value.replace("%", "")) > 0 && Number(value.replace("%", "")) < 20 ){
+        return "inherit";
+    }
+
+    if (Number(value.replace("%", "")) < 0) {
+ return "rgba(255, 69, 58, 1)";
+    }
+
+  };
 
 const KpiAnalysis = () => {
     const [isValue, setIsValue] = useState<boolean>(false);
 
+    const columns: GridColDef[] = [
+        {
+            field: "Country",
+            headerName: "Country",
+            sortable: false,
+            width: 130,
+            disableColumnMenu: true,
+            cellClassName: (params: GridCellParams<any, number>) => {
+                if (params.value == null) {
+                    return "";
+                }
+
+                return clsx("first-column", {
+                    cell: true
+                });
+            }
+        },
+        {
+            field: "2019",
+            headerName: "2019",
+            sortable: false,
+            width: 130,
+            disableColumnMenu: true,
+            renderCell: (params: GridRenderCellParams) => {
+                const color: any = getColor(params.value);
+          
+                return (
+                  <Box
+                    sx={{
+                      color: color,
+                    }}
+                  >
+                    {params.value}
+                  </Box>
+                );
+              },
+        },
+        {
+            field: "2020",
+            headerName: "2020",
+            sortable: false,
+            width: 130,
+            disableColumnMenu: true,
+            renderCell: (params: GridRenderCellParams) => {
+                const color: any = getColor(params.value);
+          
+                return (
+                  <Box
+                    sx={{
+                      color: color,
+                    }}
+                  >
+                    {params.value}
+                  </Box>
+                );
+              },
+        },
+        {
+            field: "2021",
+            headerName: "2021",
+            sortable: false,
+            width: 130,
+            disableColumnMenu: true,
+            renderCell: (params: GridRenderCellParams) => {
+                const color: any = getColor(params.value);
+          
+                return (
+                  <Box
+                    sx={{
+                      color: color,
+                    }}
+                  >
+                    {params.value}
+                  </Box>
+                );
+              },
+        },
+        {
+            field: "2022",
+            headerName: "2022",
+            sortable: false,
+            width: 130,
+            disableColumnMenu: true,
+            renderCell: (params: GridRenderCellParams) => {
+                const color: any = getColor(params.value);
+          
+                return (
+                  <Box
+                    sx={{
+                      color: color,
+                    }}
+                  >
+                    {params.value}
+                  </Box>
+                );
+              },
+        },
+        {
+            field: "2023",
+            headerName: "2023",
+            sortable: false,
+            width: 130,
+            disableColumnMenu: true,
+            renderCell: (params: GridRenderCellParams) => {
+                const color: any = getColor(params.value);
+          
+                return (
+                  <Box
+                    sx={{
+                      color: color,
+                    }}
+                  >
+                    {params.value}
+                  </Box>
+                );
+              },
+        }
+    ];
+
+
+    const rows = [
+        { id: 1, Country: "India",2019: "15", 2020: "10", 2021: "43",2022: "77", 2023: "36" },
+        { id: 2, Country: "India",2019: "28", 2020: "10", 2021: "-43",2022: "77", 2023: "36" },
+        { id: 3, Country: "India",2019: "-10", 2020: "10", 2021: "43",2022: "77", 2023: "36" },
+        { id: 4, Country: "India",2019: "33", 2020: "-10", 2021: "43",2022: "-77", 2023: "36" },
+        { id: 5, Country: "India",2019: "22", 2020: "10", 2021: "43",2022: "77", 2023: "36" },
+        { id: 6, Country: "India",2019: "-64", 2020: "10", 2021: "43",2022: "77", 2023: "-36" },
+        { id: 7, Country: "India",2019: "56", 2020: "10", 2021: "43",2022: "77", 2023: "36" },
+    ];
+
+    const rowsPercentage = [
+        { id: 1, Country: "India",2019: "15%", 2020: "10%", 2021: "43%",2022: "77%", 2023: "36%" },
+        { id: 2, Country: "India",2019: "28%", 2020: "10%", 2021: "-43%",2022: "77%", 2023: "36%" },
+        { id: 3, Country: "India",2019: "-10%", 2020: "10%", 2021: "43%",2022: "77%", 2023: "36%" },
+        { id: 4, Country: "India",2019: "33%", 2020: "-10%", 2021: "43%",2022: "-77%", 2023: "36%" },
+        { id: 5, Country: "India",2019: "22%", 2020: "10%", 2021: "43%",2022: "77%", 2023: "36%" },
+        { id: 6, Country: "India",2019: "-64%", 2020: "10%", 2021: "43%",2022: "77%", 2023: "-36%" },
+        { id: 7, Country: "India",2019: "56%", 2020: "10%", 2021: "43%",2022: "77%", 2023: "36%" },
+    ];
 
 
     function copyTableToClipboard() {
@@ -161,18 +320,51 @@ const KpiAnalysis = () => {
                                     <FileDownloadOutlinedIcon />
                                 </Avatar>
                             </span>
-                            {/* <span onClick={() => {}}>
-                                <Avatar sx={{ bgcolor: "#E1E5F2",
-                                 color: "rgba(12, 9, 156, 1)", "&:hover": {
-                                            backgroundColor: "#0027B0",
-                                                color: ' rgba(30, 255, 241, 0.8)'
-                                            
-                                        } }}>
-                                    <ShareOutlinedIcon  />
-                                </Avatar>
-                            </span> */}
+                            
                         </Box>
+
                     </Stack>
+
+                    <Stack>
+                    <DataGrid
+                        hideFooter
+                        sx={{
+                            overflowX: "scroll !important",
+                            "& .first-column.cell": {
+                                backgroundColor: "#F2F2F7"
+                            },
+                            ".highlight": {
+                                bgcolor: "grey"
+                            },
+                            ".MuiDataGrid-cell": {
+                                backgroundColor: "none",
+                                fontWeight: 700,
+                                border: '1px solid #BBBBBB'
+                            },
+                            "& .MuiDataGrid-columnHeader": {
+                                backgroundColor: "#5376F0",
+                                color: "white",
+                                fontSize: "14px",
+                                fontWeight: 700,
+                                lineHeight: "16px",
+                                letterSpacing: "0em",
+                                textAlign: "left",
+                                border: '1px solid #BBBBBB'
+                            },
+                            // '.MuiDataGrid-root .MuiDataGrid-row:hover, MuiDataGrid-root.MuiDataGrid-row.Mui-hovered':{
+                            //     backgroundColor: "unset",
+                            // },
+                        }}
+                        rows={isValue ?rows : rowsPercentage} 
+                        columns={columns}
+                        disableRowSelectionOnClick
+                        disableColumnFilter
+                        hideFooterSelectedRowCount
+                        hideFooterPagination
+                        
+                    />
+                    </Stack>
+                    
                 </Box>
             </Box>
         </>
