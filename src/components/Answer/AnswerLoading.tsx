@@ -14,8 +14,9 @@ export const AnswerLoading = (props:any) => {
     return (
         <animated.div style={{ ...animatedStyles }} className={` ${styles.answerContainerDiv}`}>
             <Stack.Item>
-                <Stack horizontal horizontalAlign="space-between">
-                <img src={props.projectData?props.projectData.projectLogoPath:LogoWhiteTransparent} width="100%" height={props.projectData?props.projectData.projectLogoHeight:"30px"} />
+                <Stack horizontal horizontalAlign="space-between"  className={styles.answerLogo}>
+                {/* <img src={props.projectData?props.projectData.projectLogoPath:LogoWhiteTransparent} width="100%" height={props.projectData?props.projectData.projectLogoHeight:"30px"} /> */}
+                <img src="static\assets\cglense_icon_logo.png" width="40px" />
                 </Stack>
             </Stack.Item>
             <Stack className={styles.answerContainer} verticalAlign="space-between">

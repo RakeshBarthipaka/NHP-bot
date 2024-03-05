@@ -367,7 +367,7 @@ const Chat = (props: any) => {
 
     const toggleChatRightContent = () => {
         setchatRightContent(current => !current);
-        if (!ischatRightContent) {
+        if (ischatRightContent) {
             setIsLeaderBoard(false);
             setIsUpload(false);
             setIsDeepAnalysis(false);
@@ -451,7 +451,7 @@ const Chat = (props: any) => {
                     </Grid>
 
                     <Grid container item justifyContent="center" xs={12} md={11} className="shiftingContainer">
-                        {!ischatRightContent && !latestQuestion ? (
+                        {!latestQuestion ? (
                             <>
                                 <Grid container item xs={12} className={styles.chatEmptyState} spacing={2}>
                                     <Grid item xs={12} md={6}>
@@ -552,11 +552,15 @@ const Chat = (props: any) => {
                                         <div className="sidePanelBtn" onClick={toggleChatRightContent}>
                                             <ArrowLeftIcon />
                                         </div>
-                                        {isLeaderBoard && <LeaderBoard />}
-                                        {isUpload && <Uploads />}
-                                        {isKeywordAnalysis && <KeywordAnalysis tagName={tagName} />}
-                                        {isDeepAnalysis && <DeepAnalysis />}
+                                        <div className={styles.featuresContentDiv}>
+                                            {isLeaderBoard && <LeaderBoard />}
+                                            {isUpload && <Uploads />}
+                                            {isKeywordAnalysis && <KeywordAnalysis tagName={tagName} />}
+                                            {isDeepAnalysis && <DeepAnalysis />}
+                                        </div>
                                     </Grid>
+
+                                    
                                 )}
                             </>
                         )}
@@ -662,18 +666,20 @@ const Chat = (props: any) => {
                 </Grid>
             )}
 
-            <ChatBoxLeftPanel
-                onShowHistoryClicked={onShowHistoryClicked}
-                onClearChatClicked={clearChat}
-                onExampleClicked={onExampleClicked}
-                chatData={localChatData}
-                onFileViewURLClicked={onFileViewURLClicked}
-                showThreads={updateQandA}
-                toggleChatRightContent={toggleChatRightContent}
-                toggleLeaderBoard={toggleLeaderBoard}
-                toggleUploads={toggleUploads}
-                toggleDeepAnalysis={toggleDeepAnalysis}
-            />
+            {latestQuestion &&
+                <ChatBoxLeftPanel
+                    onShowHistoryClicked={onShowHistoryClicked}
+                    onClearChatClicked={clearChat}
+                    onExampleClicked={onExampleClicked}
+                    chatData={localChatData}
+                    onFileViewURLClicked={onFileViewURLClicked}
+                    showThreads={updateQandA}
+                    toggleChatRightContent={toggleChatRightContent}
+                    toggleLeaderBoard={toggleLeaderBoard}
+                    toggleUploads={toggleUploads}
+                    toggleDeepAnalysis={toggleDeepAnalysis}
+                />
+            }
         </>
     );
 };

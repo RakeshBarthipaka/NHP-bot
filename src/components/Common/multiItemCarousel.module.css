@@ -88,8 +88,8 @@
 
 .kpiCard {
   height: 100%;
-  background: rgba(83, 118, 240, 0.1);
-    border: 2px solid rgba(83, 118, 240, 0.8);
+  background: var(--bg-primary-light);
+    border: 2px solid var(--primary-border-color);
     border-radius: 20px;
     padding: 10px 15px;
     color: rgba(51, 51, 51, 1);

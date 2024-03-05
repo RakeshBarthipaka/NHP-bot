@@ -168,8 +168,21 @@ const setChatGPTToken = (value: number) => {
 
             }
 
-            currentFontSize = value;
+            // currentFontSize = value;
 
+            if (value === 2 ){
+
+                currentFontSize = currentFontSize + 1;
+        
+              }else if (value === 1 ){
+        
+                currentFontSize = textElements[i].getAttribute('default-font-size');
+        
+              }else{
+        
+                currentFontSize = currentFontSize - 1;
+        
+              }
 
             textElements[i].style.fontSize = currentFontSize + 'px';
 
@@ -181,8 +194,8 @@ const setChatGPTToken = (value: number) => {
       
 
     return (
-        <div className={styles.layout}>
-            <header className={`${styles.header} ${themeClass}`} role={"banner"} >
+        <div className={`${styles.layout}  ${themeClass}`}>
+            <header className={`${styles.header}`} role={"banner"} >
                 <div className={styles.headerContainer}>
                     <div className={styles.brandLogo}>
                         <NavLink to="" onClick={() => dispatch(set_history(false as any))} className={styles.headerNavPageLink}>
@@ -331,25 +344,25 @@ const setChatGPTToken = (value: number) => {
                                                                 className="fontSizeSlider"
                                                                 aria-label="Accessibility values"
                                                                 track={false}
-                                                                defaultValue={14} 
+                                                                defaultValue={1} 
                                                                 getAriaValueText={valuetext}
                                                                 onChange={fontChange}
                                                                 step={null}
                                                                 valueLabelDisplay="off"  
-                                                                min={13}
-                                                                max={15}
+                                                                min={0}
+                                                                max={2}
                                                                 size="small"
                                                                 marks={[
                                                                     {
-                                                                        value: 13,
+                                                                        value: 0,
                                                                         label: "AZ"
                                                                     },
                                                                     {
-                                                                        value: 14,
+                                                                        value: 1,
                                                                         label: "AZ"
                                                                     },
                                                                     {
-                                                                        value: 15,
+                                                                        value: 2,
                                                                         label: "AZ"
                                                                     },
                                                                 ]}
