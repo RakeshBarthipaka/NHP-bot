@@ -7,9 +7,9 @@ const colorSlice = createSlice({
   initialState: {
     //@ts-ignore
     color: JSON.parse(localStorage.getItem('color')) || {
-      color: "Orange",
-      colorCode: "orange",
-      class: "theme-orange"
+      color: "Blue",
+      colorCode: "#0027B0",
+      class: "theme-blue"
     },
     avatar : azureSpeakerVoiceList[0]
   },

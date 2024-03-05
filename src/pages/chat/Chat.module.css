@@ -322,6 +322,6 @@ p {
     line-height: 1.65;
 }
 .featuresContentDiv {
-    max-height: calc(100vh - 168px);
+    max-height: calc(100vh - 170px);
     overflow-y: scroll;
 }
