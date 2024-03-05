@@ -31,7 +31,7 @@ export async function askApi(options: AskRequest): Promise<AskResponse> {
 }
 
 export async function chatApi(options: ChatRequest): Promise<AskResponse> {
-    const response = await fetch("http://20.193.133.240:8542/chat", {
+    const response = await fetch("/chat", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -170,7 +170,7 @@ export async function ChartJSApi(options: ChartJSRequest): Promise<ChartJSRespon
 
 export async function fecthApi(apiName: string) {
     try {
-        const response = await fetch(`http://20.193.133.240:8542/${apiName}`, {
+        const response = await fetch(`/${apiName}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"

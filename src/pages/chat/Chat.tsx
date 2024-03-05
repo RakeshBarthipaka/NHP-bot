@@ -34,6 +34,8 @@ import Uploads from "../../components/Uploads";
 import ChatThreads from "../../components/ChatThreads";
 import KpiAnalysis from "../../components/KpiAnalysis/KpiAnalysis";
 import ChatThreadSession from "../../components/ChatThreads/ChatThreadSession";
+import CglenseInsightLogo from "../../assets/cglense_icon_logo.png";
+import CglenseInsightFullLogo from "../../assets/CGLense_app_logo_v3.png";
 
 interface activeChatThread {
     id: number;
@@ -519,18 +521,19 @@ const Chat = (props: any) => {
                     </Grid>
 
                     <Grid container item justifyContent="center" xs={12} md={11} className="shiftingContainer">
-                        {!latestQuestion && !ischatRightContent ? (
+                        {!latestQuestion ? (
                             <>
                                 <Grid container item xs={12} className={styles.chatEmptyState} spacing={2}>
                                     <Grid item xs={12} md={6}>
                                         <h4 className="accessibility-plugin-ac">Get started with CGlense. A Powerful AI Assistant</h4>
-                                        <img src="static\assets\cglense_icon_logo.png" alt="" />
+                                        <img src={CglenseInsightLogo} alt="" />
+
                                         {/* <ExampleList onExampleClicked={onExampleClicked} chatBotTypes={chatBotVoice.VoiceName} projectData={props.projectData} /> */}
                                         <p className="accessibility-plugin-ac"> Hi, I am here. How may I help you today?. </p>
                                         <p className="accessibility-plugin-ac"> Click on the Chat window you wish to ask a question </p>
                                     </Grid>
                                     <Grid item xs={12} md={6}>
-                                        <img src="static\assets\CGLense_app_logo_v3-btO_FX8F.png" alt="" style={{ height: "42px", marginTop: "15px" }} />
+                                        <img src={CglenseInsightFullLogo} alt="" style={{ height: "42px", marginTop: "15px" }} />
                                         <div className={styles.infoCard}>
                                             <h3 className="accessibility-plugin-ac">COMPANY INFO</h3>
                                             <p className="accessibility-plugin-ac">
@@ -737,19 +740,21 @@ const Chat = (props: any) => {
                 </Grid>
             )}
 
-            <ChatBoxLeftPanel
-                onShowHistoryClicked={onShowHistoryClicked}
-                onClearChatClicked={clearChat}
-                onExampleClicked={onExampleClicked}
-                chatData={localChatData}
-                onFileViewURLClicked={onFileViewURLClicked}
-                showThreads={updateQandA}
-                toggleChatRightContent={toggleChatRightContent}
-                toggleLeaderBoard={toggleLeaderBoard}
-                toggleUploads={toggleUploads}
-                toggleDeepAnalysis={toggleDeepAnalysis}
-                toggleChatThreads={toggleChatThreads}
-            />
+            {latestQuestion && (
+                <ChatBoxLeftPanel
+                    onShowHistoryClicked={onShowHistoryClicked}
+                    onClearChatClicked={clearChat}
+                    onExampleClicked={onExampleClicked}
+                    chatData={localChatData}
+                    onFileViewURLClicked={onFileViewURLClicked}
+                    showThreads={updateQandA}
+                    toggleChatRightContent={toggleChatRightContent}
+                    toggleLeaderBoard={toggleLeaderBoard}
+                    toggleUploads={toggleUploads}
+                    toggleDeepAnalysis={toggleDeepAnalysis}
+                    toggleChatThreads={toggleChatThreads}
+                />
+            )}
         </>
     );
 };

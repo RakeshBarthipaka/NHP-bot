@@ -24,6 +24,8 @@ import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
+import CglenseInsightLogo from "../../assets/cglense_icon_logo.png";
+
 
 interface Props {
     answer: AskResponse;
@@ -172,7 +174,7 @@ export const Answer = ({
                 <Stack.Item>
                 <Stack horizontal horizontalAlign="space-between" className={styles.answerLogo}>
                     {/* <img src={projectData ? projectData.projectLogoPath : LogoWhiteTransparent} width="100%" height={projectData ? projectData.projectLogoHeight : "30px"} /> */}
-                    <img src="static\assets\cglense_icon_logo.png" width="40px" />
+                    <img src={CglenseInsightLogo} width="40px" />
                 </Stack>
                 </Stack.Item>
                 <Stack className={`${styles.answerContainer} ${isSelected && styles.selected}`} verticalAlign="space-between">
