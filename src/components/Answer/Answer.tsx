@@ -170,13 +170,10 @@ export const Answer = ({
         <>
             <Stack verticalAlign="space-between" {...SpacingColumnProps} className={` ${styles.answerContainerDiv}`}>
                 <Stack.Item>
-                    <Stack horizontal horizontalAlign="space-between">
-                        <img
-                            src={projectData ? projectData.projectLogoPath : LogoWhiteTransparent}
-                            width="100%"
-                            height={projectData ? projectData.projectLogoHeight : "30px"}
-                        />
-                    </Stack>
+                <Stack horizontal horizontalAlign="space-between" className={styles.answerLogo}>
+                    {/* <img src={projectData ? projectData.projectLogoPath : LogoWhiteTransparent} width="100%" height={projectData ? projectData.projectLogoHeight : "30px"} /> */}
+                    <img src="static\assets\cglense_icon_logo.png" width="40px" />
+                </Stack>
                 </Stack.Item>
                 <Stack className={`${styles.answerContainer} ${isSelected && styles.selected}`} verticalAlign="space-between">
                     <Stack.Item grow>

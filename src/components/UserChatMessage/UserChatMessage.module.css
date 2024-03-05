@@ -45,6 +45,6 @@
     background: var(--active-themes);
     /* clip-path: polygon(0 0, 0 47%, 100% 0); */
     clip-path: polygon(0 0, 100% 0%, 59% 0, 100% 0, 59% 32%, 59% 69%, 0 70%);
-    right: -17px;
+    right: -16px;
     top: 0;
 }

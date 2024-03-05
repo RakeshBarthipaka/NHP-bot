@@ -81,6 +81,7 @@
     color: white !important;
     animation: pulsate infinite 1.5s;
     padding: 5px;
+    background: var(--active-themes);
 }
 
 @keyframes pulsate {
@@ -99,6 +100,7 @@
     color: white !important;
     animation: pulsate infinite 1.5s;
     padding: 5px;
+    background: var(--active-themes);
 }
 
 @keyframes speakersound {

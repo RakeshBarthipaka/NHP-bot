@@ -13,27 +13,29 @@ const MostLikedAnswer = () => {
   return (
     <Box className="LikedAnswerpanel">
         <Box>
-            <Box className="likedQuestion">
-                <Typography className="questionText">Show recommended Queries after one Queries that info come from history</Typography>
+              <Box className="likedQuestion">
+                  <Typography className="questionText">Show recommended Queries after one Queries that info come from history</Typography>
 
-                <Box>
-                    <Typography className='otherOptions'>requested by: Vishnu  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested on: 22/01/2024
-                    </Typography> 
-                    <span className='viewIcon'>
-                    <span><RemoveRedEyeOutlinedIcon  /></span> 
-                    <span>9</span>
-                </span> 
-                <span className='thumbUp'>
-                    <span><ThumbUpOutlinedIcon /></span>
-                    <span>2</span>
+                  <Box sx={{ display: 'flex',  gap: '20px' }}>
+                      <Typography className='otherOptions'>requested by: Vishnu </Typography>
+                      <Typography className='otherOptions'>requested on: 22/01/2024 </Typography>
+                      <span>
+                          <span className='viewIcon'>
+                              <span><RemoveRedEyeOutlinedIcon /></span>
+                              <span>9</span>
+                          </span>
+                          <span className='thumbUp'>
+                              <span><ThumbUpOutlinedIcon /></span>
+                              <span>2</span>
 
-                </span>
-                <span className='thumbDown'>
-                    <span>< ThumbDownAltOutlinedIcon/></span>
-                    <span>2</span>
-                </span>              
-                </Box>                
-            </Box>
+                          </span>
+                          <span className='thumbDown'>
+                              <span>< ThumbDownAltOutlinedIcon /></span>
+                              <span>2</span>
+                          </span>
+                      </span>
+                  </Box>
+              </Box>
             <Typography className='answerText'>                
               
                 Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are in the process of improving your finances, there are a few other approaches to your lifestyle that you can implement that will improve your financial position further.

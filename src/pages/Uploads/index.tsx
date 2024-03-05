@@ -12,6 +12,8 @@ import PictureAsPdfOutlinedIcon from "@mui/icons-material/PictureAsPdfOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import SearchBar from "./SearchBar";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
+import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
+
 
 const Uploads = (props: any) => {
     const card = (
@@ -46,7 +48,8 @@ const Uploads = (props: any) => {
         <>
             <Box className="upload-container">
                 <Box className="upload-heading">
-                    <img src={UploadsIcon} alt="Uploads" />
+                    {/* <img src={UploadsIcon} alt="Uploads" /> */}
+                    <CloudUploadOutlinedIcon />
                     <h3 className="disply-page-title">UPLOADS & ATTACHMENTS</h3>
                 </Box>
                 <Divider />

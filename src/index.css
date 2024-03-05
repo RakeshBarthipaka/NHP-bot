@@ -17,28 +17,67 @@
     --common-font-family: "Inter";
     
     --theme-red : #FF453A;
-    --theme-blue : #5376F0;
+    --theme-blue : #0027B0;
     --theme-orange : #FF9843;
     --theme-black : #000;
     --theme-green : #32D74B;
-    --active-themes: #5376F0;
+    --active-themes: #0027B0;
 
+    /*blue*/
+    --primary-blue-light: rgba(83, 118, 240, 0.1);
+    --secondary-blue-color: #5376F0;
+    --border-blue-color: rgba(83, 118, 240, 0.8);
+    
+    /*red*/
+    --primary-red-light: rgb(255, 69, 58, 0.06);
+    --secondary-red-color: #FF453A;
+    --border-red-color: rgba(255, 69, 58, 0.8);
+    
+    /*orange*/
+    --primary-orange-light: rgb(255, 152, 67, 0.1);
+    --secondary-orange-color: #FF9843;
+    --border-orange-color: rgba(255, 152, 67, 0.8);
+
+    /*black*/
+    --primary-black-light: rgb(0, 0, 0, 0.05);
+    --secondary-black-color: #111;
+    --border-black-color: rgba(0, 0, 0, 0.8);
+
+    /*green*/
+    --primary-green-light: rgb(50, 215, 75, 0.05);
+    --secondary-green-color: #32D74B;
+    --border-green-color: rgba(50, 215, 75, 0.8);
 }
 
 .theme-red{
-    background-color : var(--theme-red)
+    --bg-primary: var(--active-themes);
+    --bg-secondary: var(--active-themes);
+    --bg-primary-light: var(--primary-red-light);
+    --primary-border-color: var(--border-red-color);
 }
 .theme-blue{
-    background-color : var(--theme-blue)
+    --bg-primary: var(--active-themes);
+    --bg-secondary: var(--secondary-blue-color);
+    --bg-primary-light: var(--primary-blue-light);
+    --primary-border-color: var(--border-blue-color);
 }
 .theme-orange{
-    background-color : var(--theme-orange)
+    --bg-primary: var(--active-themes);
+    --bg-secondary: var(--secondary-orange-color);
+    --bg-primary-light: var(--primary-orange-light);
+    --primary-border-color: var(--border-orange-color);
 }
 .theme-black{
-    background-color : var(--theme-black)
+    --bg-primary: var(--active-themes);
+    --bg-secondary: var(--secondary-black-color);
+    --bg-primary-light: var(--primary-black-light);
+    --primary-border-color: var(--border-black-color);
 }
 .theme-green{
-    background-color : var(--theme-green)
+    --bg-primary: var(--active-themes);
+    --bg-secondary: var(--secondary-green-color);
+    --bg-primary-light: var(--primary-green-light);
+    --primary-border-color: var(--border-green-color);
 }
 
 html,
@@ -191,9 +230,15 @@ html {
         align-items: center;
         cursor: pointer;
 }
+.shiftingContainer .sidePanelBtn svg {
+    transform: rotate(180deg);
+}
 .rowReverse .shiftingContainer .sidePanelBtn {
     right: 0px;
     left: auto;
+}
+.rowReverse .shiftingContainer .sidePanelBtn svg {
+    transform: none;
 }
 .rowReverse .shiftingContainer > div:nth-child(2)::before {
     right: 22px;

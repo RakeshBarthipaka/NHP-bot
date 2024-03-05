@@ -75,12 +75,12 @@ export const QuestionInput = ({ onSend, disabled, placeholder, clearOnSend, onSe
             <div className={`${styles.questionInputMicSpeakerBtn} speechServiceTourGuide`}>
                 {isListen ? (
                     // <Mic28Filled className={`${styles.microphoneRecognize} ${themeClass}`} onClick={handleMicClick} />
-                    <KeyboardVoiceOutlinedIcon className={`${styles.microphoneRecognize} ${themeClass}`} onClick={handleMicClick}  />
+                    <KeyboardVoiceOutlinedIcon className={`${styles.microphoneRecognize}`} onClick={handleMicClick}  />
                 ) : <Mic28Filled primaryFill={colorCode} onClick={handleMicClick} />
                 }
                 {isSpeakerOn ? (
                     // <Speaker028Filled className={`${styles.speakersoundAnimation} ${themeClass}`} onClick={handleSpeakerClick} />
-                    <VolumeUpOutlinedIcon className={`${styles.speakersoundAnimation} ${themeClass}`} onClick={handleSpeakerClick}/>
+                    <VolumeUpOutlinedIcon className={`${styles.speakersoundAnimation}`} onClick={handleSpeakerClick}/>
                 ) : 
                 // <SpeakerMute28Filled primaryFill={colorCode} onClick={handleSpeakerClick} />
                 <VolumeOffOutlinedIcon sx={{color: colorCode}} onClick={handleSpeakerClick}/>

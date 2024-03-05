@@ -34,7 +34,7 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 const Chat = (props: any) => {
     const [tagName, setTagName] = useState("");
-    const [tagClicked,setTagClicked] = useState(false);
+    const [tagClicked, setTagClicked] = useState(false);
     const [isConfigPanelOpen, setIsConfigPanelOpen] = useState(false);
     const [promptTemplate, setPromptTemplate] = useState<string>("");
     const [retrieveCount, setRetrieveCount] = useState<number>(3);
@@ -369,7 +369,7 @@ const Chat = (props: any) => {
 
     const toggleChatRightContent = () => {
         setchatRightContent(current => !current);
-        if (!ischatRightContent) {
+        if (ischatRightContent) {
             setIsLeaderBoard(false);
             setIsUpload(false);
             setIsDeepAnalysis(false);
@@ -401,7 +401,7 @@ const Chat = (props: any) => {
         setIsKeywordAnalysis(false);
     };
 
-   const toggleDeepAnalysis = () => {
+    const toggleDeepAnalysis = () => {
         if (!ischatRightContent) {
             toggleChatRightContent();
         }
@@ -411,9 +411,8 @@ const Chat = (props: any) => {
         setIsUpload(false);
         setIsLeaderBoard(false);
         setIsKeywordAnalysis(false);
-    }
+    };
 
-    
     const toggleKeywordAnalysis = () => {
         if (!ischatRightContent) {
             toggleChatRightContent();
@@ -424,7 +423,7 @@ const Chat = (props: any) => {
         setIsUpload(false);
         setIsLeaderBoard(false);
         setIsDeepAnalysis(false);
-    }
+    };
 
     return (
         <>
@@ -454,7 +453,7 @@ const Chat = (props: any) => {
                     </Grid>
 
                     <Grid container item justifyContent="center" xs={12} md={11} className="shiftingContainer">
-                        {!ischatRightContent && !latestQuestion ? (
+                        {!latestQuestion ? (
                             <>
                                 <Grid container item xs={12} className={styles.chatEmptyState} spacing={2}>
                                     <Grid item xs={12} md={6}>
@@ -551,11 +550,15 @@ const Chat = (props: any) => {
                                         <div className="sidePanelBtn" onClick={toggleChatRightContent}>
                                             <ArrowRightIcon />
                                         </div>
-                                        {isLeaderBoard && <LeaderBoard />}
-                                        {isUpload && <Uploads />}
-                                        {isKeywordAnalysis && <KeywordAnalysis tagName={tagName} />}
-                                {isDeepAnalysis && <DeepAnalysis />}
+                                        <div className={styles.featuresContentDiv}>
+                                            {isLeaderBoard && <LeaderBoard />}
+                                            {isUpload && <Uploads />}
+                                            {isKeywordAnalysis && <KeywordAnalysis tagName={tagName} />}
+                                            {isDeepAnalysis && <DeepAnalysis />}
+                                        </div>
                                     </Grid>
+
+                                    
                                 )}
                             </>
                         )}
@@ -661,18 +664,20 @@ const Chat = (props: any) => {
                 </Grid>
             )}
 
-            <ChatBoxLeftPanel
-                onShowHistoryClicked={onShowHistoryClicked}
-                onClearChatClicked={clearChat}
-                onExampleClicked={onExampleClicked}
-                chatData={localChatData}
-                onFileViewURLClicked={onFileViewURLClicked}
-                showThreads={updateQandA}
-                toggleChatRightContent={toggleChatRightContent}
-                toggleLeaderBoard={toggleLeaderBoard}
-                toggleUploads={toggleUploads}
-                toggleDeepAnalysis={toggleDeepAnalysis}
-            />
+            {latestQuestion &&
+                <ChatBoxLeftPanel
+                    onShowHistoryClicked={onShowHistoryClicked}
+                    onClearChatClicked={clearChat}
+                    onExampleClicked={onExampleClicked}
+                    chatData={localChatData}
+                    onFileViewURLClicked={onFileViewURLClicked}
+                    showThreads={updateQandA}
+                    toggleChatRightContent={toggleChatRightContent}
+                    toggleLeaderBoard={toggleLeaderBoard}
+                    toggleUploads={toggleUploads}
+                    toggleDeepAnalysis={toggleDeepAnalysis}
+                />
+            }
         </>
     );
 };
