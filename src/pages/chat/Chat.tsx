@@ -25,12 +25,13 @@ import { set_history, set_answers, set_QnA, set_recommendedQnA, set_latestQuesti
 import UserLocationSave from "./UserLocationSave";
 import { Grid } from "@mui/material";
 import KpiWidget from "../../components/KpiWidget/KpiWidget";
-import LeaderBoard from "../LeaderBoard";
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import LeaderBoard from "../../components/LeaderBoard";
 import { KeywordAnalysis } from "../../components/KeywordAnalysis/KeywordAnalysis";
 import { DeepAnalysis } from "../../components/DeepAnalysis/DeepAnalysis";
 import { TagsList } from "../../components/TagsList/TagsList";
-import Uploads from "../Uploads";
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import Uploads from "../../components/Uploads";
+import ChatThreads from "../../components/ChatThreads";
 
 const Chat = (props: any) => {
     const [tagName, setTagName] = useState("");
@@ -59,6 +60,7 @@ const Chat = (props: any) => {
     const [isDeepAnalysis, setIsDeepAnalysis] = useState<boolean>(false);
     const [isKeywordAnalysis, setIsKeywordAnalysis] = useState<boolean>(false);
     const [isUpload, setIsUpload] = useState<boolean>(false);
+    const [isChatThread, setIsChatThread] = useState<boolean>(false);
 
     let getDisclaimer = localStorage.getItem("Disclaimer") || false;
     const [showDisclaimer, setShowDisclaimer] = useState<any>(getDisclaimer);
@@ -374,6 +376,7 @@ const Chat = (props: any) => {
             setIsUpload(false);
             setIsDeepAnalysis(false);
             setIsKeywordAnalysis(false);
+            setIsChatThread(false);
         }
     };
 
@@ -387,6 +390,7 @@ const Chat = (props: any) => {
         setIsUpload(false);
         setIsDeepAnalysis(false);
         setIsKeywordAnalysis(false);
+        setIsChatThread(false);
     };
 
     const toggleUploads = () => {
@@ -411,6 +415,7 @@ const Chat = (props: any) => {
         setIsUpload(false);
         setIsLeaderBoard(false);
         setIsKeywordAnalysis(false);
+        setIsChatThread(false);
     };
 
     const toggleKeywordAnalysis = () => {
@@ -423,6 +428,20 @@ const Chat = (props: any) => {
         setIsUpload(false);
         setIsLeaderBoard(false);
         setIsDeepAnalysis(false);
+        setIsChatThread(false);
+    };
+
+    const toggleChatThreads = () => {
+        if (!ischatRightContent) {
+            toggleChatRightContent();
+        }
+        if (!isChatThread) {
+            setIsChatThread(true);
+        }
+        setIsLeaderBoard(false);
+        setIsUpload(false);
+        setIsDeepAnalysis(false);
+        setIsKeywordAnalysis(false);
     };
 
     return (
@@ -453,7 +472,7 @@ const Chat = (props: any) => {
                     </Grid>
 
                     <Grid container item justifyContent="center" xs={12} md={11} className="shiftingContainer">
-                        {!latestQuestion ? (
+                        {!latestQuestion && !ischatRightContent ? (
                             <>
                                 <Grid container item xs={12} className={styles.chatEmptyState} spacing={2}>
                                     <Grid item xs={12} md={6}>
@@ -466,7 +485,7 @@ const Chat = (props: any) => {
                                     <Grid item xs={12} md={6}>
                                         <img src="static\assets\CGLense_app_logo_v3-btO_FX8F.png" alt="" style={{ height: "42px", marginTop: "15px" }} />
                                         <div className={styles.infoCard}>
-                                            <h3 className="accessibility-plugin-ac">COMPANY INFO </h3>
+                                            <h3 className="accessibility-plugin-ac">COMPANY INFO</h3>
                                             <p className="accessibility-plugin-ac">
                                                 CGLense AI, your advanced visual companion! Empowering businesses across sectors with cutting-edge image
                                                 analysis, object recognition, and custom insights. Experience precise AI solutions for diverse industries.
@@ -555,10 +574,9 @@ const Chat = (props: any) => {
                                             {isUpload && <Uploads />}
                                             {isKeywordAnalysis && <KeywordAnalysis tagName={tagName} />}
                                             {isDeepAnalysis && <DeepAnalysis />}
+                                            {isChatThread && <ChatThreads />}
                                         </div>
                                     </Grid>
-
-                                    
                                 )}
                             </>
                         )}
@@ -664,20 +682,19 @@ const Chat = (props: any) => {
                 </Grid>
             )}
 
-            {latestQuestion &&
-                <ChatBoxLeftPanel
-                    onShowHistoryClicked={onShowHistoryClicked}
-                    onClearChatClicked={clearChat}
-                    onExampleClicked={onExampleClicked}
-                    chatData={localChatData}
-                    onFileViewURLClicked={onFileViewURLClicked}
-                    showThreads={updateQandA}
-                    toggleChatRightContent={toggleChatRightContent}
-                    toggleLeaderBoard={toggleLeaderBoard}
-                    toggleUploads={toggleUploads}
-                    toggleDeepAnalysis={toggleDeepAnalysis}
-                />
-            }
+            <ChatBoxLeftPanel
+                onShowHistoryClicked={onShowHistoryClicked}
+                onClearChatClicked={clearChat}
+                onExampleClicked={onExampleClicked}
+                chatData={localChatData}
+                onFileViewURLClicked={onFileViewURLClicked}
+                showThreads={updateQandA}
+                toggleChatRightContent={toggleChatRightContent}
+                toggleLeaderBoard={toggleLeaderBoard}
+                toggleUploads={toggleUploads}
+                toggleDeepAnalysis={toggleDeepAnalysis}
+                toggleChatThreads={toggleChatThreads}
+            />
         </>
     );
 };

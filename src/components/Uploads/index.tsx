@@ -10,10 +10,10 @@ import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
 import PictureAsPdfOutlinedIcon from "@mui/icons-material/PictureAsPdfOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import SearchBar from "./SearchBar";
+//import SearchBar from "./SearchBar";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
-import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
-
+import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
+import SearchBar from "../Common/SearchBar";
 
 const Uploads = (props: any) => {
     const card = (
