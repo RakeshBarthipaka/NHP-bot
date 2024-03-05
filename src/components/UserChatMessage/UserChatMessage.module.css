@@ -33,6 +33,7 @@
     z-index: -1;
     left: 0;
     border-radius: 25px; 
+    opacity: 0.6;
 }
 
 .message::after {
@@ -45,4 +46,5 @@
     clip-path: polygon(0 0, 100% 0%, 59% 0, 100% 0, 59% 32%, 59% 69%, 0 70%);
     right: -16px;
     top: 0;
+    z-index: -2;
 }

@@ -7,11 +7,16 @@ import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutl
 import ArrowBackIosOutlinedIcon from '@mui/icons-material/ArrowBackIosOutlined';
 import { useSelector } from "react-redux";
 
+interface Props { 
+    KpiSlides:any;
+    toggleChatRightContent: () => void; 
+    toggleKpiAnalysis: () => void;
+}
 
-const MultiItemCarousel = (props: any) => {
-    const Slides: any[] = props.Slides
+const MultiItemCarousel = ({KpiSlides, toggleChatRightContent, toggleKpiAnalysis}:Props) => {
+    const Slides: any[] = KpiSlides
     const { colorCode } = useSelector((state: any) => state.theme.color)
-
+    const [isRightPanelOpen, setIsRightPanelOpen] = useState(false);
 
     function SlickNextArrow(props: any) {
         const { className, style, onClick } = props;
@@ -90,6 +95,10 @@ const MultiItemCarousel = (props: any) => {
         }
     }, []);
 
+    const toggleisRightPanelOpen = () => {
+        setIsRightPanelOpen(current => !current);
+        console.log(isRightPanelOpen);
+    };
 
 
     return (
@@ -97,7 +106,10 @@ const MultiItemCarousel = (props: any) => {
            
                 <Slider  {...settings} className={styles.slider}>
                     {Slides.map((card, index) => (
-                        <div data-index={index} key={index} className={styles.kpiCard}>
+                        <div data-index={index} key={index} className={styles.kpiCard}   onClick={() => {
+                            toggleisRightPanelOpen();
+                            toggleKpiAnalysis();
+                        }}>
                             <h5>{card.kpiname}</h5>
                             <h4>{card.kpivalue}</h4>
                             <div className={styles.previousInfo}>

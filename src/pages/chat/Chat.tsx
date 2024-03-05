@@ -32,6 +32,7 @@ import { DeepAnalysis } from "../../components/DeepAnalysis/DeepAnalysis";
 import { TagsList } from "../../components/TagsList/TagsList";
 import Uploads from "../../components/Uploads";
 import ChatThreads from "../../components/ChatThreads";
+import KpiAnalysis from "../../components/KpiAnalysis/KpiAnalysis";
 
 const Chat = (props: any) => {
     const [tagName, setTagName] = useState("");
@@ -61,6 +62,9 @@ const Chat = (props: any) => {
     const [isKeywordAnalysis, setIsKeywordAnalysis] = useState<boolean>(false);
     const [isUpload, setIsUpload] = useState<boolean>(false);
     const [isChatThread, setIsChatThread] = useState<boolean>(false);
+    const [isKpiAnalysis, setIsKpiAnalysis] = useState<boolean>(false);
+
+    
 
     let getDisclaimer = localStorage.getItem("Disclaimer") || false;
     const [showDisclaimer, setShowDisclaimer] = useState<any>(getDisclaimer);
@@ -375,6 +379,7 @@ const Chat = (props: any) => {
             setIsDeepAnalysis(false);
             setIsKeywordAnalysis(false);
             setIsChatThread(false);
+            setIsKpiAnalysis(false);
         }
     };
 
@@ -389,6 +394,7 @@ const Chat = (props: any) => {
         setIsDeepAnalysis(false);
         setIsKeywordAnalysis(false);
         setIsChatThread(false);
+        setIsKpiAnalysis(false);
     };
 
     const toggleUploads = () => {
@@ -401,6 +407,7 @@ const Chat = (props: any) => {
         setIsLeaderBoard(false);
         setIsDeepAnalysis(false);
         setIsKeywordAnalysis(false);
+        setIsKpiAnalysis(false);
     };
 
     const toggleDeepAnalysis = () => {
@@ -414,6 +421,7 @@ const Chat = (props: any) => {
         setIsLeaderBoard(false);
         setIsKeywordAnalysis(false);
         setIsChatThread(false);
+        setIsKpiAnalysis(false);
     };
 
     const toggleKeywordAnalysis = () => {
@@ -427,6 +435,7 @@ const Chat = (props: any) => {
         setIsLeaderBoard(false);
         setIsDeepAnalysis(false);
         setIsChatThread(false);
+        setIsKpiAnalysis(false);
     };
 
     const toggleChatThreads = () => {
@@ -440,6 +449,21 @@ const Chat = (props: any) => {
         setIsUpload(false);
         setIsDeepAnalysis(false);
         setIsKeywordAnalysis(false);
+        setIsKpiAnalysis(false);
+    };
+
+    const toggleKpiAnalysis = () => {
+        if (!ischatRightContent) {
+            toggleChatRightContent();
+        }
+        if (!isKpiAnalysis) {
+            setIsKpiAnalysis(true);
+        }
+        setIsLeaderBoard(false);
+        setIsUpload(false);
+        setIsDeepAnalysis(false);
+        setIsKeywordAnalysis(false);
+        setIsChatThread(false);
     };
 
     return (
@@ -511,7 +535,7 @@ const Chat = (props: any) => {
                         ) : (
                             <>
                                 <Grid item xs={12} sm={12} md={ischatRightContent ? 6 : 8}>
-                                    <KpiWidget />
+                                    <KpiWidget  toggleChatRightContent={toggleChatRightContent} toggleKpiAnalysis={toggleKpiAnalysis} />
                                     <div className={styles.chatContainer}>
                                         <div className={styles.chatMessageStream}>
                                             {answers.map((answer: any, index: number) => (
@@ -577,6 +601,7 @@ const Chat = (props: any) => {
                                             {isKeywordAnalysis && <KeywordAnalysis tagName={tagName} />}
                                             {isDeepAnalysis && <DeepAnalysis />}
                                             {isChatThread && <ChatThreads />}
+                                            {isKpiAnalysis && <KpiAnalysis />}
                                         </div>
                                     </Grid>
                                 )}
