@@ -15,7 +15,7 @@ export const ProductList = (props: any) => {
                     <>
                         <p className={styles.boldTag}> {product.title}</p>
                         <div className={styles.productList} key={i} >
-                            <OwlCarousel dots={true} items={2} margin={8} dangerouslySetInnerHTML={{
+                            <OwlCarousel dots={true} items={2} margin={8} children dangerouslySetInnerHTML={{
                                 __html: DOMPurify.sanitize(product.product).replace(/href/g, "target='_blank' href")}} className='owl-theme' loop nav={false} >
                             </OwlCarousel>;
                         </div>
