@@ -23,6 +23,8 @@ import { Drawer } from '@mui/material';
 // import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import PsychologyAltOutlinedIcon from '@mui/icons-material/PsychologyAltOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
+import { LogsData } from '../LogsData/LogsData';
+import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
 
 
 interface TabPanelProps {
@@ -70,6 +72,8 @@ export default function AnalysisPanelPopUp(props: any) {
 
   const sanitizedThoughts = DOMPurify.sanitize(props.answer.thoughts!);
 
+  console.log(props.answer, 'answers');
+
   return (
     <div>
       <Drawer
@@ -96,7 +100,7 @@ export default function AnalysisPanelPopUp(props: any) {
               <div dangerouslySetInnerHTML={{ __html: sanitizedThoughts }} />
             </div>
           </div>
-        ) : (
+        ) : value == 'supportingContent'  ?  (
           <div>
             <Toolbar sx={{ background: colorCode, color: '#fff' }}>
               <DescriptionOutlinedIcon sx={{ marginRight: '10px'}}/>
@@ -111,6 +115,20 @@ export default function AnalysisPanelPopUp(props: any) {
             </div>
           </div>
 
+        ) : (
+          <div>
+            <Toolbar sx={{ background: colorCode, color: '#fff' }}>
+              <HistoryOutlinedIcon sx={{ marginRight: '10px'}}/>
+              <Typography variant="h6" sx={{ fontSize: '18px' }} noWrap component="div">
+                Logs Data
+              </Typography>
+            </Toolbar>
+
+            <div className={styles.drawerContent}>
+
+              <LogsData />
+            </div>
+          </div>
         )
 
         }

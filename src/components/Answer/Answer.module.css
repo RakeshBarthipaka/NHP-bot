@@ -218,10 +218,10 @@ sup {
     gap: 2px;
     width: 28px;
     height: 28px;
-    background: #5376F033;
-    border: 1px solid #5376F080;
+    background: var(--bg-primary-light);
+    border: none;
     border-radius: 50% !important;
-    color: #1F36C7 !important;
+    color: var(--active-themes) !important;
     margin-left: 16px;
     cursor: pointer;
 }

@@ -17,7 +17,7 @@
     }
 }
 .file-count{
-    background-color: #5376F0;
+    background-color: var(--bg-secondary);
     padding: 8px;
     border-radius: 30px;
     color: #FFFFFF;
@@ -29,7 +29,7 @@
 
 .grid-container{
     .thread-box{
-        background-color: #F2F2F7;
+        background-color: var(--bg-primary-light);
         padding:20px;
         border-radius:20px;
         margin-bottom: 15px;
@@ -37,12 +37,11 @@
         }
         .questionText{
             font-size:14px;
-            color:#0C099C;
             margin-bottom: 10px;
         }
         .otherOptions{
             font-size:12px;
-            color:#5376F0;
+            color: var(--active-themes);
             font-weight: bold;
             line-height:30px;
         }

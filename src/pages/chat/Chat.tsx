@@ -338,25 +338,6 @@ const Chat = (props: any) => {
         }
     };
 
-    const dummyLogsData = [
-        {
-            id: "0",
-            request_id: "1",
-            query: "show me some good italian restraunts",
-            stage: "optimize_layer",
-            tokens: "1697108146827",
-            time: "1697108146827"
-        },
-
-        {
-            id: "1",
-            request_id: "1",
-            query: "show me some good italian restraunts",
-            stage: "optimize_layer",
-            tokens: "1697108146827",
-            time: "1697108146827"
-        }
-    ];
 
     const onRecommendedQuestionClicked = (recommendedQuestion: string) => {
         makeApiRequest(recommendedQuestion);
@@ -531,7 +512,7 @@ const Chat = (props: any) => {
                                                             onFollowupQuestionClicked={q => makeApiRequest(q)}
                                                             showFollowupQuestions={useSuggestFollowupQuestions && answers.length - 1 === index}
                                                             questionAnswersList={questionAnswersList}
-                                                            onLogsContentClicked={() => onLogsContentClicked()}
+                                                            onLogsContentClicked={() => onToggleTab(AnalysisPanelTabs.CitationTab, index)}
                                                             projectData={props.projectData}
                                                             onExampleClicked={onExampleClicked}
                                                         />
@@ -641,7 +622,7 @@ const Chat = (props: any) => {
                             />
                         </Panel>
 
-                        {showLogsView && (
+                        {/* {showLogsView && (
                             <Grid item xs={12}>
                                 <div className={styles.LogsDataBlock}>
                                     <h2>Logs data</h2>
@@ -669,7 +650,7 @@ const Chat = (props: any) => {
                                     </div>
                                 </div>
                             </Grid>
-                        )}
+                        )} */}
                     </Grid>
                 </Grid>
             )}

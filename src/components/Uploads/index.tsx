@@ -18,13 +18,13 @@ import SearchBar from "../Common/SearchBar";
 const Uploads = (props: any) => {
     const card = (
         <>
-            <CardContent>
+            <CardContent className="upload-outer-box">
                 <Box className="upload-box">
                     <Box className="plus-icon-cont">
                         <AddIcon />
                     </Box>
                     <Typography sx={{ color: "#000000" }}>
-                        Drag and Drop or Browse to<span style={{ color: "#0C099C" }}>Upload a File</span>
+                        Drag and Drop or Browse to<span style={{ color: "var(--active-themes)" }}>Upload a File</span>
                     </Typography>
                     <Typography className="allowed-text">Allowed Formats: PDF</Typography>
                 </Box>
@@ -35,12 +35,12 @@ const Uploads = (props: any) => {
     const fileItems = (
         <>
             <Box className="file-row">
-                <Typography sx={{ color: "#0027B0", display: "flex", fontSize: "14px" }}>
-                    <PictureAsPdfOutlinedIcon sx={{ color: "#EB5757" }} />
+                <Typography sx={{ display: "flex", fontSize: "14px" }}>
+                    <PictureAsPdfOutlinedIcon sx={{ color: "var(--active-themes)" }} />
                     &nbsp;unilever_chat_1706852987594.pdf
                 </Typography>
-                <Typography sx={{ color: "#5376F0", fontSize: "12px" }}>10 min ago</Typography>
-                <DeleteOutlinedIcon sx={{ color: "#0C099C" }} />
+                <Typography sx={{ color: "var(--active-themes)", fontSize: "12px" }}>10 min ago</Typography>
+                <DeleteOutlinedIcon sx={{ color: "var(--active-themes)" }} />
             </Box>
         </>
     );
@@ -52,11 +52,15 @@ const Uploads = (props: any) => {
                     <CloudUploadOutlinedIcon />
                     <h3 className="disply-page-title">UPLOADS & ATTACHMENTS</h3>
                 </Box>
-                <Divider />
+                <Divider sx={{
+                  
+                        border: " 1px solid var(--bg-primary-light)"
+          
+                }} />
                 <Card variant="outlined" sx={{ marginTop: "10px", backgroundColor: "#F2F2F7" }}>
                     {card}
                 </Card>
-                <Divider sx={{ marginTop: "10px", marginBottom: "10px", borderColor: "#5376F0" }} />
+                <Divider sx={{ marginTop: "10px", marginBottom: "10px", borderColor: "var(--active-themes)" }} />
                 <Box className="search-row">
                     <SearchBar />
                     <Box className="file-count">

@@ -2,7 +2,7 @@ import React from "react";
 import { PDFDownloadLink, Page, Text, View, Document, StyleSheet, Font, Image, Link } from "@react-pdf/renderer";
 import { IconButton } from "@fluentui/react";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
-import { Avatar } from "@mui/material";
+import { Avatar, Box } from "@mui/material";
 
 // Define styles with types
 const styles = StyleSheet.create({
@@ -80,6 +80,14 @@ const styles = StyleSheet.create({
     productLink: {
         textDecoration: "none",
         fontWeight: "bold"
+    },
+    pdfDownload: {
+        padding: "8px",
+        display: "flex",
+        alignItems: "center",
+        width: "38px",
+        height: "40px",
+        marginLeft: "0",
     }
 });
 
@@ -152,15 +160,24 @@ const MyDocument: React.FC<MyDocumentProps> = ({ pdfData }) => {
 
 // Create a function to trigger the download
 const DownloadPDF: React.FC<{ pdfData: MyDocumentProps[] }> = ({ pdfData }) => (
-    <PDFDownloadLink style={{ padding: '8px',display: "flex", alignItems: "center", width: "38px",
-    height: '40px', marginLeft: "0",
-     }} document={<MyDocument pdfData={pdfData} />} fileName={`cglense_chat_${Date.now()}.pdf`}>
+    <Box sx={{
+        "& a:hover": {
+            backgroundColor: "var(--active-themes)",
+            color: "#fff !important"
+        }
+    }}>
+    <PDFDownloadLink
+        style={styles.pdfDownload}
+        className="pdfDownload"
+        document={<MyDocument pdfData={pdfData} />}
+        fileName={`cglense_chat_${Date.now()}.pdf`}
+    >
         {({ loading }) =>
             loading ? (
                 "Loading"
             ) : (
                 <>
-                        <FileDownloadOutlinedIcon />
+                    <FileDownloadOutlinedIcon />
 
                     {/* <IconButton title="Export" iconProps={{ iconName: 'FileDownloadOutlinedIcon' }} />
            Export PDF */}
@@ -168,6 +185,7 @@ const DownloadPDF: React.FC<{ pdfData: MyDocumentProps[] }> = ({ pdfData }) => (
             )
         }
     </PDFDownloadLink>
+    </Box>
 );
 
 export default DownloadPDF;

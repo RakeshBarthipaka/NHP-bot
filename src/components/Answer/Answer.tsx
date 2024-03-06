@@ -170,10 +170,10 @@ export const Answer = ({
         <>
             <Stack verticalAlign="space-between" {...SpacingColumnProps} className={` ${styles.answerContainerDiv}`}>
                 <Stack.Item>
-                <Stack horizontal horizontalAlign="space-between" className={styles.answerLogo}>
-                    {/* <img src={projectData ? projectData.projectLogoPath : LogoWhiteTransparent} width="100%" height={projectData ? projectData.projectLogoHeight : "30px"} /> */}
-                    <img src="static\assets\cglense_icon_logo.png" width="40px" />
-                </Stack>
+                    <Stack horizontal horizontalAlign="space-between" className={styles.answerLogo}>
+                        {/* <img src={projectData ? projectData.projectLogoPath : LogoWhiteTransparent} width="100%" height={projectData ? projectData.projectLogoHeight : "30px"} /> */}
+                        <img src="static\assets\cglense_icon_logo.png" width="40px" />
+                    </Stack>
                 </Stack.Item>
                 <Stack className={`${styles.answerContainer} ${isSelected && styles.selected}`} verticalAlign="space-between">
                     <Stack.Item grow>
@@ -236,18 +236,22 @@ export const Answer = ({
                             onClick={() => likeDisLikeAnswerToggle("DISLIKE")}
                         /> */}
                             <Divider className={styles.iconDivider} orientation="vertical" />
-                            <span title="Copy Data"
-                                 onClick={() => copyChatData()}>
-                            <Avatar  sx={{ bgcolor: "rgba(83, 118, 240, 0.2)", color: "rgba(83, 118, 240, 1)", "&:hover": {
-                                            backgroundColor: "#0027B0",
-                                                color: ' rgba(30, 255, 241, 0.8)'
-                                            
-                                        } }}>
+                            <span title="Copy Data" onClick={() => copyChatData()}>
+                                <Avatar
+                                    sx={{
+                                        bgcolor: "var(--bg-primary-light)",
+                                        color: "var(--active-themes)",
+                                        "&:hover": {
+                                            backgroundColor: "var(--bg-secondary)",
+                                            color: "#fff"
+                                        }
+                                    }}
+                                >
                                     {" "}
                                     <ContentCopyOutlinedIcon />
                                 </Avatar>
                             </span>
-                           
+
                             {/* <IconButton
                                 iconProps={{ iconName: "Copy" }}
                                 title="Copy Data"
@@ -256,14 +260,19 @@ export const Answer = ({
                                 onClick={() => copyChatData()}
                             /> */}
                             <span>
-                            <DownloadPDF pdfData={questionAnswersList} />
+                                <DownloadPDF pdfData={questionAnswersList} />
                             </span>
                             <span onClick={() => copyChatData()}>
-                            <Avatar sx={{bgcolor: "rgba(83, 118, 240, 0.2)", color: "rgba(83, 118, 240, 1)", "&:hover": {
-                                            backgroundColor: "#0027B0",
-                                                color: ' rgba(30, 255, 241, 0.8)'
-                                            
-                                        } }}>
+                                <Avatar
+                                     sx={{
+                                        bgcolor: "var(--bg-primary-light)",
+                                        color: "var(--active-themes)",
+                                        "&:hover": {
+                                            backgroundColor: "var(--bg-secondary)",
+                                            color: "#fff"
+                                        }
+                                    }}
+                                >
                                     {" "}
                                     <MailOutlineOutlinedIcon />
                                 </Avatar>
@@ -305,36 +314,93 @@ export const Answer = ({
                                 </Link>
                             </div>
                         </div> */}
-                        <span onClick={() => onThoughtProcessClicked()} >
-                            <Avatar sx={{ bgcolor: "rgba(83, 118, 240, 1)", color: "rgba(255, 255, 255, 1)", "&:hover": {
-                                            backgroundColor: "#0027B0",
-                                                color: ' rgba(30, 255, 241, 0.8)'
-                                            
-                                        } }}>
+                            <span onClick={() => onThoughtProcessClicked()}>
+                                <Avatar
+                                    sx={{
+                                        bgcolor: "var(--bg-secondary)",
+                                        color: "#fff",
+                                        "&:hover": {
+                                            backgroundColor: "var(--active-themes)",
+                                            color: "#fff"
+                                        }
+                                    }}
+                                    // sx={{
+                                    //     bgcolor: "var(--bg-primary-light)",
+                                    //     color: "var(--active-themes)",
+                                    //     "&:hover": {
+                                    //         backgroundColor: "var(--active-themes)",
+                                    //         color: "#fff"
+                                    //     }
+                                    // }}
+                                >
                                     {" "}
-                                    <PsychologyOutlinedIcon  />
+                                    <PsychologyOutlinedIcon />
                                 </Avatar>
                             </span>
                             <span onClick={() => onSupportingContentClicked()}>
-                            <Avatar sx={{ bgcolor: "rgba(83, 118, 240, 1)", color: "rgba(255, 255, 255, 1)", "&:hover": {
-                                            backgroundColor: "#0027B0",
-                                                color: ' rgba(30, 255, 241, 0.8)'
-                                            
-                                        } }}>
+                                <Avatar
+                                    // sx={{
+                                    //     bgcolor: "rgba(83, 118, 240, 1)",
+                                    //     color: "rgba(255, 255, 255, 1)",
+                                    //     "&:hover": {
+                                    //         backgroundColor: "#0027B0",
+                                    //         color: " rgba(30, 255, 241, 0.8)"
+                                    //     }
+                                    // }}
+
+                                    sx={{
+                                        bgcolor: "var(--bg-secondary)",
+                                        color: "#fff",
+                                        "&:hover": {
+                                            backgroundColor: "var(--active-themes)",
+                                            color: "#fff"
+                                        }
+                                    }}
+
+                                    // sx={{
+                                    //     bgcolor: "var(--bg-primary-light)",
+                                    //     color: "var(--active-themes)",
+                                    //     "&:hover": {
+                                    //         backgroundColor: "var(--active-themes)",
+                                    //         color: "#fff"
+                                    //     }
+                                    // }}
+                                >
                                     {" "}
                                     <AssignmentOutlinedIcon />
                                 </Avatar>
                             </span>
-                            
 
-                            <span onClick={() => onSupportingContentClicked()}>
-                            <Avatar sx={{ bgcolor: "rgba(83, 118, 240, 1)", color: "rgba(255, 255, 255, 1)", "&:hover": {
-                                            backgroundColor: "#0027B0",
-                                                color: ' rgba(30, 255, 241, 0.8)'
-                                            
-                                        } }}>
+                            <span onClick={() => onLogsContentClicked()}>
+                                <Avatar
+                                    // sx={{
+                                    //     bgcolor: "rgba(83, 118, 240, 1)",
+                                    //     color: "rgba(255, 255, 255, 1)",
+                                    //     "&:hover": {
+                                    //         backgroundColor: "#0027B0",
+                                    //         color: " rgba(30, 255, 241, 0.8)"
+                                    //     }
+                                    // }}
+
+                                    // sx={{
+                                    //     bgcolor: "var(--bg-primary-light)",
+                                    //     color: "var(--active-themes)",
+                                    //     "&:hover": {
+                                    //         backgroundColor: "var(--active-themes)",
+                                    //         color: "#fff"
+                                    //     }
+                                    // }}
+                                    sx={{
+                                        bgcolor: "var(--bg-secondary)",
+                                        color: "#fff",
+                                        "&:hover": {
+                                            backgroundColor: "var(--active-themes)",
+                                            color: "#fff"
+                                        }
+                                    }}
+                                >
                                     {" "}
-                                    <HistoryOutlinedIcon  />
+                                    <HistoryOutlinedIcon />
                                 </Avatar>
                             </span>
 

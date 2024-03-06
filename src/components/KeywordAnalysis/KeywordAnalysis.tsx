@@ -71,7 +71,7 @@ export const KeywordAnalysis = ({ tagName }: Props) => {
                                 aria-label="Disabled button group"
                                 sx={{
                                     border: "1px",
-                                    background: "rgba(12, 9, 156, 1)",
+                                    background: "var(--active-themes)",
                                     borderRadius: "20px",
                                     paddingTop: '1px',
                                     paddingBottom: '1px',
@@ -96,13 +96,15 @@ export const KeywordAnalysis = ({ tagName }: Props) => {
                             >
                                 <Button className="firstButton" sx={{
                                     borderRadius: "20px !important",
-                                    background: "rgba(12, 9, 156, 1)",
+                                    background: "var(--active-themes)",
                                     border: 'none !important',
                                    
                                 }}>{tagName}</Button>
                                 <Button  className="secondButton" sx={{
                                     borderRadius: "20px !important",
                                     background: "rgba(255, 255, 255, 1)",
+                                    color: 'var(--active-themes)',
+                                    borderColor: 'var(--active-themes)',
                                 }} variant="outlined">5</Button>
                             </ButtonGroup>
                         </Box>

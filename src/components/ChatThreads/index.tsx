@@ -61,7 +61,12 @@ const ChatThreads = (props: any) => {
                 </Box>
                 <Box className="search-row">
                     <SearchBar />
-                    <Box>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "center"
+                        }}
+                    >
                         <span className="iconText">
                             <HeightIcon className="IconElemt" />
                         </span>
@@ -75,7 +80,7 @@ const ChatThreads = (props: any) => {
                         Total no.of topics &nbsp;<Box>8</Box>
                     </Box>
                 </Box>
-                <Divider sx={{ marginTop: "10px", marginBottom: "10px", borderColor: "#5376F0" }} />
+                <Divider sx={{ marginTop: "10px", marginBottom: "10px", borderColor: "var(--active-themes)" }} />
                 <Box className="grid-container">
                     {Threads.map((item, index) => {
                         return <React.Fragment key={index}>{ThreadElements(item)}</React.Fragment>;
