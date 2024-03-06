@@ -44,6 +44,7 @@ const ChatThreadSession = (props: any) => {
                     </Box>
                 </Box>
             )}
+            <br></br>
         </>
     );
 };
