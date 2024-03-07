@@ -19,7 +19,7 @@ const ChatThreads = (props: any) => {
     const ThreadElements = (item: any) => {
         return (
             <>
-                <Box className="thread-box">
+                <Box className="thread-box" onClick={() => props.runChatThread(item)}>
                     <Typography className="questionText">{item.question}</Typography>
                     <Box className="thread-icon-container">
                         <Typography className="otherOptions">{item.time} hour ago</Typography>

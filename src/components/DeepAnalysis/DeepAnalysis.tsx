@@ -293,7 +293,7 @@ export const DeepAnalysis = () => {
                                         }
                                     },
                                     "& .firstButton": {
-                                        borderRadius: "8px",
+                                        borderRadius: "12px",
                                         border: "0 !important",
                                         fontSize: "12px !important",
                                         padding: "12px 24px !important",

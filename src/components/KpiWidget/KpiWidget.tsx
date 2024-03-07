@@ -9,7 +9,12 @@ import { useSelector } from "react-redux";
 import MultiItemCarousel from "../Common/MultiItemCarousel";
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 
-const KpiWidget = () => {
+interface Props { 
+    toggleChatRightContent: () => void; 
+    toggleKpiAnalysis: () => void;
+}
+
+const KpiWidget = ({toggleChatRightContent, toggleKpiAnalysis}: Props) => {
 
     const result = [
         {
@@ -143,7 +148,7 @@ const KpiWidget = () => {
             <div className={styles.carouselContainer}>
                 {(kpiSlides.length > 0) ?
                     <>
-                        <MultiItemCarousel Slides={kpiSlides} />
+                        <MultiItemCarousel KpiSlides={kpiSlides}  toggleChatRightContent={toggleChatRightContent} toggleKpiAnalysis={toggleKpiAnalysis}/>
                         <AddCircleOutlineOutlinedIcon className={styles.addKpiBtn} onClick={() => setOpenKpiModal(true)} />
                     </>
                     :

@@ -7,7 +7,8 @@
     --active-color: #EFF3FF;
     --white-color: #ffffff;
     --black-color: #000000;
-    --background-color: #F9FAFB;
+    /* --background-color: #F9FAFB; */
+    --background-color: #ffffff;
     --card-background-color: #ffffff;
     --border-color: #e9e4e4;
     --link-color: #003A75;
@@ -97,7 +98,9 @@ html {
     height: 100%;
 }
 
-
+/* span{
+    padding-top:0px!important;
+} */
 .text-center {
     text-align: center;
 }

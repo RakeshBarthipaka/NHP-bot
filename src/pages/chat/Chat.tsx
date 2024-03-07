@@ -25,13 +25,25 @@ import { set_history, set_answers, set_QnA, set_recommendedQnA, set_latestQuesti
 import UserLocationSave from "./UserLocationSave";
 import { Grid } from "@mui/material";
 import KpiWidget from "../../components/KpiWidget/KpiWidget";
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import LeaderBoard from "../../components/LeaderBoard";
 import { KeywordAnalysis } from "../../components/KeywordAnalysis/KeywordAnalysis";
 import { DeepAnalysis } from "../../components/DeepAnalysis/DeepAnalysis";
 import { TagsList } from "../../components/TagsList/TagsList";
 import Uploads from "../../components/Uploads";
 import ChatThreads from "../../components/ChatThreads";
+import KpiAnalysis from "../../components/KpiAnalysis/KpiAnalysis";
+import ChatThreadSession from "../../components/ChatThreads/ChatThreadSession";
+import CglenseInsightLogo from "../../assets/cglense_icon_logo.png";
+import CglenseInsightFullLogo from "../../assets/CGLense_app_logo_v3.png";
+
+interface activeChatThread {
+    id: number;
+    question: string;
+    time: number;
+    likeCount: number;
+    dislikeCount: number;
+}
 
 const Chat = (props: any) => {
     const [tagName, setTagName] = useState("");
@@ -47,6 +59,10 @@ const Chat = (props: any) => {
     const chatMessageStreamEnd = useRef<HTMLDivElement | null>(null);
     const [localChatData, setLocalChatData] = useState([]);
 
+    const [isChatThreadStart, setIsChatThreadStart] = useState(false);
+    const [activeChatThreadDetails, setActiveChatThreadDetails] = useState<activeChatThread>();
+    const [isAssignClick, setIsAssignClick] = useState<boolean>(false);
+
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<unknown>();
 
@@ -61,6 +77,7 @@ const Chat = (props: any) => {
     const [isKeywordAnalysis, setIsKeywordAnalysis] = useState<boolean>(false);
     const [isUpload, setIsUpload] = useState<boolean>(false);
     const [isChatThread, setIsChatThread] = useState<boolean>(false);
+    const [isKpiAnalysis, setIsKpiAnalysis] = useState<boolean>(false);
 
     let getDisclaimer = localStorage.getItem("Disclaimer") || false;
     const [showDisclaimer, setShowDisclaimer] = useState<any>(getDisclaimer);
@@ -84,6 +101,8 @@ const Chat = (props: any) => {
     const latestQuestion = useSelector((state: any) => state.chat.latestQuestion);
     const lastQuestionRef = useRef<string>("");
     const dispatch = useDispatch();
+
+    //console.log("answers=======:", answers);
 
     let handleMicClick = () => {
         if (!isListen) {
@@ -190,10 +209,10 @@ const Chat = (props: any) => {
         let patientemail = localStorage.getItem("patientemail") ? localStorage.getItem("patientemail") : "";
         let patientemailconfirm = Boolean(localStorage.getItem("patientemailconfirm")) ? Boolean(localStorage.getItem("patientemailconfirm")) : false;
         //let latitude = localStorage.getItem("latitude") ? localStorage.getItem("latitude") : 0;
-       // let longitude = localStorage.getItem("longitude") ? localStorage.getItem("longitude") : 0;
+        // let longitude = localStorage.getItem("longitude") ? localStorage.getItem("longitude") : 0;
         //let userLocation = localStorage.getItem("userLocation") ? localStorage.getItem("userLocation") : "Auckland";
 
-        console.log(chatGPTToken, 'chatgpttokens');
+        console.log(chatGPTToken, "chatgpttokens");
 
         dispatch(set_recommendedQnA([] as any));
         error && setError(undefined);
@@ -227,7 +246,7 @@ const Chat = (props: any) => {
                 userID: `${userID}`,
                 appointmentData: appointmentData,
                 patientemail: patientemail,
-                patientemailconfirm: patientemailconfirm,
+                patientemailconfirm: patientemailconfirm
                 // longitude: longitude,
                 // latitude: latitude,
                 // userLocation: userLocation
@@ -358,6 +377,7 @@ const Chat = (props: any) => {
             setIsDeepAnalysis(false);
             setIsKeywordAnalysis(false);
             setIsChatThread(false);
+            setIsKpiAnalysis(false);
         }
     };
 
@@ -372,6 +392,7 @@ const Chat = (props: any) => {
         setIsDeepAnalysis(false);
         setIsKeywordAnalysis(false);
         setIsChatThread(false);
+        setIsKpiAnalysis(false);
     };
 
     const toggleUploads = () => {
@@ -384,6 +405,7 @@ const Chat = (props: any) => {
         setIsLeaderBoard(false);
         setIsDeepAnalysis(false);
         setIsKeywordAnalysis(false);
+        setIsKpiAnalysis(false);
     };
 
     const toggleDeepAnalysis = () => {
@@ -397,6 +419,7 @@ const Chat = (props: any) => {
         setIsLeaderBoard(false);
         setIsKeywordAnalysis(false);
         setIsChatThread(false);
+        setIsKpiAnalysis(false);
     };
 
     const toggleKeywordAnalysis = () => {
@@ -410,6 +433,7 @@ const Chat = (props: any) => {
         setIsLeaderBoard(false);
         setIsDeepAnalysis(false);
         setIsChatThread(false);
+        setIsKpiAnalysis(false);
     };
 
     const toggleChatThreads = () => {
@@ -423,6 +447,31 @@ const Chat = (props: any) => {
         setIsUpload(false);
         setIsDeepAnalysis(false);
         setIsKeywordAnalysis(false);
+        setIsKpiAnalysis(false);
+    };
+
+    const toggleKpiAnalysis = () => {
+        if (!ischatRightContent) {
+            toggleChatRightContent();
+        }
+        if (!isKpiAnalysis) {
+            setIsKpiAnalysis(true);
+        }
+        setIsLeaderBoard(false);
+        setIsUpload(false);
+        setIsDeepAnalysis(false);
+        setIsKeywordAnalysis(false);
+        setIsChatThread(false);
+    };
+
+    const runChatThread = (obj: any) => {
+        setIsAssignClick(false);
+        setIsChatThreadStart(true);
+        setActiveChatThreadDetails(obj);
+    };
+
+    const handleAssign = () => {
+        setIsAssignClick(true);
     };
 
     return (
@@ -453,18 +502,19 @@ const Chat = (props: any) => {
                     </Grid>
 
                     <Grid container item justifyContent="center" xs={12} md={11} className="shiftingContainer">
-                        {!latestQuestion && !ischatRightContent ? (
+                        {!latestQuestion ? (
                             <>
                                 <Grid container item xs={12} className={styles.chatEmptyState} spacing={2}>
                                     <Grid item xs={12} md={6}>
                                         <h4 className="accessibility-plugin-ac">Get started with CGlense. A Powerful AI Assistant</h4>
-                                        <img src="static\assets\cglense_icon_logo.png" alt="" />
+                                        <img src={CglenseInsightLogo} alt="" />
+
                                         {/* <ExampleList onExampleClicked={onExampleClicked} chatBotTypes={chatBotVoice.VoiceName} projectData={props.projectData} /> */}
                                         <p className="accessibility-plugin-ac"> Hi, I am here. How may I help you today?. </p>
                                         <p className="accessibility-plugin-ac"> Click on the Chat window you wish to ask a question </p>
                                     </Grid>
                                     <Grid item xs={12} md={6}>
-                                        <img src="static\assets\CGLense_app_logo_v3-btO_FX8F.png" alt="" style={{ height: "42px", marginTop: "15px" }} />
+                                        <img src={CglenseInsightFullLogo} alt="" style={{ height: "42px", marginTop: "15px" }} />
                                         <div className={styles.infoCard}>
                                             <h3 className="accessibility-plugin-ac">COMPANY INFO</h3>
                                             <p className="accessibility-plugin-ac">
@@ -494,13 +544,20 @@ const Chat = (props: any) => {
                         ) : (
                             <>
                                 <Grid item xs={12} sm={12} md={ischatRightContent ? 6 : 8}>
-                                    <KpiWidget />
+                                    <KpiWidget toggleChatRightContent={toggleChatRightContent} toggleKpiAnalysis={toggleKpiAnalysis} />
                                     <div className={styles.chatContainer}>
                                         <div className={styles.chatMessageStream}>
+                                            {isChatThreadStart && activeChatThreadDetails !== undefined && (
+                                                <ChatThreadSession {...{ activeChatThreadDetails, handleAssign, isAssignClick }} />
+                                            )}
                                             {answers.map((answer: any, index: number) => (
                                                 <div key={index}>
                                                     <UserChatMessage message={answer[0]} />
-                                                    <TagsList toggleKeywordAnalysis={toggleKeywordAnalysis} setTagName={setTagName} setTagClicked={setTagClicked}/>
+                                                    <TagsList
+                                                        toggleKeywordAnalysis={toggleKeywordAnalysis}
+                                                        setTagName={setTagName}
+                                                        setTagClicked={setTagClicked}
+                                                    />
                                                     <div className={styles.chatMessageGpt}>
                                                         <Answer
                                                             key={index}
@@ -555,7 +612,8 @@ const Chat = (props: any) => {
                                             {isUpload && <Uploads />}
                                             {isKeywordAnalysis && <KeywordAnalysis tagName={tagName} />}
                                             {isDeepAnalysis && <DeepAnalysis />}
-                                            {isChatThread && <ChatThreads />}
+                                            {isChatThread && <ChatThreads runChatThread={runChatThread} />}
+                                            {isKpiAnalysis && <KpiAnalysis />}
                                         </div>
                                     </Grid>
                                 )}
@@ -663,19 +721,21 @@ const Chat = (props: any) => {
                 </Grid>
             )}
 
-            <ChatBoxLeftPanel
-                onShowHistoryClicked={onShowHistoryClicked}
-                onClearChatClicked={clearChat}
-                onExampleClicked={onExampleClicked}
-                chatData={localChatData}
-                onFileViewURLClicked={onFileViewURLClicked}
-                showThreads={updateQandA}
-                toggleChatRightContent={toggleChatRightContent}
-                toggleLeaderBoard={toggleLeaderBoard}
-                toggleUploads={toggleUploads}
-                toggleDeepAnalysis={toggleDeepAnalysis}
-                toggleChatThreads={toggleChatThreads}
-            />
+            {latestQuestion && (
+                <ChatBoxLeftPanel
+                    onShowHistoryClicked={onShowHistoryClicked}
+                    onClearChatClicked={clearChat}
+                    onExampleClicked={onExampleClicked}
+                    chatData={localChatData}
+                    onFileViewURLClicked={onFileViewURLClicked}
+                    showThreads={updateQandA}
+                    toggleChatRightContent={toggleChatRightContent}
+                    toggleLeaderBoard={toggleLeaderBoard}
+                    toggleUploads={toggleUploads}
+                    toggleDeepAnalysis={toggleDeepAnalysis}
+                    toggleChatThreads={toggleChatThreads}
+                />
+            )}
         </>
     );
 };
