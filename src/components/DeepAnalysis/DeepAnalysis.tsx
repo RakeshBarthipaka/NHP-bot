@@ -289,7 +289,7 @@ export const DeepAnalysis = () => {
                                         fontSize: '12px !important',
                                         padding: '6px 12px',
                                         border: 'none',
-                                        borderRadius: "8px",
+                                        borderRadius: "12px",
                                         marginLeft: isValue ?  '3px' : '6px',
                                         marginRight: isValue ? '6px' : '6px',
                                         color: "rgba(12, 9, 156, 1)",
@@ -300,7 +300,7 @@ export const DeepAnalysis = () => {
                                           
                                     },
                                     '& .firstButton':{
-                                        borderRadius: "8px",
+                                        borderRadius: "12px",
                                         fontSize: '12px !important',
                                         padding: '12px 24px !important',
                                         marginTop: '1px',

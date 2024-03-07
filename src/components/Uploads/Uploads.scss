@@ -14,7 +14,8 @@
 .upload-box{
     text-align: center;
     .plus-icon-cont{
-        width: 12%;
+        cursor:pointer;
+        width: 65px;
         margin: 0 auto;
         border-radius: 47%;
         height: 63px;
@@ -22,7 +23,8 @@
         background-color: #FFFFFFCC;
         justify-content: center;
         display: flex;
-        align-items: center;
+        align-items: center;      
+        
         svg{
             font-size: 60px;
             color: #E5E5EA;

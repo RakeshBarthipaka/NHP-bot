@@ -57,8 +57,8 @@ text-align: left;
     /* padding: 15px 20px; */
     background: #eee;
     border: 1px solid #E5E5EA;
-    /* border-radius: 0 0 10px 10px; */
-    margin: 0 -20px -20px;
+    border-radius: 0 0 30px 30px;
+    margin: 0px -20px -20px -20px;
 }
 
 .shareIconStyles{

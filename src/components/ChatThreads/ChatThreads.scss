@@ -30,9 +30,9 @@
 .grid-container{
     .thread-box{
         background-color: #F2F2F7;
-        padding:20px;
+        padding:10px 20px;
         border-radius:20px;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         cursor: pointer;
         }
         .questionText{
@@ -57,7 +57,13 @@
             align-items: center;
             gap: 6px;
             line-height: 1;
-    
+            margin:0px 4px;
+            background-color: #fff;
+            color:#0C099C;
+    &:hover{
+        background-color: #0C099C;
+        color:#fff;
+    }
             span {
                 padding: 0;
             }
@@ -77,7 +83,12 @@
             align-items: center;
             gap: 6px;
             line-height: 1;
-    
+            background-color: #fff;
+            color:#2AC141;
+    &:hover{
+        background-color: #2AC141;
+        color:#fff;
+    }
             span {
                 padding: 0;
             }
@@ -136,32 +147,40 @@
 
 .chatThreadBox{
     background-color: #5376F033;
-    padding: 10px 0px;
+    padding: 6px 6px;
     color: #0C099C;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-radius:15px;
+    border-radius:6px;
 }
 .assignBtn{
     width: 100px;
     background-color: #BBBBBB;
     color: #000000;
     text-align: center;
-    padding: 10px 0px;
+    padding: 5px 0px;
     border-radius: 30px;
     cursor: pointer;
+    &:hover{
+        background-color: #aaa;
+    }
 }
 .chatThreadAssignedBox{
     border: 1px solid #898989;
     margin-top: 12px;
     margin-bottom: 5px;
-    border-radius: 10px;
+    //border-radius: 10px;
+    // margin-top: 12px;
+    border-radius: 6px;
     padding: 10px;
+    margin-bottom:20px;
+    font-size:14px!important;
 }
 
 .chatThreadAssignedBox p{
     margin-bottom: 5px;
+    font-size:14px!important;
 }
 
 .chatThreadAssignedBox p span{
@@ -182,7 +201,7 @@
 .postSpan{
     background-color: #0C099C;
     color: #FFFFFF;
-    font-weight: 300;
+    font-weight: 500;
     text-align: center;
     padding: 5px 25px;
     border-radius: 22px;
@@ -215,4 +234,5 @@
     svg{
         font-size: 15px;
     }
+    font-size:12px;
 }
