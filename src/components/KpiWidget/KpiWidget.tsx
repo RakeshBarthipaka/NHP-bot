@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import styles from "./KpiWidget.module.css";
 
 import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
-import { Button, Drawer, Toolbar, Typography } from "@mui/material";
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { Box, Button, Drawer, TextField, Toolbar, Typography } from "@mui/material";
+import { DataGrid, GridColDef, GridToolbarColumnsButton, GridToolbarContainer, GridValueGetterParams } from '@mui/x-data-grid'; 
 import { useSelector } from "react-redux";
 import MultiItemCarousel from "../Common/MultiItemCarousel";
-import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined'; 
+import SearchBar from "../Common/SearchBar";
 
 interface Props { 
     toggleChatRightContent: () => void; 
@@ -73,33 +74,23 @@ const KpiWidget = ({toggleChatRightContent, toggleKpiAnalysis}: Props) => {
         }
     ];
 
-    const initialKpis = [1, 2, 3, 4]
-    const [openKpiModal, setOpenKpiModal] = useState(false);
-    const [selectedKpis, setSelectedKpis] = useState<any[]>(initialKpis);
-
-    const initialSlides = getKpiSlides(initialKpis, result);
-    const [kpiSlides, setKpiSlides] = useState<any[]>(initialSlides);
-    const { colorCode } = useSelector((state: any) => state.theme.color)
-
- 
-
+       
     const columns: GridColDef[] = [
         {
             field: 'kpiname',
             headerName: 'KPI',
-            width: 150,
+            flex: 1,
+            minWidth: 150,
             sortable: false,
             disableColumnMenu: true
         },
         {
             field: 'kpivalue',
-            headerName: 'Value',
-            width: 150,
+            headerName: 'Value', 
             sortable: false,
             disableColumnMenu: true
         },
     ];
-
 
 
     const rows = [
@@ -120,6 +111,23 @@ const KpiWidget = ({toggleChatRightContent, toggleKpiAnalysis}: Props) => {
         { id: 15, kpiname: 'Quick Ratio', kpivalue: '8234' },
     ];
 
+    const initialKpis = [1, 2, 3, 4]
+    const [openKpiModal, setOpenKpiModal] = useState(false);
+    const [selectedKpis, setSelectedKpis] = useState<any[]>(initialKpis);
+
+    const initialSlides = getKpiSlides(initialKpis, result);
+    const [kpiSlides, setKpiSlides] = useState<any[]>(initialSlides);
+    const { colorCode } = useSelector((state: any) => state.theme.color)
+    const [searchText, setSearchText] = useState("");
+    const [tableData, setTableData] = useState<any[]>(rows);
+ 
+    const CustomToolbar = (props: JSX.IntrinsicAttributes) => (
+        <div> 
+          <SearchBar {...props} /> 
+        </div>
+      );
+   
+
 
 
     function getKpiSlides(ids: any[], result: any[]) {
@@ -138,10 +146,23 @@ const KpiWidget = ({toggleChatRightContent, toggleKpiAnalysis}: Props) => {
         setSelectedKpis(ids);
         // console.log(ids);
         setKpiSlides(getKpiSlides(ids, result));
-        setOpenKpiModal(false)
+        // setOpenKpiModal(false)
     };
 
-
+    const requestSearch = (searchValue: string) => {
+        const searchRegex = new RegExp(`.*${searchValue}.*`, "ig");
+        const filteredRows = result.filter((o: any) => {
+          return Object.keys(o).some((k: any) => {
+            return searchRegex.test(o[k].toString());
+          });
+        });
+        setTableData(filteredRows);
+      };
+    
+      const cancelSearch = () => {
+        setSearchText("");
+        requestSearch(searchText);
+      };
 
     return (
         <>
@@ -178,20 +199,45 @@ const KpiWidget = ({toggleChatRightContent, toggleKpiAnalysis}: Props) => {
 
                     <div className={styles.drawerContent}>
                         <DataGrid
-                            rows={rows}
+                            sx={{
+                                border: 'none', 
+                               
+                                '& .MuiDataGrid-main': {
+                                     background: '#F2F2F7',
+                                     marginTop: '15px',
+                                  },
+                                '& .MuiDataGrid-virtualScroller': {
+                                    maxHeight: '440px',
+                                  },
+                            }}
+                            slots={{ toolbar: CustomToolbar }}
+                            slotProps={{
+                                toolbar: {
+                                  value: searchText,
+                                  onChange: (searchVal: any) => requestSearch(searchVal),
+                                  onCancelSearch: () => cancelSearch()
+                                }
+                              }}
+                            rows={tableData}
                             columns={columns}
                             checkboxSelection
-                            rowSelectionModel={selectedKpis}
-                            initialState={{
-                                pagination: {
-                                    paginationModel: { page: 15, pageSize: 15 },
-                                },
-                            }}
-                            pageSizeOptions={[30,]}
-                            disableRowSelectionOnClick
-                            onRowSelectionModelChange={(ids) => onRowsSelectionHandler(ids)}
+                            rowSelectionModel={selectedKpis}  
+                            disableRowSelectionOnClick 
+                            disableColumnFilter
+                            hideFooterSelectedRowCount
+                            hideFooterPagination
+                            hideFooter
+                            onRowSelectionModelChange={(ids) => onRowsSelectionHandler(ids)} 
+                             
                         />
+
+                        <Box sx={{display: 'flex', justifyContent: 'flex-end', }}>
+                            <Button variant="contained" sx={{marginTop: '10px', marginRight: '5px', borderRadius: '25px', background: 'var(--active-themes)'}}>CANCEL</Button>
+                            <Button variant="contained" sx={{marginTop: '10px', marginRight: '5px', borderRadius: '25px', background: 'var(--active-themes)'}}>SAVE</Button> 
+                        </Box>
                     </div>
+
+                   
                 </div>
             </Drawer>
         </>

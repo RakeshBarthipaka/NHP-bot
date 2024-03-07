@@ -12,6 +12,9 @@ import html2canvas from 'html2canvas';
 import { GridColDef, DataGrid, GridCellParams, GridRenderCellParams } from "@mui/x-data-grid";
 import clsx from "clsx";
 
+import React from 'react';
+import { Line } from 'react-chartjs-2';
+
 const getColor = (value: any) => {
 
     console.log(value, 'valueeee');
@@ -35,10 +38,11 @@ const KpiAnalysis = () => {
 
     const columns: GridColDef[] = [
         {
-            field: "Country",
-            headerName: "Country",
+            field: "rowheader",
+            headerName: "$ in Millions",
             sortable: false,
-            width: 130,
+            flex: 1,
+            minWidth: 150,
             disableColumnMenu: true,
             cellClassName: (params: GridCellParams<any, number>) => {
                 if (params.value == null) {
@@ -54,7 +58,7 @@ const KpiAnalysis = () => {
             field: "2019",
             headerName: "2019",
             sortable: false,
-            width: 130,
+             
             disableColumnMenu: true,
             renderCell: (params: GridRenderCellParams) => {
                 const color: any = getColor(params.value);
@@ -74,7 +78,7 @@ const KpiAnalysis = () => {
             field: "2020",
             headerName: "2020",
             sortable: false,
-            width: 130,
+             
             disableColumnMenu: true,
             renderCell: (params: GridRenderCellParams) => {
                 const color: any = getColor(params.value);
@@ -94,7 +98,7 @@ const KpiAnalysis = () => {
             field: "2021",
             headerName: "2021",
             sortable: false,
-            width: 130,
+             
             disableColumnMenu: true,
             renderCell: (params: GridRenderCellParams) => {
                 const color: any = getColor(params.value);
@@ -114,7 +118,7 @@ const KpiAnalysis = () => {
             field: "2022",
             headerName: "2022",
             sortable: false,
-            width: 130,
+             
             disableColumnMenu: true,
             renderCell: (params: GridRenderCellParams) => {
                 const color: any = getColor(params.value);
@@ -134,7 +138,7 @@ const KpiAnalysis = () => {
             field: "2023",
             headerName: "2023",
             sortable: false,
-            width: 130,
+             
             disableColumnMenu: true,
             renderCell: (params: GridRenderCellParams) => {
                 const color: any = getColor(params.value);
@@ -154,23 +158,22 @@ const KpiAnalysis = () => {
 
 
     const rows = [
-        { id: 1, Country: "India",2019: "15", 2020: "10", 2021: "43",2022: "77", 2023: "36" },
-        { id: 2, Country: "India",2019: "28", 2020: "10", 2021: "-43",2022: "77", 2023: "36" },
-        { id: 3, Country: "India",2019: "-10", 2020: "10", 2021: "43",2022: "77", 2023: "36" },
-        { id: 4, Country: "India",2019: "33", 2020: "-10", 2021: "43",2022: "-77", 2023: "36" },
-        { id: 5, Country: "India",2019: "22", 2020: "10", 2021: "43",2022: "77", 2023: "36" },
-        { id: 6, Country: "India",2019: "-64", 2020: "10", 2021: "43",2022: "77", 2023: "-36" },
-        { id: 7, Country: "India",2019: "56", 2020: "10", 2021: "43",2022: "77", 2023: "36" },
+        { id: 1, rowheader: "Products",2019: "$213,883", 2020: "$213,883", 2021: "$213,883",2022: "$213,883", 2023: "$213,883" },
+        { id: 2, rowheader: "Services",2019: "46,291", 2020: "46,291", 2021: "46,291",2022: "46,291", 2023: "46,291" },
+        { id: 3, rowheader: "Total Net Sales",2019: "$260,174", 2020: "$260,174", 2021: "$260,174",2022: "$260,174", 2023: "$260,174" },
+        { id: 4, rowheader: "Total Cost of Sales",2019: "$161,782", 2020: "$161,782", 2021: "$161,782",2022: "$161,782", 2023: "$161,782" },
+        { id: 5, rowheader: "Total Gross Profit",2019: "$98,392", 2020: "$104,392", 2021: "$152,392",2022: "$152,392", 2023: "$152,392" },
+        { id: 6, rowheader: "% Gross Margin",2019: "37.8%", 2020: "38.2%", 2021: "41.8%",2022: "44.8%", 2023: "48.12%" },
+        
     ];
 
     const rowsPercentage = [
-        { id: 1, Country: "India",2019: "15%", 2020: "10%", 2021: "43%",2022: "77%", 2023: "36%" },
-        { id: 2, Country: "India",2019: "28%", 2020: "10%", 2021: "-43%",2022: "77%", 2023: "36%" },
-        { id: 3, Country: "India",2019: "-10%", 2020: "10%", 2021: "43%",2022: "77%", 2023: "36%" },
-        { id: 4, Country: "India",2019: "33%", 2020: "-10%", 2021: "43%",2022: "-77%", 2023: "36%" },
-        { id: 5, Country: "India",2019: "22%", 2020: "10%", 2021: "43%",2022: "77%", 2023: "36%" },
-        { id: 6, Country: "India",2019: "-64%", 2020: "10%", 2021: "43%",2022: "77%", 2023: "-36%" },
-        { id: 7, Country: "India",2019: "56%", 2020: "10%", 2021: "43%",2022: "77%", 2023: "36%" },
+      { id: 1, rowheader: "Products",2019: "$213,883", 2020: "$213,883", 2021: "$213,883",2022: "$213,883", 2023: "$213,883" },
+      { id: 2, rowheader: "Services",2019: "46,291", 2020: "46,291", 2021: "46,291",2022: "46,291", 2023: "46,291" },
+      { id: 3, rowheader: "Total Net Sales",2019: "$260,174", 2020: "$260,174", 2021: "$260,174",2022: "$260,174", 2023: "$260,174" },
+      { id: 4, rowheader: "Total Cost of Sales",2019: "$161,782", 2020: "$161,782", 2021: "$161,782",2022: "$161,782", 2023: "$161,782" },
+      { id: 5, rowheader: "Total Gross Profit",2019: "$98,392", 2020: "$104,392", 2021: "$152,392",2022: "$152,392", 2023: "$152,392" },
+      { id: 6, rowheader: "% Gross Margin",2019: "37.8%", 2020: "38.2%", 2021: "41.8%",2022: "44.8%", 2023: "48.12%" },       
     ];
 
 
@@ -199,6 +202,39 @@ const KpiAnalysis = () => {
         });
       };
 
+      
+      const options = {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top' as const,
+          },
+          title: {
+            display: true,
+            text: 'Gross Margin Trend for the last 5 years',
+          },
+        },
+      };
+      
+      const labels = ['2019', '2020', '2021', '2022', '2023', '2024', '2025'];
+      
+      const data = {
+        labels,
+        datasets: [
+          {
+            label: 'Dataset 1',
+            data: [5, 12, 9,25,35,22,40 ], 
+          },
+          {
+            label: 'Dataset 2',
+            data: [7, 11,10,28,36,32,45 ], 
+          },
+          {
+            label: 'Dataset ',
+            data: [9,11,15,29,34,39,44 ], 
+          },
+        ],
+      };
 
     return (
         <>
@@ -291,54 +327,53 @@ const KpiAnalysis = () => {
                             </ButtonGroup>
                         </Box>
 
-                        <Box
-                            sx={{
-                                display: "flex"
-                            }}
-                        >
+                          <Box sx={{ display: "flex" }} >
                             <span onClick={copyTableToClipboard}>
-                                <Avatar
-                                   sx={{ bgcolor: "#E1E5F2",
-                                   color: "rgba(12, 9, 156, 1)", "&:hover": {
-                                              backgroundColor: "#0027B0",
-                                                  color: ' rgba(30, 255, 241, 0.8)'
-                                              
-                                          } }}
-                                >
-                                    <ContentCopyOutlinedIcon/>
-                                </Avatar>
+                              <Avatar
+                                sx={{
+                                  bgcolor: "#E1E5F2",
+                                  color: "rgba(12, 9, 156, 1)", "&:hover": {
+                                    backgroundColor: "#0027B0",
+                                    color: ' rgba(30, 255, 241, 0.8)'
+                                  }
+                                }}
+                              >
+                                <ContentCopyOutlinedIcon />
+                              </Avatar>
                             </span>
 
                             <span onClick={downloadAsPdf}>
-                                <Avatar sx={{ bgcolor: "#E1E5F2",
-                                 color: "rgba(12, 9, 156, 1)", "&:hover": {
-                                            backgroundColor: "#0027B0",
-                                                color: ' rgba(30, 255, 241, 0.8)'
-                                            
-                                        } }}>
-                                    {" "}
-                                    <FileDownloadOutlinedIcon />
-                                </Avatar>
+                              <Avatar sx={{
+                                bgcolor: "#E1E5F2",
+                                color: "rgba(12, 9, 156, 1)", "&:hover": {
+                                  backgroundColor: "#0027B0",
+                                  color: ' rgba(30, 255, 241, 0.8)'
+                                }
+                              }}>
+                                {" "}
+                                <FileDownloadOutlinedIcon />
+                              </Avatar>
                             </span>
-                            
-                        </Box>
+                          </Box>
 
                     </Stack>
 
                     <Stack>
                     <DataGrid
-                        hideFooter
+                        hideFooter 
                         sx={{
+                            border: 'none', 
                             overflowX: "scroll !important",
                             "& .first-column.cell": {
-                                backgroundColor: "#F2F2F7"
+                                backgroundColor: "#F2F2F7",
+                                fontWeight: 600,
                             },
                             ".highlight": {
                                 bgcolor: "grey"
                             },
                             ".MuiDataGrid-cell": {
                                 backgroundColor: "none",
-                                fontWeight: 700,
+                                fontWeight: 500,
                                 border: '1px solid #BBBBBB'
                             },
                             "& .MuiDataGrid-columnHeader": {
@@ -350,10 +385,23 @@ const KpiAnalysis = () => {
                                 letterSpacing: "0em",
                                 textAlign: "left",
                                 border: '1px solid #BBBBBB'
-                            },
+                            }, 
                             // '.MuiDataGrid-root .MuiDataGrid-row:hover, MuiDataGrid-root.MuiDataGrid-row.Mui-hovered':{
                             //     backgroundColor: "unset",
                             // },
+                            '& .MuiDataGrid-virtualScroller::-webkit-scrollbar': {
+                              height: '6px',
+                            },
+                            '& .MuiDataGrid-virtualScroller::-webkit-scrollbar-track': {
+                              background: '#f1f1f1',
+                            },
+                            '& .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb': {
+                              backgroundColor: '#bbb',
+                              borderRadius: '6px',
+                            },
+                            '& .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb:hover': {
+                              background: '#757575',
+                            },
                         }}
                         rows={isValue ?rows : rowsPercentage} 
                         columns={columns}
@@ -364,7 +412,22 @@ const KpiAnalysis = () => {
                         
                     />
                     </Stack>
-                    
+                    <Stack className={styles.kpiAnalysisText}>
+                      <h5>Summary of Gross Margin</h5>
+                    <ul>
+                      <li>
+                        India has shown fluctuation with significant declines in 2020 and subsequent improvement in the following years.
+                      </li>
+                      <li>Mexico has shown a consistant increase in UOM over the years. </li>
+                      <li>China’s UOM has shown some variability, with an overall decrease in 2022. </li>
+                      <li>Thailand has shown some generally increasing trend in UOM with slight decline in 2022.</li>
+                      
+                    </ul>
+                    </Stack>
+                </Box>
+
+                <Box paddingLeft={4} paddingTop={2} marginBottom={4}> 
+                    <Line options={options} data={data} />
                 </Box>
             </Box>
         </>
