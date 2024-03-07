@@ -632,7 +632,7 @@ const Chat = (props: any) => {
                                             {isUpload && <Uploads />}
                                             {isKeywordAnalysis && <KeywordAnalysis tagName={tagName} />}
                                             {isDeepAnalysis && <DeepAnalysis />}
-                                            {isChatThread && <ChatThreads runChatThread={runChatThread} />}
+                                            {isChatThread && <ChatThreads runChatThread={runChatThread} activeChatThreadDetails={activeChatThreadDetails} />}
                                             {isKpiAnalysis && <KpiAnalysis />}
                                         </div>
                                     </Grid>

@@ -17,9 +17,14 @@ import { Threads } from "../../utils/MockData";
 
 const ChatThreads = (props: any) => {
     const ThreadElements = (item: any) => {
+        console.log("activeChatThreadDetails==========:", props.activeChatThreadDetails);
+        console.log("item==========:", item);
         return (
             <>
-                <Box className="thread-box" onClick={() => props.runChatThread(item)}>
+                <Box
+                    className={`thread-box ${props.activeChatThreadDetails?.id === item.id ? "active-thread-box" : ""}`}
+                    onClick={() => props.runChatThread(item)}
+                >
                     <Typography className="questionText">{item.question}</Typography>
                     <Box className="thread-icon-container">
                         <Typography className="otherOptions">{item.time} hour ago</Typography>
