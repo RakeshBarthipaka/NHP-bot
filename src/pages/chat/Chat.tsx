@@ -425,6 +425,7 @@ const Chat = (props: any) => {
         setIsDeepAnalysis(false);
         setIsKeywordAnalysis(false);
         setIsKpiAnalysis(false);
+        setIsChatThread(false);
     };
 
     const toggleDeepAnalysis = () => {
