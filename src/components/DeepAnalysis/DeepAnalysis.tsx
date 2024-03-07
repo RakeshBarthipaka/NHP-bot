@@ -1,5 +1,4 @@
 import { Avatar, Box, Button, ButtonGroup, Grid, Stack } from "@mui/material";
-import styles from "./DeepAnalysis.module.css";
 import TroubleshootOutlinedIcon from "@mui/icons-material/TroubleshootOutlined";
 import { Icon, IconButton } from "@fluentui/react";
 import { GenerateTable } from "../Tables/GenerateTable";
@@ -14,6 +13,7 @@ import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { useState } from "react";
+import "./DeepAnalysis.scss";
 
 // interface Props {
 //     text: string;
@@ -192,10 +192,6 @@ export const DeepAnalysis = () => {
         }
     ];
 
-    const shareIconStyles = {};
-
-    const IconStyles = { color: "blue", borderRadius: "8px" };
-    const IconActiveStyles = { backgroundColor: "lightgray", borderRadius: "8px" };
 
     const copyChatData = async (e: any) => {
         e.stopPropagation();
@@ -234,12 +230,12 @@ export const DeepAnalysis = () => {
                     paddingBottom: "24px"
                 }}
             >
-                <Box paddingLeft={3} paddingBottom={2} className={styles.header}>
+                <Box paddingLeft={3} paddingBottom={2} className='header'>
                     {" "}
-                    <TroubleshootOutlinedIcon className={styles.headerIcon} /> <span className={styles.headerText}>DEEP ANALYSIS</span>{" "}
+                    <TroubleshootOutlinedIcon className='headerIcon' /> <span className='headerText'>DEEP ANALYSIS</span>{" "}
                 </Box>
                 <Box paddingBottom={2}>
-                    <hr className={styles.verticalLineStyle} />
+                    <hr className='verticalLineStyle' />
                 </Box>
 
                 <Box paddingLeft={2}>
@@ -423,7 +419,7 @@ export const DeepAnalysis = () => {
                     <span>In summary the yearly trend UOM in </span>
                 </Box>
                 <Box paddingLeft={4} paddingTop={2}>
-                    {summary?.map(data => <li className={styles.summary}>{data.text}</li>)}
+                    {summary?.map(data => <li className='summary'>{data.text}</li>)}
                 </Box>
                 <Box paddingLeft={4} paddingTop={2}>
                     <span>Graph Analytics by Region </span>

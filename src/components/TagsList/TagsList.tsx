@@ -1,16 +1,8 @@
 import { Paper, Stack, styled } from "@mui/material";
-import styles from "./TagsList.module.css";
-import { useContext } from "react";
+import "./TagsList.scss";
 
-// interface Props {
-//     text: string;
-//     value: string;
-//     onClick: (value: string) => void;
-// }
 
 const Item = styled(Paper)(({ theme }) => ({
-    // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    // ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: "center",
     color: theme.palette.text.secondary
@@ -53,9 +45,9 @@ export const TagsList = ({setTagClicked, setTagName, toggleKeywordAnalysis}: any
                                 setTagClicked(true);
                                 toggleKeywordAnalysis();
                         }}
-                        className={styles.tagsStyle}
+                        className='tagsStyle'
                     >
-                        {tag.tagName} <b className={styles.tagCount}>{tag.tagCount}</b>
+                        {tag.tagName} <b className='tagCount'>{tag.tagCount}</b>
                     </Item>
                 );
             })}

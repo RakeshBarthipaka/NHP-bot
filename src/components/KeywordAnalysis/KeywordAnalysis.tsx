@@ -1,5 +1,5 @@
 import { Avatar, Box, Button, ButtonGroup, Grid, Stack } from "@mui/material";
-import styles from "./KeywordAnalysis.module.css";
+import "./KeywordAnalysis.scss";
 import TroubleshootIcon from "@mui/icons-material/Troubleshoot";
 import { Icon, IconButton } from "@fluentui/react";
 import { GenerateTable } from "../Tables/GenerateTable";
@@ -22,10 +22,7 @@ interface Props {
 }
 
 export const KeywordAnalysis = ({ tagName }: Props) => {
-    const shareIconStyles = {};
 
-    const IconStyles = { color: "blue", borderRadius: "8px" };
-    const IconActiveStyles = { backgroundColor: "lightgray", borderRadius: "8px" };
 
     return (
         <Grid xs={12} padding={3}>
@@ -36,12 +33,12 @@ export const KeywordAnalysis = ({ tagName }: Props) => {
                     paddingBottom: "24px"
                 }}
             >
-                <Box paddingLeft={3} className={styles.header}>
+                <Box paddingLeft={3} className='header'>
                     {" "}
-                    <TroubleshootIcon className={styles.headerIcon} /> <span className={styles.headerText}>KEYWORD ANALYSIS</span>{" "}
+                    <TroubleshootIcon className='headerIcon' /> <span className='headerText'>KEYWORD ANALYSIS</span>{" "}
                 </Box>
                 <Box>
-                    <hr className={styles.verticalLineStyle} />
+                    <hr className='verticalLineStyle' />
                 </Box>
 
                 <Box paddingLeft={3} paddingTop={2}>
@@ -116,18 +113,18 @@ export const KeywordAnalysis = ({ tagName }: Props) => {
 
                     </Stack>
                     <Box>
-                    <hr className={styles.verticalLineStyle} />
+                    <hr className='verticalLineStyle' />
                 </Box>
                     <Stack alignContent="center" alignItems="center" justifyItems={"center"} justifyContent={"end"} direction={"row"}>
                         <Box display={"flex"} justifyContent={"center"}>
-                            <span className={styles.iconText}>
+                            <span className='iconText'>
                                 <VisibilityOutlinedIcon />
                             </span>
-                            <span className={styles.iconText}>By Views</span>
-                            <span className={styles.iconText}>
+                            <span className='iconText'>By Views</span>
+                            <span className='iconText'>
                                 <SortOutlinedIcon />
                             </span>
-                            <span className={styles.iconText}>By Date</span>
+                            <span className='iconText'>By Date</span>
                         </Box>
                     </Stack>
                 </Box>

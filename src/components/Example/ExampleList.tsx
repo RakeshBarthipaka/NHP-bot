@@ -1,5 +1,5 @@
 import { Example } from "./Example";
-import styles from "./Example.module.css";
+import "./Example.scss";
 
 
 export type ExampleModel = {
@@ -48,7 +48,7 @@ interface Props {
 export const ExampleList = ({ onExampleClicked, chatBotTypes, projectData }: Props) => {
     let EXAMPLES = projectData && projectData.exampleListQuestion?projectData.exampleListQuestion: EXAMPLES_CHAT_GPT;
     return (
-        <ul className={styles.examplesNavList}>
+        <ul className='examplesNavList'>
             {EXAMPLES.map((x:any, i:any) => (
                 <li key={i}>
                     <Example text={x.text} value={x.value} onClick={onExampleClicked} />

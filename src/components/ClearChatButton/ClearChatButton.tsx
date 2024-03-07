@@ -1,7 +1,7 @@
 import { Text } from "@fluentui/react";
 import { Delete24Regular } from "@fluentui/react-icons";
 
-import styles from "./ClearChatButton.module.css";
+import "./ClearChatButton.scss";
 
 interface Props {
     className?: string;
@@ -11,7 +11,7 @@ interface Props {
 
 export const ClearChatButton = ({ className, disabled, onClick }: Props) => {
     return (
-        <div className={`${styles.container} ${className ?? ""} ${disabled && styles.disabled}`} onClick={onClick}>
+        <div className={`container ${className ?? ""} ${disabled && 'disabled'}`} onClick={onClick}>
             <Delete24Regular />
             <Text>{"Clear chat"}</Text>
         </div>

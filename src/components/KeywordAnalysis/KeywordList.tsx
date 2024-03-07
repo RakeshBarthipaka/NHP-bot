@@ -5,7 +5,7 @@ import "react-tabs/style/react-tabs.css";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
-import styles from "./KeywordList.module.css";
+import "./KeywordList.scss";
 import { Avatar, Stack } from "@mui/material";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
@@ -173,7 +173,7 @@ const KeywordList = (props: any) => {
                         </Box>
                         {isDisplayAnswer === tag.id && isDisplayAnswerToggle && (
                             <div className="answer-container">
-                                <Stack className={styles.iconContainer} direction={"row"} alignItems={"center"} justifyContent={"space-between"}>
+                                <Stack className='iconContainer' direction={"row"} alignItems={"center"} justifyContent={"space-between"}>
                                     <Box
                                         sx={{
                                             display: "flex"
@@ -239,16 +239,16 @@ const KeywordList = (props: any) => {
                                             </span> */}
                                     </Box>
                                     <Box gap={1} display={"flex"}>
-                                        <div className={styles.viewIcon}>
+                                        <div className='viewIconAnswer'>
                                             <RemoveRedEyeOutlinedIcon fontSize="small" />
                                             <div>9</div>
                                         </div>
-                                        <div className={styles.thumbUp}>
+                                        <div className='thumbUp'>
                                             <ThumbUpOutlinedIcon fontSize="small" />
 
                                             <div>9</div>
                                         </div>
-                                        <div className={styles.thumbDown}>
+                                        <div className='thumbDown'>
                                             <ThumbDownAltOutlinedIcon fontSize="small" />
 
                                             <div>9</div>
