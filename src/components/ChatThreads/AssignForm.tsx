@@ -50,6 +50,8 @@ const AssignForm = (props: any) => {
                         <Typography>
                             <Box component="span" fontWeight="bold">
                                 Tag to:
+                                <Box className="user-box">abc@gmail.com</Box>
+                                <Box className="user-box">xyz@gmail.com</Box>
                             </Box>
                         </Typography>
                         <Divider sx={{ borderColor: "#898989" }} />

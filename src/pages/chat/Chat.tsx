@@ -412,6 +412,8 @@ const Chat = (props: any) => {
         setIsKeywordAnalysis(false);
         setIsChatThread(false);
         setIsKpiAnalysis(false);
+        setIsChatThreadStart(false);
+        setActiveChatThreadDetails(undefined);
     };
 
     const toggleUploads = () => {
@@ -426,6 +428,8 @@ const Chat = (props: any) => {
         setIsKeywordAnalysis(false);
         setIsKpiAnalysis(false);
         setIsChatThread(false);
+        setIsChatThreadStart(false);
+        setActiveChatThreadDetails(undefined);
     };
 
     const toggleDeepAnalysis = () => {
@@ -440,6 +444,8 @@ const Chat = (props: any) => {
         setIsKeywordAnalysis(false);
         setIsChatThread(false);
         setIsKpiAnalysis(false);
+        setIsChatThreadStart(false);
+        setActiveChatThreadDetails(undefined);
     };
 
     const toggleKeywordAnalysis = () => {
@@ -454,6 +460,8 @@ const Chat = (props: any) => {
         setIsDeepAnalysis(false);
         setIsChatThread(false);
         setIsKpiAnalysis(false);
+        setIsChatThreadStart(false);
+        setActiveChatThreadDetails(undefined);
     };
 
     const toggleChatThreads = () => {
@@ -482,6 +490,8 @@ const Chat = (props: any) => {
         setIsDeepAnalysis(false);
         setIsKeywordAnalysis(false);
         setIsChatThread(false);
+        setIsChatThreadStart(false);
+        setActiveChatThreadDetails(undefined);
     };
 
     const runChatThread = (obj: any) => {

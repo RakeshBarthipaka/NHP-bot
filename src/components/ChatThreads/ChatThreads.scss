@@ -221,10 +221,19 @@
 }
 .addedTopicsBox{
     background-color: #5376F033;
+    padding: 7px;
+    color: #0C099C;
+    border-radius:15px;
+    margin-left: 5px;
+}
+
+.user-box{
+    background-color: #C8C8C8;
     padding: 7px 10px;
     color: #0C099C;
     border-radius:15px;
     margin-left: 5px;
+    display: inline-block;
 }
 .add-topic-search-container{
     margin-bottom:10px;

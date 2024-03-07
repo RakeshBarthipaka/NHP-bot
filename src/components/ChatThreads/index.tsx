@@ -17,8 +17,6 @@ import { Threads } from "../../utils/MockData";
 
 const ChatThreads = (props: any) => {
     const ThreadElements = (item: any) => {
-        console.log("activeChatThreadDetails==========:", props.activeChatThreadDetails);
-        console.log("item==========:", item);
         return (
             <>
                 <Box
