@@ -179,7 +179,7 @@ export async function fecthApi(apiName: string) {
             throw Error(parsedResponse.error || "Unknown error");
         }
         return parsedResponse;
-        // cojukuhkuh
+        
     }
     catch (err) {
         return []

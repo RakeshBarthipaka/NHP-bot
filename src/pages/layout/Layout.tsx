@@ -33,7 +33,7 @@ const Layout = (props: any) => {
     const [Language, setLanguage] = useState<string>(`${localStorage.getItem("language") || "English"}`);
     const dispatch = useDispatch();
    
-    const abortControllerRef = useRef(new AbortController());
+    
  
    
 
@@ -129,7 +129,6 @@ const setChatGPTToken = (value: number) => {
 
     const resetChat = () => {
         dispatch(set_history(false as any)),
-        console.log("abort is called");
         dispatch(set_answers([] as any))
         dispatch(set_QnA([] as any))
         dispatch(set_recommendedQnA([] as any))
@@ -199,7 +198,7 @@ const setChatGPTToken = (value: number) => {
 
         }
 
-        console.log(value);
+       
     };
 
     
