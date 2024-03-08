@@ -1,5 +1,5 @@
 import { Outlet, NavLink } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useRef,useEffect } from "react";
 import styles from "./Layout.module.css";
 import { userInfoApi } from "../../api";
 import MobileNavBar from "./NavBarMobile";
@@ -7,7 +7,7 @@ import CGLenseLogo from "../../assets/CGLense_app_logo_v3.png";
 import { ChevronDown20Regular, ChevronUp20Regular } from "@fluentui/react-icons";
 import { useDispatch, useSelector } from 'react-redux';
 import { set_color } from './layoutSlice';
-import { set_history, set_answers, set_QnA, set_recommendedQnA, set_latestQuestion } from "../chat/chatSlice";
+import { set_history, set_answers, set_QnA, set_recommendedQnA, set_latestQuestion,resetChatList } from "../chat/chatSlice";
 import { languageList } from '../../utils/languages';
 import { ColorList } from '../../utils/colors'
 import azureSpeakerVoiceList from "../../utils/azureSpeakerVoiceList";
@@ -32,6 +32,12 @@ const Layout = (props: any) => {
     const [settings, toggleSettings] = useState<boolean>(false);
     const [Language, setLanguage] = useState<string>(`${localStorage.getItem("language") || "English"}`);
     const dispatch = useDispatch();
+   
+    const abortControllerRef = useRef(new AbortController());
+ 
+   
+
+    
     const { color: themesColor, class: themeClass } = useSelector((state: any) => state.theme.color) 
     const [dropDown, setDropDown] = useState<boolean>(false);
     const { colorCode } = useSelector((state: any) => state.theme.color)
@@ -119,13 +125,19 @@ const setChatGPTToken = (value: number) => {
         dispatch(set_history(true as any))
     }
 
+   
+
     const resetChat = () => {
         dispatch(set_history(false as any)),
-            dispatch(set_answers([] as any))
+        console.log("abort is called");
+        dispatch(set_answers([] as any))
         dispatch(set_QnA([] as any))
         dispatch(set_recommendedQnA([] as any))
         dispatch(set_latestQuestion("" as any))
+        dispatch(resetChatList(true as any))
+       
     }
+ 
 
     const handleSelectedSpeakerData = (voiceData: any) => {
         localStorage.setItem("speakerData", voiceData)
@@ -165,7 +177,6 @@ const setChatGPTToken = (value: number) => {
                 att.value = currentFontSize.toString();
 
                 textElements[i].setAttributeNode(att);
-
             }
 
             // currentFontSize = value;
@@ -190,6 +201,8 @@ const setChatGPTToken = (value: number) => {
 
         console.log(value);
     };
+
+    
     
       
 

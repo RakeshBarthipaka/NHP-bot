@@ -8,7 +8,8 @@ const chatSlice = createSlice({
     answers : [],
     qnA : [],
     recommendedQuestions : [],
-    latestQuestion : ""
+    latestQuestion : "",
+    resetChat:false,
   },
   reducers: {
     set_history: (state,action:any) => {
@@ -25,9 +26,12 @@ const chatSlice = createSlice({
     },
     set_latestQuestion : (state, action:any) => {
         state.latestQuestion = action.payload
+    },
+    resetChatList:(state,action:any)=>{
+      state.resetChat=action.payload;
     }
   },
 });
 
-export const { set_history,set_answers,set_QnA,set_recommendedQnA,set_latestQuestion } = chatSlice.actions;
+export const { set_history,set_answers,set_QnA,set_recommendedQnA,set_latestQuestion,resetChatList } = chatSlice.actions;
 export default chatSlice.reducer;
