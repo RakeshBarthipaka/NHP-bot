@@ -71,6 +71,41 @@
                 font-size: 18px;
             }
         }
+        .replyIcon{
+            border:1px solid #0C099C;
+            border-radius: 20px;
+            display: inline-block;
+            padding: 2px 8px;
+            margin-left: 5px;
+            display: inline-flex;
+            font-weight: bold;
+            font-size: 12px;
+            align-items: center;
+            gap: 6px;
+            line-height: 1;
+            background-color: #fff;
+            color:#0C099C;
+    &:hover{
+        background-color: #0C099C;
+        color:#fff;
+    }
+            span {
+                padding: 0;
+            }
+                svg{
+                    color:#0C099C;
+                    transform:rotate(0) translate(0);
+                    font-size: 18px;
+                }
+            &:hover{
+                background-color: #0C099C;
+                color:#fff;
+                svg{
+                    color:#fff;
+                    transform:rotate(-5deg) translate(0px, -1px);
+                }
+            }
+        }
         .thumbUp{
             border:1px solid #2AC141;
             border-radius: 20px;
@@ -254,3 +289,56 @@
 .active-thread-box{
     background-color: #5376F033 !important
 }
+.reply-box-top{
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    span:first-child {
+        font-size: 16px;
+        font-weight: 700;
+        color: #0C099C;
+    }
+      span:last-child {
+        font-size: 12px;
+        font-weight: 400;
+        color: #000000;
+    }
+}
+.comment-box{
+    margin-top: 40px;
+}
+.comment-box-top{
+    display: flex;
+    align-items:center;
+    span:nth-child(2) {
+        font-size: 14px;
+        font-weight: 700;
+        color: #000000;
+    }
+    span:last-child {
+        font-size: 12px;
+        font-weight: 400;
+        color: #0C099C;
+        margin-left: auto;
+    }
+}
+.name-circle{
+    width: 40px;
+    background-color: #BF5AF2CC;
+    text-align: center;
+    border-radius: 50%;
+    height: 40px;
+    line-height: 40px;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 700;
+}
+.comment-text{
+    padding-top: 20px;
+    padding-left: 50px;
+    font-size: 14px !important;
+    color: #000000 !important;
+}
+
+   
+

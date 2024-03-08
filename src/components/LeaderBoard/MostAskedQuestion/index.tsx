@@ -8,6 +8,7 @@ import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOut
 //import style from "../../LeaderBoard/LeaderBoard.module.scss";
 import { MostAskedQuestion as Questions } from "../../../utils/MockData";
 import SortOutlinedIcon from "@mui/icons-material/SortOutlined";
+import { Button, ButtonGroup } from "@mui/material";
 
 const MostAskedQuestion = (props: any) => {
     const [isDisplayAnswer, setIsDisplayAnswer] = useState<boolean>(false);
@@ -33,6 +34,10 @@ const MostAskedQuestion = (props: any) => {
                     <SortOutlinedIcon className="ShortByIcon IconElemt" />
                 </span>
                 <span className="iconText">By Date</span>
+                <ButtonGroup variant="outlined" aria-label="Basic button group">
+                    <Button>Top 10</Button>
+                    <Button>ALL</Button>
+                </ButtonGroup>
             </Box>
             {Questions.map((item, index) => {
                 return (

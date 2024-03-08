@@ -78,6 +78,7 @@ const Chat = (props: any) => {
     const [isUpload, setIsUpload] = useState<boolean>(false);
     const [isChatThread, setIsChatThread] = useState<boolean>(false);
     const [isKpiAnalysis, setIsKpiAnalysis] = useState<boolean>(false);
+    const [isReplyDisplay, setIsReplyDisplay] = useState<boolean>(false);
 
     let getDisclaimer = localStorage.getItem("Disclaimer") || false;
     const [showDisclaimer, setShowDisclaimer] = useState<any>(getDisclaimer);
@@ -414,6 +415,7 @@ const Chat = (props: any) => {
         setIsKpiAnalysis(false);
         setIsChatThreadStart(false);
         setActiveChatThreadDetails(undefined);
+        setIsReplyDisplay(false);
     };
 
     const toggleUploads = () => {
@@ -430,6 +432,7 @@ const Chat = (props: any) => {
         setIsChatThread(false);
         setIsChatThreadStart(false);
         setActiveChatThreadDetails(undefined);
+        setIsReplyDisplay(false);
     };
 
     const toggleDeepAnalysis = () => {
@@ -446,6 +449,7 @@ const Chat = (props: any) => {
         setIsKpiAnalysis(false);
         setIsChatThreadStart(false);
         setActiveChatThreadDetails(undefined);
+        setIsReplyDisplay(false);
     };
 
     const toggleKeywordAnalysis = () => {
@@ -462,6 +466,7 @@ const Chat = (props: any) => {
         setIsKpiAnalysis(false);
         setIsChatThreadStart(false);
         setActiveChatThreadDetails(undefined);
+        setIsReplyDisplay(false);
     };
 
     const toggleChatThreads = () => {
@@ -476,6 +481,7 @@ const Chat = (props: any) => {
         setIsDeepAnalysis(false);
         setIsKeywordAnalysis(false);
         setIsKpiAnalysis(false);
+        setIsReplyDisplay(false);
     };
 
     const toggleKpiAnalysis = () => {
@@ -492,6 +498,7 @@ const Chat = (props: any) => {
         setIsChatThread(false);
         setIsChatThreadStart(false);
         setActiveChatThreadDetails(undefined);
+        setIsReplyDisplay(false);
     };
 
     const runChatThread = (obj: any) => {
@@ -502,6 +509,13 @@ const Chat = (props: any) => {
 
     const handleAssign = () => {
         setIsAssignClick(true);
+    };
+
+    const handleReplyClick = (event: any) => {
+        event.stopPropagation();
+        setIsChatThreadStart(false);
+        setActiveChatThreadDetails(undefined);
+        setIsReplyDisplay(true);
     };
 
     return (
@@ -642,7 +656,14 @@ const Chat = (props: any) => {
                                             {isUpload && <Uploads />}
                                             {isKeywordAnalysis && <KeywordAnalysis tagName={tagName} />}
                                             {isDeepAnalysis && <DeepAnalysis />}
-                                            {isChatThread && <ChatThreads runChatThread={runChatThread} activeChatThreadDetails={activeChatThreadDetails} />}
+                                            {isChatThread && (
+                                                <ChatThreads
+                                                    runChatThread={runChatThread}
+                                                    activeChatThreadDetails={activeChatThreadDetails}
+                                                    isReplyDisplay={isReplyDisplay}
+                                                    handleReplyClick={handleReplyClick}
+                                                />
+                                            )}
                                             {isKpiAnalysis && <KpiAnalysis />}
                                         </div>
                                     </Grid>
