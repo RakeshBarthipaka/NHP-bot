@@ -34,7 +34,7 @@ export async function chatApi(options: ChatRequest, signal?: AbortSignal): Promi
     const controller = new AbortController();
     const mergedSignal = signal || controller.signal;
  
-    const response = await fetch("http://20.193.133.240:8544/chat", {
+    const response = await fetch("/chat", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -75,7 +75,7 @@ export function getCitationFilePath(citation: string): string {
 
 
 export async function feedBackApi(options: feedbackRequest): Promise<AskResponse> {
-    const response = await fetch("http://20.193.133.240:8544/feedback", {
+    const response = await fetch("/feedback", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -179,6 +179,7 @@ export async function fecthApi(apiName: string) {
             throw Error(parsedResponse.error || "Unknown error");
         }
         return parsedResponse;
+        // cojukuhkuh
     }
     catch (err) {
         return []
