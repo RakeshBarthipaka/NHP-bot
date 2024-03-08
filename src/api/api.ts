@@ -1,4 +1,4 @@
-import { AskRequest, AskResponse, ChatRequest, ChartJSResponse, userInfoResponse, ChartJSRequest, feedbackRequest, exportPdfRequest } from "./models";
+import { AskRequest, AskResponse, ChatRequest, ChartJSResponse, userInfoResponse, ChartJSRequest, feedbackRequest, exportPdfRequest, } from "./models";
 
 export async function askApi(options: AskRequest): Promise<AskResponse> {
     const response = await fetch("/ask", {
@@ -30,8 +30,11 @@ export async function askApi(options: AskRequest): Promise<AskResponse> {
     return parsedResponse;
 }
 
-export async function chatApi(options: ChatRequest): Promise<AskResponse> {
-    const response = await fetch("http://20.193.133.240:8544/chat", {
+export async function chatApi(options: ChatRequest, signal?: AbortSignal): Promise<AskResponse> {
+    const controller = new AbortController();
+    const mergedSignal = signal || controller.signal;
+ 
+    const response = await fetch("/chat", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -51,23 +54,18 @@ export async function chatApi(options: ChatRequest): Promise<AskResponse> {
                 suggest_followup_questions: options.overrides?.suggestFollowupQuestions
             },
             temperature: options.temperature,
-            token: options.token,
+            token: options.temperature,
             language: options.language,
-            userID: options.userID,
-            appointmentData:options.appointmentData,
-            patientemail:options.patientemail,
-            patientemailconfirm:options.patientemailconfirm,
-            // longitude:options.longitude,
-            // latitude:options.latitude,
-            // userLocation:options.userLocation
-        })
+            userID: options.userID
+        }),
+        signal: mergedSignal
     });
-
+ 
     const parsedResponse: AskResponse = await response.json();
     if (response.status > 299 || !response.ok) {
         throw Error(parsedResponse.error || "Unknown error");
     }
-
+ 
     return parsedResponse;
 }
 
@@ -77,7 +75,7 @@ export function getCitationFilePath(citation: string): string {
 
 
 export async function feedBackApi(options: feedbackRequest): Promise<AskResponse> {
-    const response = await fetch("http://20.193.133.240:8542/feedback", {
+    const response = await fetch("/feedback", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -181,6 +179,7 @@ export async function fecthApi(apiName: string) {
             throw Error(parsedResponse.error || "Unknown error");
         }
         return parsedResponse;
+        
     }
     catch (err) {
         return []
@@ -239,7 +238,7 @@ export async function UpdateAppointemtApi(options:any, apiName:any) {
 }
 
 
-const BASE_API_URL = 'http://20.193.133.240:8541';
+const BASE_API_URL = '';
 
 
 export async function postApi(options: any, apiName: string): Promise<any> {
