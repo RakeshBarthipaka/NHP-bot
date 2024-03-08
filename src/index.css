@@ -259,3 +259,33 @@ html {
 .slick-slide > div {
     height: 100%;
 }
+
+.KpisDrawer .MuiCollapse-wrapperInner {
+    width: 100%;
+}
+.KpisDrawer .MuiTextField-root span{
+    padding: 0px;
+}
+.KpisDrawer .MuiOutlinedInput-notchedOutline legend {
+    display: none;
+}
+
+.kpisTable {
+    max-height: calc(100vh - 220px);
+    margin-top: 15px;
+    background: #eee;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+.KpisDrawer .MuiTableRow-root[data-selected="true"] td.MuiTableCell-root::after {
+    background-color: var(--white-color);
+}
+.KpisDrawer .MuiTableRow-root:hover td.MuiTableCell-root::after, 
+.KpisDrawer .MuiTableRow-root[data-selected="true"]:hover td.MuiTableCell-root::after {
+    background-color: rgba(25, 118, 210, 0.05);
+}
+
+.KpisDrawer .Mui-disabled.MuiIconButton-root {
+ color: transparent;
+}

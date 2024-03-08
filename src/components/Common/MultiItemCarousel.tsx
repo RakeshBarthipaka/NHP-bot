@@ -14,7 +14,8 @@ interface Props {
 }
 
 const MultiItemCarousel = ({KpiSlides, toggleChatRightContent, toggleKpiAnalysis}:Props) => {
-    const Slides: any[] = KpiSlides
+    // const Slides: any[] = KpiSlides
+    const [slides, setSlides] = useState<any[]>(KpiSlides);
     const { colorCode } = useSelector((state: any) => state.theme.color)
     const [isRightPanelOpen, setIsRightPanelOpen] = useState(false);
 
@@ -78,6 +79,10 @@ const MultiItemCarousel = ({KpiSlides, toggleChatRightContent, toggleKpiAnalysis
         prevArrow: <SlickPrevArrow />
     };
 
+    useEffect(() => {
+        
+        setSlides(KpiSlides);
+    }, [KpiSlides]);
 
     useEffect(() => {
         const styleSheet = document.styleSheets[0];
@@ -105,7 +110,7 @@ const MultiItemCarousel = ({KpiSlides, toggleChatRightContent, toggleKpiAnalysis
         <>
            
                 <Slider  {...settings} className={styles.slider}>
-                    {Slides.map((card, index) => (
+                    {slides.map((card, index) => (
                         <div data-index={index} key={index} className={styles.kpiCard}   
                         onClick={() => {
                             toggleisRightPanelOpen();
