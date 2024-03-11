@@ -322,3 +322,51 @@ html {
     width: 540px;
     max-width: 90%;
 }
+
+/*Data table styles*/
+.MuiDataGrid-root {
+    border: none;
+
+    .first-column.cell {
+        background-color: #F2F2F7;
+        font-weight: 600;
+    }
+
+    .highlight {
+        background-color: grey;
+    }
+
+    .MuiDataGrid-cell {
+        background-color: none;
+        font-weight: 500;
+        border: 1px solid #BBBBBB;
+    }
+
+    .MuiDataGrid-columnHeader {
+        background-color: #5376F0;
+        color: white;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 16px;
+        letter-spacing: 0em;
+        text-align: left;
+        border: 1px solid #BBBBBB;
+    }
+
+    .MuiDataGrid-virtualScroller::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .MuiDataGrid-virtualScroller::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb {
+        background-color: #bbb;
+        border-radius: 6px;
+    }
+
+    .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb:hover {
+        background: #757575;
+    }
+}

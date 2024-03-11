@@ -236,70 +236,21 @@ const KpiAnalysis = () => {
 
   return (
     <>
-      <Box sx={{ width: "100%", padding: "5px 15px" }}>
-        <Box className="leader-board-heading">
+      <Box className="kpiAnalysis">
+        <Box className="kpi-analysis-heading">
           <TroubleshootOutlinedIcon />
           <h3 className="disply-page-title">KPI Analysis</h3>
         </Box>
         <Box>
           <h4 className="">Gross Margin</h4>
 
-          <Stack
-            className="stackShareOptions"
-            direction="row"
-            alignContent="center"
-            alignItems="center"
-            justifyContent="space-between"
-            paddingLeft={2}
-            sx={{
-              //paddingBottom: "20px",
-              background: "#F2F2F7",
-              padding: "5px 10px"
-            }}
-          >
+          <Stack className="stackDataOptions">
             <Box  display={"flex"} gap={1}>
               <ButtonGroup
                 disableElevation
                 size="small"
                 variant="contained"
-                aria-label="button group"
-
-                sx={{
-                  border: "1px solid rgba(12, 9, 156, 1)",
-                  background: "rgba(255, 255, 255, 1)",
-                  borderRadius: "8px",
-                  paddingTop: '2px',
-                  paddingBottom: '2px',
-                  maxHeight: '32px',
-                  overflow: 'hidden',
-                  '& .secondButton': {
-                    fontSize: '12px !important',
-                    padding: '6px 12px',
-                    border: 'none',
-                    borderRadius: "6px",
-                    marginLeft: isValue ? '3px' : '6px',
-                    marginRight: isValue ? '6px' : '6px',
-                    color: "rgba(12, 9, 156, 1)",
-                    bgcolor: "rgba(255, 255, 255, 1)",
-                    "&.MuiButtonBase-root:hover": {
-                      bgcolor: "rgba(255, 255, 255, 1)"
-                    },
-
-                  },
-                  '& .firstButton': {
-                    borderRadius: "6px",
-                    fontSize: '12px !important',
-                    padding: '12px 24px !important',
-                    marginTop: '1px',
-                    marginLeft: isValue ? '3px' : '6px',
-                    marginRight: isValue ? '6px' : '3px',
-                    height: '24px !important',
-                    background: 'rgba(12, 9, 156, 1)',
-                    "&:hover": {
-                      bgcolor: "rgba(12, 9, 156, 1) !important"
-                    },
-                  }
-                }}
+                aria-label="button group" 
               >
                 <Button onClick={() => setIsValue(false)} className={isValue ? "secondButton" : "firstButton"}>%</Button>
                 <Button onClick={() => setIsValue(true)} className={isValue ? "firstButton" : "secondButton"}>Value</Button>
@@ -309,10 +260,7 @@ const KpiAnalysis = () => {
                 size="small"
                 variant="contained"
                 aria-label="Disabled button group"
-                style={{
-                  borderRadius: "10px",
-                  border: "1px"
-                }}
+                className="disabledButtonStyle"
                 disabled
               >
                 <Button>USD</Button>
@@ -320,30 +268,15 @@ const KpiAnalysis = () => {
               </ButtonGroup>
             </Box>
 
-            <Box sx={{ display: "flex" }} >
+            <Box display={"flex"} >
               <span onClick={copyTableToClipboard}>
-                <Avatar
-                  sx={{
-                    bgcolor: "#E1E5F2",
-                    color: "rgba(12, 9, 156, 1)", "&:hover": {
-                      backgroundColor: "#0027B0",
-                      color: ' rgba(30, 255, 241, 0.8)'
-                    }
-                  }}
-                >
+                <Avatar className="iconsBtns">
                   <ContentCopyOutlinedIcon />
                 </Avatar>
               </span>
 
               <span onClick={downloadAsPdf}>
-                <Avatar sx={{
-                  bgcolor: "#E1E5F2",
-                  color: "rgba(12, 9, 156, 1)", "&:hover": {
-                    backgroundColor: "#0027B0",
-                    color: ' rgba(30, 255, 241, 0.8)'
-                  }
-                }}>
-                  {" "}
+                <Avatar  className="iconsBtns"> 
                   <FileDownloadOutlinedIcon />
                 </Avatar>
               </span>
@@ -353,49 +286,7 @@ const KpiAnalysis = () => {
 
           <Stack>
             <DataGrid
-              hideFooter
-              sx={{
-                border: 'none',
-                overflowX: "scroll !important",
-                "& .first-column.cell": {
-                  backgroundColor: "#F2F2F7",
-                  fontWeight: 600,
-                },
-                ".highlight": {
-                  bgcolor: "grey"
-                },
-                ".MuiDataGrid-cell": {
-                  backgroundColor: "none",
-                  fontWeight: 500,
-                  border: '1px solid #BBBBBB'
-                },
-                "& .MuiDataGrid-columnHeader": {
-                  backgroundColor: "#5376F0",
-                  color: "white",
-                  fontSize: "14px",
-                  fontWeight: 700,
-                  lineHeight: "16px",
-                  letterSpacing: "0em",
-                  textAlign: "left",
-                  border: '1px solid #BBBBBB'
-                },
-                // '.MuiDataGrid-root .MuiDataGrid-row:hover, MuiDataGrid-root.MuiDataGrid-row.Mui-hovered':{
-                //     backgroundColor: "unset",
-                // },
-                '& .MuiDataGrid-virtualScroller::-webkit-scrollbar': {
-                  height: '6px',
-                },
-                '& .MuiDataGrid-virtualScroller::-webkit-scrollbar-track': {
-                  background: '#f1f1f1',
-                },
-                '& .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb': {
-                  backgroundColor: '#bbb',
-                  borderRadius: '6px',
-                },
-                '& .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb:hover': {
-                  background: '#757575',
-                },
-              }}
+              hideFooter 
               rows={isValue ? rows : rowsPercentage}
               columns={columns}
               disableRowSelectionOnClick
@@ -406,7 +297,7 @@ const KpiAnalysis = () => {
             />
           </Stack>
           <Stack className="kpiAnalysisText">
-            <h5>Summary of Gross Margin</h5>
+            <h4>Summary of Gross Margin</h4>
             <ul>
               <li>
                 India has shown fluctuation with significant declines in 2020 and subsequent improvement in the following years.
@@ -419,7 +310,7 @@ const KpiAnalysis = () => {
           </Stack>
         </Box>
 
-        <Box paddingLeft={4} paddingTop={2} marginBottom={4}>
+        <Box className="chartsBox">
           <Line options={options} data={data} />
         </Box>
       </Box>

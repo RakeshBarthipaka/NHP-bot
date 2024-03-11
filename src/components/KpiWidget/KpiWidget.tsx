@@ -302,7 +302,7 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis }: Props) => {
             <Typography variant="h6" noWrap component="div"> KPIs </Typography>
           </Toolbar>
 
-          <div className="drawerContent KpisDrawer">
+          <div className="KpisDrawer">
             <MRT_GlobalFilterTextField table={table} />
             <MRT_TableContainer table={table} className={`${disableSelection ? 'disableSelection' : ' '} kpisTable`} />
 
