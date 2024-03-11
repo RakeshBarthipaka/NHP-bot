@@ -210,7 +210,7 @@ const KeywordList = (props: any) => {
                                         </div>
                                     </Box>
                                 </Stack>
-                                <Typography padding={2}>{tag.answer}</Typography>
+                                <Typography className="tagAnswers" padding={2}>{tag.answer}</Typography>
                             </div>
                         )}
                     </>

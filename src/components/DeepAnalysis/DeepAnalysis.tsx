@@ -22,12 +22,10 @@ import "./DeepAnalysis.scss";
 // }
 
 const getColor = (value: any) => {
-  
-    if(Number(value.replace("%", "")) > 20) {
-return " rgba(50, 215, 75, 1)";
-
-    } 
-    if(Number(value.replace("%", "")) > 0 && Number(value.replace("%", "")) < 20 ){
+    if (Number(value.replace("%", "")) > 20) {
+        return " rgba(50, 215, 75, 1)";
+    }
+    if (Number(value.replace("%", "")) > 0 && Number(value.replace("%", "")) < 20) {
         return "inherit";
     }
 
@@ -192,7 +190,6 @@ export const DeepAnalysis = () => {
         }
     ];
 
-
     const copyChatData = async (e: any) => {
         e.stopPropagation();
         navigator.clipboard.writeText("tessss");
@@ -201,7 +198,7 @@ export const DeepAnalysis = () => {
     function copyTableToClipboard() {
         window?.getSelection()?.removeAllRanges();
         let range = document.createRange();
-        const gridContainer: any = document.querySelector(".forMakingPdf");
+        const gridContainer: any = document.querySelector(".forMakingPdfDA");
         range.selectNode(gridContainer);
         window?.getSelection()?.addRange(range);
         document.execCommand("copy");
@@ -223,15 +220,13 @@ export const DeepAnalysis = () => {
 
     return (
         <Grid xs={12} padding={3}>
-            <div
-                className="forMakingPdfDA"
-            >
-                <Box paddingLeft={3} paddingBottom={2} className='header'>
+            <div className="forMakingPdfDA">
+                <Box paddingLeft={3} paddingBottom={2} className="header">
                     {" "}
-                    <TroubleshootOutlinedIcon className='headerIcon' /> <span className='headerText'>DEEP ANALYSIS</span>{" "}
+                    <TroubleshootOutlinedIcon className="headerIcon" /> <span className="headerText">DEEP ANALYSIS</span>{" "}
                 </Box>
                 <Box paddingBottom={2}>
-                    <hr className='verticalLineStyle' />
+                    <hr className="verticalLineStyle" />
                 </Box>
 
                 <Box paddingLeft={2}>
@@ -247,9 +242,7 @@ export const DeepAnalysis = () => {
                         justifyContent="space-between"
                         paddingLeft={2}
                     >
-                        <Box display={"flex"}
-                           gap={2}
-                        >
+                        <Box display={"flex"} gap={2}>
                             <ButtonGroup
                                 disableElevation
                                 size="small"
@@ -259,11 +252,11 @@ export const DeepAnalysis = () => {
                                 sx={{
                                     "& .secondButtonDA": {
                                         marginLeft: isValue ? "3px" : "6px",
-                                        marginRight: isValue ? "6px" : "6px",
+                                        marginRight: isValue ? "6px" : "6px"
                                     },
                                     "& .firstButtonDA": {
                                         marginLeft: isValue ? "3px" : "6px",
-                                        marginRight: isValue ? "6px" : "3px",
+                                        marginRight: isValue ? "6px" : "3px"
                                     }
                                 }}
                             >
@@ -279,10 +272,7 @@ export const DeepAnalysis = () => {
                                 size="small"
                                 variant="contained"
                                 aria-label="Disabled button group"
-                                style={{
-                                    borderRadius: "10px",
-                                    border: "1px"
-                                }}
+                                className="disabledButtonStyle"
                                 disabled
                             >
                                 <Button>USD</Button>
@@ -290,22 +280,10 @@ export const DeepAnalysis = () => {
                             </ButtonGroup>
                         </Box>
 
-                        <Box
-                            sx={{
-                                display: "flex"
-                            }}
-                        >
+                        <Box display="flex">
                             <span onClick={copyTableToClipboard}>
                                 <Avatar
-                                    sx={{
-                                        // bgcolor: "#E1E5F2",
-                                        bgcolor: "var(--bg-primary-light)",
-                                        color: "var(--active-themes)",
-                                        "&:hover": {
-                                            backgroundColor: "var(--active-themes)",
-                                            color: "#fff"
-                                        }
-                                    }}
+                                    className="avatarDA"
                                 >
                                     <ContentCopyOutlinedIcon />
                                 </Avatar>
@@ -313,61 +291,18 @@ export const DeepAnalysis = () => {
 
                             <span onClick={downloadAsPdf}>
                                 <Avatar
-                                    sx={{
-                                        bgcolor: "var(--bg-primary-light)",
-                                        color: "var(--active-themes)",
-                                        "&:hover": {
-                                            backgroundColor: "var(--active-themes)",
-                                            color: "#fff"
-                                        }
-                                    }}
+                                    className="avatarDA"
                                 >
                                     {" "}
                                     <FileDownloadOutlinedIcon />
                                 </Avatar>
                             </span>
-                            {/* <span onClick={() => {}}>
-                                <Avatar sx={{ bgcolor: "#E1E5F2",
-                                 color: "rgba(12, 9, 156, 1)", "&:hover": {
-                                            backgroundColor: "#0027B0",
-                                                color: ' rgba(30, 255, 241, 0.8)'
-                                            
-                                        } }}>
-                                    <ShareOutlinedIcon  />
-                                </Avatar>
-                            </span> */}
                         </Box>
                     </Stack>
 
                     <DataGrid
                         hideFooter
-                        sx={{
-                            overflowX: "scroll !important",
-                            "& .first-column.cell": {
-                                backgroundColor: "var(--bg-primary-light)"
-                            },
-                            ".highlight": {
-                                bgcolor: "grey"
-                            },
-                            ".MuiDataGrid-cell": {
-                                backgroundColor: "none",
-                                fontWeight: 700,
-                                border: "1px solid #BBBBBB"
-                            },
-                            "& .MuiDataGrid-columnHeader": {
-                                backgroundColor: "var(--bg-secondary)",
-                                color: "white",
-                                fontSize: "14px",
-                                fontWeight: 700,
-                                lineHeight: "16px",
-                                letterSpacing: "0em",
-                                textAlign: "left",
-                                border: "1px solid #BBBBBB"
-                            }
-                            // '.MuiDataGrid-root .MuiDataGrid-row:hover, MuiDataGrid-root.MuiDataGrid-row.Mui-hovered':{
-                            //     backgroundColor: "unset",
-                            // },
-                        }}
+                        className="deepAnalysisTable"
                         rows={isValue ? rows : rowsPercentage}
                         columns={columns}
                         disableRowSelectionOnClick
@@ -380,7 +315,7 @@ export const DeepAnalysis = () => {
                     <span>In summary the yearly trend UOM in </span>
                 </Box>
                 <Box paddingLeft={4} paddingTop={2}>
-                    {summary?.map(data => <li className='summary'>{data.text}</li>)}
+                    {summary?.map(data => <li className="summary">{data.text}</li>)}
                 </Box>
                 <Box paddingLeft={4} paddingTop={2}>
                     <span>Graph Analytics by Region </span>

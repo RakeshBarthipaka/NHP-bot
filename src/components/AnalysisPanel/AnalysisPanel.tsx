@@ -1,7 +1,7 @@
 import { Pivot, PivotItem } from "@fluentui/react";
 import DOMPurify from "dompurify";
 
-import styles from "./AnalysisPanel.module.css";
+import "./AnalysisPanel.scss";
 
 import { SupportingContent } from "../SupportingContent";
 import { AskResponse } from "../../api";
@@ -36,7 +36,7 @@ export const AnalysisPanel = ({ answer, activeTab, activeCitation, citationHeigh
                 headerText="Thought process"
                 headerButtonProps={isDisabledThoughtProcessTab ? pivotItemDisabledStyle : undefined}
             >
-                <div className={styles.thoughtProcess} dangerouslySetInnerHTML={{ __html: sanitizedThoughts }}></div>
+                <div className='thoughtProcess' dangerouslySetInnerHTML={{ __html: sanitizedThoughts }}></div>
             </PivotItem>
             <PivotItem
                 itemKey={AnalysisPanelTabs.SupportingContentTab}

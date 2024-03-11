@@ -94,7 +94,7 @@ export const QuestionInput = ({ onSend, disabled, placeholder, clearOnSend, onSe
                     onClick={sendQuestion}
                 >
                     {/* <Send28Filled primaryFill={colorCode} /> */}
-                    <SendOutlinedIcon sx={{color: "#fff"}}/>
+                    <SendOutlinedIcon className="sendIcon"/>
                 </div>
             </div>
         </Stack>
