@@ -1,7 +1,7 @@
 import { Text } from "@fluentui/react";
 import { Settings24Regular } from "@fluentui/react-icons";
 
-import styles from "./SettingsButton.module.css";
+import "./SettingsButton.scss";
 
 interface Props {
     className?: string;
@@ -10,7 +10,7 @@ interface Props {
 
 export const SettingsButton = ({ className, onClick }: Props) => {
     return (
-        <div className={`${styles.container} ${className ?? ""}`} onClick={onClick}>
+        <div className={`container ${className ?? ""}`} onClick={onClick}>
             <Settings24Regular />
             <Text>{"Developer settings"}</Text>
         </div>

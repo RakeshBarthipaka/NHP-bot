@@ -16,7 +16,7 @@ import {
 } from '@mui/icons-material';
 import DOMPurify from 'dompurify';
 import { SupportingContent } from '../SupportingContent';
-import styles from '../AnalysisPanel/AnalysisPanel.module.css';
+import '../AnalysisPanel/AnalysisPanel.scss';
 import { useSelector } from "react-redux";
 
 import { Drawer } from '@mui/material';
@@ -33,26 +33,26 @@ interface TabPanelProps {
   value: number;
 }
 
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
+// function CustomTabPanel(props: TabPanelProps) {
+//   const { children, value, index, ...other } = props;
 
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`modal-tabpanel-${index}`}
-      aria-labelledby={`modal-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
+//   return (
+//     <div
+//       role="tabpanel"
+//       hidden={value !== index}
+//       id={`modal-tabpanel-${index}`}
+//       aria-labelledby={`modal-tab-${index}`}
+//       {...other}
+//     >
+//       {value === index && (
+//         <Box sx={{ p: 3 }}>
+//           <Typography>{children}</Typography>
+//         </Box>
+//       )}
+//     </div>
+//   );
+// }
 
 export default function AnalysisPanelPopUp(props: any) {
   // let activePanel = props.activeTab === 'thoughtProcess' ? 0 : 1;
@@ -72,15 +72,13 @@ export default function AnalysisPanelPopUp(props: any) {
 
   const sanitizedThoughts = DOMPurify.sanitize(props.answer.thoughts!);
 
-  console.log(props.answer, 'answers');
-
   return (
     <div>
       <Drawer
         anchor='right'
         open={openModal}
         onClose={handleCloseModal}
-        className={styles.drawerContentDiv}
+        className='drawerContentDiv'
 
         PaperProps={{
           sx: { width: "600px", maxWidth: '90%' },
@@ -89,13 +87,13 @@ export default function AnalysisPanelPopUp(props: any) {
         {value == 'thoughtProcess' ? (
           <div>
             <Toolbar sx={{ background: colorCode, color: '#fff' }}> 
-              <PsychologyAltOutlinedIcon sx={{ marginRight: '10px'}}/>
-              <Typography variant="h6"  sx={{ fontSize: '18px' }} noWrap component="div">
+              <PsychologyAltOutlinedIcon className='iconAnalysis'/>
+              <Typography variant="h6"  fontSize={"18px"} noWrap component="div">
                 Thought Process
               </Typography>
             </Toolbar>
 
-            <div className={styles.drawerContent}>
+            <div className='drawerContent'>
 
               <div dangerouslySetInnerHTML={{ __html: sanitizedThoughts }} />
             </div>
@@ -103,13 +101,13 @@ export default function AnalysisPanelPopUp(props: any) {
         ) : value == 'supportingContent'  ?  (
           <div>
             <Toolbar sx={{ background: colorCode, color: '#fff' }}>
-              <DescriptionOutlinedIcon sx={{ marginRight: '10px'}}/>
-              <Typography variant="h6" sx={{ fontSize: '18px' }} noWrap component="div">
+              <DescriptionOutlinedIcon className='iconAnalysis'/>
+              <Typography variant="h6" fontSize={"18px"}  noWrap component="div">
                 Suggested Content
               </Typography>
             </Toolbar>
 
-            <div className={styles.drawerContent}>
+            <div className='drawerContent'>
 
               <SupportingContent supportingContent={props.answer.data_points} />
             </div>
@@ -118,13 +116,13 @@ export default function AnalysisPanelPopUp(props: any) {
         ) : (
           <div>
             <Toolbar sx={{ background: colorCode, color: '#fff' }}>
-              <HistoryOutlinedIcon sx={{ marginRight: '10px'}}/>
-              <Typography variant="h6" sx={{ fontSize: '18px' }} noWrap component="div">
+              <HistoryOutlinedIcon className='iconAnalysis'  />
+              <Typography variant="h6" fontSize={"18px"} noWrap component="div">
                 Logs Data
               </Typography>
             </Toolbar>
 
-            <div className={styles.drawerContent}>
+            <div className='drawerContent'>
 
               <LogsData />
             </div>
