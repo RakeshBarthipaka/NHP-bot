@@ -292,8 +292,33 @@ html {
 .KpisDrawer .Mui-disabled.MuiIconButton-root {
  color: transparent;
 }
+.KpisDrawer .MuiInputBase-root {
+    padding-right: 40px;
+    border-radius: 25px;
+}
+.KpisDrawer .MuiTextField-root .MuiSvgIcon-root {
+    position: absolute;
+    right: 10px
+}
+.KpisDrawer .MuiTextField-root {
+    width: 100%;
+}
 
 .kpisTable.disableSelection .Mui-selected .MuiCheckbox-root {
     pointer-events: none;
     opacity: 0.7;
+}
+
+.drawerHeader {
+    background: var(--active-themes); 
+    color: #fff;
+    gap: 10px;
+}
+.drawerHeader .MuiTypography-h6 {
+    font-size: 18px;
+}
+
+.MuiDrawer-root .MuiPaper-root {
+    width: 540px;
+    max-width: 90%;
 }

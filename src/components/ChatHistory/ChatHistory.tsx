@@ -9,6 +9,7 @@ import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
 import { fecthApi } from '../../api';
 
+import './ChatHistory.scss';
 
 interface Row {
     id: number;

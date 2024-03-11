@@ -1,0 +1,73 @@
+.carouselContainer {
+  max-width: 100%;
+  margin: 0 auto;
+  min-width: 100%;
+  padding: 0 78px 0 20px;
+  position: relative;
+}
+
+.slick-prev,
+.slick-next {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.drawerContent {
+  padding: 10px;
+  /* background: #F2F2F7; */
+  margin: 15px;
+  border-radius: 15px;
+  font-size: 14px;
+}
+
+.addKpiBtn {
+  position: absolute;
+  right: -5px;
+  top: 25%;
+  color: #E5E5EA;
+  font-size: 64px !important;
+  /* color: "#F1F1F1", fontSize: "50px"  */
+}
+
+.emptykpiCard {
+  position: relative;
+  display: block;
+  width: 180px;
+  height: 156px;
+  background: rgba(83, 118, 240, 0.1);
+  border: 2px solid rgba(83, 118, 240, 0.8);
+  border-radius: 20px;
+  padding: 15px 20px;
+
+  .addKpiBtn {
+    right: 30%;
+    color: rgba(83, 118, 240, 0.5);
+  }
+}
+
+.kpisTable {
+  max-height: calc(100vh - 220px);
+  margin-top: 15px;
+  background: #eee;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.drawerBtns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+
+  button {
+    border-radius: 25px;
+    margin: 15px 0 10px;
+    background: var(--secondary-blue-color);
+    min-width: 102px;
+
+    &:nth-child(2) {
+      background: var(--active-themes);
+    }
+  }
+}

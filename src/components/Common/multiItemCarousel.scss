@@ -133,9 +133,11 @@ p.negative {
   background: rgba(255, 69, 58, 1);
 }
 
-.slick-prev svg, .slick-next svg{
+.carouselContainer .slick-prev svg, .slick-next svg{
   font-size: 36px;
-  color: var(--active-themes);
+  margin-left: -5px;
+  // color: var(--active-themes);
+  color: #F1F1F1; 
 }
 .slick-arrow::before {
   display: none;
