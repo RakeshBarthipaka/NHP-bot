@@ -62,6 +62,9 @@ export type ChatRequest = {
     // userLocation:any,
 };
 
+      
+
+
 
 export type feedbackRequest = {
     exchange_id: string;

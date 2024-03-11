@@ -21,7 +21,7 @@ import AnalysisPanelPopUp from "../../components/AnalysisPanel/AnalysisPanelPopU
 import UserGuide from "./userGuide";
 import MultiItemCarousel from "../../components/Common/MultiItemCarousel";
 import { useDispatch, useSelector } from "react-redux";
-import { set_history, set_answers, set_QnA, set_recommendedQnA, set_latestQuestion } from "./chatSlice";
+import { set_history, set_answers, set_QnA, set_recommendedQnA, set_latestQuestion, resetChatList } from "./chatSlice";
 import UserLocationSave from "./UserLocationSave";
 import { Grid } from "@mui/material";
 import KpiWidget from "../../components/KpiWidget/KpiWidget";
@@ -58,6 +58,7 @@ const Chat = (props: any) => {
     const [threads, scrollThreads] = useState(false);
     const chatMessageStreamEnd = useRef<HTMLDivElement | null>(null);
     const [localChatData, setLocalChatData] = useState([]);
+    const resetChatBox=useSelector((state:any)=>state.chat.resetChat)
 
     const [isChatThreadStart, setIsChatThreadStart] = useState(false);
     const [activeChatThreadDetails, setActiveChatThreadDetails] = useState<activeChatThread>();
@@ -78,6 +79,11 @@ const Chat = (props: any) => {
     const [isUpload, setIsUpload] = useState<boolean>(false);
     const [isChatThread, setIsChatThread] = useState<boolean>(false);
     const [isKpiAnalysis, setIsKpiAnalysis] = useState<boolean>(false);
+
+    
+    const abortControllerRef = useRef(new AbortController());
+    
+    const [isReplyDisplay, setIsReplyDisplay] = useState<boolean>(false);
 
     let getDisclaimer = localStorage.getItem("Disclaimer") || false;
     const [showDisclaimer, setShowDisclaimer] = useState<any>(getDisclaimer);
@@ -200,6 +206,8 @@ const Chat = (props: any) => {
     };
 
     const makeApiRequest = async (question: string) => {
+        abortControllerRef.current=new AbortController();
+
         lastQuestionRef.current = question;
         dispatch(set_latestQuestion(lastQuestionRef.current as any));
         let chatGPTToken = localStorage.getItem("chatGPTToken") ? localStorage.getItem("chatGPTToken") : 0;
@@ -251,7 +259,7 @@ const Chat = (props: any) => {
                 // latitude: latitude,
                 // userLocation: userLocation
             };
-            const result = await chatApi(request);
+            const result = await chatApi(request,abortControllerRef.current.signal);
             if (result.exchange_id) {
                 let answersList = [...answers, [question, result]];
                 let qnAList = [
@@ -294,6 +302,9 @@ const Chat = (props: any) => {
         dispatch(set_recommendedQnA([] as any));
         setLocalChatData([]);
         scrollThreads(false);
+        if (abortControllerRef.current) {
+            abortControllerRef.current.abort();
+        }
     };
 
     useEffect(() => chatMessageStreamEnd.current?.scrollIntoView({ behavior: "smooth" }), [isLoading, threads]);
@@ -393,6 +404,9 @@ const Chat = (props: any) => {
         setIsKeywordAnalysis(false);
         setIsChatThread(false);
         setIsKpiAnalysis(false);
+        setIsChatThreadStart(false);
+        setActiveChatThreadDetails(undefined);
+        setIsReplyDisplay(false);
     };
 
     const toggleUploads = () => {
@@ -406,6 +420,10 @@ const Chat = (props: any) => {
         setIsDeepAnalysis(false);
         setIsKeywordAnalysis(false);
         setIsKpiAnalysis(false);
+        setIsChatThread(false);
+        setIsChatThreadStart(false);
+        setActiveChatThreadDetails(undefined);
+        setIsReplyDisplay(false);
     };
 
     const toggleDeepAnalysis = () => {
@@ -420,6 +438,9 @@ const Chat = (props: any) => {
         setIsKeywordAnalysis(false);
         setIsChatThread(false);
         setIsKpiAnalysis(false);
+        setIsChatThreadStart(false);
+        setActiveChatThreadDetails(undefined);
+        setIsReplyDisplay(false);
     };
 
     const toggleKeywordAnalysis = () => {
@@ -434,6 +455,9 @@ const Chat = (props: any) => {
         setIsDeepAnalysis(false);
         setIsChatThread(false);
         setIsKpiAnalysis(false);
+        setIsChatThreadStart(false);
+        setActiveChatThreadDetails(undefined);
+        setIsReplyDisplay(false);
     };
 
     const toggleChatThreads = () => {
@@ -448,6 +472,7 @@ const Chat = (props: any) => {
         setIsDeepAnalysis(false);
         setIsKeywordAnalysis(false);
         setIsKpiAnalysis(false);
+        setIsReplyDisplay(false);
     };
 
     const toggleKpiAnalysis = () => {
@@ -462,6 +487,9 @@ const Chat = (props: any) => {
         setIsDeepAnalysis(false);
         setIsKeywordAnalysis(false);
         setIsChatThread(false);
+        setIsChatThreadStart(false);
+        setActiveChatThreadDetails(undefined);
+        setIsReplyDisplay(false);
     };
 
     const runChatThread = (obj: any) => {
@@ -474,10 +502,24 @@ const Chat = (props: any) => {
         setIsAssignClick(true);
     };
 
+    const handleReplyClick = (event: any) => {
+        event.stopPropagation();
+        setIsChatThreadStart(false);
+        setActiveChatThreadDetails(undefined);
+        setIsReplyDisplay(true);
+    };
+
+    useEffect(()=>{
+        if(resetChatBox){
+            clearChat()
+            dispatch(resetChatList(false as any))
+        }
+    },[resetChatBox])
+
     return (
         <>
             <UserGuide />
-            {isUserTourGuide && <UserLocationSave />}
+            {/* {isUserTourGuide && <UserLocationSave />} */}
 
             {FileViewerURL && <FileViewer fileURL={FileViewerURL} onFileViewURLClicked={onFileViewURLClicked} />}
 
@@ -612,7 +654,14 @@ const Chat = (props: any) => {
                                             {isUpload && <Uploads />}
                                             {isKeywordAnalysis && <KeywordAnalysis tagName={tagName} />}
                                             {isDeepAnalysis && <DeepAnalysis />}
-                                            {isChatThread && <ChatThreads runChatThread={runChatThread} />}
+                                            {isChatThread && (
+                                                <ChatThreads
+                                                    runChatThread={runChatThread}
+                                                    activeChatThreadDetails={activeChatThreadDetails}
+                                                    isReplyDisplay={isReplyDisplay}
+                                                    handleReplyClick={handleReplyClick}
+                                                />
+                                            )}
                                             {isKpiAnalysis && <KpiAnalysis />}
                                         </div>
                                     </Grid>

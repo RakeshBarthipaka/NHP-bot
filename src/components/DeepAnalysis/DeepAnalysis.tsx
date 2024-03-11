@@ -22,12 +22,12 @@ import "./DeepAnalysis.scss";
 // }
 
 const getColor = (value: any) => {
-    console.log(value, "valueeee");
+  
+    if(Number(value.replace("%", "")) > 20) {
+return " rgba(50, 215, 75, 1)";
 
-    if (Number(value.replace("%", "")) > 20) {
-        return " rgba(50, 215, 75, 1)";
-    }
-    if (Number(value.replace("%", "")) > 0 && Number(value.replace("%", "")) < 20) {
+    } 
+    if(Number(value.replace("%", "")) > 0 && Number(value.replace("%", "")) < 20 ){
         return "inherit";
     }
 

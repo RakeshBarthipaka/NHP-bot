@@ -23,10 +23,10 @@ import "./SearchBar.scss";
 const SearchBar = () => {
     return (
         <form noValidate autoComplete="off">
-            <FormControl hiddenLabel sx={{ width: "25ch" }} className="searchBar">
+            <FormControl hiddenLabel sx={{ width: "100%" }} className="searchBar">
                 {/* <OutlinedInput placeholder="Please enter text" /> */}
                 {/* <MyFormHelperText /> */}
-                <TextField variant="standard" placeholder="Please enter text" InputProps={{ disableUnderline: true }} />
+                <TextField variant="standard" placeholder="Search" sx={{ width: "100%" }} InputProps={{ disableUnderline: true }} />
                 <span className="searchIcon">
                     <SearchOutlinedIcon />
                 </span>

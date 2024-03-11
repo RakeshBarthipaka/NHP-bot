@@ -1,4 +1,4 @@
-import { AskRequest, AskResponse, ChatRequest, ChartJSResponse, userInfoResponse, ChartJSRequest, feedbackRequest, exportPdfRequest } from "./models";
+import { AskRequest, AskResponse, ChatRequest, ChartJSResponse, userInfoResponse, ChartJSRequest, feedbackRequest, exportPdfRequest, } from "./models";
 
 export async function askApi(options: AskRequest): Promise<AskResponse> {
     const response = await fetch("/ask", {
@@ -30,8 +30,11 @@ export async function askApi(options: AskRequest): Promise<AskResponse> {
     return parsedResponse;
 }
 
-export async function chatApi(options: ChatRequest): Promise<AskResponse> {
-    const response = await fetch("http://20.193.133.240:8542/chat", {
+export async function chatApi(options: ChatRequest, signal?: AbortSignal): Promise<AskResponse> {
+    const controller = new AbortController();
+    const mergedSignal = signal || controller.signal;
+ 
+    const response = await fetch("http://20.193.133.240:8544/chat", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -51,23 +54,18 @@ export async function chatApi(options: ChatRequest): Promise<AskResponse> {
                 suggest_followup_questions: options.overrides?.suggestFollowupQuestions
             },
             temperature: options.temperature,
-            token: options.token,
+            token: options.temperature,
             language: options.language,
-            userID: options.userID,
-            appointmentData:options.appointmentData,
-            patientemail:options.patientemail,
-            patientemailconfirm:options.patientemailconfirm,
-            // longitude:options.longitude,
-            // latitude:options.latitude,
-            // userLocation:options.userLocation
-        })
+            userID: options.userID
+        }),
+        signal: mergedSignal
     });
-
+ 
     const parsedResponse: AskResponse = await response.json();
     if (response.status > 299 || !response.ok) {
         throw Error(parsedResponse.error || "Unknown error");
     }
-
+ 
     return parsedResponse;
 }
 
@@ -75,9 +73,8 @@ export function getCitationFilePath(citation: string): string {
     return `/content/${citation}`;
 }
 
-
 export async function feedBackApi(options: feedbackRequest): Promise<AskResponse> {
-    const response = await fetch("http://20.193.133.240:8542/feedback", {
+    const response = await fetch("/feedback", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -87,7 +84,7 @@ export async function feedBackApi(options: feedbackRequest): Promise<AskResponse
             answer: options.answer,
             reaction: options.reaction,
             comment_categories: options.comment_categories,
-            additional_comments: options.additional_comments,
+            additional_comments: options.additional_comments
         })
     });
 
@@ -101,41 +98,36 @@ export async function feedBackApi(options: feedbackRequest): Promise<AskResponse
 
 export async function exportChatbotApi() {
     return fetch("/export")
-        .then((res) => res.blob())
-        .then((blob) => URL.createObjectURL(blob))
-        .then((href) => {
-            Object.assign(document.createElement('a'), {
+        .then(res => res.blob())
+        .then(blob => URL.createObjectURL(blob))
+        .then(href => {
+            Object.assign(document.createElement("a"), {
                 href,
-                download: 'ChatbotMessage.xlsx',
+                download: "ChatbotMessage.xlsx"
             }).click();
         });
 }
 
 export async function exportChatbotPdfApi(options: exportPdfRequest) {
-    return fetch("/export_pdf",
-        {
-            method: "POST",
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(
-                {
-                    queries: options.queries
-                }
-            )
-        }
-    )
-        .then((res) => res.blob())
-        .then((blob) => URL.createObjectURL(blob))
-        .then((href) => {
-            Object.assign(document.createElement('a'), {
+    return fetch("/export_pdf", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            queries: options.queries
+        })
+    })
+        .then(res => res.blob())
+        .then(blob => URL.createObjectURL(blob))
+        .then(href => {
+            Object.assign(document.createElement("a"), {
                 href,
-                download: 'UserChatbotMessage.pdf',
+                download: "UserChatbotMessage.pdf"
             }).click();
         });
 }
-
 
 export async function userInfoApi(): Promise<userInfoResponse> {
     const response = await fetch("/get_user_info", {
@@ -143,11 +135,10 @@ export async function userInfoApi(): Promise<userInfoResponse> {
     });
     const parsedResponse: userInfoResponse = await response.json();
     if (response.status > 299 || !response.ok) {
-        return ({ user_id: "U-Chat", status: "FAIL" });
+        return { user_id: "U-Chat", status: "FAIL" };
     }
     return parsedResponse;
 }
-
 
 export async function ChartJSApi(options: ChartJSRequest): Promise<ChartJSResponse> {
     const response = await fetch("/generate_chart", {
@@ -167,10 +158,9 @@ export async function ChartJSApi(options: ChartJSRequest): Promise<ChartJSRespon
     return parsedResponse;
 }
 
-
 export async function fecthApi(apiName: string) {
     try {
-        const response = await fetch(`http://20.193.133.240:8542/${apiName}`, {
+        const response = await fetch(`http://20.193.133.240:8544/${apiName}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -181,11 +171,10 @@ export async function fecthApi(apiName: string) {
             throw Error(parsedResponse.error || "Unknown error");
         }
         return parsedResponse;
+        
+    } catch (err) {
+        return [];
     }
-    catch (err) {
-        return []
-    }
-
 }
 
 export async function CreateAPI(options: any, apiName: string): Promise<any> {
@@ -193,8 +182,8 @@ export async function CreateAPI(options: any, apiName: string): Promise<any> {
         const response = await fetch(`/${apiName}`, {
             method: "POST",
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                Accept: "application/json",
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(options)
         });
@@ -203,14 +192,12 @@ export async function CreateAPI(options: any, apiName: string): Promise<any> {
             throw Error(parsedResponse.error || "Unknown error");
         }
         return parsedResponse;
-    }
-    catch (err) {
-        return []
+    } catch (err) {
+        return [];
     }
 }
 
-
-export async function DeleteAppointemtApi(apiName:any) {
+export async function DeleteAppointemtApi(apiName: any) {
     const response = await fetch(`/${apiName}`, {
         method: "delete"
     });
@@ -221,13 +208,12 @@ export async function DeleteAppointemtApi(apiName:any) {
     return parsedResponse;
 }
 
-
-export async function UpdateAppointemtApi(options:any, apiName:any) {
+export async function UpdateAppointemtApi(options: any, apiName: any) {
     const response = await fetch(`/${apiName}`, {
         method: "PUT",
         headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            Accept: "application/json",
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(options)
     });
@@ -239,7 +225,7 @@ export async function UpdateAppointemtApi(options:any, apiName:any) {
 }
 
 
-const BASE_API_URL = 'http://20.193.133.240:8541';
+const BASE_API_URL = '';
 
 
 export async function postApi(options: any, apiName: string): Promise<any> {
@@ -273,9 +259,8 @@ export async function getApi(apiName: string) {
             throw Error(parsedResponse.error || "Unknown error");
         }
         return parsedResponse;
-    }
-    catch (err) {
-        return []
+    } catch (err) {
+        return [];
     }
 }
 
@@ -284,8 +269,8 @@ export async function postApiWithJson(options: any, apiName: string): Promise<an
         const response = await fetch(`${BASE_API_URL}/${apiName}`, {
             method: "POST",
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                Accept: "application/json",
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(options)
         });
@@ -294,13 +279,12 @@ export async function postApiWithJson(options: any, apiName: string): Promise<an
             throw Error(parsedResponse.error || "Unknown error");
         }
         return parsedResponse;
-    }
-    catch (err) {
-        return []
+    } catch (err) {
+        return [];
     }
 }
 
-export async function updateApi(options:any, apiName:any) {
+export async function updateApi(options: any, apiName: any) {
     const response = await fetch(`${BASE_API_URL}/${apiName}`, {
         method: "PUT",
         body: options
@@ -312,8 +296,7 @@ export async function updateApi(options:any, apiName:any) {
     return parsedResponse;
 }
 
-
-export async function deleteApi(apiName:any) {
+export async function deleteApi(apiName: any) {
     const response = await fetch(`${BASE_API_URL}/${apiName}`, {
         method: "delete"
     });

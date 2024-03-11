@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -14,7 +14,9 @@ interface Props {
 }
 
 const MultiItemCarousel = ({KpiSlides, toggleChatRightContent, toggleKpiAnalysis}:Props) => {
-    const Slides: any[] = KpiSlides
+    // const Slides: any[] = KpiSlides
+    const [slides, setSlides] = useState<any[]>(KpiSlides);
+    let sliderRef = React.useRef<Slider>(null);
     const { colorCode } = useSelector((state: any) => state.theme.color)
     const [isRightPanelOpen, setIsRightPanelOpen] = useState(false);
 
@@ -78,6 +80,18 @@ const MultiItemCarousel = ({KpiSlides, toggleChatRightContent, toggleKpiAnalysis
         prevArrow: <SlickPrevArrow />
     };
 
+    const goToSlideOne = () => {
+        const sliderElement = sliderRef.current;
+        if(sliderElement) {
+            sliderElement.slickGoTo(0);
+            console.log('changed');
+        }
+    }
+
+    useEffect(() => { 
+        setSlides(KpiSlides);
+        goToSlideOne();
+    }, [KpiSlides]);
 
     useEffect(() => {
         const styleSheet = document.styleSheets[0];
@@ -97,20 +111,19 @@ const MultiItemCarousel = ({KpiSlides, toggleChatRightContent, toggleKpiAnalysis
 
     const toggleisRightPanelOpen = () => {
         setIsRightPanelOpen(current => !current);
-        console.log(isRightPanelOpen);
     };
 
 
     return (
         <>
            
-                <Slider  {...settings} className={styles.slider}>
-                    {Slides.map((card, index) => (
+                <Slider  {...settings} className={styles.slider} ref={sliderRef}>
+                    {slides.map((card, index) => (
                         <div data-index={index} key={index} className={styles.kpiCard}   
-                        // onClick={() => {
-                        //     toggleisRightPanelOpen();
-                        //     toggleKpiAnalysis();
-                        // }}
+                        onClick={() => {
+                            toggleisRightPanelOpen();
+                            toggleKpiAnalysis();
+                        }}
                         >
                             <h5>{card.kpiname}</h5>
                             <h4>{card.kpivalue}</h4>

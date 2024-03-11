@@ -40,23 +40,23 @@ export default function App() {
     }, [isLoaded]);
 
 
-    useEffect(() => {
-        const hasPermission = localStorage.getItem("geolocationPermissionGranted");    
-        if (hasPermission === null) {
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              setLatitude(position.coords.latitude);
-              setLongitude(position.coords.longitude);
-              localStorage.setItem("geolocationPermissionGranted", "true");
-              localStorage.setItem("latitude", `${position.coords.latitude}`);
-              localStorage.setItem("longitude", `${position.coords.longitude}`);
-            },
-            (error) => {
-              console.error("Error getting location:", error.message);
-            }
-          );
-        }
-      }, []);
+    // useEffect(() => {
+    //     const hasPermission = localStorage.getItem("geolocationPermissionGranted");    
+    //     if (hasPermission === null) {
+    //       navigator.geolocation.getCurrentPosition(
+    //         (position) => {
+    //           setLatitude(position.coords.latitude);
+    //           setLongitude(position.coords.longitude);
+    //           localStorage.setItem("geolocationPermissionGranted", "true");
+    //           localStorage.setItem("latitude", `${position.coords.latitude}`);
+    //           localStorage.setItem("longitude", `${position.coords.longitude}`);
+    //         },
+    //         (error) => {
+    //           console.error("Error getting location:", error.message);
+    //         }
+    //       );
+    //     }
+    //   }, []);
 
 
     return (

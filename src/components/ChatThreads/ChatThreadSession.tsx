@@ -2,9 +2,8 @@ import React from "react";
 import "./ChatThreads.scss";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-//import Button from "@mui/material/Button";
-//import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import Divider from "@mui/material/Divider";
+import "bootstrap/dist/css/bootstrap.css";
+import AssignForm from "./AssignForm";
 
 const ChatThreadSession = (props: any) => {
     return (
@@ -20,30 +19,7 @@ const ChatThreadSession = (props: any) => {
                     Assign
                 </Box>
             </Box>
-            {props.isAssignClick && (
-                <Box className="chatThreadAssignedBox">
-                    <Typography>
-                        <Box component="span" fontWeight="bold">
-                            Comments:
-                        </Box>{" "}
-                        Let us discuss on this point
-                    </Typography>
-                    <Typography>
-                        <Box component="span" fontWeight="bold">
-                            Tag to:
-                        </Box>
-                    </Typography>
-                    <Divider />
-                    <Box className="addMoreTopicsBox">
-                        <Box component="span" className="textSpan">
-                            + Add More Topics
-                        </Box>
-                        <Box component="span" className="postSpan">
-                            POST
-                        </Box>
-                    </Box>
-                </Box>
-            )}
+            {props.isAssignClick && <AssignForm {...{ isAssignClick: props.isAssignClick }} />}
             <br></br>
         </>
     );
