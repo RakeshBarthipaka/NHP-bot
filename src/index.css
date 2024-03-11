@@ -263,7 +263,7 @@ html {
 .KpisDrawer .MuiCollapse-wrapperInner {
     width: 100%;
 }
-.KpisDrawer .MuiTextField-root span{
+.KpisDrawer span{
     padding: 0px;
 }
 .KpisDrawer .MuiOutlinedInput-notchedOutline legend {
@@ -288,4 +288,9 @@ html {
 
 .KpisDrawer .Mui-disabled.MuiIconButton-root {
  color: transparent;
+}
+
+.kpisTable.disableSelection .Mui-selected .MuiCheckbox-root {
+    pointer-events: none;
+    opacity: 0.7;
 }

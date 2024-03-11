@@ -103,6 +103,60 @@ const result = [
     change: "0.19%",
     growth: true,
     timeduration: "Last month to this month"
+  },
+  {
+    id: 7,
+    kpiname: "Gross Margin",
+    kpivalue: "15k",
+    comparisonvalue: "12k",
+    change: "0.19%",
+    growth: true,
+    timeduration: "Last month to this month"
+  },
+  {
+    id: 8,
+    kpiname: "Sales Growth",
+    kpivalue: "€ 6234",
+    comparisonvalue: "12k",
+    change: "0.19%",
+    growth: true,
+    timeduration: "Last month to this month"
+  },
+  {
+    id: 9,
+    kpiname: "Net Sales",
+    kpivalue: "125452 units",
+    comparisonvalue: "12k",
+    change: "0.19%",
+    growth: false,
+    timeduration: "Last month to this month"
+  },
+  {
+    id: 10,
+    kpiname: "Revenue",
+    kpivalue: "€ 8234",
+    comparisonvalue: "12k",
+    change: "0.19%",
+    growth: true,
+    timeduration: "Last month to this month"
+  },
+  {
+    id: 11,
+    kpiname: "Profit Margin",
+    kpivalue: "15k",
+    comparisonvalue: "12k",
+    change: "0.19%",
+    growth: false,
+    timeduration: "Last month to this month"
+  },
+  {
+    id: 12,
+    kpiname: "Cash Inflow",
+    kpivalue: "€ 5234",
+    comparisonvalue: "12k",
+    change: "0.19%",
+    growth: true,
+    timeduration: "Last month to this month"
   }
 ];
 
@@ -129,18 +183,15 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis }: Props) => {
 
   const initialKpis = [1, 2, 3, 4]
   const [data, setData] = useState(() => initData);
-  const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
-  const [globalFilter, setGlobalFilter] = useState('');
-  const [countSelectedIDs, setCountSelectedIDs] = useState<any[]>();
-
+  const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({}); 
+  const [disableSelection, setDisableSelection] = useState(false);
   const [openKpiModal, setOpenKpiModal] = useState(false);
-  const [selectedKpis, setSelectedKpis] = useState<any[]>(initialKpis);
+  // const [selectedKpis, setSelectedKpis] = useState<any[]>(initialKpis);
 
   const initialSlides = getKpiSlides(initialKpis, result);
   const [kpiSlides, setKpiSlides] = useState<any[]>(initialSlides);
   const { colorCode } = useSelector((state: any) => state.theme.color)
-  const [searchText, setSearchText] = useState("");
-  // const [tableData, setTableData] = useState<any[]>(rows);
+  
 
 
   const customTableIcons: Partial<MRT_Icons> = {
@@ -159,11 +210,25 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis }: Props) => {
   }, []);
 
   useEffect(() => {
-    // if(table.getSelectedRowModel().rows.length <= 4) {
+    if(table.getSelectedRowModel().rows.length <= 4) {
+      setDisableSelection(true);
+    } else {
+      setDisableSelection(false);
+    } 
+
+    // const selectedElements: any = document.querySelectorAll('.MuiTableRow-root.Mui-selected MuiCheckbox-root');
+    // for (let i = 0; i < selectedElements.length; i++) {
+    //   if(table.getSelectedRowModel().rows.length <= 4) {
+    //     // selectedElements[i].style = 'pointer-events: none; color: #c5c5c5';
+    //     // selectedElements[i].classList.add = 'diabled';
+    //   } else { 
+    //   }
     // } 
 
-    console.info({ rowSelection });
+
+    // console.info({ rowSelection });
   }, [rowSelection]);
+
 
 
 
@@ -186,7 +251,7 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis }: Props) => {
     enableSelectAll: false,
     getRowId: (row): any => row.id,
     onRowSelectionChange: setRowSelection,
-    state: { rowSelection, globalFilter, showGlobalFilter: true, },
+    state: { rowSelection, showGlobalFilter: true },
 
     enableRowOrdering: true,
     muiRowDragHandleProps: ({ table }) => ({
@@ -198,8 +263,7 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis }: Props) => {
             0,
             data.splice(draggingRow.index, 1)[0],
           );
-          setData([...data]);
-          console.log(data);
+          setData([...data]); 
         }
       },
     }),
@@ -270,7 +334,7 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis }: Props) => {
                 },
               }}
             />
-            <MRT_TableContainer table={table} className="kpisTable" />
+            <MRT_TableContainer table={table} className={`${disableSelection ? 'disableSelection':' '} kpisTable`}/>
 
 
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', }}>
