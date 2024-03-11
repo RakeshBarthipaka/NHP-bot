@@ -7,31 +7,28 @@
     flex: 1;
 }
 
-.headerText{
-color: var(--active-themes);
-font-size: 18px;
-font-weight: 600;
-line-height: 21px;
-letter-spacing: 0em;
-text-align: left;
-
+.headerText {
+    color: var(--active-themes);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 21px;
+    letter-spacing: 0em;
+    text-align: left;
 }
 
-.summary{
-font-size: 14px;
-font-weight: 400;
-line-height: 34px;
-letter-spacing: 0em;
-text-align: left;
-
+.summary {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 34px;
+    letter-spacing: 0em;
+    text-align: left;
 }
 
-.headerIcon{
+.headerIcon {
     color: var(--active-themes);
     width: 30px;
     height: 30px;
 }
-
 
 @media only screen and (max-height: 780px) {
     .exampleText {
@@ -39,7 +36,6 @@ text-align: left;
         height: 80px;
     }
 }
-
 
 @media only screen and (max-width: 780px) {
     .examplesNavList li {
@@ -53,45 +49,88 @@ text-align: left;
     justify-content: flex-end;
     /* padding: 15px 20px; */
     background: #eee;
-    border: 1px solid #E5E5EA;
+    border: 1px solid #e5e5ea;
     border-radius: 0 0 30px 30px;
     margin: 0px -20px -20px -20px;
 }
 
-.shareIconStyles{
+.shareIconStyles {
     width: 37px;
-height: 37px;
-top: 337px;
-left: 1682px;
-border-radius: 30px;
-
+    height: 37px;
+    top: 337px;
+    left: 1682px;
+    border-radius: 30px;
 }
 
-.verticalLineStyle{
+.verticalLineStyle {
     border: 2px solid var(--bg-primary-light);
 }
 
-.headerText{
-font-size: 14px;
-font-weight: 700;
-line-height: 18px;
-letter-spacing: 0em;
-text-align: left;
+.headerText {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: left;
 }
 
-.subHeaderText{
-font-size: 14px;
-font-weight: 400;
-line-height: 18px;
-letter-spacing: 0em;
-text-align: left;
+.subHeaderText {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: left;
 }
 
-.iconText{
+.iconText {
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
     letter-spacing: 0em;
     text-align: left;
     color: var(--active-themes);
+}
+
+.forMakingPdf {
+    width: 100%;
+    padding-bottom: 24px;
+
+    .stackShareOptions {
+        padding: "15px 15px";
+
+        div {
+            .keywordBtnGrp {
+                border: 1px !important;
+                background: var(--active-themes);
+                border-radius: 20px;
+                padding-top: 1px;
+                padding-bottom: 1px;
+                .firstButton {
+                    font-size: 12px !important;
+                    padding: 6px 14px;
+                    border-radius: 20px !important;
+                    background: var(--active-themes);
+                    border: none !important;
+                    .MuiButtonBase-root:hover {
+                        background-color: transparent;
+                    }
+                }
+                .secondButton {
+                    font-size: 12px !important;
+                    padding: 2px 4px !important;
+                    margin-top: 2px;
+                    margin-right: 2px;
+                    height: 28px !important;
+                    border-radius: 20px !important;
+                    background: rgba(255, 255, 255, 1);
+                    color: var(--active-themes);
+                    border-color: var(--active-themes);
+                    &:hover {
+                        background-color: rgba(255, 255, 255, 1) !important;
+                    }
+                }
+            }
+        }
+        
     }
+}

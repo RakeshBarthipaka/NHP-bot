@@ -108,17 +108,16 @@ const KeywordList = (props: any) => {
                                 toggleAnswerDisplay(tag.id);
                             }}
                             sx={{
-                                backgroundColor: isDisplayAnswerToggle && isDisplayAnswer === tag.id ? "var(--bg-secondary)" : "var(--bg-primary-light)",
-                                color:
-                                    isDisplayAnswerToggle && isDisplayAnswer === tag.id ? "rgba(255, 255, 255, 1) !important" : "rgba(51, 51, 51, 1) !important"
+                                backgroundColor:
+                                    isDisplayAnswerToggle && isDisplayAnswer === tag.id
+                                        ? "var(--bg-secondary) !important"
+                                        : "var(--bg-primary-light) !important",
+                                color: isDisplayAnswerToggle && isDisplayAnswer === tag.id ? "var(--white-color) !important" : "var(--black-color) !important"
                             }}
                         >
                             <Box
-                                sx={{
-                                    width: "23px",
-                                    float: "left",
-                                    paddingRight: "2px"
-                                }}
+                                width={'23px'}
+                                paddingRight={1}
                             >
                                 {isDisplayAnswer === tag.id && isDisplayAnswerToggle ? (
                                     <RemoveCircleOutlineOutlinedIcon
@@ -139,8 +138,8 @@ const KeywordList = (props: any) => {
                                     sx={{
                                         color:
                                             isDisplayAnswerToggle && isDisplayAnswer === tag.id
-                                                ? "#fff !important"
-                                                : "rgba(51, 51, 51, 1) !important"
+                                                ? "var(--white-color) !important"
+                                                : "var(--black-color) !important"
                                     }}
                                     className="question"
                                 >
@@ -150,10 +149,10 @@ const KeywordList = (props: any) => {
                                     sx={{
                                         color:
                                             isDisplayAnswerToggle && isDisplayAnswer === tag.id
-                                                ? "#fff !important"
+                                                ? "var(--white-color)!important"
                                                 : "var(--active-themes) !important"
                                     }}
-                                    className="otherInfo"
+                                    className="otherInfoKL"
                                 >
                                     requested by: {tag.requestedBy} requested on: {tag.requestedDate}
                                     <span>
@@ -161,10 +160,10 @@ const KeywordList = (props: any) => {
                                             sx={{
                                                 color:
                                                     isDisplayAnswerToggle && isDisplayAnswer === tag.id
-                                                        ? "#fff !important"
+                                                        ? "var(--white-color) !important"
                                                         : "var(--active-themes) !important"
                                             }}
-                                            className="viewIcon"
+                                            className="viewIconKL"
                                         />
                                     </span>{" "}
                                     9
@@ -173,91 +172,45 @@ const KeywordList = (props: any) => {
                         </Box>
                         {isDisplayAnswer === tag.id && isDisplayAnswerToggle && (
                             <div className="answer-container">
-                                <Stack className='iconContainer' direction={"row"} alignItems={"center"} justifyContent={"space-between"}>
+                                <Stack className="iconContainer" direction={"row"} alignItems={"center"} justifyContent={"space-between"}>
                                     <Box
-                                        sx={{
-                                            display: "flex"
-                                        }}
+                                       display={"flex"}
                                     >
                                         <span onClick={() => {}}>
-                                            <Avatar
-                                                sx={{
-                                                    bgcolor: "var(--bg-primary-light)",
-                                                    color: "var(--active-themes)",
-                                                    "&:hover": {
-                                                        backgroundColor: "var(--bg-secondary)",
-                                                        color: "#fff"
-                                                    }
-                                                }}
-                                            >
+                                            <Avatar className="avatarIcons">
                                                 <RateReviewOutlinedIcon />
                                             </Avatar>
                                         </span>
                                         <span onClick={copyTableToClipboard}>
-                                            <Avatar
-                                               sx={{
-                                                bgcolor: "var(--bg-primary-light)",
-                                                color: "var(--active-themes)",
-                                                "&:hover": {
-                                                    backgroundColor: "var(--bg-secondary)",
-                                                    color: "#fff"
-                                                }
-                                            }}
-                                            >
+                                            <Avatar className="avatarIcons">
                                                 <ContentCopyOutlinedIcon />
                                             </Avatar>
                                         </span>
 
                                         <span onClick={downloadAsPdf}>
-                                            <Avatar
-                                                  sx={{
-                                                    bgcolor: "var(--bg-primary-light)",
-                                                    color: "var(--active-themes)",
-                                                    "&:hover": {
-                                                        backgroundColor: "var(--bg-secondary)",
-                                                        color: "#fff"
-                                                    }
-                                                }}
-                                            >
+                                            <Avatar className="avatarIcons">
                                                 {" "}
                                                 <FileDownloadOutlinedIcon />
                                             </Avatar>
                                         </span>
-                                        {/* <span onClick={() => {}}>
-                                                <Avatar
-                                                    sx={{
-                                                        bgcolor: "#E1E5F2",
-                                                        color: "rgba(12, 9, 156, 1)",
-                                                        "&:hover": {
-                                                            backgroundColor: "#0027B0",
-                                                            color: " rgba(30, 255, 241, 0.8)"
-                                                        }
-                                                    }}
-                                                >
-                                                    <ShareOutlinedIcon />
-                                                </Avatar>
-                                            </span> */}
                                     </Box>
                                     <Box gap={1} display={"flex"}>
-                                        <div className='viewIconAnswer'>
+                                        <div className="viewIconAnswer">
                                             <RemoveRedEyeOutlinedIcon fontSize="small" />
                                             <div>9</div>
                                         </div>
-                                        <div className='thumbUp'>
+                                        <div className="thumbUp">
                                             <ThumbUpOutlinedIcon fontSize="small" />
-
                                             <div>9</div>
                                         </div>
-                                        <div className='thumbDown'>
+                                        <div className="thumbDown">
                                             <ThumbDownAltOutlinedIcon fontSize="small" />
 
                                             <div>9</div>
                                         </div>
                                     </Box>
                                 </Stack>
-                                <Typography padding={2}>
-                                    {tag.answer}
-                                </Typography>
+                                <Typography padding={2}>{tag.answer}</Typography>
                             </div>
                         )}
                     </>

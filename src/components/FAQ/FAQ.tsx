@@ -47,7 +47,7 @@ export const RecommendedFAQ = ({ onExampleClicked }: Props) => {
 
     return (
         <>
-            <Accordion className='recommendedFAQBlock' sx={{border: "1px solid var(--border-color)", boxShadow: "none" }} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+            <Accordion className='recommendedFAQBlock' expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon sx={{color:colorCode}}/>}
                     aria-controls="panel1bh-content"
@@ -62,7 +62,7 @@ export const RecommendedFAQ = ({ onExampleClicked }: Props) => {
                     <div className='recommendedFAQList'  >
                         {
                             faqList.map((item: any, i: any) => (
-                                <div className='styles.recommendedFAQItem' key={i} onClick={() => onExampleClicked(item)}>
+                                <div className='recommendedFAQItem' key={i} onClick={() => onExampleClicked(item)}>
                                     <p>{item}</p>
                                 </div>
                             ))

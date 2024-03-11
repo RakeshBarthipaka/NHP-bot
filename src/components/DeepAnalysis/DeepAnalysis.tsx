@@ -209,7 +209,7 @@ export const DeepAnalysis = () => {
     }
 
     const downloadAsPdf = () => {
-        const gridContainer: any = document.querySelector(".forMakingPdf");
+        const gridContainer: any = document.querySelector(".forMakingPdfDA");
 
         html2canvas(gridContainer).then(canvas => {
             const imgData = canvas.toDataURL("image/png");
@@ -224,11 +224,7 @@ export const DeepAnalysis = () => {
     return (
         <Grid xs={12} padding={3}>
             <div
-                className="forMakingPdf"
-                style={{
-                    width: "100%",
-                    paddingBottom: "24px"
-                }}
+                className="forMakingPdfDA"
             >
                 <Box paddingLeft={3} paddingBottom={2} className='header'>
                     {" "}
@@ -244,72 +240,37 @@ export const DeepAnalysis = () => {
 
                 <Box paddingLeft={3} paddingTop={4}>
                     <Stack
-                        className="stackShareOptions"
+                        className="stackShareOptionsDA"
                         direction="row"
                         alignContent="center"
                         alignItems="center"
                         justifyContent="space-between"
                         paddingLeft={2}
-                        sx={{
-                            //paddingBottom: "20px",
-                            background: "var(--bg-primary-light)",
-                            padding: "15px 15px"
-                        }}
                     >
-                        <Box
-                            sx={{
-                                display: "flex",
-                                gap: "10px"
-                            }}
+                        <Box display={"flex"}
+                           gap={2}
                         >
                             <ButtonGroup
                                 disableElevation
                                 size="small"
                                 variant="contained"
                                 aria-label="button group"
+                                className="keywordBtnGrpDA"
                                 sx={{
-                                    border: "1px solid var(--active-themes)",
-                                    background: "rgba(255, 255, 255, 1)",
-                                    borderRadius: "20px",
-                                    paddingTop: "2px",
-                                    paddingBottom: "1px",
-                                    maxHeight: "32px",
-                                    overflow: "hidden",
-                                    "& .secondButton": {
-                                        fontSize: "12px !important",
-                                        padding: "6px 12px",
-                                        border: "0 !important",
-                                        borderRadius: "8px",
+                                    "& .secondButtonDA": {
                                         marginLeft: isValue ? "3px" : "6px",
                                         marginRight: isValue ? "6px" : "6px",
-                                        color: "var(--active-themes)",
-                                        bgcolor: "rgba(255, 255, 255, 1)",
-                                        "&.MuiButtonBase-root:hover": {
-                                            bgcolor: "rgba(255, 255, 255, 1)"
-                                        }
                                     },
-                                    "& .firstButton": {
-                                        borderRadius: "12px",
-                                        border: "0 !important",
-                                        fontSize: "12px !important",
-                                        padding: "12px 24px !important",
-                                        marginTop: "1px",
+                                    "& .firstButtonDA": {
                                         marginLeft: isValue ? "3px" : "6px",
                                         marginRight: isValue ? "6px" : "3px",
-                                        height: "24px !important",
-                                        background: "var(--active-themes)",
-
-                                        // background: 'rgba(12, 9, 156, 1)',
-                                        "&:hover": {
-                                            background: "var(--active-themes)"
-                                        }
                                     }
                                 }}
                             >
-                                <Button onClick={() => setIsValue(false)} className={isValue ? "secondButton" : "firstButton"}>
+                                <Button onClick={() => setIsValue(false)} className={isValue ? "secondButtonDA" : "firstButtonDA"}>
                                     %
                                 </Button>
-                                <Button onClick={() => setIsValue(true)} className={isValue ? "firstButton" : "secondButton"}>
+                                <Button onClick={() => setIsValue(true)} className={isValue ? "firstButtonDA" : "secondButtonDA"}>
                                     Value
                                 </Button>
                             </ButtonGroup>
