@@ -4,7 +4,9 @@
  color: rgba(51, 51, 51, 1) !important;
  font-size: 12px !important;
  font-weight: 400;
- padding: 10px 12px !important;
+ padding: 10px 16px !important;
+ box-shadow: inherit!important;
+ margin:5px!important;
 }
 
 .tagCount{
