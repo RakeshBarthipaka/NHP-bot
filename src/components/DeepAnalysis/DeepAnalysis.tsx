@@ -221,7 +221,7 @@ export const DeepAnalysis = () => {
     return (
         <Grid xs={12} padding={3}>
             <div className="forMakingPdfDA">
-                <Box paddingLeft={3} paddingBottom={2} className="header">
+                <Box paddingLeft={3} paddingBottom={2} className="headerDA">
                     {" "}
                     <TroubleshootOutlinedIcon className="headerIcon" /> <span className="headerText">DEEP ANALYSIS</span>{" "}
                 </Box>

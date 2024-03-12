@@ -25,7 +25,7 @@ export const KeywordAnalysis = ({ tagName }: Props) => {
     return (
         <Grid xs={12} padding={3}>
             <div className="forMakingPdf">
-                <Box paddingLeft={3} paddingBottom={1} className="header">
+                <Box paddingLeft={3} paddingBottom={1} className="headerKA">
                     {" "}
                     <TroubleshootIcon className="headerIcon" /> <span className="headerText">KEYWORD ANALYSIS</span>{" "}
                 </Box>
