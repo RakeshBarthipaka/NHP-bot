@@ -154,7 +154,7 @@ export async function ChartJSApi(options: ChartJSRequest): Promise<ChartJSRespon
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            data: options.data
+           chart_data: options.data
         })
     });
 

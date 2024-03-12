@@ -35,6 +35,7 @@ import ChatThreads from "../../components/ChatThreads";
 import KpiAnalysis from "../../components/KpiAnalysis/KpiAnalysis";
 import CglenseInsightLogo from "../../assets/cglense_icon_logo.png";
 import CglenseInsightFullLogo from "../../assets/CGLense_app_logo_v3.png";
+import DrawChartURL from "../../components/Charts/DrawChartURL";
 
 
 const Chat = (props: any) => {
@@ -66,7 +67,7 @@ const Chat = (props: any) => {
     const [isUpload, setIsUpload] = useState<boolean>(false);
     const [isChatThread, setIsChatThread] = useState<boolean>(false);
     const [isKpiAnalysis, setIsKpiAnalysis] = useState<boolean>(false);
-
+    const [isChartGeneration, setIsChartGeneration] = useState(false);
     
     const abortControllerRef = useRef(new AbortController());
     
@@ -88,6 +89,7 @@ const Chat = (props: any) => {
     const [FileViewerURL, setFileViewerURL] = useState("");
     const answers = useSelector((state: any) => state.chat.answers);
     const questionAnswersList = useSelector((state: any) => state.chat.qnA);
+    //const [questionAnswersList, setQuestionAnswersList] = useState<any>([]);
     const showHistory = useSelector((state: any) => state.chat.showHistory);
     const recommenededQuestionList = useSelector((state: any) => state.chat.recommendedQuestions);
     const latestQuestion = useSelector((state: any) => state.chat.latestQuestion);
@@ -203,8 +205,8 @@ const Chat = (props: any) => {
         //let latitude = localStorage.getItem("latitude") ? localStorage.getItem("latitude") : 0;
        // let longitude = localStorage.getItem("longitude") ? localStorage.getItem("longitude") : 0;
         //let userLocation = localStorage.getItem("userLocation") ? localStorage.getItem("userLocation") : "Auckland";
-
-        console.log(chatGPTToken, 'chatgpttokens');
+       
+       
 
         dispatch(set_recommendedQnA([] as any));
         error && setError(undefined);
@@ -246,25 +248,39 @@ const Chat = (props: any) => {
             const result = await chatApi(request,abortControllerRef.current.signal);
             if (result.exchange_id) {
                 let answersList = [...answers, [question, result]];
-                let qnAList = [
-                    ...questionAnswersList,
-                    {
-                        question: question,
-                        answer: result
+                if (result.isChartRequired) {
+                    setIsChartGeneration(true)
+                    let chartReq = {
+                          data: result
                     }
-                ];
-                dispatch(set_answers(answersList as any));
-                dispatch(set_QnA(qnAList as any));
+                    const chartResult = await ChartJSApi(chartReq);
+                    result['chart'] = chartResult.chart;
+                     let chartUrl = await DrawChartURL(cleanChartData(chartResult.chart))
+                     let qnAList = [
+                        ...questionAnswersList,
+                        {
+                            question: question,
+                            answer: result,
+                            chart: chartUrl
+                        }
+                    ];
+                    dispatch(set_answers(answersList as any));
+                    dispatch(set_QnA(qnAList as any));
+                    setIsChartGeneration(false)
+                }
+              
                 if (isSpeakerOn) {
                     speakText([result.answer], chatBotVoice.value);
                 }
                 dispatch(set_recommendedQnA(result.recommended_question as any));
                 let qAndA = [...localChatData];
+                
                 //@ts-ignore
                 qAndA.push({ question: question, answer: result });
                 setLocalChatData(qAndA);
                 makeThreadAPICall(qAndA);
                 localStorage.removeItem("appointmentData");
+               
             } else {
                 setError("No Data found");
             }

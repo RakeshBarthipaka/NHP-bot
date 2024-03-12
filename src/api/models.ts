@@ -23,6 +23,8 @@ export type AskRequest = {
 };
 
 export type AskResponse = {
+    isChartRequired: boolean;
+    isChartActive:any;
     answer: string;
     exchange_id: string;
     chart: string | null;
@@ -85,7 +87,7 @@ export type userInfoResponse = {
 };
 
 export type ChartJSRequest = {
-    data: string;
+   data: object;
 };
 
 export type ChartJSResponse = {

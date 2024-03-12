@@ -15,6 +15,7 @@ import { EmailConfirm } from "../Appointment/EmailConfirm";
 import HospitalList from "../Appointment/HospitalList";
 import { Avatar, Button, Divider } from "@mui/material";
 import { useSelector } from "react-redux";
+import DrawChart from "../Charts/drawChart";
 import { GenerateTable } from "../Tables/GenerateTable";
 import { TagsList } from "../TagsList/TagsList";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
@@ -77,6 +78,7 @@ export const Answer = ({
     const [showCommentBox, setshowCommentBox] = useState(false);
     const messageRef = useRef<HTMLDivElement>(null);
     const [shareIconStyle, setShareIconStyle] = useState<any>({ display: "none" });
+    let chartStatus = true;
 
     useEffect(() => {
         if (messageRef.current) {
@@ -180,6 +182,17 @@ export const Answer = ({
                 <Stack className={`${styles.answerContainer} ${isSelected && styles.selected}`} verticalAlign="space-between">
                     <Stack.Item grow>
                         <div className={styles.answerText} dangerouslySetInnerHTML={{ __html: sanitizedAnswerHtml }}></div>
+                        {
+                        chartStatus && (
+                            answer.chart ? (
+                                <DrawChart chart={answer.chart}></DrawChart>
+                            ) : (
+                                <p className={styles.answerText}>
+                                    Generating Chart
+                                    <span className={styles.loadingdots} />
+                                </p>)
+                        )
+                    }
                         {/* <GenerateTable></GenerateTable> */}
 
                         {/* { answer.patientemail && answer.patientemail.length > 0 &&  !answer.patientemailconfirm &&
@@ -258,7 +271,9 @@ export const Answer = ({
                                 onClick={() => copyChatData()}
                             /> */}
                             <span>
+                                  
                             <DownloadPDF pdfData={questionAnswersList} />
+                          
                             </span>
                             <span onClick={() => copyChatData()}>
                             <Avatar sx={{bgcolor: "rgba(83, 118, 240, 0.2)", color: "rgba(83, 118, 240, 1)", "&:hover": {
