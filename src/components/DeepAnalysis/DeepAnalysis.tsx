@@ -267,7 +267,7 @@ export const DeepAnalysis = () => {
                                     Value
                                 </Button>
                             </ButtonGroup>
-                            <ButtonGroup
+                            {/* <ButtonGroup
                                 disableElevation
                                 size="small"
                                 variant="contained"
@@ -277,7 +277,7 @@ export const DeepAnalysis = () => {
                             >
                                 <Button>USD</Button>
                                 <Button variant="outlined">Local</Button>
-                            </ButtonGroup>
+                            </ButtonGroup> */}
                         </Box>
 
                         <Box display="flex">

@@ -255,7 +255,7 @@ const KpiAnalysis = () => {
                 <Button onClick={() => setIsValue(false)} className={isValue ? "secondButton" : "firstButton"}>%</Button>
                 <Button onClick={() => setIsValue(true)} className={isValue ? "firstButton" : "secondButton"}>Value</Button>
               </ButtonGroup>
-              <ButtonGroup
+              {/* <ButtonGroup
                 disableElevation
                 size="small"
                 variant="contained"
@@ -265,7 +265,7 @@ const KpiAnalysis = () => {
               >
                 <Button>USD</Button>
                 <Button variant="outlined">Local</Button>
-              </ButtonGroup>
+              </ButtonGroup> */}
             </Box>
 
             <Box display={"flex"} >
