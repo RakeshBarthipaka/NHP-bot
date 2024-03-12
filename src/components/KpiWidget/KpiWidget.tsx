@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-import styles from "./KpiWidget.module.css";
+import "./KpiWidget.scss";
 import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
 import { Box, Button, Drawer, Toolbar, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
@@ -215,18 +215,7 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis }: Props) => {
     } else {
       setDisableSelection(false);
     } 
-
-    // const selectedElements: any = document.querySelectorAll('.MuiTableRow-root.Mui-selected MuiCheckbox-root');
-    // for (let i = 0; i < selectedElements.length; i++) {
-    //   if(table.getSelectedRowModel().rows.length <= 4) {
-    //     // selectedElements[i].style = 'pointer-events: none; color: #c5c5c5';
-    //     // selectedElements[i].classList.add = 'diabled';
-    //   } else { 
-    //   }
-    // } 
-
-
-    // console.info({ rowSelection });
+ 
   }, [rowSelection]);
 
 
@@ -289,61 +278,39 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis }: Props) => {
 
   return (
     <>
-      <div className={styles.carouselContainer}>
+      <div className="carouselContainer">
         {(kpiSlides.length > 0) ?
           <>
             <MultiItemCarousel KpiSlides={kpiSlides} toggleChatRightContent={toggleChatRightContent} toggleKpiAnalysis={toggleKpiAnalysis} />
-            <AddCircleOutlineOutlinedIcon className={styles.addKpiBtn} onClick={() => setOpenKpiModal(true)} />
+            <AddCircleOutlineOutlinedIcon className="addKpiBtn" onClick={() => setOpenKpiModal(true)} />
           </>
           :
-          <div className={styles.emptykpiCard}>
-            <AddCircleOutlineOutlinedIcon className={styles.addKpiBtn} onClick={() => setOpenKpiModal(true)} />
+          <div className="emptykpiCard">
+            <AddCircleOutlineOutlinedIcon className="addKpiBtn" onClick={() => setOpenKpiModal(true)} />
           </div>
         }
       </div>
 
       <Drawer
         anchor='right'
-        className={styles.drawerContentDiv}
         open={openKpiModal}
-        onClose={() => setOpenKpiModal(false)}
-        PaperProps={{
-          sx: { width: "500px", maxWidth: '90%' },
-        }}
-      >
+        onClose={() => setOpenKpiModal(false)}  >
 
         <div>
-          <Toolbar sx={{ background: colorCode, color: '#fff' }}>
-            <GridViewOutlinedIcon sx={{ marginRight: '10px' }} />
-            <Typography variant="h6" sx={{ fontSize: '18px' }} noWrap component="div">
-              KPIs
-            </Typography>
+          <Toolbar className="drawerHeader">
+            <GridViewOutlinedIcon />
+            <Typography variant="h6" noWrap component="div"> KPIs </Typography>
           </Toolbar>
 
-          <div className={`${styles.drawerContent} KpisDrawer`}>
-            <MRT_GlobalFilterTextField table={table}
-              sx={{
-                width: '100%',
-                '& .MuiInputBase-root': {
-                  paddingRight: '40px',
-                  borderRadius: '25px',
-                },
-                '& .MuiSvgIcon-root': {
-                  position: 'absolute',
-                  right: '10px',
-                },
-              }}
-            />
-            <MRT_TableContainer table={table} className={`${disableSelection ? 'disableSelection':' '} kpisTable`}/>
+          <div className="KpisDrawer">
+            <MRT_GlobalFilterTextField table={table} />
+            <MRT_TableContainer table={table} className={`${disableSelection ? 'disableSelection' : ' '} kpisTable`} />
 
-
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end', }}>
-              <Button variant="text" color="error" onClick={() => setOpenKpiModal(false)} sx={{ marginTop: '10px', marginRight: '5px', borderRadius: '25px' }}>CANCEL</Button>
-              <Button variant="contained" onClick={saveSelectedKpis} sx={{ marginTop: '10px', marginRight: '5px', borderRadius: '25px', background: 'var(--active-themes)' }}>SAVE</Button>
+            <Box className="drawerBtns">
+              <Button variant="contained" onClick={() => setOpenKpiModal(false)} >CANCEL</Button>
+              <Button variant="contained" onClick={saveSelectedKpis} >SAVE</Button>
             </Box>
           </div>
-
-
         </div>
       </Drawer>
     </>
