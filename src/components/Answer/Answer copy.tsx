@@ -1,7 +1,7 @@
 import { useMemo, useState, useRef, useEffect, useContext } from "react";
 import { Stack, IconButton, IStackProps, MessageBar, MessageBarType } from "@fluentui/react";
 import DOMPurify from "dompurify";
-//import styles from "./Answer.module.css";
+import styles from "./Answer.module.css";
 import "./Answer.scss";
 
 import { AskResponse, feedBackApi, feedbackRequest, exportChatbotApi } from "../../api";
@@ -165,21 +165,21 @@ export const Answer = ({
         styles: { root: { padding: 15 } }
     };
 
-    //const IconStyles = { color: "blue", borderRadius: "8px" };
-    //const IconActiveStyles = { backgroundColor: "lightgray", borderRadius: "8px" };
+    const IconStyles = { color: "blue", borderRadius: "8px" };
+    const IconActiveStyles = { backgroundColor: "lightgray", borderRadius: "8px" };
 
     return (
         <>
-            <Stack verticalAlign="space-between" {...SpacingColumnProps} className="answerContainerDiv">
+            <Stack verticalAlign="space-between" {...SpacingColumnProps} className={` ${styles.answerContainerDiv}`}>
                 <Stack.Item>
-                    <Stack horizontal horizontalAlign="space-between" className="answerLogo">
+                    <Stack horizontal horizontalAlign="space-between" className={styles.answerLogo}>
                         {/* <img src={projectData ? projectData.projectLogoPath : LogoWhiteTransparent} width="100%" height={projectData ? projectData.projectLogoHeight : "30px"} /> */}
                         <img src={CglenseInsightLogo} width="40px" />
                     </Stack>
                 </Stack.Item>
-                <Stack className={`answerContainer ${isSelected && "selected"}`} verticalAlign="space-between">
+                <Stack className={`${styles.answerContainer} ${isSelected && styles.selected}`} verticalAlign="space-between">
                     <Stack.Item grow>
-                        <div className="answerText" dangerouslySetInnerHTML={{ __html: sanitizedAnswerHtml }}></div>
+                        <div className={styles.answerText} dangerouslySetInnerHTML={{ __html: sanitizedAnswerHtml }}></div>
                         {/* <GenerateTable></GenerateTable> */}
 
                         {/* { answer.patientemail && answer.patientemail.length > 0 &&  !answer.patientemailconfirm &&
@@ -206,7 +206,7 @@ export const Answer = ({
                     </Stack.Item>
 
                     <Stack>
-                        <div className="IconCustomColor">
+                        <div className={` ${styles.IconCustomColor}`}>
                             {/* <IconButton
                             style={showLike ? IconActiveStyles : IconStyles}
                             iconProps={{ iconName: "like" }}
@@ -237,7 +237,7 @@ export const Answer = ({
                             // disabled={true}
                             onClick={() => likeDisLikeAnswerToggle("DISLIKE")}
                         /> */}
-                            <Divider className="iconDivider" orientation="vertical" />
+                            <Divider className={styles.iconDivider} orientation="vertical" />
                             <span title="Copy Data" onClick={() => copyChatData()}>
                                 <Avatar
                                     sx={{
@@ -287,7 +287,7 @@ export const Answer = ({
                             //     // disabled={true}
                             //     onClick={() => copyChatData()}
                             // /> */}
-                            <Divider className="iconDivider" orientation="vertical" />
+                            <Divider className={styles.iconDivider} orientation="vertical" />
 
                             {/* <div className={styles.dropdown}>
                             <IconButton
@@ -429,11 +429,16 @@ export const Answer = ({
 
                     {!!parsedAnswer.followupQuestions.length && showFollowupQuestions && onFollowupQuestionClicked && (
                         <Stack.Item>
-                            <Stack horizontal wrap className={`${!!parsedAnswer.citations.length ? "followupQuestionsList" : ""}`} tokens={{ childrenGap: 6 }}>
-                                <span className="followupQuestionLearnMore">Follow-up questions:</span>
+                            <Stack
+                                horizontal
+                                wrap
+                                className={`${!!parsedAnswer.citations.length ? styles.followupQuestionsList : ""}`}
+                                tokens={{ childrenGap: 6 }}
+                            >
+                                <span className={styles.followupQuestionLearnMore}>Follow-up questions:</span>
                                 {parsedAnswer.followupQuestions.map((x, i) => {
                                     return (
-                                        <a key={i} className="followupQuestion" title={x} onClick={() => onFollowupQuestionClicked(x)}>
+                                        <a key={i} className={styles.followupQuestion} title={x} onClick={() => onFollowupQuestionClicked(x)}>
                                             {`${x}`}
                                         </a>
                                     );
