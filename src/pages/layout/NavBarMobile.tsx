@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import styles from "./Layout.module.css";
+import "./Layout.scss";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import Box from "@mui/material/Box";
@@ -41,31 +41,31 @@ export default function MobileNavBar() {
     };
 
     return (
-        <AppBar className={styles.headerContainerMobile} position="static" style={{ backgroundColor: `${colorCode}`, height: "62px" }}>
+        <AppBar className='headerContainerMobile' position="static" style={{ backgroundColor: `${colorCode}`, height: "62px" }}>
             <Toolbar>
-                <div className={styles.headerContainerMobileLogo}>
+                <div className='headerContainerMobileLogo'>
                     <NavLink to="/home">
                         <IconButton>
                             <img src={CGLenseLogo} height={20} />
                         </IconButton>
                     </NavLink>
                     <NavLink to="" onClick={resetChat}>
-                        <i className="material-icons" style={{ color: "white" }}>
+                        <i className="material-icons navIconsLayoutColor">
                             add
                         </i>
-                        <div style={{ fontSize: "12px", color: "white" }}>New Chat</div>
+                        <div className="navIconsLayout">New Chat</div>
                     </NavLink>
                     <NavLink to="" onClick={resetChat}>
-                        <i className="material-icons" style={{ color: "white" }}>
+                        <i className="material-icons navIconsLayoutColor">
                             rotate_left
                         </i>
-                        <div style={{ fontSize: "12px", color: "white" }}>Reset Chat</div>
+                        <div className="navIconsLayout">Reset Chat</div>
                     </NavLink>
                     <NavLink to="" onClick={showHistory}>
-                        <i className="material-icons" style={{ color: "white" }}>
+                        <i className="material-icons navIconsLayoutColor">
                             history
                         </i>
-                        <div style={{ fontSize: "12px", color: "white" }}>Chat History</div>
+                        <div className="navIconsLayout">Chat History</div>
                     </NavLink>
                     <MoreVertIcon onClick={showKebabMenu} />
                     <Modal

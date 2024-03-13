@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./Modal.module.css";
+import "./Modal.scss";
 
 import { RecommendedFAQ } from "../../components/FAQ/FAQ";
 import { Stack } from "@fluentui/react";
@@ -38,24 +38,24 @@ const Modal = ({shown}) => {
 
   return shown ? (
     <div
-      className={styles.modalWrapper}
+      className='modalWrapper'
     >
       <div
-        className={styles.modal}
+        className='modal'
         style={{ padding: "15px" }}
         onClick={(e) => {
           e.stopPropagation();
         }}
       >
         <Stack>
-          <div className={styles.container}>
+          <div className='container'>
             <div
-              className={styles.avatarInputContainer}
+              className='avatarInputContainer'
               onClick={() => {
                 setDropDown(!dropDown);
               }}
             >
-              <p className={styles.selectAvatar}>
+              <p className='selectAvatar'>
                 Select Avatar <span>{<ChevronDown20Regular />} </span>
               </p>
             </div>
@@ -65,7 +65,7 @@ const Modal = ({shown}) => {
           </div>
 
           {dropDown && (
-            <div className={styles.imageContainer}>
+            <div className='imageContainer'>
               {voiceAvatarList.map((element) => (
                 <div
                   key={element.id}
@@ -74,21 +74,20 @@ const Modal = ({shown}) => {
                     setDropDown(false);
                   }}
                 >
-                  <img className={styles.imageAvtar} src={element.icon} height={50} />
+                  <img className='imageAvtar' src={element.icon} height={50} />
                 </div>
               ))}
             </div>
           )}
         </Stack>
-        <div className={styles.recommendation}>
+        <div className='recommendation'>
           {/* <RecommendedFAQ /> */}
         </div>
         <div>
           <h4>Themes</h4>
-          <div style={{display:"flex",flexWrap:"wrap",gap:"15px"}}>
+          <div className="themeContainerLayout">
                   {ColorList.map((color : any)=>{
-                    console.log(color.colorCode,'././../')
-                    return <span style={{borderRadius:"50%",height:"25px",width:"25px",backgroundColor:`${color.colorCode}`}} onClick={()=>changeTheme(color)}></span>
+                    return <span className="colorListTheme" style={{backgroundColor:`${color.colorCode}`}} onClick={()=>changeTheme(color)}></span>
                   })}
           </div>
         </div>

@@ -132,3 +132,14 @@
     color:black !important;
     padding-top: 15px;
   }
+  .themeContainerLayout {
+    display: flex;
+    flex-wrap: wrap;
+    gap:15px;
+  }
+
+  .colorListTheme {
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+  }
