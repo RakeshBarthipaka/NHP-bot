@@ -208,6 +208,14 @@ html {
     flex-direction: row-reverse !important;
      
 }
+
+.chatRightContent {
+    position: relative; 
+    min-height: 100%;
+    transition: 0.7s;
+    padding: 0 24px;
+}
+
 .shiftingContainer > div:nth-child(2) {
     position: relative;    
 }
@@ -368,5 +376,24 @@ html {
 
     .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb:hover {
         background: #757575;
+    }
+}
+
+
+@media (max-width: 924px) {
+    .shiftingContainer {
+        height: calc(100vh - 260px);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .chatRightContent {
+        background: #fff;
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        width: 100%;
+        transition: 0.7s;
+        z-index: 99;
     }
 }

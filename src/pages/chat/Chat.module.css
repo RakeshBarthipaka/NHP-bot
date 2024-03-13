@@ -248,12 +248,7 @@ p {
     z-index: 11;
 }
 
-.chatRightContent {
-    position: relative; 
-    min-height: 100%;
-    transition: 0.7s;
-    padding: 0 24px;
-}
+
 /* .chatRightContent::before {
     content: ' ';
     position: absolute;

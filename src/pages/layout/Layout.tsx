@@ -214,7 +214,7 @@ const setChatGPTToken = (value: number) => {
                             <img src={props.projectData && props.projectData.projectLogoPath ? props.projectData.projectLogoPath : CGLenseLogo} height={40} />
                         </NavLink>
                     </div>
-                    <nav>
+                    <nav className={styles.hideInMobile}>
                         <ul className={styles.headerNavList}>
 
                             <li>
@@ -279,7 +279,7 @@ const setChatGPTToken = (value: number) => {
                     <div className={styles.profileMenu}>
                         <ul className={styles.headerNavList}>
                             
-                            <li>
+                            <li className={styles.hideInMobile}>
                                 <div className={styles.lanuageDropdown}>
                                     <div className={styles.lanuageChoose} onClick={() => {
                                         setDropdwonLanguage(!dropdwonLanguage);

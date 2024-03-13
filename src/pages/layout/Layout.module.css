@@ -161,30 +161,6 @@
     font-weight: bold;
 }
 
-@media (max-width: 924px) {
-    .headerContainerMobile {
-        display: block !important;
-        box-shadow: none !important;
-
-    }
-    .headerContainerMobileLogo{
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-    }
-
-    .headerContainerMobileLogo a { 
-        text-decoration: none;
-    }
-    
-}
-
-@media (max-width: 924px) {
-    .headerContainer {
-        display: none !important;
-    }
-}
-
 .lanuageDropdown {
     display: flex;
     gap: 5px;
@@ -422,4 +398,57 @@
 }
 .advancedChatSugges p svg {
     font-size: 16px;
+}
+
+
+@media (max-width: 924px) {
+    .mainContent {
+        margin-top: 122px;
+        max-height: calc(100vh - 122px);
+    }
+    .hideInMobile{
+        display: none !important;
+    }
+    .profileMenu {
+        border: none;
+    }
+    .headerContainerMobile {
+        display: block !important;
+        box-shadow: none !important;
+
+    }
+    .headerContainerMobileLogo{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .headerContainerMobileLogo a { 
+        text-decoration: none;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 11px;
+        color: #fff;
+        opacity: 0.9;
+    }
+
+    .headerContainerMobileLogo a svg {
+        color: #fff;
+        margin-bottom: 3px;
+    }
+
+    .fullViewBtn {
+        color: #1EFFF1CC;
+        cursor: pointer;
+    }
+
+    .avatarSelect {
+        font-size: 11px;
+    }
+    .avatarSelect span {
+        padding: 0px;
+    }
+    
 }

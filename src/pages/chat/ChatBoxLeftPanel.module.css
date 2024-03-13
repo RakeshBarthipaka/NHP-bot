@@ -291,8 +291,4 @@
     font-size: 28px;
     color: var(--active-themes);
 }
-@media only screen and (max-width: 900px) {
-    .leftSidePanel {
-        display: none;
-    }
-}
+
