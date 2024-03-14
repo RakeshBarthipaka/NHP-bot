@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Uploads.scss";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
@@ -14,8 +14,74 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import SearchBar from "../Common/SearchBar";
+import { deleteApi, getApi, postApi } from "../../api";
 
 const Uploads = (props: any) => {
+    const [UploadFileList, setUploadFileList] = useState<any>([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [deleteFileID, setDeleteFileID] = useState(false);
+    const [isFileDeleted, setIsFileDeleted] = useState(false);
+    const [selectedFile, setSelectedFile] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const getUploadFileData = async () => {
+        try {
+            const response = await postApi({
+                page: 0,
+                limit: 10,
+                search_key: "",
+                sort_key: "date",
+                sort_type: "asc"
+            },"file/list/");
+
+            console.log(response.items, 'response');
+            setUploadFileList(response.items);
+            setIsLoaded(true);
+        } catch (error) {
+            setUploadFileList([""]);
+        }
+    };
+
+
+    const deleteUploadFileData = async () => {
+        try {
+            const response = await deleteApi(`file/list/${deleteFileID}`);
+
+            console.log(response.items, 'response');
+            setIsFileDeleted(true);
+        } catch (error) {
+            setUploadFileList([""]);
+        }
+    };
+
+    const handleFileChange = async (event: any) => {
+        const file = event.target.files[0];
+        const formData = new FormData();
+        formData.append("files", file);
+        setSelectedFile(file.name);
+        setLoading(true);
+        console.log(file, 'formData');
+        try {
+            const resp = await postApi({
+                  formData
+            }, `file/upload/`);
+            if (resp.status === 200) {
+                setLoading(false);
+                setIsLoaded(false)
+            } else {
+                setLoading(false);
+            }
+        } catch (err) {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        if (!isLoaded) {
+            getUploadFileData();
+        }
+    }, [isLoaded]);
+
     const card = (
         <>
             <CardContent className="upload-outer-box">
@@ -24,8 +90,22 @@ const Uploads = (props: any) => {
                         <AddIcon />
                     </Box>
                     <Typography sx={{ color: "#000000" }}>
-                        Drag and Drop or Browse to<span style={{ color: "var(--active-themes)" }}>Upload a File</span>
+                  
+                        Drag and Drop or Browse to<span style={{ color: "var(--active-themes)" }}>Upload a File
+                        <input
+                                id="file-upload"
+                                type="file"
+                                accept=".pdf"
+                                //style={{ display: 'none' }}
+                                onChange={handleFileChange}
+                                disabled={loading}
+                            /></span>
                     </Typography>
+                    {selectedFile && (
+                            <div>
+                                <p>Selected File: {selectedFile}</p>
+                            </div>
+                        )}
                     <Typography className="allowed-text">Allowed Formats: PDF</Typography>
                 </Box>
             </CardContent>
@@ -52,11 +132,11 @@ const Uploads = (props: any) => {
                     <CloudUploadOutlinedIcon />
                     <h3 className="disply-page-title">UPLOADS & ATTACHMENTS</h3>
                 </Box>
-                <Divider sx={{
-                  
+                <Divider
+                    sx={{
                         border: " 1px solid var(--bg-primary-light)"
-          
-                }} />
+                    }}
+                />
                 <Card variant="outlined" sx={{ marginTop: "10px", backgroundColor: "#F2F2F7" }}>
                     {card}
                 </Card>
