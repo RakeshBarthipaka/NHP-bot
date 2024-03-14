@@ -330,7 +330,7 @@ const Layout = (props: any) => {
                                                 <span></span>
                                             </div>
                                             <div
-                                                className={`layoutBox` + (layoutStyle == "row" ? " " : "active")}
+                                                className={`layoutBox` + (layoutStyle == "row" ? " " : " active")}
                                                 onClick={e => {
                                                     setLayoutStyles("row-reverse");
                                                     toggleSettings(false);

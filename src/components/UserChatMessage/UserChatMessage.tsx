@@ -13,7 +13,7 @@ export const UserChatMessage = ({ message }: Props) => {
     const {colorCode} = useSelector((state:any)=>state.theme.color)
 
     return (
-        <div className='container'>
+        <div className='messageContainer'>
             <div className='message'>
                 <div style={{whiteSpace:"pre-line"}}> {message}</div>
             </div>

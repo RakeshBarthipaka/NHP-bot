@@ -257,7 +257,7 @@ html {
 }
 
 .shiftingContainer {
-    height: calc(100vh - 170px);
+    height: calc(100vh - 174px);
     overflow-y: scroll;
 }
 .slick-track {
@@ -455,5 +455,9 @@ html {
         transition: 0.7s;
         padding-right: 0px;
         z-index: 99;
+    }
+
+    .MuiSlider-root .MuiSlider-markLabel {
+        top: 25px !important;
     }
 }

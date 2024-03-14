@@ -32,7 +32,7 @@ const tagsList = [
 
 export const TagsList = ({ setTagClicked, setTagName, toggleKeywordAnalysis }: any) => {
     return (
-        <Stack direction="row" alignItems={"end"} justifyContent={"end"} marginBottom={3} spacing={2} marginRight={8}>
+        <Stack className="TagsListDiv">
             {tagsList.map(tag => {
                 return (
                     <Item

@@ -8,7 +8,7 @@
     padding-right: 24px;
     display: flex;
     flex-direction: column;
-    padding: 1.5rem;
+    padding: 1.5rem 0.5rem;
 }
 
 .chatMessageGpt {

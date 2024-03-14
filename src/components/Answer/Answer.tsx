@@ -171,7 +171,7 @@ export const Answer = ({
     return (
         <>
             <Stack verticalAlign="space-between" {...SpacingColumnProps} className="answerContainerDiv">
-                <Stack.Item>
+                <Stack.Item className="anwerAvatar">
                     <Stack horizontal horizontalAlign="space-between" className="answerLogo">
                         {/* <img src={projectData ? projectData.projectLogoPath : LogoWhiteTransparent} width="100%" height={projectData ? projectData.projectLogoHeight : "30px"} /> */}
                         <img src={CglenseInsightLogo} width="40px" />
@@ -206,7 +206,7 @@ export const Answer = ({
                     </Stack.Item>
 
                     <Stack>
-                        <div className="IconCustomColor">
+                        <div className="IconCustomColor answerActionIconBtns">
                             {/* <IconButton
                             style={showLike ? IconActiveStyles : IconStyles}
                             iconProps={{ iconName: "like" }}

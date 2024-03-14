@@ -482,3 +482,50 @@ sup {
     padding: 10px 30px;
     border-radius: 18px;
 }
+
+.answerActionIconBtns {
+    .pdfDownload {
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        width: 38px;
+        height: 40px;
+        margin-left:  0;
+    }
+
+}
+
+@media (max-width: 620px) {
+    .answerActionIconBtns {
+        .MuiAvatar-root {
+            width: 32px;
+            height: 32px;
+
+            svg {
+                width: 0.75em;
+                height: 0.75em;
+            }
+        }
+
+        .pdfDownload { 
+            width: 30px;
+            height: 32px; 
+            padding: 4px;
+        }
+    }
+}
+
+@media (max-width: 560px) {
+    .messageContainer {
+        .MuiAvatar-root {
+            display: none;
+        }
+    }
+
+    .answerContainerDiv {
+        .anwerAvatar{
+            display: none;
+        }
+    }
+}
+
