@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import styles from "./Layout.module.css";
+import "./Layout.scss";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import Box from "@mui/material/Box";
@@ -72,14 +72,14 @@ export default function MobileNavBar() {
     };
 
     return (
-        <AppBar className={styles.headerContainerMobile} position="static" style={{ backgroundColor: `${colorCode}`, height: "62px" }}>
+        <AppBar className='headerContainerMobile' position="static" style={{ backgroundColor: `${colorCode}`, height: "62px" }}>
             <Toolbar>
-                <div className={styles.headerContainerMobileLogo}>
+                <div className='headerContainerMobileLogo'>
                     {/* <NavLink to="/home">
                         <IconButton>
                             <img src={CGLenseLogo} height={20} />
                         </IconButton>
-                    </NavLink> */}
+                    </NavLink>  */}
                     <NavLink to="" onClick={resetChat}>
                         <AddCommentOutlinedIcon />
                         <div>New Chat</div>
@@ -94,7 +94,7 @@ export default function MobileNavBar() {
                     </NavLink>
                     <div>
                     <div
-                                    className={`${styles.avatarSelect}`}
+                                    className="avatarSelect"
                                     onClick={() => {
                                         setDropDown(!dropDown);
                                     }}
@@ -107,7 +107,7 @@ export default function MobileNavBar() {
 
                                 </div>
                                 {dropDown && (
-                                    <div className={styles.imageContainer}>
+                                    <div className="imageContainer">
                                         {azureSpeakerVoiceList.map((element) => (
                                             <div key={element.id}
                                                 style={{ marginBottom: "5px" }}
@@ -116,14 +116,14 @@ export default function MobileNavBar() {
                                                     setDropDown(false);
                                                 }}
                                             >
-                                                <img className={styles.imageAvtar} src={element.icon} height={50} />
+                                                <img className="imageAvtar" src={element.icon} height={50} />
                                             </div>
                                         ))}
                                     </div>
                                 )}
                     </div>
 
-                    <OpenInFullIcon  className={styles.fullViewBtn}/>
+                    <OpenInFullIcon  className="fullViewBtn"/> 
 
                     {/* <MoreVertIcon onClick={showKebabMenu} />
                     <Modal
