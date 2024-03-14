@@ -60,9 +60,9 @@
 }
 
 @media (max-width: 1150px) {
-  .carouselContainer {
-    max-width: 600px;
-  }
+  // .carouselContainer {
+  //   max-width: 600px;
+  // }
 
   .cardTitle {
     font-size: 1.1rem;
@@ -74,16 +74,16 @@
 }
 
 @media (max-width: 900px) {
-  .carouselContainer {
-    max-width: 350px;
-    min-width: auto;
-  }
+  // .carouselContainer {
+  //   max-width: 350px;
+  //   min-width: auto;
+  // }
 }
 
 @media (max-width: 500px) {
-  .carouselContainer {
-    max-width: 300px;
-  }
+  // .carouselContainer {
+  //   max-width: 300px;
+  // }
 }
 
 .kpiCard {

@@ -524,26 +524,10 @@ const Chat = (props: any) => {
             {FileViewerURL && <FileViewer fileURL={FileViewerURL} onFileViewURLClicked={onFileViewURLClicked} />}
 
             {!showHistory && (
-                <Grid container item direction="row" justifyContent="center" alignItems="flex-start" sx={{ height: "100%" }}>
-                    <Grid item xs={12} md={11} className={styles.chatInputBlock}>
-                        <div className={styles.chatInput}>
-                            {/* <h1 style={{ marginTop: "100px", marginBottom:"50px" }} className={styles.chatEmptyStateTitle}>Get started with CGLense</h1> */}
-                            <QuestionInput
-                                onSelectChatBotTypes={chatBotVoice => handleSelectedSpeakerData(JSON.parse(chatBotVoice))}
-                                clearOnSend
-                                placeholder="Enter your prompt here"
-                                disabled={isLoading}
-                                onSend={question => makeApiRequest(question)}
-                                handleMicClick={handleMicClick}
-                                handleSpeakerClick={handleSpeakerClick}
-                                isListen={isListen}
-                                isSpeakerOn={isSpeakerOn}
-                                chatBotVoice={chatBotVoice}
-                            />
-                        </div>
-                    </Grid>
+                <Grid container item direction="row" justifyContent="center" alignItems="flex-start" sx={{ height: "100%" }} display={{ xs: "block", md: "flex" }}>
+                   
 
-                    <Grid container item justifyContent="center" xs={12} md={11} className="shiftingContainer">
+                    <Grid container item justifyContent="center" xs={12} md={12} lg={11} className="shiftingContainer" order={{ xs: 1, md: 2 }}>
                         {!latestQuestion ? (
                             <>
                                 <Grid container item xs={12} className={styles.chatEmptyState} spacing={2}>
@@ -645,7 +629,7 @@ const Chat = (props: any) => {
                                     </div>
                                 </Grid>
                                 {ischatRightContent && (
-                                    <Grid item xs={12} sm={12} md={6} className={styles.chatRightContent} display={{ xs: "none", md: "block" }}>
+                                    <Grid item xs={12} sm={12} md={6} className="chatRightContent">
                                         <div className="sidePanelBtn" onClick={toggleChatRightContent}>
                                             <ArrowRightIcon />
                                         </div>
@@ -758,6 +742,24 @@ const Chat = (props: any) => {
                                 </div>
                             </Grid>
                         )} */}
+                    </Grid>
+
+                    <Grid item xs={12}  md={12} lg={11} className={styles.chatInputBlock} order={{ xs: 2, md: 1 }}>
+                        <div className={styles.chatInput}>
+                            {/* <h1 style={{ marginTop: "100px", marginBottom:"50px" }} className={styles.chatEmptyStateTitle}>Get started with CGLense</h1> */}
+                            <QuestionInput
+                                onSelectChatBotTypes={chatBotVoice => handleSelectedSpeakerData(JSON.parse(chatBotVoice))}
+                                clearOnSend
+                                placeholder="Enter your prompt here"
+                                disabled={isLoading}
+                                onSend={question => makeApiRequest(question)}
+                                handleMicClick={handleMicClick}
+                                handleSpeakerClick={handleSpeakerClick}
+                                isListen={isListen}
+                                isSpeakerOn={isSpeakerOn}
+                                chatBotVoice={chatBotVoice}
+                            />
+                        </div>
                     </Grid>
                 </Grid>
             )}

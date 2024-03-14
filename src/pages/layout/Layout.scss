@@ -177,6 +177,7 @@
     display: flex;
     align-items: center;
     font-size: 14px;
+    margin-top: 10px;
 }
 
 .lanuageDropdownList {
@@ -398,6 +399,16 @@
 }
 .advancedChatSugges p svg {
     font-size: 16px;
+}
+.navIconsLayout {
+    font-size: 12px;
+     color: white; 
+}
+.navIconsLayoutColor{
+    color: white !important; 
+}
+.imageAvatarMB{
+    margin-bottom: 5px !important;
 }
 
 

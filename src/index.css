@@ -208,6 +208,14 @@ html {
     flex-direction: row-reverse !important;
      
 }
+
+.chatRightContent {
+    position: relative; 
+    min-height: 100%;
+    transition: 0.7s;
+    padding: 0 24px;
+}
+
 .shiftingContainer > div:nth-child(2) {
     position: relative;    
 }
@@ -234,7 +242,7 @@ html {
         cursor: pointer;
 }
 .shiftingContainer .sidePanelBtn svg {
-    transform: rotate(180deg);
+    /* transform: rotate(180deg); */
 }
 .rowReverse .shiftingContainer .sidePanelBtn {
     right: 0px;
@@ -428,4 +436,24 @@ html {
 }
 .clear-path{
     clear:both;
+}
+
+
+@media (max-width: 900px) {
+    .shiftingContainer {
+        height: calc(100vh - 232px);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .chatRightContent {
+        background: #fff;
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        width: 100%;
+        transition: 0.7s;
+        padding-right: 0px;
+        z-index: 99;
+    }
 }

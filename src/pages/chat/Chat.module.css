@@ -248,12 +248,7 @@ p {
     z-index: 11;
 }
 
-.chatRightContent {
-    position: relative; 
-    min-height: 100%;
-    transition: 0.7s;
-    padding: 0 24px;
-}
+
 /* .chatRightContent::before {
     content: ' ';
     position: absolute;
@@ -278,6 +273,9 @@ p {
 
 .chatEmptyState {
     align-items: center;
+    height: 100%;
+    overflow-y: scroll;
+    padding: 15px 0;
 }
 .chatEmptyState > div:nth-child(1) {
     padding: 10px 15px;
@@ -324,5 +322,21 @@ p {
 .featuresContentDiv {
     max-height: calc(100vh - 170px);
     overflow-y: scroll;
+    background: #fff;
 }
 
+@media (max-width: 900px ) {
+    .featuresContentDiv {
+        max-height: calc(100vh - 200px); 
+    }
+
+    .chatEmptyState > div:nth-child(1) {
+        padding: 35px 15px;
+    }
+
+    .chatContainer {
+        max-height: calc(100vh - 358px);
+        overflow-y: scroll;
+    
+    }
+}

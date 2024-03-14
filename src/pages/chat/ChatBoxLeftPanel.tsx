@@ -100,52 +100,54 @@ const ChatBoxLeftPanel = ({
                 <div className={styles.sidePanelBtn} onClick={toggleisRightPanelOpen}>
                     <ArrowLeftIcon />
                 </div>
-                <div
-                    className={styles.iconContainer}
-                    onClick={() => {
+                <div className={styles.featuresIconList}>
+                    <div
+                        className={styles.iconContainer}
+                        onClick={() => {
+                            toggleisRightPanelOpen();
+                            toggleLeaderBoard();
+                        }}
+                    >
+                        {/* <img src={LeaderBoard} alt="Leader Board" /> */}
+                        <LeaderboardOutlinedIcon />
+                        <p className={styles.labelName}>Leader Board</p>
+                    </div>
+                    <div onClick={()=> {
                         toggleisRightPanelOpen();
-                        toggleLeaderBoard();
-                    }}
-                >
-                    {/* <img src={LeaderBoard} alt="Leader Board" /> */}
-                    <LeaderboardOutlinedIcon />
-                    <p className={styles.labelName}>Leader Board</p>
-                </div>
-                <div onClick={()=> {
-                    toggleisRightPanelOpen();
-                    toggleDeepAnalysis();
-                }} className={styles.iconContainer}>
-                    <TroubleshootOutlinedIcon sx={{
-                        color: '#0C099C',
-                    }} />
-                    {/* <img src={DeepAnalysis} alt="Deep Analysis" /> */}
-                    <p className={styles.labelName}>Deep Analysis</p>
-                </div>
-                <div className={styles.iconContainer}>
-                    {/* <img src={Analytics} alt="Analytics" /> */}
-                    <TimelineOutlinedIcon />
-                    <p className={styles.labelName}>Analytics</p>
-                </div>
-                <div
-                    className={styles.iconContainer}
-                    onClick={() => {
-                        toggleisRightPanelOpen();
-                        toggleChatThreads();
-                    }}
-                >
-                    <ForumOutlinedIcon />
-                    <p className={styles.labelName}>Chat Threads</p>
-                </div>
-                <div
-                    className={styles.iconContainer}
-                    onClick={() => {
-                        toggleisRightPanelOpen();
-                        toggleUploads();
-                    }}
-                >
-                    {/* <img src={Uploads} alt="Uploads" /> */}
-                    <CloudUploadOutlinedIcon />
-                    <p className={styles.labelName}>Uploads</p>
+                        toggleDeepAnalysis();
+                    }} className={styles.iconContainer}>
+                        <TroubleshootOutlinedIcon sx={{
+                            color: '#0C099C',
+                        }} />
+                        {/* <img src={DeepAnalysis} alt="Deep Analysis" /> */}
+                        <p className={styles.labelName}>Deep Analysis</p>
+                    </div>
+                    <div className={styles.iconContainer}>
+                        {/* <img src={Analytics} alt="Analytics" /> */}
+                        <TimelineOutlinedIcon />
+                        <p className={styles.labelName}>Analytics</p>
+                    </div>
+                    <div
+                        className={styles.iconContainer}
+                        onClick={() => {
+                            toggleisRightPanelOpen();
+                            toggleChatThreads();
+                        }}
+                    >
+                        <ForumOutlinedIcon />
+                        <p className={styles.labelName}>Chat Threads</p>
+                    </div>
+                    <div
+                        className={styles.iconContainer}
+                        onClick={() => {
+                            toggleisRightPanelOpen();
+                            toggleUploads();
+                        }}
+                    >
+                        {/* <img src={Uploads} alt="Uploads" /> */}
+                        <CloudUploadOutlinedIcon />
+                        <p className={styles.labelName}>Uploads</p>
+                    </div>
                 </div>
 
                 {/* <div>
