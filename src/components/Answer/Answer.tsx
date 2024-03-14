@@ -217,13 +217,13 @@ export const Answer = ({
                         /> */}
                             {/* <span onClick={downloadAsPdf}></span> */}
                             <span onClick={() => likeDisLikeAnswerToggle("LIKE")}>
-                                <Avatar sx={{ bgcolor: "rgba(42, 193, 65, 0.2)", color: "rgba(42, 193, 65, 1)" }}>
+                                <Avatar className="thumbUp">
                                     {" "}
                                     <ThumbUpAltOutlinedIcon />
                                 </Avatar>
                             </span>
                             <span onClick={() => likeDisLikeAnswerToggle("DISLIKE")}>
-                                <Avatar sx={{ bgcolor: "rgba(255, 69, 58, 0.2)", color: "rgba(255, 69, 58, 1)" }}>
+                                <Avatar className="thumbDown">
                                     {" "}
                                     <ThumbDownAltOutlinedIcon />
                                 </Avatar>

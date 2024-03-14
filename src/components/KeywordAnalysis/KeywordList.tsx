@@ -101,7 +101,7 @@ const KeywordList = (props: any) => {
                 return (
                     <>
                         <Box
-                            className="question-box"
+                            className="keyword-widget"
                             onClick={() => {
                                 setIsDisplayAnswer(tag.id);
                                 //setIsDisplayAnswerToggle(!isDisplayAnswerToggle);

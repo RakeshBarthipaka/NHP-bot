@@ -48,10 +48,43 @@
     display: flex;
     justify-content: flex-end;
     /* padding: 15px 20px; */
-    background: #eee;
+    background: #fff;
     border: 1px solid #e5e5ea;
     border-radius: 0 0 30px 30px;
     margin: 0px -20px -20px -20px;
+
+    >span {
+        cursor: pointer;
+    }
+
+    .thumbUp {
+        background-color: rgba(42, 193, 65, 0.2);
+        color: rgba(42, 193, 65, 1);
+
+        &:hover {
+            svg {
+                color: #fff !important;
+            }
+
+            background-color: rgba(42, 193, 65, 1);
+            color:#fff !important;
+        }
+    }
+
+    .thumbDown {
+        background-color: rgba(255, 69, 58, 0.2);
+        color: rgba(255, 69, 58, 1);
+
+        &:hover {
+            svg {
+                color: #fff !important;
+            }
+
+            background-color: rgba(255, 69, 58, 1);
+            color:#fff !important;
+        }
+    }
+
 }
 
 .shareIconStyles {
@@ -105,16 +138,19 @@
                 border-radius: 20px;
                 padding-top: 1px;
                 padding-bottom: 1px;
+
                 .firstButton {
                     font-size: 12px !important;
                     padding: 6px 14px;
                     border-radius: 20px !important;
                     background: var(--active-themes);
                     border: none !important;
+
                     .MuiButtonBase-root:hover {
                         background-color: transparent;
                     }
                 }
+
                 .secondButton {
                     font-size: 12px !important;
                     padding: 2px 4px !important;
@@ -125,12 +161,13 @@
                     background: rgba(255, 255, 255, 1);
                     color: var(--active-themes);
                     border-color: var(--active-themes);
+
                     &:hover {
                         background-color: rgba(255, 255, 255, 1) !important;
                     }
                 }
             }
         }
-        
+
     }
 }

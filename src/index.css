@@ -370,3 +370,62 @@ html {
         background: #757575;
     }
 }
+.mui-custom-toggle{  
+    border:none;
+    height:30px;
+    margin-right:10px;
+}
+.mui-toggle-active{
+    background-color:#5376F0!important;
+    color:#fff!important;
+}
+
+
+.mui-custom-toggle button:first-child{
+    border-radius:30px 0px 0px 30px;
+    border:1px solid #5376F0;
+    font-size:12px;
+    text-transform: none;
+}
+
+.mui-custom-toggle button:nth-child(2){
+    border-radius:0px 0px 0px 0px;
+    border:1px solid #5376F0;
+    font-size:12px;
+    text-transform: none;
+}
+.mui-custom-toggle button:last-child{
+    border-radius:0px 30px 30px 0px;
+    border:1px solid #5376F0;
+    font-size:12px;
+    text-transform: none;
+}
+.mui-custom-toggle button span{
+    padding:0px 3px;
+}
+.mui-custom-toggle button span svg{
+    font-size:20px;
+    color:#5376F0;
+}
+
+.mui-toggle-active svg{
+    color:#fff!important;
+    
+}
+/* // */
+.pdf-icon{
+    color:#0027B0;
+}
+.delete-icon{
+    color:#FF453A;
+}
+/* // */
+.pull-left{
+    float:left;
+}
+.pull-right{
+    float:right;
+}
+.clear-path{
+    clear:both;
+}

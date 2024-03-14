@@ -4,7 +4,8 @@
     
 }
 .upload-outer-box{
-    background-color: var(--bg-primary-light);
+    background-color: #F2F2F7;
+    border-radius: 30px;;
 }
 .upload-heading{
     display: flex;
@@ -45,7 +46,7 @@
 }
 .file-row{
     height: 45px;
-    background-color: var(--bg-primary-light);
+    background-color:#F2F2F7;
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
@@ -53,6 +54,9 @@
     cursor: pointer;
     margin-bottom: 6px;
     padding: 0 10px;
+    &:hover{
+        background-color: #dde4fc;
+    }
 }
 .search-row{
     display: flex;

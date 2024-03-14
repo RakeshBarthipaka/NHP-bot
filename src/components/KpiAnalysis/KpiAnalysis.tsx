@@ -246,14 +246,12 @@ const KpiAnalysis = () => {
 
           <Stack className="stackDataOptions">
             <Box  display={"flex"} gap={1}>
-              <ButtonGroup
+            <ButtonGroup className="mui-custom-toggle" variant="outlined" aria-label="Basic button group"                   
                 disableElevation
-                size="small"
-                variant="contained"
-                aria-label="button group" 
+                size="small"               
               >
-                <Button onClick={() => setIsValue(false)} className={isValue ? "secondButton" : "firstButton"}>%</Button>
-                <Button onClick={() => setIsValue(true)} className={isValue ? "firstButton" : "secondButton"}>Value</Button>
+                <Button onClick={() => setIsValue(false)} className={isValue ? "secondButton" : "mui-toggle-active"}>%</Button>
+                <Button onClick={() => setIsValue(true)} className={isValue ? "mui-toggle-active" : "secondButton"}>Value</Button>
               </ButtonGroup>
               {/* <ButtonGroup
                 disableElevation
@@ -267,7 +265,6 @@ const KpiAnalysis = () => {
                 <Button variant="outlined">Local</Button>
               </ButtonGroup> */}
             </Box>
-
             <Box display={"flex"} >
               <span onClick={copyTableToClipboard}>
                 <Avatar className="iconsBtns">
@@ -281,9 +278,7 @@ const KpiAnalysis = () => {
                 </Avatar>
               </span>
             </Box>
-
           </Stack>
-
           <Stack>
             <DataGrid
               hideFooter 

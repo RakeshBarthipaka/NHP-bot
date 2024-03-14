@@ -1,12 +1,16 @@
 .tagsStyle {
  border-radius: 18px !important;
- background-color: rgba(225, 229, 242, 0.8) !important;
+ background-color:#F2F2F7 !important;
  color: rgba(51, 51, 51, 1) !important;
  font-size: 12px !important;
  font-weight: 400;
  padding: 10px 16px !important;
  box-shadow: inherit!important;
  margin:5px!important;
+ cursor: pointer;
+ &:hover{
+    background-color: #DDE4FC!important;
+ }
 }
 
 .tagCount{

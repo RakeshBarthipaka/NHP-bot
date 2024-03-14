@@ -27,36 +27,44 @@ const ChatThreads = (props: any) => {
                     <Typography className="questionText">{item.question}</Typography>
                     <Box className="thread-icon-container">
                         <Typography className="otherOptions">{item.time} hour ago</Typography>
-                        <span>
-                            <span className="replyIcon" onClick={props.handleReplyClick}>
-                                <span>
-                                    <ReplyAllIcon />
+                        <div className="d-flex justify-content-end">
+
+
+                            <div className="p-2 bd-highlight">
+
+                                <span className="replyIcon" onClick={props.handleReplyClick}>
+                                    <span>
+                                        <ReplyAllIcon />
+                                    </span>
+                                    <span>{item.likeCount}</span>
                                 </span>
-                                <span>{item.likeCount}</span>
-                            </span>
-                            <span className="thumbUp" onClick={event => event.stopPropagation()}>
-                                <span>
-                                    <ThumbUpOutlinedIcon />
+                                <span className="viewIcon" onClick={event => event.stopPropagation()}>
+                                    <span>
+                                        <ShareOutlinedIcon />
+                                    </span>
                                 </span>
-                                <span>{item.likeCount}</span>
-                            </span>
-                            <span className="thumbDown" onClick={event => event.stopPropagation()}>
-                                <span>
-                                    <ThumbDownAltOutlinedIcon />
+                                <span className="viewIcon" onClick={event => event.stopPropagation()}>
+                                    <span>
+                                        <FileDownloadOutlinedIcon />
+                                    </span>
                                 </span>
-                                <span>{item.dislikeCount}</span>
-                            </span>
-                            <span className="viewIcon" onClick={event => event.stopPropagation()}>
-                                <span>
-                                    <ShareOutlinedIcon />
+                            </div>
+                            <div className="p-2 bd-highlight">
+                                <span className="thumbUp" onClick={event => event.stopPropagation()}>
+                                    <span>
+                                        <ThumbUpOutlinedIcon />
+                                    </span>
+                                    <span>{item.likeCount}</span>
                                 </span>
-                            </span>
-                            <span className="viewIcon" onClick={event => event.stopPropagation()}>
-                                <span>
-                                    <FileDownloadOutlinedIcon />
+                                <span className="thumbDown" onClick={event => event.stopPropagation()}>
+                                    <span>
+                                        <ThumbDownAltOutlinedIcon />
+                                    </span>
+                                    <span>{item.dislikeCount}</span>
                                 </span>
-                            </span>
-                        </span>
+                            </div>
+                        </div>
+
                     </Box>
                 </Box>
             </>

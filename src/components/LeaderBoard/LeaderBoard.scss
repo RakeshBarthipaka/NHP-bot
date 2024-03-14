@@ -73,11 +73,13 @@
 
 .question-box {
     cursor: pointer;
-    background-color: var(--bg-primary-light) !important;
+    // background-color: var(--card-background-color) !important;
+    background-color:#F2F2F7!important;
     padding: 10px 20px 0px 20px;
     border-radius: 30px 0px 30px 30px;
     display: inline-flex;
     margin-bottom: 5px;
+    // box-shadow:0px 2px 2px 2px #ccc;
 
     .question-text {
         display: inline-block;
@@ -101,21 +103,24 @@
             margin-left: 10px;
         }
     }
+    &:hover{
+        background-color: #dde4fc !important;
+        color:#0C099C;
+    }
 }
 .LikedAnswerpanel {
     padding: 10px;
-    background-color: var(--bg-primary-light);
-    padding: 10px 15px 0px 15px;
-    border-radius: 0px 30px 30px 30px;
+    background-color: #F2F2F7;
+    padding: 10px 10px 0px 10px;
+    border-radius: 30px 30px 30px 30px;
     .likedQuestion {
         background-color: #fff;
-        padding: 20px;
+        padding: 10px 15px;
         border-radius: 20px;
-        margin-bottom: 15px;
     }
     .questionText {
-        font-size: 14px;
-        color: #2a2a2a;
+        font-size: 15px;
+        color: #0c099c;
         margin-bottom: 10px;
     }
     .otherOptions {
@@ -127,6 +132,8 @@
     .answerText {
         font-size: 14px;
         color: #2a2a2a;
+        margin:15px;
+        line-height: 24px;
         span {
             cursor: pointer;
         }
@@ -208,6 +215,25 @@
             svg {
                 color: #fff;
             }
+        }
+    }
+    .showMore-spacer{
+        text-align: center;
+        display: block;
+        padding:20px;
+    }
+    .showMore-link{       
+        color:#0C099C;
+        font-weight: bold;
+        font-size:12px;
+        text-decoration: none;
+        cursor: pointer;
+        &:hover{
+            border:1px solid #0C099C;
+            padding:5px 8px;
+            border-radius: 30px;;
+            background-color: white;
+
         }
     }
 }

@@ -29,7 +29,7 @@
 
 .grid-container{
     .thread-box{
-        background-color: var(--bg-primary-light);
+        background-color: #F2F2F7;
         padding:10px 20px;
         border-radius:20px;
         margin-bottom: 10px;
@@ -60,9 +60,10 @@
             background-color: #fff;
             color:#0C099C;
     &:hover{
-        background-color: #0C099C;
+        background-color: var(--bg-primary-light)!important;
         color:#fff;
     }
+    
             span {
                 padding: 0;
             }

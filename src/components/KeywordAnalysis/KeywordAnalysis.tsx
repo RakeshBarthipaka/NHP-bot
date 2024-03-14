@@ -16,6 +16,7 @@ import html2canvas from "html2canvas";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import SortOutlinedIcon from "@mui/icons-material/SortOutlined";
 import KeywordList from "./KeywordList";
+import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 
 interface Props {
     tagName: string;
@@ -44,7 +45,8 @@ export const KeywordAnalysis = ({ tagName }: Props) => {
                         paddingLeft={2}
                         gap={2}
                     >
-                        <Box display={"flex"} gap={2}>
+                        <Box display={"flex"} gap={2}>                 
+
                             <ButtonGroup disableElevation size="small" variant="contained" aria-label="Disabled button group" className="keywordBtnGrp">
                                 <Button className="firstButton">{tagName}</Button>
                                 <Button className="secondButton" variant="outlined">
@@ -61,19 +63,24 @@ export const KeywordAnalysis = ({ tagName }: Props) => {
                     <Box paddingTop={2}>
                         <hr className="verticalLineStyle" />
                     </Box>
-                    <Stack alignContent="center" alignItems="center" justifyItems={"center"} justifyContent={"end"} direction={"row"}>
-                        <Box display={"flex"} justifyContent={"center"}>
-                            <span className="iconText">
-                                <VisibilityOutlinedIcon />
-                            </span>
-                            <span className="iconText">By Views</span>
-                            <span className="iconText">
-                                <SortOutlinedIcon />
-                            </span>
-                            <span className="iconText">By Date</span>
-                        </Box>
-                    </Stack>
+                    <div className="pull-right">
+                    <ButtonGroup className="mui-custom-toggle" variant="outlined" aria-label="Basic button group">
+                    <Button className="mui-toggle-active">
+                        <span className="iconText">
+                            <RemoveRedEyeOutlinedIcon className="viewIcon IconElemt" />
+                        </span>
+                        <span>By Views</span>
+                    </Button>
+                    <Button>
+                        <span className="iconText">
+                            <SortOutlinedIcon className="ShortByIcon IconElemt" />
+                        </span>
+                        <span>By Date</span>
+                    </Button>
+                </ButtonGroup>
+                </div>
                 </Box>
+                <div className="clear-path"></div>
                 <Box paddingLeft={3} paddingTop={4}>
                     <KeywordList />
                 </Box>
