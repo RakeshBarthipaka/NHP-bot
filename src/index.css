@@ -242,7 +242,7 @@ html {
         cursor: pointer;
 }
 .shiftingContainer .sidePanelBtn svg {
-    transform: rotate(180deg);
+    /* transform: rotate(180deg); */
 }
 .rowReverse .shiftingContainer .sidePanelBtn {
     right: 0px;
