@@ -82,3 +82,15 @@
         text-align: center;
     }
 }
+
+.uploadedFileViewDiv {
+    .stackDataOptions { 
+        background: #fff; 
+        margin-bottom: 25px;
+    }
+
+    .uploadedFileView {
+        max-height: calc(100vh - 114px);
+        overflow-y: scroll;
+    }
+}
