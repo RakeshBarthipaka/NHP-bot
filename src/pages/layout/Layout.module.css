@@ -401,10 +401,11 @@
 }
 
 
-@media (max-width: 924px) {
+@media (max-width: 900px) {
     .mainContent {
-        margin-top: 122px;
+        margin-top: 128px;
         max-height: calc(100vh - 122px);
+        min-height: calc(100vh - 122px);
     }
     .hideInMobile{
         display: none !important;

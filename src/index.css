@@ -380,9 +380,9 @@ html {
 }
 
 
-@media (max-width: 924px) {
+@media (max-width: 900px) {
     .shiftingContainer {
-        height: calc(100vh - 260px);
+        height: calc(100vh - 232px);
         overflow: hidden;
         position: relative;
     }
@@ -394,6 +394,7 @@ html {
         left: 0;
         width: 100%;
         transition: 0.7s;
+        padding-right: 0px;
         z-index: 99;
     }
 }
