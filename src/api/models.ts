@@ -87,7 +87,8 @@ export type userInfoResponse = {
 };
 
 export type ChartJSRequest = {
-   data: object;
+    chart_data:any
+    data: any;
 };
 
 export type ChartJSResponse = {

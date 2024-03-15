@@ -1,24 +1,10 @@
 .yes {
     background-color: var(--active-themes);
     border-radius: 10%;
-    /* color:white; */
-    /* Add shadow on hover */
     &:hover {
-      box-shadow: 0 0 4px rgba(0, 0, 0, 0.5); /* Adjust the shadow properties as needed */
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
     }
   }
   .whiteText {
     color: 'white', 
   }
-  
- 
-  
- 
-.cancel{
-    background: var(--active-themes);
-    border-radius:10%;
-    &:hover {
-        box-shadow: 0 0 4px rgba(0, 0, 0, 0.3); /* Adjust the shadow properties as needed */
-
-}
-}

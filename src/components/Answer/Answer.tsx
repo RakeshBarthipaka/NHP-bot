@@ -13,7 +13,7 @@ import AppointmentsBookingList from "../Appointment/AppointmentsBookingList";
 import ScheduleAppointment from "../Appointment/AppointmentBooking";
 import { EmailConfirm } from "../Appointment/EmailConfirm";
 import HospitalList from "../Appointment/HospitalList";
-import { Avatar, Button, Divider } from "@mui/material";
+import { Avatar, Button, Divider, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import DrawChart from "../Charts/drawChart";
 import { GenerateTable } from "../Tables/GenerateTable";
@@ -26,7 +26,6 @@ import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
 import CglenseInsightLogo from "../../assets/cglense_icon_logo.png";
-
 
 interface Props {
     answer: AskResponse;
@@ -174,50 +173,24 @@ export const Answer = ({
         <>
             <Stack verticalAlign="space-between" {...SpacingColumnProps} className={` ${styles.answerContainerDiv}`}>
                 <Stack.Item>
-                <Stack horizontal horizontalAlign="space-between" className={styles.answerLogo}>
-                    {/* <img src={projectData ? projectData.projectLogoPath : LogoWhiteTransparent} width="100%" height={projectData ? projectData.projectLogoHeight : "30px"} /> */}
-                    <img src={CglenseInsightLogo} width="40px" />
-                </Stack>
+                    <Stack horizontal horizontalAlign="space-between" className={styles.answerLogo}>
+                        {/* <img src={projectData ? projectData.projectLogoPath : LogoWhiteTransparent} width="100%" height={projectData ? projectData.projectLogoHeight : "30px"} /> */}
+                        <img src={CglenseInsightLogo} width="40px" />
+                    </Stack>
                 </Stack.Item>
                 <Stack className={`${styles.answerContainer} ${isSelected && styles.selected}`} verticalAlign="space-between">
                     <Stack.Item grow>
                         <div className={styles.answerText} dangerouslySetInnerHTML={{ __html: sanitizedAnswerHtml }}></div>
-                        {
-                        chartStatus && (
-                            answer.chart ? (
+                        {answer.isChartRequired &&
+                            (answer.chart ? (
                                 <DrawChart chart={answer.chart}></DrawChart>
                             ) : (
                                 <p className={styles.answerText}>
                                     Generating Chart
                                     <span className={styles.loadingdots} />
-                                </p>)
-                        )
-                    }
-                        {/* <GenerateTable></GenerateTable> */}
-
-                        {/* { answer.patientemail && answer.patientemail.length > 0 &&  !answer.patientemailconfirm &&
-                        <EmailConfirm onExampleClicked={onExampleClicked} patientemail={answer.patientemail}/>
-                    }
-                    { answer.appointmentlimit  &&
-                       <Button size='small' variant="contained" style={{marginBottom:"1.5rem", background:colorCode}} onClick={()=>onExampleClicked("show my bookings")}>Show my bookings</Button>
-                    }
-
-                    { answer.hospitallist && answer.hospitallist.length > 0 &&  
-                        <HospitalList onExampleClicked={onExampleClicked} hospitallist={answer.hospitallist}/>
-                    }
-                    {
-                        answer.doctorlist && answer.doctorlist.length > 0 && (
-                            <ScheduleAppointment events={answer.doctorlist} onExampleClicked={onExampleClicked} />
-                        )
-                    }
-
-                    {
-                        answer.appointmentlist && answer.appointmentlist.length > 0 && (
-                            <AppointmentsBookingList events={answer.appointmentlist} onExampleClicked={onExampleClicked} />
-                        )
-                    } */}
+                                </p>
+                            ))}
                     </Stack.Item>
-
                     <Stack>
                         <div className={` ${styles.IconCustomColor}`}>
                             {/* <IconButton
@@ -251,18 +224,22 @@ export const Answer = ({
                             onClick={() => likeDisLikeAnswerToggle("DISLIKE")}
                         /> */}
                             <Divider className={styles.iconDivider} orientation="vertical" />
-                            <span title="Copy Data"
-                                 onClick={() => copyChatData()}>
-                            <Avatar  sx={{ bgcolor: "rgba(83, 118, 240, 0.2)", color: "rgba(83, 118, 240, 1)", "&:hover": {
+                            <span title="Copy Data" onClick={() => copyChatData()}>
+                                <Avatar
+                                    sx={{
+                                        bgcolor: "rgba(83, 118, 240, 0.2)",
+                                        color: "rgba(83, 118, 240, 1)",
+                                        "&:hover": {
                                             backgroundColor: "#0027B0",
-                                                color: ' rgba(30, 255, 241, 0.8)'
-                                            
-                                        } }}>
+                                            color: " rgba(30, 255, 241, 0.8)"
+                                        }
+                                    }}
+                                >
                                     {" "}
                                     <ContentCopyOutlinedIcon />
                                 </Avatar>
                             </span>
-                           
+
                             {/* <IconButton
                                 iconProps={{ iconName: "Copy" }}
                                 title="Copy Data"
@@ -271,16 +248,19 @@ export const Answer = ({
                                 onClick={() => copyChatData()}
                             /> */}
                             <span>
-                                  
-                            <DownloadPDF pdfData={questionAnswersList} />
-                          
+                                <DownloadPDF pdfData={questionAnswersList} />
                             </span>
                             <span onClick={() => copyChatData()}>
-                            <Avatar sx={{bgcolor: "rgba(83, 118, 240, 0.2)", color: "rgba(83, 118, 240, 1)", "&:hover": {
+                                <Avatar
+                                    sx={{
+                                        bgcolor: "rgba(83, 118, 240, 0.2)",
+                                        color: "rgba(83, 118, 240, 1)",
+                                        "&:hover": {
                                             backgroundColor: "#0027B0",
-                                                color: ' rgba(30, 255, 241, 0.8)'
-                                            
-                                        } }}>
+                                            color: " rgba(30, 255, 241, 0.8)"
+                                        }
+                                    }}
+                                >
                                     {" "}
                                     <MailOutlineOutlinedIcon />
                                 </Avatar>
@@ -322,36 +302,50 @@ export const Answer = ({
                                 </Link>
                             </div>
                         </div> */}
-                        <span onClick={() => onThoughtProcessClicked()} >
-                            <Avatar sx={{ bgcolor: "rgba(83, 118, 240, 1)", color: "rgba(255, 255, 255, 1)", "&:hover": {
+                            <span onClick={() => onThoughtProcessClicked()}>
+                                <Avatar
+                                    sx={{
+                                        bgcolor: "rgba(83, 118, 240, 1)",
+                                        color: "rgba(255, 255, 255, 1)",
+                                        "&:hover": {
                                             backgroundColor: "#0027B0",
-                                                color: ' rgba(30, 255, 241, 0.8)'
-                                            
-                                        } }}>
+                                            color: " rgba(30, 255, 241, 0.8)"
+                                        }
+                                    }}
+                                >
                                     {" "}
-                                    <PsychologyOutlinedIcon  />
+                                    <PsychologyOutlinedIcon />
                                 </Avatar>
                             </span>
                             <span onClick={() => onSupportingContentClicked()}>
-                            <Avatar sx={{ bgcolor: "rgba(83, 118, 240, 1)", color: "rgba(255, 255, 255, 1)", "&:hover": {
+                                <Avatar
+                                    sx={{
+                                        bgcolor: "rgba(83, 118, 240, 1)",
+                                        color: "rgba(255, 255, 255, 1)",
+                                        "&:hover": {
                                             backgroundColor: "#0027B0",
-                                                color: ' rgba(30, 255, 241, 0.8)'
-                                            
-                                        } }}>
+                                            color: " rgba(30, 255, 241, 0.8)"
+                                        }
+                                    }}
+                                >
                                     {" "}
                                     <AssignmentOutlinedIcon />
                                 </Avatar>
                             </span>
-                            
 
                             <span onClick={() => onSupportingContentClicked()}>
-                            <Avatar sx={{ bgcolor: "rgba(83, 118, 240, 1)", color: "rgba(255, 255, 255, 1)", "&:hover": {
+                                <Avatar
+                                    sx={{
+                                        bgcolor: "rgba(83, 118, 240, 1)",
+                                        color: "rgba(255, 255, 255, 1)",
+                                        "&:hover": {
                                             backgroundColor: "#0027B0",
-                                                color: ' rgba(30, 255, 241, 0.8)'
-                                            
-                                        } }}>
+                                            color: " rgba(30, 255, 241, 0.8)"
+                                        }
+                                    }}
+                                >
                                     {" "}
-                                    <HistoryOutlinedIcon  />
+                                    <HistoryOutlinedIcon />
                                 </Avatar>
                             </span>
 

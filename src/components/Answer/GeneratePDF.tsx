@@ -172,9 +172,7 @@ const DownloadPDF: React.FC<{ pdfData: MyDocumentProps[] }> = ({ pdfData }) => {
             <Typography variant='h6'>Confirm Download</Typography>
             <Typography variant='body2' marginBottom={1}>Are you sure you want to download the PDF?</Typography>
             <Stack direction="row" gap={2}>
-              <div className={`${style1.cancel}`} >
-              <Button  sx={{color: "#fff"}} onClick={handleClose}>Cancel</Button>
-              </div>
+             <Button variant="contained" color="primary" onClick={handleClose}>Cancel</Button>
               <PDFDownloadLink document={<MyDocument pdfData={open ? pdfData : []} />} fileName={`cglense_chat_${Date.now()}.pdf`}>
                 <div className={`${style1.yes}`}>
                 <Button  onClick={handleClose} sx={{color: "#fff"}}> Yes</Button>

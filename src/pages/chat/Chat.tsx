@@ -25,7 +25,7 @@ import { set_history, set_answers, set_QnA, set_recommendedQnA, set_latestQuesti
 import UserLocationSave from "./UserLocationSave";
 import { Grid } from "@mui/material";
 import KpiWidget from "../../components/KpiWidget/KpiWidget";
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import LeaderBoard from "../../components/LeaderBoard";
 import { KeywordAnalysis } from "../../components/KeywordAnalysis/KeywordAnalysis";
 import { DeepAnalysis } from "../../components/DeepAnalysis/DeepAnalysis";
@@ -36,7 +36,6 @@ import KpiAnalysis from "../../components/KpiAnalysis/KpiAnalysis";
 import CglenseInsightLogo from "../../assets/cglense_icon_logo.png";
 import CglenseInsightFullLogo from "../../assets/CGLense_app_logo_v3.png";
 import DrawChartURL from "../../components/Charts/DrawChartURL";
-
 
 const Chat = (props: any) => {
     const [tagName, setTagName] = useState("");
@@ -51,7 +50,7 @@ const Chat = (props: any) => {
     const [threads, scrollThreads] = useState(false);
     const chatMessageStreamEnd = useRef<HTMLDivElement | null>(null);
     const [localChatData, setLocalChatData] = useState([]);
-    const resetChatBox=useSelector((state:any)=>state.chat.resetChat)
+    const resetChatBox = useSelector((state: any) => state.chat.resetChat);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<unknown>();
 
@@ -68,9 +67,8 @@ const Chat = (props: any) => {
     const [isChatThread, setIsChatThread] = useState<boolean>(false);
     const [isKpiAnalysis, setIsKpiAnalysis] = useState<boolean>(false);
     const [isChartGeneration, setIsChartGeneration] = useState(false);
-    
+
     const abortControllerRef = useRef(new AbortController());
-    
 
     let getDisclaimer = localStorage.getItem("Disclaimer") || false;
     const [showDisclaimer, setShowDisclaimer] = useState<any>(getDisclaimer);
@@ -89,7 +87,6 @@ const Chat = (props: any) => {
     const [FileViewerURL, setFileViewerURL] = useState("");
     const answers = useSelector((state: any) => state.chat.answers);
     const questionAnswersList = useSelector((state: any) => state.chat.qnA);
-    //const [questionAnswersList, setQuestionAnswersList] = useState<any>([]);
     const showHistory = useSelector((state: any) => state.chat.showHistory);
     const recommenededQuestionList = useSelector((state: any) => state.chat.recommendedQuestions);
     const latestQuestion = useSelector((state: any) => state.chat.latestQuestion);
@@ -192,7 +189,7 @@ const Chat = (props: any) => {
     };
 
     const makeApiRequest = async (question: string) => {
-        abortControllerRef.current=new AbortController();
+        abortControllerRef.current = new AbortController();
 
         lastQuestionRef.current = question;
         dispatch(set_latestQuestion(lastQuestionRef.current as any));
@@ -203,10 +200,8 @@ const Chat = (props: any) => {
         let patientemail = localStorage.getItem("patientemail") ? localStorage.getItem("patientemail") : "";
         let patientemailconfirm = Boolean(localStorage.getItem("patientemailconfirm")) ? Boolean(localStorage.getItem("patientemailconfirm")) : false;
         //let latitude = localStorage.getItem("latitude") ? localStorage.getItem("latitude") : 0;
-       // let longitude = localStorage.getItem("longitude") ? localStorage.getItem("longitude") : 0;
+        // let longitude = localStorage.getItem("longitude") ? localStorage.getItem("longitude") : 0;
         //let userLocation = localStorage.getItem("userLocation") ? localStorage.getItem("userLocation") : "Auckland";
-       
-       
 
         dispatch(set_recommendedQnA([] as any));
         error && setError(undefined);
@@ -240,23 +235,23 @@ const Chat = (props: any) => {
                 userID: `${userID}`,
                 appointmentData: appointmentData,
                 patientemail: patientemail,
-                patientemailconfirm: patientemailconfirm,
-                // longitude: longitude,
-                // latitude: latitude,
-                // userLocation: userLocation
+                patientemailconfirm: patientemailconfirm
             };
-            const result = await chatApi(request,abortControllerRef.current.signal);
+
+            const result = await chatApi(request, abortControllerRef.current.signal);
             if (result.exchange_id) {
                 let answersList = [...answers, [question, result]];
                 if (result.isChartRequired) {
-                    setIsChartGeneration(true)
+                    setIsChartGeneration(true);
                     let chartReq = {
-                          data: result
-                    }
+                        chart_data: result,
+                        data: answersList
+                    };
                     const chartResult = await ChartJSApi(chartReq);
-                    result['chart'] = chartResult.chart;
-                     let chartUrl = await DrawChartURL(cleanChartData(chartResult.chart))
-                     let qnAList = [
+                    setIsChartGeneration(true);
+                    result["chart"] = chartResult.chart;
+                    let chartUrl = await DrawChartURL(cleanChartData(chartResult.chart));
+                    let qnAList = [
                         ...questionAnswersList,
                         {
                             question: question,
@@ -266,21 +261,30 @@ const Chat = (props: any) => {
                     ];
                     dispatch(set_answers(answersList as any));
                     dispatch(set_QnA(qnAList as any));
-                    setIsChartGeneration(false)
+                    setIsChartGeneration(false);
+                } else {
+                    // If chart is not required
+                    let qnAListWithoutChart = [
+                        ...questionAnswersList,
+                        {
+                            question: question,
+                            answer: result
+                        }
+                    ];
+                    dispatch(set_answers(answersList as any));
+                    dispatch(set_QnA(qnAListWithoutChart as any));
                 }
-              
                 if (isSpeakerOn) {
                     speakText([result.answer], chatBotVoice.value);
                 }
                 dispatch(set_recommendedQnA(result.recommended_question as any));
                 let qAndA = [...localChatData];
-                
+
                 //@ts-ignore
                 qAndA.push({ question: question, answer: result });
                 setLocalChatData(qAndA);
                 makeThreadAPICall(qAndA);
                 localStorage.removeItem("appointmentData");
-               
             } else {
                 setError("No Data found");
             }
@@ -494,12 +498,12 @@ const Chat = (props: any) => {
         setIsChatThread(false);
     };
 
-    useEffect(()=>{
-        if(resetChatBox){
-            clearChat()
-            dispatch(resetChatList(false as any))
+    useEffect(() => {
+        if (resetChatBox) {
+            clearChat();
+            dispatch(resetChatList(false as any));
         }
-    },[resetChatBox])
+    }, [resetChatBox]);
 
     return (
         <>
@@ -571,13 +575,17 @@ const Chat = (props: any) => {
                         ) : (
                             <>
                                 <Grid item xs={12} sm={12} md={ischatRightContent ? 6 : 8}>
-                                    <KpiWidget  toggleChatRightContent={toggleChatRightContent} toggleKpiAnalysis={toggleKpiAnalysis} />
+                                    <KpiWidget toggleChatRightContent={toggleChatRightContent} toggleKpiAnalysis={toggleKpiAnalysis} />
                                     <div className={styles.chatContainer}>
                                         <div className={styles.chatMessageStream}>
                                             {answers.map((answer: any, index: number) => (
                                                 <div key={index}>
                                                     <UserChatMessage message={answer[0]} />
-                                                    <TagsList toggleKeywordAnalysis={toggleKeywordAnalysis} setTagName={setTagName} setTagClicked={setTagClicked}/>
+                                                    <TagsList
+                                                        toggleKeywordAnalysis={toggleKeywordAnalysis}
+                                                        setTagName={setTagName}
+                                                        setTagClicked={setTagClicked}
+                                                    />
                                                     <div className={styles.chatMessageGpt}>
                                                         <Answer
                                                             key={index}
@@ -741,21 +749,21 @@ const Chat = (props: any) => {
                 </Grid>
             )}
 
-                {latestQuestion &&
-                    <ChatBoxLeftPanel
-                        onShowHistoryClicked={onShowHistoryClicked}
-                        onClearChatClicked={clearChat}
-                        onExampleClicked={onExampleClicked}
-                        chatData={localChatData}
-                        onFileViewURLClicked={onFileViewURLClicked}
-                        showThreads={updateQandA}
-                        toggleChatRightContent={toggleChatRightContent}
-                        toggleLeaderBoard={toggleLeaderBoard}
-                        toggleUploads={toggleUploads}
-                        toggleDeepAnalysis={toggleDeepAnalysis}
-                        toggleChatThreads={toggleChatThreads}
-                    />
-                }
+            {latestQuestion && (
+                <ChatBoxLeftPanel
+                    onShowHistoryClicked={onShowHistoryClicked}
+                    onClearChatClicked={clearChat}
+                    onExampleClicked={onExampleClicked}
+                    chatData={localChatData}
+                    onFileViewURLClicked={onFileViewURLClicked}
+                    showThreads={updateQandA}
+                    toggleChatRightContent={toggleChatRightContent}
+                    toggleLeaderBoard={toggleLeaderBoard}
+                    toggleUploads={toggleUploads}
+                    toggleDeepAnalysis={toggleDeepAnalysis}
+                    toggleChatThreads={toggleChatThreads}
+                />
+            )}
         </>
     );
 };
