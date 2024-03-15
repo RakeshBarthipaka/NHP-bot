@@ -67,23 +67,23 @@ const Uploads = (props: any) => {
                 <Box className="search-row">
                     <SearchBar />
                    
-                </Box>
-                <ButtonGroup className="mui-custom-toggle" variant="outlined" aria-label="Basic button group">
-                    <Button className="mui-toggle-active">
-                        <span className="iconText">
-                            <RemoveRedEyeOutlinedIcon className="viewIcon IconElemt" />
-                        </span>
-                        <span>By Views</span>
-                    </Button>
-                    <Button>
-                        <span className="iconText">
-                            <SortOutlinedIcon className="ShortByIcon IconElemt" />
-                        </span>
-                        <span>By Date</span>
-                    </Button>
-                </ButtonGroup>
-                <Box className="file-count">
-                        Total no.of files &nbsp;<Box>8</Box>
+                    <ButtonGroup className="mui-custom-toggle" variant="outlined" aria-label="Basic button group">
+                        <Button className="mui-toggle-active">
+                            <span className="iconText">
+                                <RemoveRedEyeOutlinedIcon className="viewIcon IconElemt" />
+                            </span>
+                            <span>By Views</span>
+                        </Button>
+                        <Button>
+                            <span className="iconText">
+                                <SortOutlinedIcon className="ShortByIcon IconElemt" />
+                            </span>
+                            <span>By Date</span>
+                        </Button>
+                    </ButtonGroup>
+                    <Box className="file-count">
+                            Total no.of files &nbsp;<Box>8</Box>
+                        </Box>
                     </Box>
                 </Box>
                

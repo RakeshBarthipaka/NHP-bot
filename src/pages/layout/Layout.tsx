@@ -448,7 +448,7 @@ const Layout = (props: any) => {
                 </div>
                 <MobileNavBar></MobileNavBar>
             </header>
-            <Grid container className={`mainContent` + (layoutStyle == "row" ? " " : "rowReverse")}>
+            <Grid container className={`mainContent` + (layoutStyle == "row" ? " " : " rowReverse")}>
                 <Outlet context={{ isFullLeftPanelOpen: isFullLeftPanelOpen }} />
             </Grid>
         </div>

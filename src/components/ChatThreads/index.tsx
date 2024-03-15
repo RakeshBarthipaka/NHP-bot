@@ -122,7 +122,8 @@ const ChatThreads = (props: any) => {
                     <Box
                         sx={{
                             display: "flex",
-                            justifyContent: "center"
+                            justifyContent: "center",
+                            marginTop: "10px"
                         }}
                     >
                         <span className="iconText">

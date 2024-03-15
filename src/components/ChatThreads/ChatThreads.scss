@@ -18,13 +18,16 @@
 }
 .file-count{
     background-color: var(--bg-secondary);
-    padding: 8px;
+    padding: 4px 4px 4px 8px;
     border-radius: 30px;
     color: #FFFFFF;
     font-size: 14px;
+    line-height: 1.85;
     display: flex;
     justify-content: center;
-    width: 28%;
+    white-space: nowrap;
+    margin-top: 10px;
+    // width: 28%;
 }
 
 .grid-container{
@@ -175,9 +178,10 @@
 
 .thread-icon-container{
     display: flex;
-    gap: 20px;
+    // gap: 20px;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .chatThreadBox{
@@ -341,4 +345,14 @@
 }
 
    
+@media (max-width: 680px) {
+    .search-row {
+        flex-wrap: wrap;
 
+        > form {
+            flex: 1 0 100%;
+            margin-bottom: 10px;
+        }
+    }
+
+}

@@ -327,7 +327,7 @@ p {
 
 @media (max-width: 900px ) {
     .featuresContentDiv {
-        max-height: calc(100vh - 200px); 
+        max-height: calc(100vh - 220px); 
     }
 
     .chatEmptyState > div:nth-child(1) {

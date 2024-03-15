@@ -249,7 +249,7 @@ html {
     left: auto;
 }
 .rowReverse .shiftingContainer .sidePanelBtn svg {
-    transform: none;
+    transform: rotate(180deg);
 }
 .rowReverse .shiftingContainer > div:nth-child(2)::before {
     right: 22px;
@@ -382,6 +382,7 @@ html {
     border:none;
     height:30px;
     margin-right:10px;
+    margin-top: 10px;
 }
 .mui-toggle-active{
     background-color:#5376F0!important;
@@ -394,6 +395,7 @@ html {
     border:1px solid #5376F0;
     font-size:12px;
     text-transform: none;
+    white-space: nowrap;
 }
 
 .mui-custom-toggle button:nth-child(2){
@@ -409,7 +411,8 @@ html {
     text-transform: none;
 }
 .mui-custom-toggle button span{
-    padding:0px 3px;
+    padding:0px 3px; 
+    white-space: nowrap;
 }
 .mui-custom-toggle button span svg{
     font-size:20px;
@@ -459,5 +462,17 @@ html {
 
     .MuiSlider-root .MuiSlider-markLabel {
         top: 25px !important;
+    }
+
+    .rowReverse .shiftingContainer .sidePanelBtn {
+        right: auto;
+        left: 0px;
+    }
+    .rowReverse .shiftingContainer > div:nth-child(2)::before {
+        right: auto;
+        left: 22px;
+    }
+    .rowReverse .shiftingContainer .sidePanelBtn svg {
+        transform: none;
     }
 }

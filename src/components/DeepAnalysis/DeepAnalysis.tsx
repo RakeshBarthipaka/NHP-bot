@@ -219,7 +219,7 @@ export const DeepAnalysis = () => {
     };
 
     return (
-        <Grid xs={12} padding={3}>
+        <Grid xs={12}>
             <div className="forMakingPdfDA">
                 <Box paddingLeft={3} paddingBottom={2} className="headerDA">
                     {" "}
