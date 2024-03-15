@@ -335,7 +335,7 @@ p {
     }
 
     .chatContainer {
-        max-height: calc(100vh - 358px);
+        max-height: calc(100vh - 378px);
         overflow-y: scroll;
     
     }
