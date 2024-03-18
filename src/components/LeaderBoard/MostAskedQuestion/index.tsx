@@ -49,7 +49,7 @@ const MostAskedQuestion = (props: any) => {
             {Questions.map((item, index) => {
                 return (
                     <React.Fragment key={index}>
-                        <Box className="question-box" onClick={() => toggleAnswerDisplay(item.id)}>
+                        <Box className={`question-box ${isDisplayAnswer && displayAnsId === item.id ? 'active-tab' : ''}`} onClick={() => toggleAnswerDisplay(item.id)}>
                             <Box
                                 sx={{
                                     width: "23px",

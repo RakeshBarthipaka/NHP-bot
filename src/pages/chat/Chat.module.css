@@ -321,9 +321,10 @@ p {
     line-height: 1.65;
 }
 .featuresContentDiv {
-    max-height: calc(100vh - 170px);
+    max-height: calc(100vh - 140px);
     overflow-y: scroll;
     background: #fff;
+    padding-left:10px;
 }
 
 @media (max-width: 900px ) {

@@ -28,7 +28,7 @@
     .question-text {
         display: inline-block;
         .question{
-            color:#2a2a2a;
+            color:#2a2a2a!important;
             font-size:14px;
         }
         .otherInfoKL{
@@ -39,6 +39,7 @@
             align-items: center;
             line-height: 20px;
             margin-bottom: 10px;
+            color:#0C099C;
         }
         .viewIconKL{
             color:#0C099C;
@@ -47,6 +48,7 @@
             font-size:1.4rem;
             padding-right:5px;
             margin-left:10px;
+            color:#0C099C;
             
         }
     }
@@ -56,7 +58,10 @@
         border:1px solid #0C099C;
     }
 }
-
+.active-tab{
+    background-color: #DDE4FC !important;
+    color: #0C099C;
+}
 .viewIconAnswer{
     border:1px solid rgba(83, 118, 240, 1);
     border-radius: 20px;
