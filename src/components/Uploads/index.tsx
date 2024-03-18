@@ -14,27 +14,37 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import SearchBar from "../Common/SearchBar";
-import { deleteApi, getApi, postApi } from "../../api";
+import {  deleteApiFile, postApiFiles } from "../../api";
+import { format, parseISO } from "date-fns";
+
 
 const Uploads = (props: any) => {
     const [UploadFileList, setUploadFileList] = useState<any>([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [deleteFileID, setDeleteFileID] = useState(false);
     const [isFileDeleted, setIsFileDeleted] = useState(false);
-    const [selectedFile, setSelectedFile] = useState('');
+    const [selectedFile, setSelectedFile] = useState("");
     const [loading, setLoading] = useState(false);
+    const [searchKey, setSearchKey] = useState<string>("");
 
     const getUploadFileData = async () => {
         try {
-            const response = await postApi({
-                page: 0,
-                limit: 10,
-                search_key: "",
-                sort_key: "date",
-                sort_type: "asc"
-            },"file/list/");
+            const response = await postApiFiles(
+                {
+                    page: 0,
+                    limit: 10,
+                    search_key: searchKey,
+                    sort_key: "date",
+                    sort_type: "asc"
+                },
+                "file/list/",
+                {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                }
+            );
 
-            console.log(response.items, 'response');
+            console.log(response.items, "response");
             setUploadFileList(response.items);
             setIsLoaded(true);
         } catch (error) {
@@ -42,45 +52,52 @@ const Uploads = (props: any) => {
         }
     };
 
-
-    const deleteUploadFileData = async () => {
+    const deleteUploadFileData = async (id: any) => {
         try {
-            const response = await deleteApi(`file/list/${deleteFileID}`);
-
-            console.log(response.items, 'response');
-            setIsFileDeleted(true);
+            console.log("delete response inside", id);
+            const response = await deleteApiFile(`file/delete/${id}`);
+            setIsLoaded(false);
         } catch (error) {
-            setUploadFileList([""]);
+            setIsFileDeleted(false);
         }
     };
 
-    const handleFileChange = async (event: any) => {
-        const file = event.target.files[0];
-        const formData = new FormData();
-        formData.append("files", file);
-        setSelectedFile(file.name);
-        setLoading(true);
-        console.log(file, 'formData');
-        try {
-            const resp = await postApi({
-                  formData
-            }, `file/upload/`);
-            if (resp.status === 200) {
-                setLoading(false);
-                setIsLoaded(false)
-            } else {
-                setLoading(false);
-            }
-        } catch (err) {
-            setLoading(false);
-        }
-    }
+
+
+    // const handleFileChange = async (event: any) => {
+    //     const file = event.target.files[0];
+    //     const formData = new FormData();
+    //     formData.append("files", file);
+    //     setSelectedFile(file.name);
+    //     setLoading(true);
+    //     console.log(file, "formData");
+    //     try {
+    //         const resp = await postApi(formData, `file/upload/`);
+    //         if (resp.status === 200) {
+    //             setLoading(false);
+    //             setIsLoaded(false);
+    //             setIsFileDeleted(false);
+    //         } else {
+    //             setLoading(false);
+    //         }
+    //     } catch (err) {
+    //         setLoading(false);
+    //     }
+    // };
 
     useEffect(() => {
         if (!isLoaded) {
             getUploadFileData();
         }
     }, [isLoaded]);
+
+    useEffect(() => {
+        const getData = setTimeout(() => {
+            getUploadFileData();
+        }, 1000);
+
+        return () => clearTimeout(getData);
+    }, [isLoaded, searchKey]);
 
     const card = (
         <>
@@ -90,40 +107,53 @@ const Uploads = (props: any) => {
                         <AddIcon />
                     </Box>
                     <Typography sx={{ color: "#000000" }}>
-                  
-                        Drag and Drop or Browse to<span style={{ color: "var(--active-themes)" }}>Upload a File
-                        <input
+                        Drag and Drop or Browse to
+                        <span style={{ color: "var(--active-themes)" }}>
+                            Upload a File
+                            <input
                                 id="file-upload"
                                 type="file"
                                 accept=".pdf"
                                 //style={{ display: 'none' }}
-                                onChange={handleFileChange}
+                                //onChange={handleFileChange}
                                 disabled={loading}
-                            /></span>
+                            />
+                        </span>
                     </Typography>
                     {selectedFile && (
-                            <div>
-                                <p>Selected File: {selectedFile}</p>
-                            </div>
-                        )}
+                        <div>
+                            <p>Selected File: {selectedFile}</p>
+                        </div>
+                    )}
                     <Typography className="allowed-text">Allowed Formats: PDF</Typography>
                 </Box>
             </CardContent>
         </>
     );
 
-    const fileItems = (
-        <>
-            <Box className="file-row">
-                <Typography sx={{ display: "flex", fontSize: "14px" }}>
-                    <PictureAsPdfOutlinedIcon sx={{ color: "var(--active-themes)" }} />
-                    &nbsp;unilever_chat_1706852987594.pdf
-                </Typography>
-                <Typography sx={{ color: "var(--active-themes)", fontSize: "12px" }}>10 min ago</Typography>
-                <DeleteOutlinedIcon sx={{ color: "var(--active-themes)" }} />
-            </Box>
-        </>
-    );
+    const fileItems = (data: any) => {
+        return (
+            <>
+                <Box className="file-row">
+                    <Typography flex={2} sx={{ display: "flex", fontSize: "14px" }}>
+                        <PictureAsPdfOutlinedIcon sx={{ color: "var(--active-themes)" }} />
+                        {/* {data?.filename?.length < 40 ? data?.filename :  data?.filename.substring(0,40)+ '...pdf' } */}
+                        {data?.filename}
+                    </Typography>
+                    <Typography flex={1} sx={{ color: "var(--active-themes)", fontSize: "12px" }}>
+                        {format(parseISO(data?.date), "dd-MM-yyyy h:mm a")}
+                    </Typography>
+                    <DeleteOutlinedIcon
+                        onClick={() => {
+                            deleteUploadFileData(data?.id);
+                        }}
+                        sx={{ color: "var(--active-themes)" }}
+                    />
+                </Box>
+            </>
+        );
+    };
+
     return (
         <>
             <Box className="upload-container">
@@ -142,20 +172,17 @@ const Uploads = (props: any) => {
                 </Card>
                 <Divider sx={{ marginTop: "10px", marginBottom: "10px", borderColor: "var(--active-themes)" }} />
                 <Box className="search-row">
-                    <SearchBar />
+                    <SearchBar
+                        searchKey={searchKey}
+                        setSearchKey={value => {
+                            setSearchKey(value);
+                        }}
+                    />
                     <Box className="file-count">
-                        Total no.of files &nbsp;<Box>8</Box>
+                        Total no.of files &nbsp;<Box>{UploadFileList?.length}</Box>
                     </Box>
                 </Box>
-                {fileItems}
-                {fileItems}
-                {fileItems}
-                {fileItems}
-                {fileItems}
-                {fileItems}
-                {fileItems}
-                {fileItems}
-                {fileItems}
+                {UploadFileList?.map((data: any) => fileItems(data))}
             </Box>
         </>
     );

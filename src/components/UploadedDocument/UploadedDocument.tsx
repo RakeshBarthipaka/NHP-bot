@@ -52,7 +52,7 @@ export const UploadedDocumentView = ({ onFileViewURLClicked }: Props) => {
             const resp = await postApi(formData, `api/v1/document/document-create`);
             if (resp.status === 200) {
                 setLoading(false);
-                setIsLoaded(false)
+                setIsLoaded(false);
             } else {
                 setLoading(false);
             }

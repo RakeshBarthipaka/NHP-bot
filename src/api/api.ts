@@ -246,6 +246,27 @@ export async function postApi(options: any, apiName: string): Promise<any> {
     }
 }
 
+export async function postApiFiles(options: any, apiName: string, headers?: any): Promise<any> {
+    try {
+        const response = await fetch(`${BASE_API_URL}/${apiName}`, {
+            method: "POST",
+            mode: "cors",
+            headers: headers,
+            body: JSON.stringify(options)
+        });
+
+        console.log(response, 'response in postapi')
+        const parsedResponse = await response.json();
+        if (!response.ok) {
+            throw Error(parsedResponse.error || "Unknown error");
+        }
+
+        return parsedResponse;
+    } catch (err) {
+        return [];
+    }
+}
+
 export async function getApi(apiName: string) {
     try {
         const response = await fetch(`${BASE_API_URL}/${apiName}`, {
@@ -305,4 +326,12 @@ export async function deleteApi(apiName: any) {
         throw Error(parsedResponse.error || "Unknown error");
     }
     return parsedResponse;
+}
+
+export async function deleteApiFile(apiName: any) {
+    const response = await fetch(`${BASE_API_URL}/${apiName}`, {
+        method: "delete"
+    });
+    
+    return response;
 }
