@@ -60,7 +60,7 @@ export const QuestionInput = ({ onSend, disabled, placeholder, clearOnSend, onSe
     const sendQuestionDisabled = disabled || !question.trim();
 
     return (
-        <Stack horizontal className='questionInputContainer' style={{border:`1px solid ${colorCode}`}}>
+        <Stack horizontal className='questionInputContainer'>
           
             <TextField
                 className={`questionInputTextArea chatboxTourGuide`}

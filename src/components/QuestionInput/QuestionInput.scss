@@ -1,15 +1,19 @@
 .questionInputContainer {
     /* border-radius: 8px; */
     position: relative;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.14), 0px 0px 2px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.14), 0px 0px 2px rgba(0, 0, 0, 0.12);
     height: 60px;
     width: 100%;
     padding: 3px 5px 3px 7px;
     background: white;
-    // border: 1px solid #73706E;
+    border: 1px solid #dedede;
     border-radius: 52px;
     align-items: center;
 }
+.questionInputContainer:hover {
+    box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.14), 0px 0px 2px rgba(0, 0, 0, 0.12);
+}
+
 
 .questionInputContainer select {
     display: flex;
@@ -70,13 +74,27 @@
 
 .questionInputMicSpeakerBtn {
     display: flex;
-    gap: 5px;
+    gap: 18px;
     padding: 0 5px;
     cursor: pointer;
+    background-color: #DDE4FC;
+    border-radius: 40px;
+    padding:6px 10px;
+    margin-right:5px;
 }
 .questionInputMicSpeakerBtn svg {
-    font-size: 22px;
-    height: 22px;
+    font-size: 30px;
+    height:30px;
+    width:30px;
+    padding:4px 4px;
+    background-color:#fff;
+    border-radius:30px;
+    border:1px solid #cfd9fb;
+    color:var(--active-themes);
+    
+   &:hover{
+    border:1px solid var(--active-themes);
+   }
 }
 
 .microphoneRecognize {
@@ -100,10 +118,10 @@
 
 .speakersoundAnimation {
     border-radius: 50% !important;
-    color: white !important;
-    animation: pulsate infinite 1.5s;
+    color: var(--active-themes)!important;
+    // animation: pulsate infinite 1.5s;
     padding: 5px;
-    background: var(--active-themes);
+    // background: var(--active-themes);
 }
 
 @keyframes speakersound {

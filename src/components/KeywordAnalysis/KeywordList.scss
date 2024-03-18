@@ -11,15 +11,19 @@
     p {
         color: #2a2a2a;
         font-size: 14px !important;
+        line-height: 23px;
     }
 }
 .keyword-widget {    
     cursor: pointer;
-    background-color: #F2F2F7!important;
-    padding:10px 20px 0px 20px;
+    background-color:#fff!important;
+    padding: 10px 20px 0px 20px;
     border-radius: 30px 0px 30px 30px;
     display: inline-flex;
-    margin-bottom:5px;
+    margin-bottom: 5px;
+    // border:1px solid #d1d1d1;
+    border:1px solid #efefef;
+    // box-shadow:0px 0px 10px rgba(0, 0, 0, 0.14), 0px 0px 2px rgba(0, 0, 0, 0.12);
     
     .question-text {
         display: inline-block;
@@ -47,8 +51,9 @@
         }
     }
     &:hover{
-        background-color: var(--bg-primary-light);
-        color:#0C099C!important;
+        // background-color: #dde4fc !important;
+        color:#0C099C;
+        border:1px solid #0C099C;
     }
 }
 

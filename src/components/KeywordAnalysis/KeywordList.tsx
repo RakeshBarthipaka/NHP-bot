@@ -110,8 +110,8 @@ const KeywordList = (props: any) => {
                             sx={{
                                 backgroundColor:
                                     isDisplayAnswerToggle && isDisplayAnswer === tag.id
-                                        ? "var(--bg-secondary) !important"
-                                        : "var(--bg-primary-light) !important",
+                                        ? "var(--theme-blue) !important"
+                                        : "var(--white-color) !important",
                                 color: isDisplayAnswerToggle && isDisplayAnswer === tag.id ? "var(--white-color) !important" : "var(--black-color) !important"
                             }}
                         >

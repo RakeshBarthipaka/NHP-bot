@@ -49,7 +49,7 @@ const Uploads = (props: any) => {
 
     const card = (
         <>
-            <CardContent className="upload-outer-box">
+            <CardContent className="upload-outer-box" >
                 <Box className="upload-box">
                     <Box className="plus-icon-cont">
                         <AddIcon />
@@ -77,13 +77,12 @@ const Uploads = (props: any) => {
     );
     return (
         <>
-            <Box className="upload-container">
+            <Box className="upload-container" sx={{ boxShadow: "none"}}> 
                 <Box className="upload-heading">
                     {/* <img src={UploadsIcon} alt="Uploads" /> */}
                     <CloudUploadOutlinedIcon />
                     <h3 className="disply-page-title">UPLOADS & ATTACHMENTS</h3>
-                </Box>
-              
+                </Box>              
                 <Card>
                     {card}
                 </Card>
@@ -94,8 +93,18 @@ const Uploads = (props: any) => {
                 <Box sx={{ display: 'flex' }}>
                 <Box className="search-row">
                     <SearchBar />
-                   
-                </Box>
+                    {/* <Box className="file-count">
+                        <span>
+                        Total no.of topics &nbsp;
+                        </span>
+                        <Box>8</Box>
+                    </Box> */}
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "center"
+                        }}
+                    >
                 <ButtonGroup className="mui-custom-toggle" variant="outlined" aria-label="Basic button group">
                     <Button className="mui-toggle-active">
                         <span className="iconText">
@@ -110,9 +119,11 @@ const Uploads = (props: any) => {
                         <span>By Date</span>
                     </Button>
                 </ButtonGroup>
-                <Box className="file-count">
-                        Total no.of files &nbsp;<Box>8</Box>
-                    </Box>
+                {/* <Box className="file-count">                   
+                        <span>Total no.of files</span> &nbsp;<Box>8</Box>
+                    </Box> */}
+                </Box>
+                </Box>
                 </Box>
                
                

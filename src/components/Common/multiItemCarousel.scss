@@ -88,12 +88,14 @@
 
 .kpiCard {
   height: 100%;
-  background: var(--bg-primary-light);
+  // background: var(--bg-primary-light);
+  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(221,228,252,1) 100%);
     border: 2px solid var(--primary-border-color);
-    border-radius: 20px;
+    border-radius: 30px;
     padding: 10px 15px;
     color: rgba(51, 51, 51, 1);
     cursor: pointer;
+    max-height:140px;
 }
 .kpiCard:hover {
   border: 2px solid var(--active-themes);
@@ -112,7 +114,7 @@
 }
 
 .kpiCard h4 {
-  margin: 0 0 10px;
+  margin: 0 0 0px;
     font-size: clamp(14px, 1.25vw, 20px); 
 }
 .kpiCard .previousInfo {
@@ -138,6 +140,9 @@ p.negative {
   margin-left: -5px;
   // color: var(--active-themes);
   color: #F1F1F1; 
+  &:hover{
+    color:var(--active-themes);
+  }
 }
 .slick-arrow::before {
   display: none;
@@ -175,9 +180,13 @@ p.negative {
 .addKpiBtn{
   position: absolute;
       right: -5px;
-      top: 25%;
-      color: #E5E5EA ;
+      top: 28%;
+      color:#F2F2F7;      
       font-size: 64px !important;
+      cursor: pointer;
       /* color: "#F1F1F1", fontSize: "50px"  */
+      &:hover{
+        color: #E1E5F2 ;
+      }
 }
 

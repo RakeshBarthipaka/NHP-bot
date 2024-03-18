@@ -34,7 +34,7 @@ export const KeywordAnalysis = ({ tagName }: Props) => {
                     <hr className="verticalLineStyle" />
                 </Box>
 
-                <Box paddingLeft={3} paddingTop={2}>
+                <Box >
                     <Stack
                         className="stackShareOptions"
                         direction="row"
