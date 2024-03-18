@@ -330,7 +330,7 @@ const Layout = (props: any) => {
                                                 <span></span>
                                             </div>
                                             <div
-                                                className={`layoutBox` + (layoutStyle == "row" ? " " : "active")}
+                                                className={`layoutBox` + (layoutStyle == "row" ? " " : " active")}
                                                 onClick={e => {
                                                     setLayoutStyles("row-reverse");
                                                     toggleSettings(false);
@@ -448,7 +448,7 @@ const Layout = (props: any) => {
                 </div>
                 <MobileNavBar></MobileNavBar>
             </header>
-            <Grid container className={`mainContent` + (layoutStyle == "row" ? " " : "rowReverse")}>
+            <Grid container className={`mainContent` + (layoutStyle == "row" ? " " : " rowReverse")}>
                 <Outlet context={{ isFullLeftPanelOpen: isFullLeftPanelOpen }} />
             </Grid>
         </div>

@@ -81,14 +81,7 @@ const styles = StyleSheet.create({
         textDecoration: "none",
         fontWeight: "bold"
     },
-    pdfDownload: {
-        padding: "8px",
-        display: "flex",
-        alignItems: "center",
-        width: "38px",
-        height: "40px",
-        marginLeft: "0",
-    }
+   
 });
 
 // Define props type for MyDocument component
@@ -167,7 +160,6 @@ const DownloadPDF: React.FC<{ pdfData: MyDocumentProps[] }> = ({ pdfData }) => (
         }
     }}>
     <PDFDownloadLink
-        style={styles.pdfDownload}
         className="pdfDownload"
         document={<MyDocument pdfData={pdfData} />}
         fileName={`cglense_chat_${Date.now()}.pdf`}

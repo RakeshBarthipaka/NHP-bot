@@ -43,9 +43,9 @@ export default function MobileNavBar() {
   
     let selectedAvatars = speakerData && speakerData ? JSON.parse(speakerData) : voiceAvatarList[0]
 
-    let handleSelectedSpeakerData = (voiceData:any) => {
-      dispatch(set_avatar(voiceData));
-      setLocalStorageData("speakerData", voiceData);
+
+    const handleSelectedSpeakerData = (voiceData: any) => {
+        localStorage.setItem("speakerData", voiceData);
     };
   
     let onSelectChatBotTypes = (chatBotVoice:any) => {

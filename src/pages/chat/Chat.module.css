@@ -8,7 +8,7 @@
     padding-right: 24px;
     display: flex;
     flex-direction: column;
-    padding: 1.5rem;
+    padding: 1.5rem 0.5rem;
 }
 
 .chatMessageGpt {
@@ -329,7 +329,7 @@ p {
 
 @media (max-width: 900px ) {
     .featuresContentDiv {
-        max-height: calc(100vh - 200px); 
+        max-height: calc(100vh - 220px); 
     }
 
     .chatEmptyState > div:nth-child(1) {
@@ -337,7 +337,7 @@ p {
     }
 
     .chatContainer {
-        max-height: calc(100vh - 358px);
+        max-height: calc(100vh - 378px);
         overflow-y: scroll;
     
     }

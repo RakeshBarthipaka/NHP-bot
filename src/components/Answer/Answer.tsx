@@ -171,7 +171,7 @@ export const Answer = ({
     return (
         <>
             <Stack verticalAlign="space-between" {...SpacingColumnProps} className="answerContainerDiv">
-                <Stack.Item>
+                <Stack.Item className="anwerAvatar">
                     <Stack horizontal horizontalAlign="space-between" className="answerLogo">
                         {/* <img src={projectData ? projectData.projectLogoPath : LogoWhiteTransparent} width="100%" height={projectData ? projectData.projectLogoHeight : "30px"} /> */}
                         <img src={CglenseInsightLogo} width="40px" />
@@ -206,7 +206,7 @@ export const Answer = ({
                     </Stack.Item>
 
                     <Stack>
-                        <div className="IconCustomColor">
+                        <div className="IconCustomColor answerActionIconBtns">
                             {/* <IconButton
                             style={showLike ? IconActiveStyles : IconStyles}
                             iconProps={{ iconName: "like" }}
@@ -316,7 +316,7 @@ export const Answer = ({
                                 </Link>
                             </div>
                         </div> */}
-                            <span onClick={() => onThoughtProcessClicked()}>
+                            <span onClick={() => onThoughtProcessClicked()} className="hideInMobileXs">
                                 <Avatar
                                     sx={{
                                         bgcolor: "var(--bg-secondary)",
@@ -339,7 +339,7 @@ export const Answer = ({
                                     <PsychologyOutlinedIcon />
                                 </Avatar>
                             </span>
-                            <span onClick={() => onSupportingContentClicked()}>
+                            <span onClick={() => onSupportingContentClicked()} className="hideInMobileXs">
                                 <Avatar
                                     // sx={{
                                     //     bgcolor: "rgba(83, 118, 240, 1)",
@@ -373,7 +373,7 @@ export const Answer = ({
                                 </Avatar>
                             </span>
 
-                            <span onClick={() => onLogsContentClicked()}>
+                            <span onClick={() => onLogsContentClicked()} className="hideInMobileXs">
                                 <Avatar
                                     // sx={{
                                     //     bgcolor: "rgba(83, 118, 240, 1)",

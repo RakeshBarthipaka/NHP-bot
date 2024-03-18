@@ -307,6 +307,7 @@
     padding: 0px;
     box-shadow: 2px 4px 12px rgb(0,0,0,0.15);
     border-radius: 5px;
+    z-index: 11;
 }
 .colorsList {
     display: flex;
@@ -415,6 +416,9 @@
 
 
 @media (max-width: 900px) {
+    .header::before {
+        background: linear-gradient(90deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0.8) 40%, rgba(0, 0, 0, 0) 70%);
+    }
     .mainContent {
         margin-top: 128px;
         max-height: calc(100vh - 122px);

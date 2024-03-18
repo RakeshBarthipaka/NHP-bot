@@ -55,6 +55,7 @@ export async function chatApi(options: ChatRequest, signal?: AbortSignal): Promi
             },
             temperature: options.temperature,
             token: options.temperature,
+            personalization: false,
             language: options.language,
             userID: options.userID
         }),
@@ -256,7 +257,7 @@ export async function postApiFiles(options: any, apiName: string, headers?: any)
             body: JSON.stringify(options)
         });
 
-        console.log(response, 'response in postapi')
+        console.log(response, "response in postapi");
         const parsedResponse = await response.json();
         if (!response.ok) {
             throw Error(parsedResponse.error || "Unknown error");
@@ -333,7 +334,7 @@ export async function deleteApiFile(apiName: any) {
     const response = await fetch(`${BASE_API_URL}/${apiName}`, {
         method: "delete"
     });
-    
+
     return response;
 }
 export const fileUpload = (formData: any, apiName: any) => {
