@@ -36,6 +36,7 @@ import KpiAnalysis from "../../components/KpiAnalysis/KpiAnalysis";
 import ChatThreadSession from "../../components/ChatThreads/ChatThreadSession";
 import CglenseInsightLogo from "../../assets/cglense_icon_logo.png";
 import CglenseInsightFullLogo from "../../assets/CGLense_app_logo_v3.png";
+import DrawChartURL from "../../components/Charts/DrawChartURL";
 
 interface activeChatThread {
     id: number;
@@ -58,11 +59,13 @@ const Chat = (props: any) => {
     const [threads, scrollThreads] = useState(false);
     const chatMessageStreamEnd = useRef<HTMLDivElement | null>(null);
     const [localChatData, setLocalChatData] = useState([]);
+
     const resetChatBox=useSelector((state:any)=>state.chat.resetChat)
 
     const [isChatThreadStart, setIsChatThreadStart] = useState(false);
     const [activeChatThreadDetails, setActiveChatThreadDetails] = useState<activeChatThread>();
     const [isAssignClick, setIsAssignClick] = useState<boolean>(false);
+
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<unknown>();
@@ -79,11 +82,13 @@ const Chat = (props: any) => {
     const [isUpload, setIsUpload] = useState<boolean>(false);
     const [isChatThread, setIsChatThread] = useState<boolean>(false);
     const [isKpiAnalysis, setIsKpiAnalysis] = useState<boolean>(false);
+    const [isChartGeneration, setIsChartGeneration] = useState(false);
+
+    const abortControllerRef = useRef(new AbortController());
 
     
-    const abortControllerRef = useRef(new AbortController());
-    
     const [isReplyDisplay, setIsReplyDisplay] = useState<boolean>(false);
+
 
     let getDisclaimer = localStorage.getItem("Disclaimer") || false;
     const [showDisclaimer, setShowDisclaimer] = useState<any>(getDisclaimer);
@@ -206,7 +211,7 @@ const Chat = (props: any) => {
     };
 
     const makeApiRequest = async (question: string) => {
-        abortControllerRef.current=new AbortController();
+        abortControllerRef.current = new AbortController();
 
         lastQuestionRef.current = question;
         dispatch(set_latestQuestion(lastQuestionRef.current as any));
@@ -219,9 +224,6 @@ const Chat = (props: any) => {
         //let latitude = localStorage.getItem("latitude") ? localStorage.getItem("latitude") : 0;
         // let longitude = localStorage.getItem("longitude") ? localStorage.getItem("longitude") : 0;
         //let userLocation = localStorage.getItem("userLocation") ? localStorage.getItem("userLocation") : "Auckland";
-
-        console.log(chatGPTToken, "chatgpttokens");
-
         dispatch(set_recommendedQnA([] as any));
         error && setError(undefined);
         setIsLoading(true);
@@ -255,27 +257,50 @@ const Chat = (props: any) => {
                 appointmentData: appointmentData,
                 patientemail: patientemail,
                 patientemailconfirm: patientemailconfirm
-                // longitude: longitude,
-                // latitude: latitude,
-                // userLocation: userLocation
             };
-            const result = await chatApi(request,abortControllerRef.current.signal);
+
+            const result = await chatApi(request, abortControllerRef.current.signal);
             if (result.exchange_id) {
                 let answersList = [...answers, [question, result]];
-                let qnAList = [
-                    ...questionAnswersList,
-                    {
-                        question: question,
-                        answer: result
-                    }
-                ];
-                dispatch(set_answers(answersList as any));
-                dispatch(set_QnA(qnAList as any));
+                if (result.isChartRequired) {
+                    setIsChartGeneration(true);
+                    let chartReq = {
+                        chart_data: result,
+                        data: answersList
+                    };
+                    const chartResult = await ChartJSApi(chartReq);
+                    setIsChartGeneration(true);
+                    result["chart"] = chartResult.chart;
+                    let chartUrl = await DrawChartURL(cleanChartData(chartResult.chart));
+                    let qnAList = [
+                        ...questionAnswersList,
+                        {
+                            question: question,
+                            answer: result,
+                            chart: chartUrl
+                        }
+                    ];
+                    dispatch(set_answers(answersList as any));
+                    dispatch(set_QnA(qnAList as any));
+                    setIsChartGeneration(false);
+                } else {
+                    // If chart is not required
+                    let qnAListWithoutChart = [
+                        ...questionAnswersList,
+                        {
+                            question: question,
+                            answer: result
+                        }
+                    ];
+                    dispatch(set_answers(answersList as any));
+                    dispatch(set_QnA(qnAListWithoutChart as any));
+                }
                 if (isSpeakerOn) {
                     speakText([result.answer], chatBotVoice.value);
                 }
                 dispatch(set_recommendedQnA(result.recommended_question as any));
                 let qAndA = [...localChatData];
+
                 //@ts-ignore
                 qAndA.push({ question: question, answer: result });
                 setLocalChatData(qAndA);
@@ -509,12 +534,12 @@ const Chat = (props: any) => {
         setIsReplyDisplay(true);
     };
 
-    useEffect(()=>{
-        if(resetChatBox){
-            clearChat()
-            dispatch(resetChatList(false as any))
+    useEffect(() => {
+        if (resetChatBox) {
+            clearChat();
+            dispatch(resetChatList(false as any));
         }
-    },[resetChatBox])
+    }, [resetChatBox]);
 
     return (
         <>

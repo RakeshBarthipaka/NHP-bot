@@ -14,8 +14,9 @@ import AppointmentsBookingList from "../Appointment/AppointmentsBookingList";
 import ScheduleAppointment from "../Appointment/AppointmentBooking";
 import { EmailConfirm } from "../Appointment/EmailConfirm";
 import HospitalList from "../Appointment/HospitalList";
-import { Avatar, Button, Divider } from "@mui/material";
+import { Avatar, Button, Divider, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
+import DrawChart from "../Charts/drawChart";
 import { GenerateTable } from "../Tables/GenerateTable";
 import { TagsList } from "../TagsList/TagsList";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
@@ -77,6 +78,7 @@ export const Answer = ({
     const [showCommentBox, setshowCommentBox] = useState(false);
     const messageRef = useRef<HTMLDivElement>(null);
     const [shareIconStyle, setShareIconStyle] = useState<any>({ display: "none" });
+    let chartStatus = true;
 
     useEffect(() => {
         if (messageRef.current) {
@@ -179,32 +181,18 @@ export const Answer = ({
                 </Stack.Item>
                 <Stack className={`answerContainer ${isSelected && "selected"}`} verticalAlign="space-between">
                     <Stack.Item grow>
-                        <div className="answerText" dangerouslySetInnerHTML={{ __html: sanitizedAnswerHtml }}></div>
-                        {/* <GenerateTable></GenerateTable> */}
 
-                        {/* { answer.patientemail && answer.patientemail.length > 0 &&  !answer.patientemailconfirm &&
-                        <EmailConfirm onExampleClicked={onExampleClicked} patientemail={answer.patientemail}/>
-                    }
-                    { answer.appointmentlimit  &&
-                       <Button size='small' variant="contained" style={{marginBottom:"1.5rem", background:colorCode}} onClick={()=>onExampleClicked("show my bookings")}>Show my bookings</Button>
-                    }
-
-                    { answer.hospitallist && answer.hospitallist.length > 0 &&  
-                        <HospitalList onExampleClicked={onExampleClicked} hospitallist={answer.hospitallist}/>
-                    }
-                    {
-                        answer.doctorlist && answer.doctorlist.length > 0 && (
-                            <ScheduleAppointment events={answer.doctorlist} onExampleClicked={onExampleClicked} />
-                        )
-                    }
-
-                    {
-                        answer.appointmentlist && answer.appointmentlist.length > 0 && (
-                            <AppointmentsBookingList events={answer.appointmentlist} onExampleClicked={onExampleClicked} />
-                        )
-                    } */}
+                        <div className={styles.answerText} dangerouslySetInnerHTML={{ __html: sanitizedAnswerHtml }}></div>
+                        {answer.isChartRequired &&
+                            (answer.chart ? (
+                                <DrawChart chart={answer.chart}></DrawChart>
+                            ) : (
+                                <p className={styles.answerText}>
+                                    Generating Chart
+                                    <span className={styles.loadingdots} />
+                                </p>
+                            ))}
                     </Stack.Item>
-
                     <Stack>
                         <div className="IconCustomColor answerActionIconBtns">
                             {/* <IconButton
@@ -237,6 +225,7 @@ export const Answer = ({
                             // disabled={true}
                             onClick={() => likeDisLikeAnswerToggle("DISLIKE")}
                         /> */}
+
                             <Divider className="iconDivider" orientation="vertical" />
                             <span title="Copy Data" onClick={() => copyChatData()}>
                                 <Avatar
@@ -246,6 +235,7 @@ export const Answer = ({
                                         "&:hover": {
                                             backgroundColor: "var(--bg-secondary)",
                                             color: "#fff"
+
                                         }
                                     }}
                                 >
@@ -267,11 +257,13 @@ export const Answer = ({
                             <span onClick={() => copyChatData()}>
                                 <Avatar
                                     sx={{
+
                                         bgcolor: "var(--bg-primary-light)",
                                         color: "var(--active-themes)",
                                         "&:hover": {
                                             backgroundColor: "var(--bg-secondary)",
                                             color: "#fff"
+
                                         }
                                     }}
                                 >
@@ -316,6 +308,7 @@ export const Answer = ({
                                 </Link>
                             </div>
                         </div> */}
+
                             <span onClick={() => onThoughtProcessClicked()} className="hideInMobileXs">
                                 <Avatar
                                     sx={{
@@ -334,11 +327,13 @@ export const Answer = ({
                                     //         color: "#fff"
                                     //     }
                                     // }}
+
                                 >
                                     {" "}
                                     <PsychologyOutlinedIcon />
                                 </Avatar>
                             </span>
+
                             <span onClick={() => onSupportingContentClicked()} className="hideInMobileXs">
                                 <Avatar
                                     // sx={{
@@ -367,11 +362,13 @@ export const Answer = ({
                                     //         color: "#fff"
                                     //     }
                                     // }}
+
                                 >
                                     {" "}
                                     <AssignmentOutlinedIcon />
                                 </Avatar>
                             </span>
+
 
                             <span onClick={() => onLogsContentClicked()} className="hideInMobileXs">
                                 <Avatar
@@ -398,6 +395,7 @@ export const Answer = ({
                                         "&:hover": {
                                             backgroundColor: "var(--active-themes)",
                                             color: "#fff"
+
                                         }
                                     }}
                                 >
