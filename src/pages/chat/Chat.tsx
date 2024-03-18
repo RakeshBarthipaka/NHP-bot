@@ -33,9 +33,18 @@ import { TagsList } from "../../components/TagsList/TagsList";
 import Uploads from "../../components/Uploads";
 import ChatThreads from "../../components/ChatThreads";
 import KpiAnalysis from "../../components/KpiAnalysis/KpiAnalysis";
+import ChatThreadSession from "../../components/ChatThreads/ChatThreadSession";
 import CglenseInsightLogo from "../../assets/cglense_icon_logo.png";
 import CglenseInsightFullLogo from "../../assets/CGLense_app_logo_v3.png";
 import DrawChartURL from "../../components/Charts/DrawChartURL";
+
+interface activeChatThread {
+    id: number;
+    question: string;
+    time: number;
+    likeCount: number;
+    dislikeCount: number;
+}
 
 const Chat = (props: any) => {
     const [tagName, setTagName] = useState("");
@@ -50,7 +59,14 @@ const Chat = (props: any) => {
     const [threads, scrollThreads] = useState(false);
     const chatMessageStreamEnd = useRef<HTMLDivElement | null>(null);
     const [localChatData, setLocalChatData] = useState([]);
-    const resetChatBox = useSelector((state: any) => state.chat.resetChat);
+
+    const resetChatBox=useSelector((state:any)=>state.chat.resetChat)
+
+    const [isChatThreadStart, setIsChatThreadStart] = useState(false);
+    const [activeChatThreadDetails, setActiveChatThreadDetails] = useState<activeChatThread>();
+    const [isAssignClick, setIsAssignClick] = useState<boolean>(false);
+
+
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<unknown>();
 
@@ -69,6 +85,10 @@ const Chat = (props: any) => {
     const [isChartGeneration, setIsChartGeneration] = useState(false);
 
     const abortControllerRef = useRef(new AbortController());
+
+    
+    const [isReplyDisplay, setIsReplyDisplay] = useState<boolean>(false);
+
 
     let getDisclaimer = localStorage.getItem("Disclaimer") || false;
     const [showDisclaimer, setShowDisclaimer] = useState<any>(getDisclaimer);
@@ -92,6 +112,8 @@ const Chat = (props: any) => {
     const latestQuestion = useSelector((state: any) => state.chat.latestQuestion);
     const lastQuestionRef = useRef<string>("");
     const dispatch = useDispatch();
+
+    //console.log("answers=======:", answers);
 
     let handleMicClick = () => {
         if (!isListen) {
@@ -202,7 +224,6 @@ const Chat = (props: any) => {
         //let latitude = localStorage.getItem("latitude") ? localStorage.getItem("latitude") : 0;
         // let longitude = localStorage.getItem("longitude") ? localStorage.getItem("longitude") : 0;
         //let userLocation = localStorage.getItem("userLocation") ? localStorage.getItem("userLocation") : "Auckland";
-
         dispatch(set_recommendedQnA([] as any));
         error && setError(undefined);
         setIsLoading(true);
@@ -372,25 +393,6 @@ const Chat = (props: any) => {
         }
     };
 
-    const dummyLogsData = [
-        {
-            id: "0",
-            request_id: "1",
-            query: "show me some good italian restraunts",
-            stage: "optimize_layer",
-            tokens: "1697108146827",
-            time: "1697108146827"
-        },
-
-        {
-            id: "1",
-            request_id: "1",
-            query: "show me some good italian restraunts",
-            stage: "optimize_layer",
-            tokens: "1697108146827",
-            time: "1697108146827"
-        }
-    ];
 
     const onRecommendedQuestionClicked = (recommendedQuestion: string) => {
         makeApiRequest(recommendedQuestion);
@@ -427,6 +429,9 @@ const Chat = (props: any) => {
         setIsKeywordAnalysis(false);
         setIsChatThread(false);
         setIsKpiAnalysis(false);
+        setIsChatThreadStart(false);
+        setActiveChatThreadDetails(undefined);
+        setIsReplyDisplay(false);
     };
 
     const toggleUploads = () => {
@@ -440,6 +445,10 @@ const Chat = (props: any) => {
         setIsDeepAnalysis(false);
         setIsKeywordAnalysis(false);
         setIsKpiAnalysis(false);
+        setIsChatThread(false);
+        setIsChatThreadStart(false);
+        setActiveChatThreadDetails(undefined);
+        setIsReplyDisplay(false);
     };
 
     const toggleDeepAnalysis = () => {
@@ -454,6 +463,9 @@ const Chat = (props: any) => {
         setIsKeywordAnalysis(false);
         setIsChatThread(false);
         setIsKpiAnalysis(false);
+        setIsChatThreadStart(false);
+        setActiveChatThreadDetails(undefined);
+        setIsReplyDisplay(false);
     };
 
     const toggleKeywordAnalysis = () => {
@@ -468,6 +480,9 @@ const Chat = (props: any) => {
         setIsDeepAnalysis(false);
         setIsChatThread(false);
         setIsKpiAnalysis(false);
+        setIsChatThreadStart(false);
+        setActiveChatThreadDetails(undefined);
+        setIsReplyDisplay(false);
     };
 
     const toggleChatThreads = () => {
@@ -482,6 +497,7 @@ const Chat = (props: any) => {
         setIsDeepAnalysis(false);
         setIsKeywordAnalysis(false);
         setIsKpiAnalysis(false);
+        setIsReplyDisplay(false);
     };
 
     const toggleKpiAnalysis = () => {
@@ -496,6 +512,26 @@ const Chat = (props: any) => {
         setIsDeepAnalysis(false);
         setIsKeywordAnalysis(false);
         setIsChatThread(false);
+        setIsChatThreadStart(false);
+        setActiveChatThreadDetails(undefined);
+        setIsReplyDisplay(false);
+    };
+
+    const runChatThread = (obj: any) => {
+        setIsAssignClick(false);
+        setIsChatThreadStart(true);
+        setActiveChatThreadDetails(obj);
+    };
+
+    const handleAssign = () => {
+        setIsAssignClick(true);
+    };
+
+    const handleReplyClick = (event: any) => {
+        event.stopPropagation();
+        setIsChatThreadStart(false);
+        setActiveChatThreadDetails(undefined);
+        setIsReplyDisplay(true);
     };
 
     useEffect(() => {
@@ -513,26 +549,10 @@ const Chat = (props: any) => {
             {FileViewerURL && <FileViewer fileURL={FileViewerURL} onFileViewURLClicked={onFileViewURLClicked} />}
 
             {!showHistory && (
-                <Grid container item direction="row" justifyContent="center" alignItems="flex-start" sx={{ height: "100%" }}>
-                    <Grid item xs={12} md={11} className={styles.chatInputBlock}>
-                        <div className={styles.chatInput}>
-                            {/* <h1 style={{ marginTop: "100px", marginBottom:"50px" }} className={styles.chatEmptyStateTitle}>Get started with CGLense</h1> */}
-                            <QuestionInput
-                                onSelectChatBotTypes={chatBotVoice => handleSelectedSpeakerData(JSON.parse(chatBotVoice))}
-                                clearOnSend
-                                placeholder="Enter your prompt here"
-                                disabled={isLoading}
-                                onSend={question => makeApiRequest(question)}
-                                handleMicClick={handleMicClick}
-                                handleSpeakerClick={handleSpeakerClick}
-                                isListen={isListen}
-                                isSpeakerOn={isSpeakerOn}
-                                chatBotVoice={chatBotVoice}
-                            />
-                        </div>
-                    </Grid>
+                <Grid container item direction="row" justifyContent="center" alignItems="flex-start" sx={{ height: "100%" }} display={{ xs: "block", md: "flex" }}>
+                   
 
-                    <Grid container item justifyContent="center" xs={12} md={11} className="shiftingContainer">
+                    <Grid container item justifyContent="center" xs={12} md={12} lg={11} className="shiftingContainer" order={{ xs: 1, md: 2 }}>
                         {!latestQuestion ? (
                             <>
                                 <Grid container item xs={12} className={styles.chatEmptyState} spacing={2}>
@@ -578,6 +598,9 @@ const Chat = (props: any) => {
                                     <KpiWidget toggleChatRightContent={toggleChatRightContent} toggleKpiAnalysis={toggleKpiAnalysis} />
                                     <div className={styles.chatContainer}>
                                         <div className={styles.chatMessageStream}>
+                                            {isChatThreadStart && activeChatThreadDetails !== undefined && (
+                                                <ChatThreadSession {...{ activeChatThreadDetails, handleAssign, isAssignClick }} />
+                                            )}
                                             {answers.map((answer: any, index: number) => (
                                                 <div key={index}>
                                                     <UserChatMessage message={answer[0]} />
@@ -597,7 +620,7 @@ const Chat = (props: any) => {
                                                             onFollowupQuestionClicked={q => makeApiRequest(q)}
                                                             showFollowupQuestions={useSuggestFollowupQuestions && answers.length - 1 === index}
                                                             questionAnswersList={questionAnswersList}
-                                                            onLogsContentClicked={() => onLogsContentClicked()}
+                                                            onLogsContentClicked={() => onToggleTab(AnalysisPanelTabs.CitationTab, index)}
                                                             projectData={props.projectData}
                                                             onExampleClicked={onExampleClicked}
                                                         />
@@ -631,7 +654,7 @@ const Chat = (props: any) => {
                                     </div>
                                 </Grid>
                                 {ischatRightContent && (
-                                    <Grid item xs={12} sm={12} md={6} className={styles.chatRightContent} display={{ xs: "none", md: "block" }}>
+                                    <Grid item xs={12} sm={12} md={6} className="chatRightContent">
                                         <div className="sidePanelBtn" onClick={toggleChatRightContent}>
                                             <ArrowRightIcon />
                                         </div>
@@ -640,7 +663,14 @@ const Chat = (props: any) => {
                                             {isUpload && <Uploads />}
                                             {isKeywordAnalysis && <KeywordAnalysis tagName={tagName} />}
                                             {isDeepAnalysis && <DeepAnalysis />}
-                                            {isChatThread && <ChatThreads />}
+                                            {isChatThread && (
+                                                <ChatThreads
+                                                    runChatThread={runChatThread}
+                                                    activeChatThreadDetails={activeChatThreadDetails}
+                                                    isReplyDisplay={isReplyDisplay}
+                                                    handleReplyClick={handleReplyClick}
+                                                />
+                                            )}
                                             {isKpiAnalysis && <KpiAnalysis />}
                                         </div>
                                     </Grid>
@@ -708,7 +738,7 @@ const Chat = (props: any) => {
                             />
                         </Panel>
 
-                        {showLogsView && (
+                        {/* {showLogsView && (
                             <Grid item xs={12}>
                                 <div className={styles.LogsDataBlock}>
                                     <h2>Logs data</h2>
@@ -736,7 +766,25 @@ const Chat = (props: any) => {
                                     </div>
                                 </div>
                             </Grid>
-                        )}
+                        )} */}
+                    </Grid>
+
+                    <Grid item xs={12}  md={12} lg={11} className={styles.chatInputBlock} order={{ xs: 2, md: 1 }}>
+                        <div className={styles.chatInput}>
+                            {/* <h1 style={{ marginTop: "100px", marginBottom:"50px" }} className={styles.chatEmptyStateTitle}>Get started with CGLense</h1> */}
+                            <QuestionInput
+                                onSelectChatBotTypes={chatBotVoice => handleSelectedSpeakerData(JSON.parse(chatBotVoice))}
+                                clearOnSend
+                                placeholder="Enter your prompt here"
+                                disabled={isLoading}
+                                onSend={question => makeApiRequest(question)}
+                                handleMicClick={handleMicClick}
+                                handleSpeakerClick={handleSpeakerClick}
+                                isListen={isListen}
+                                isSpeakerOn={isSpeakerOn}
+                                chatBotVoice={chatBotVoice}
+                            />
+                        </div>
                     </Grid>
                 </Grid>
             )}

@@ -103,10 +103,10 @@
     border: 1px solid #ddd;
     z-index: 1;
 }
-.container {
-    display: flex;
-    justify-content: space-between;
-}
+// .container {
+//     display: flex;
+//     justify-content: space-between;
+// }
 
 .recommendedQueries {
     position: relative;
@@ -131,4 +131,15 @@
   .recommendation {
     color:black !important;
     padding-top: 15px;
+  }
+  .themeContainerLayout {
+    display: flex;
+    flex-wrap: wrap;
+    gap:15px;
+  }
+
+  .colorListTheme {
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
   }

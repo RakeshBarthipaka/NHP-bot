@@ -8,6 +8,7 @@ import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOut
 //import style from "../../LeaderBoard/LeaderBoard.module.scss";
 import { MostAskedQuestion as Questions } from "../../../utils/MockData";
 import SortOutlinedIcon from "@mui/icons-material/SortOutlined";
+import { Button, ButtonGroup } from "@mui/material";
 
 const MostAskedQuestion = (props: any) => {
     const [isDisplayAnswer, setIsDisplayAnswer] = useState<boolean>(false);
@@ -25,15 +26,26 @@ const MostAskedQuestion = (props: any) => {
     return (
         <>
             <Box className="asked-question-top-box">
-                <span className="iconText">
-                    <RemoveRedEyeOutlinedIcon className="viewIcon IconElemt" />
-                </span>
-                <span className="iconText">By Views</span>
-                <span className="iconText">
-                    <SortOutlinedIcon className="ShortByIcon IconElemt" />
-                </span>
-                <span className="iconText">By Date</span>
+                <ButtonGroup className="mui-custom-toggle" variant="outlined" aria-label="Basic button group">
+                    <Button className="mui-toggle-active">
+                        <span className="iconText">
+                            <RemoveRedEyeOutlinedIcon className="viewIcon IconElemt" />
+                        </span>
+                        <span>By Views</span>
+                    </Button>
+                    <Button>
+                        <span className="iconText">
+                            <SortOutlinedIcon className="ShortByIcon IconElemt" />
+                        </span>
+                        <span>By Date</span>
+                    </Button>
+                </ButtonGroup>
+                <ButtonGroup className="mui-custom-toggle" variant="outlined" aria-label="Basic button group">
+                    <Button className="mui-toggle-active">Top 10</Button>
+                    <Button>ALL</Button>
+                </ButtonGroup>
             </Box>
+            <br></br>
             {Questions.map((item, index) => {
                 return (
                     <React.Fragment key={index}>

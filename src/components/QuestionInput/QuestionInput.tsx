@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Stack, TextField } from "@fluentui/react";
 import { Send28Filled, Mic28Filled, Speaker028Filled, SpeakerMute28Filled, ChevronDown20Regular } from "@fluentui/react-icons";
-import styles from "./QuestionInput.module.css";
+import "./QuestionInput.scss";
 import azureSpeakerVoiceList from "../../utils/azureSpeakerVoiceList";
 import { useSelector } from "react-redux";
 
@@ -60,10 +60,10 @@ export const QuestionInput = ({ onSend, disabled, placeholder, clearOnSend, onSe
     const sendQuestionDisabled = disabled || !question.trim();
 
     return (
-        <Stack horizontal className={`${styles.questionInputContainer}`} style={{border:`1px solid ${colorCode}`}}>
+        <Stack horizontal className='questionInputContainer' style={{border:`1px solid ${colorCode}`}}>
           
             <TextField
-                className={`${styles.questionInputTextArea} chatboxTourGuide`}
+                className={`questionInputTextArea chatboxTourGuide`}
                 placeholder={placeholder}
                 resizable={false}
                 borderless
@@ -72,29 +72,29 @@ export const QuestionInput = ({ onSend, disabled, placeholder, clearOnSend, onSe
                 onKeyDown={onEnterPress}
             />
 
-            <div className={`${styles.questionInputMicSpeakerBtn} speechServiceTourGuide`}>
+            <div className={`questionInputMicSpeakerBtn speechServiceTourGuide`}>
                 {isListen ? (
                     // <Mic28Filled className={`${styles.microphoneRecognize} ${themeClass}`} onClick={handleMicClick} />
-                    <KeyboardVoiceOutlinedIcon className={`${styles.microphoneRecognize}`} onClick={handleMicClick}  />
+                    <KeyboardVoiceOutlinedIcon className='microphoneRecognize}' onClick={handleMicClick}  />
                 ) : <Mic28Filled primaryFill={colorCode} onClick={handleMicClick} />
                 }
                 {isSpeakerOn ? (
                     // <Speaker028Filled className={`${styles.speakersoundAnimation} ${themeClass}`} onClick={handleSpeakerClick} />
-                    <VolumeUpOutlinedIcon className={`${styles.speakersoundAnimation}`} onClick={handleSpeakerClick}/>
+                    <VolumeUpOutlinedIcon className='speakersoundAnimation' onClick={handleSpeakerClick}/>
                 ) : 
                 // <SpeakerMute28Filled primaryFill={colorCode} onClick={handleSpeakerClick} />
                 <VolumeOffOutlinedIcon sx={{color: colorCode}} onClick={handleSpeakerClick}/>
                 }
             </div>
 
-            <div className={styles.questionInputButtonsContainer}>
+            <div className='questionInputButtonsContainer'>
                 <div
-                    className={`${styles.questionInputSendButton} ${sendQuestionDisabled ? styles.questionInputSendButtonDisabled : ""}`}
+                    className={`questionInputSendButton ${sendQuestionDisabled ? 'questionInputSendButtonDisabled' : ""}`}
                     aria-label="Ask question button"
                     onClick={sendQuestion}
                 >
                     {/* <Send28Filled primaryFill={colorCode} /> */}
-                    <SendOutlinedIcon sx={{color: "#fff"}}/>
+                    <SendOutlinedIcon className="sendIcon"/>
                 </div>
             </div>
         </Stack>

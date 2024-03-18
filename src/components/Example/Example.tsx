@@ -1,4 +1,4 @@
-import styles from "./Example.module.css";
+import "./Example.scss";
 
 interface Props {
     text: string;
@@ -8,8 +8,8 @@ interface Props {
 
 export const Example = ({ text, value, onClick }: Props) => {
     return (
-        <div className={styles.example} onClick={() => onClick(value)}>
-            <p className={`${styles.exampleText} StartYourConversationGuide`}>{text}</p>
+        <div className='example' onClick={() => onClick(value)}>
+            <p className='exampleText StartYourConversationGuide'>{text}</p>
         </div>
     );
 };

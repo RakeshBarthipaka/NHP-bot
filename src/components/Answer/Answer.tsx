@@ -1,7 +1,8 @@
 import { useMemo, useState, useRef, useEffect, useContext } from "react";
 import { Stack, IconButton, IStackProps, MessageBar, MessageBarType } from "@fluentui/react";
 import DOMPurify from "dompurify";
-import styles from "./Answer.module.css";
+//import styles from "./Answer.module.css";
+import "./Answer.scss";
 
 import { AskResponse, feedBackApi, feedbackRequest, exportChatbotApi } from "../../api";
 import { parseAnswerToHtml } from "./AnswerParser";
@@ -166,20 +167,21 @@ export const Answer = ({
         styles: { root: { padding: 15 } }
     };
 
-    const IconStyles = { color: "blue", borderRadius: "8px" };
-    const IconActiveStyles = { backgroundColor: "lightgray", borderRadius: "8px" };
+    //const IconStyles = { color: "blue", borderRadius: "8px" };
+    //const IconActiveStyles = { backgroundColor: "lightgray", borderRadius: "8px" };
 
     return (
         <>
-            <Stack verticalAlign="space-between" {...SpacingColumnProps} className={` ${styles.answerContainerDiv}`}>
-                <Stack.Item>
-                    <Stack horizontal horizontalAlign="space-between" className={styles.answerLogo}>
+            <Stack verticalAlign="space-between" {...SpacingColumnProps} className="answerContainerDiv">
+                <Stack.Item className="anwerAvatar">
+                    <Stack horizontal horizontalAlign="space-between" className="answerLogo">
                         {/* <img src={projectData ? projectData.projectLogoPath : LogoWhiteTransparent} width="100%" height={projectData ? projectData.projectLogoHeight : "30px"} /> */}
                         <img src={CglenseInsightLogo} width="40px" />
                     </Stack>
                 </Stack.Item>
-                <Stack className={`${styles.answerContainer} ${isSelected && styles.selected}`} verticalAlign="space-between">
+                <Stack className={`answerContainer ${isSelected && "selected"}`} verticalAlign="space-between">
                     <Stack.Item grow>
+
                         <div className={styles.answerText} dangerouslySetInnerHTML={{ __html: sanitizedAnswerHtml }}></div>
                         {answer.isChartRequired &&
                             (answer.chart ? (
@@ -192,7 +194,7 @@ export const Answer = ({
                             ))}
                     </Stack.Item>
                     <Stack>
-                        <div className={` ${styles.IconCustomColor}`}>
+                        <div className="IconCustomColor answerActionIconBtns">
                             {/* <IconButton
                             style={showLike ? IconActiveStyles : IconStyles}
                             iconProps={{ iconName: "like" }}
@@ -203,13 +205,13 @@ export const Answer = ({
                         /> */}
                             {/* <span onClick={downloadAsPdf}></span> */}
                             <span onClick={() => likeDisLikeAnswerToggle("LIKE")}>
-                                <Avatar sx={{ bgcolor: "rgba(42, 193, 65, 0.2)", color: "rgba(42, 193, 65, 1)" }}>
+                                <Avatar className="thumbUp">
                                     {" "}
                                     <ThumbUpAltOutlinedIcon />
                                 </Avatar>
                             </span>
                             <span onClick={() => likeDisLikeAnswerToggle("DISLIKE")}>
-                                <Avatar sx={{ bgcolor: "rgba(255, 69, 58, 0.2)", color: "rgba(255, 69, 58, 1)" }}>
+                                <Avatar className="thumbDown">
                                     {" "}
                                     <ThumbDownAltOutlinedIcon />
                                 </Avatar>
@@ -223,15 +225,17 @@ export const Answer = ({
                             // disabled={true}
                             onClick={() => likeDisLikeAnswerToggle("DISLIKE")}
                         /> */}
-                            <Divider className={styles.iconDivider} orientation="vertical" />
+
+                            <Divider className="iconDivider" orientation="vertical" />
                             <span title="Copy Data" onClick={() => copyChatData()}>
                                 <Avatar
                                     sx={{
-                                        bgcolor: "rgba(83, 118, 240, 0.2)",
-                                        color: "rgba(83, 118, 240, 1)",
+                                        bgcolor: "var(--bg-primary-light)",
+                                        color: "var(--active-themes)",
                                         "&:hover": {
-                                            backgroundColor: "#0027B0",
-                                            color: " rgba(30, 255, 241, 0.8)"
+                                            backgroundColor: "var(--bg-secondary)",
+                                            color: "#fff"
+
                                         }
                                     }}
                                 >
@@ -253,11 +257,13 @@ export const Answer = ({
                             <span onClick={() => copyChatData()}>
                                 <Avatar
                                     sx={{
-                                        bgcolor: "rgba(83, 118, 240, 0.2)",
-                                        color: "rgba(83, 118, 240, 1)",
+
+                                        bgcolor: "var(--bg-primary-light)",
+                                        color: "var(--active-themes)",
                                         "&:hover": {
-                                            backgroundColor: "#0027B0",
-                                            color: " rgba(30, 255, 241, 0.8)"
+                                            backgroundColor: "var(--bg-secondary)",
+                                            color: "#fff"
+
                                         }
                                     }}
                                 >
@@ -273,7 +279,7 @@ export const Answer = ({
                             //     // disabled={true}
                             //     onClick={() => copyChatData()}
                             // /> */}
-                            <Divider className={styles.iconDivider} orientation="vertical" />
+                            <Divider className="iconDivider" orientation="vertical" />
 
                             {/* <div className={styles.dropdown}>
                             <IconButton
@@ -302,45 +308,94 @@ export const Answer = ({
                                 </Link>
                             </div>
                         </div> */}
-                            <span onClick={() => onThoughtProcessClicked()}>
+
+                            <span onClick={() => onThoughtProcessClicked()} className="hideInMobileXs">
                                 <Avatar
                                     sx={{
-                                        bgcolor: "rgba(83, 118, 240, 1)",
-                                        color: "rgba(255, 255, 255, 1)",
+                                        bgcolor: "var(--bg-secondary)",
+                                        color: "#fff",
                                         "&:hover": {
-                                            backgroundColor: "#0027B0",
-                                            color: " rgba(30, 255, 241, 0.8)"
+                                            backgroundColor: "var(--active-themes)",
+                                            color: "#fff"
                                         }
                                     }}
+                                    // sx={{
+                                    //     bgcolor: "var(--bg-primary-light)",
+                                    //     color: "var(--active-themes)",
+                                    //     "&:hover": {
+                                    //         backgroundColor: "var(--active-themes)",
+                                    //         color: "#fff"
+                                    //     }
+                                    // }}
+
                                 >
                                     {" "}
                                     <PsychologyOutlinedIcon />
                                 </Avatar>
                             </span>
-                            <span onClick={() => onSupportingContentClicked()}>
+
+                            <span onClick={() => onSupportingContentClicked()} className="hideInMobileXs">
                                 <Avatar
+                                    // sx={{
+                                    //     bgcolor: "rgba(83, 118, 240, 1)",
+                                    //     color: "rgba(255, 255, 255, 1)",
+                                    //     "&:hover": {
+                                    //         backgroundColor: "#0027B0",
+                                    //         color: " rgba(30, 255, 241, 0.8)"
+                                    //     }
+                                    // }}
+
                                     sx={{
-                                        bgcolor: "rgba(83, 118, 240, 1)",
-                                        color: "rgba(255, 255, 255, 1)",
+                                        bgcolor: "var(--bg-secondary)",
+                                        color: "#fff",
                                         "&:hover": {
-                                            backgroundColor: "#0027B0",
-                                            color: " rgba(30, 255, 241, 0.8)"
+                                            backgroundColor: "var(--active-themes)",
+                                            color: "#fff"
                                         }
                                     }}
+
+                                    // sx={{
+                                    //     bgcolor: "var(--bg-primary-light)",
+                                    //     color: "var(--active-themes)",
+                                    //     "&:hover": {
+                                    //         backgroundColor: "var(--active-themes)",
+                                    //         color: "#fff"
+                                    //     }
+                                    // }}
+
                                 >
                                     {" "}
                                     <AssignmentOutlinedIcon />
                                 </Avatar>
                             </span>
 
-                            <span onClick={() => onSupportingContentClicked()}>
+
+                            <span onClick={() => onLogsContentClicked()} className="hideInMobileXs">
                                 <Avatar
+                                    // sx={{
+                                    //     bgcolor: "rgba(83, 118, 240, 1)",
+                                    //     color: "rgba(255, 255, 255, 1)",
+                                    //     "&:hover": {
+                                    //         backgroundColor: "#0027B0",
+                                    //         color: " rgba(30, 255, 241, 0.8)"
+                                    //     }
+                                    // }}
+
+                                    // sx={{
+                                    //     bgcolor: "var(--bg-primary-light)",
+                                    //     color: "var(--active-themes)",
+                                    //     "&:hover": {
+                                    //         backgroundColor: "var(--active-themes)",
+                                    //         color: "#fff"
+                                    //     }
+                                    // }}
                                     sx={{
-                                        bgcolor: "rgba(83, 118, 240, 1)",
-                                        color: "rgba(255, 255, 255, 1)",
+                                        bgcolor: "var(--bg-secondary)",
+                                        color: "#fff",
                                         "&:hover": {
-                                            backgroundColor: "#0027B0",
-                                            color: " rgba(30, 255, 241, 0.8)"
+                                            backgroundColor: "var(--active-themes)",
+                                            color: "#fff"
+
                                         }
                                     }}
                                 >
@@ -372,16 +427,11 @@ export const Answer = ({
 
                     {!!parsedAnswer.followupQuestions.length && showFollowupQuestions && onFollowupQuestionClicked && (
                         <Stack.Item>
-                            <Stack
-                                horizontal
-                                wrap
-                                className={`${!!parsedAnswer.citations.length ? styles.followupQuestionsList : ""}`}
-                                tokens={{ childrenGap: 6 }}
-                            >
-                                <span className={styles.followupQuestionLearnMore}>Follow-up questions:</span>
+                            <Stack horizontal wrap className={`${!!parsedAnswer.citations.length ? "followupQuestionsList" : ""}`} tokens={{ childrenGap: 6 }}>
+                                <span className="followupQuestionLearnMore">Follow-up questions:</span>
                                 {parsedAnswer.followupQuestions.map((x, i) => {
                                     return (
-                                        <a key={i} className={styles.followupQuestion} title={x} onClick={() => onFollowupQuestionClicked(x)}>
+                                        <a key={i} className="followupQuestion" title={x} onClick={() => onFollowupQuestionClicked(x)}>
                                             {`${x}`}
                                         </a>
                                     );

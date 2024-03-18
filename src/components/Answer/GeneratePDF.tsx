@@ -12,6 +12,7 @@ import Html from 'react-pdf-html';
  
 // Define styles with types
 const styles = StyleSheet.create({
+
   page: {
     flexDirection: 'column',
     backgroundColor: 'white',
@@ -66,6 +67,8 @@ const styles = StyleSheet.create({
 answerText: {
     fontSize: 12,
    
+
+  
 
 },
 productList: {
@@ -148,10 +151,6 @@ const MyDocument: React.FC<MyDocumentProps> = ({ pdfData }) => {
     </Document>
   );
 };
- 
- 
- 
- 
 const DownloadPDF: React.FC<{ pdfData: MyDocumentProps[] }> = ({ pdfData }) => {
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => setOpen(true);
@@ -187,4 +186,5 @@ const DownloadPDF: React.FC<{ pdfData: MyDocumentProps[] }> = ({ pdfData }) => {
 };
  
  
+
 export default DownloadPDF;

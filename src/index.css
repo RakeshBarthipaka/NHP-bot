@@ -7,7 +7,8 @@
     --active-color: #EFF3FF;
     --white-color: #ffffff;
     --black-color: #000000;
-    --background-color: #F9FAFB;
+    /* --background-color: #F9FAFB; */
+    --background-color: #ffffff;
     --card-background-color: #ffffff;
     --border-color: #e9e4e4;
     --link-color: #003A75;
@@ -97,7 +98,9 @@ html {
     height: 100%;
 }
 
-
+/* span{
+    padding-top:0px!important;
+} */
 .text-center {
     text-align: center;
 }
@@ -205,6 +208,14 @@ html {
     flex-direction: row-reverse !important;
      
 }
+
+.chatRightContent {
+    position: relative; 
+    min-height: 100%;
+    transition: 0.7s;
+    padding: 0 24px;
+}
+
 .shiftingContainer > div:nth-child(2) {
     position: relative;    
 }
@@ -231,14 +242,14 @@ html {
         cursor: pointer;
 }
 .shiftingContainer .sidePanelBtn svg {
-    transform: rotate(180deg);
+    /* transform: rotate(180deg); */
 }
 .rowReverse .shiftingContainer .sidePanelBtn {
     right: 0px;
     left: auto;
 }
 .rowReverse .shiftingContainer .sidePanelBtn svg {
-    transform: none;
+    transform: rotate(180deg);
 }
 .rowReverse .shiftingContainer > div:nth-child(2)::before {
     right: 22px;
@@ -246,7 +257,7 @@ html {
 }
 
 .shiftingContainer {
-    height: calc(100vh - 170px);
+    height: calc(100vh - 174px);
     overflow-y: scroll;
 }
 .slick-track {
@@ -258,4 +269,210 @@ html {
 }
 .slick-slide > div {
     height: 100%;
+}
+
+.KpisDrawer .MuiCollapse-wrapperInner {
+    width: 100%;
+}
+.KpisDrawer span{
+    padding: 0px;
+}
+.KpisDrawer .MuiOutlinedInput-notchedOutline legend {
+    display: none;
+}
+
+.kpisTable {
+    max-height: calc(100vh - 220px);
+    margin-top: 15px;
+    background: #eee;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+.KpisDrawer .MuiTableRow-root[data-selected="true"] td.MuiTableCell-root::after {
+    background-color: var(--white-color);
+}
+.KpisDrawer .MuiTableRow-root:hover td.MuiTableCell-root::after, 
+.KpisDrawer .MuiTableRow-root[data-selected="true"]:hover td.MuiTableCell-root::after {
+    background-color: rgba(25, 118, 210, 0.05);
+}
+
+.KpisDrawer .Mui-disabled.MuiIconButton-root {
+ color: transparent;
+}
+.KpisDrawer .MuiInputBase-root {
+    padding-right: 40px;
+    border-radius: 25px;
+}
+.KpisDrawer .MuiTextField-root .MuiSvgIcon-root {
+    position: absolute;
+    right: 10px
+}
+.KpisDrawer .MuiTextField-root {
+    width: 100%;
+}
+
+.kpisTable.disableSelection .Mui-selected .MuiCheckbox-root {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.drawerHeader {
+    background: var(--active-themes); 
+    color: #fff;
+    gap: 10px;
+}
+.drawerHeader .MuiTypography-h6 {
+    font-size: 18px;
+}
+
+.MuiDrawer-root .MuiPaper-root {
+    width: 540px;
+    max-width: 90%;
+}
+
+/*Data table styles*/
+.MuiDataGrid-root {
+    border: none;
+
+    .first-column.cell {
+        background-color: #F2F2F7;
+        font-weight: 600;
+    }
+
+    .highlight {
+        background-color: grey;
+    }
+
+    .MuiDataGrid-cell {
+        background-color: none;
+        font-weight: 500;
+        border: 1px solid #BBBBBB;
+    }
+
+    .MuiDataGrid-columnHeader {
+        background-color: #5376F0;
+        color: white;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 16px;
+        letter-spacing: 0em;
+        text-align: left;
+        border: 1px solid #BBBBBB;
+    }
+
+    .MuiDataGrid-virtualScroller::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .MuiDataGrid-virtualScroller::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb {
+        background-color: #bbb;
+        border-radius: 6px;
+    }
+
+    .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb:hover {
+        background: #757575;
+    }
+}
+.mui-custom-toggle{  
+    border:none;
+    height:30px;
+    margin-right:10px;
+    margin-top: 10px;
+}
+.mui-toggle-active{
+    background-color:#5376F0!important;
+    color:#fff!important;
+}
+
+
+.mui-custom-toggle button:first-child{
+    border-radius:30px 0px 0px 30px;
+    border:1px solid #5376F0;
+    font-size:12px;
+    text-transform: none;
+    white-space: nowrap;
+}
+
+.mui-custom-toggle button:nth-child(2){
+    border-radius:0px 0px 0px 0px;
+    border:1px solid #5376F0;
+    font-size:12px;
+    text-transform: none;
+}
+.mui-custom-toggle button:last-child{
+    border-radius:0px 30px 30px 0px;
+    border:1px solid #5376F0;
+    font-size:12px;
+    text-transform: none;
+}
+.mui-custom-toggle button span{
+    padding:0px 3px; 
+    white-space: nowrap;
+}
+.mui-custom-toggle button span svg{
+    font-size:20px;
+    color:#5376F0;
+}
+
+.mui-toggle-active svg{
+    color:#fff!important;
+    
+}
+/* // */
+.pdf-icon{
+    color:#0027B0;
+}
+.delete-icon{
+    color:#FF453A;
+}
+/* // */
+.pull-left{
+    float:left;
+}
+.pull-right{
+    float:right;
+}
+.clear-path{
+    clear:both;
+}
+
+
+@media (max-width: 900px) {
+    .shiftingContainer {
+        height: calc(100vh - 232px);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .chatRightContent {
+        background: #fff;
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        width: 100%;
+        transition: 0.7s;
+        padding-right: 0px;
+        z-index: 99;
+    }
+
+    .MuiSlider-root .MuiSlider-markLabel {
+        top: 25px !important;
+    }
+
+    .rowReverse .shiftingContainer .sidePanelBtn {
+        right: auto;
+        left: 0px;
+    }
+    .rowReverse .shiftingContainer > div:nth-child(2)::before {
+        right: auto;
+        left: 22px;
+    }
+    .rowReverse .shiftingContainer .sidePanelBtn svg {
+        transform: none;
+    }
 }

@@ -6,9 +6,9 @@
     padding-top: 5px;
 }
 
-.leader-board-heading{
+.leader-board-heading {
     display: flex;
-    align-items:center;
+    align-items: center;
     padding-bottom: 5px;
     margin-bottom: 10px;
     border-bottom: 2px solid rgba(83, 118, 240, 0.2);
@@ -34,7 +34,7 @@
     list-style: none;
     padding: 10px 30px 0px 30px;
     cursor: pointer;
-    background-color: #DDE4FC;
+    background-color: #dde4fc;
     color: #333333;
     height: 42px;
     font-size: 14px;
@@ -58,7 +58,7 @@
 
 .answer-container {
     padding: 20px;
-    background-color: #F2F2F7;
+    background-color: var(--bg-primary-light);
     color: #2a2a2a;
     font-size: 14px !important;
     border-radius: 0px 30px 30px 30px;
@@ -72,68 +72,74 @@
 }
 
 .question-box {
-    
     cursor: pointer;
-    background-color: #DDE4FC;
-    padding:10px 20px 0px 20px;
+    // background-color: var(--card-background-color) !important;
+    background-color:#F2F2F7!important;
+    padding: 10px 20px 0px 20px;
     border-radius: 30px 0px 30px 30px;
-    display: inline-block;
-    
+    display: inline-flex;
+    margin-bottom: 5px;
+    // box-shadow:0px 2px 2px 2px #ccc;
+
     .question-text {
         display: inline-block;
-        .question{
-            color:#2a2a2a;
-            font-size:14px;
+        .question {
+            color: #2a2a2a;
+            font-size: 14px;
         }
-        .otherInfo{
-            color:#0C099C;
-            font-size:12px;
+        .otherInfo {
+            color: var(--active-themes) !important;
+            font-size: 12px;
             font-weight: bold;
             display: flex;
-            padding-top:10px;
+            padding-top: 10px;
         }
-        .viewIcon{
-            color:#0C099C;
+        .viewIcon {
+            color: var(--active-themes) !important;
             display: inline;
-            margin-top:-8px;
-            font-size:1.4rem;
-            padding-right:5px;
-            margin-left:10px;
+            margin-top: -8px;
+            font-size: 1.4rem;
+            padding-right: 5px;
+            margin-left: 10px;
         }
+    }
+    &:hover{
+        background-color: #dde4fc !important;
+        color:#0C099C;
     }
 }
-.LikedAnswerpanel{
-padding:10px;
-background-color: #F2F2F7;
-padding: 10px 15px 0px 15px;
-border-radius: 0px 30px 30px 30px;
-.likedQuestion{
-    background-color: #fff;
-    padding:20px;
-    border-radius:20px;
-    margin-bottom: 15px;
-    
+.LikedAnswerpanel {
+    padding: 10px;
+    background-color: #F2F2F7;
+    padding: 10px 10px 0px 10px;
+    border-radius: 30px 30px 30px 30px;
+    .likedQuestion {
+        background-color: #fff;
+        padding: 10px 15px;
+        border-radius: 20px;
     }
-    .questionText{
-        font-size:14px;
-        color:#0C099C;
+    .questionText {
+        font-size: 15px;
+        color: #0c099c;
         margin-bottom: 10px;
     }
-    .otherOptions{
-        font-size:12px;
-        color:#5376F0;
+    .otherOptions {
+        font-size: 12px;
+        color: var(--active-themes);
         font-weight: bold;
-        line-height:30px;
+        line-height: 30px;
     }
-    .answerText{
-        font-size:14px;
-        color:#2a2a2a;
-        span{
+    .answerText {
+        font-size: 14px;
+        color: #2a2a2a;
+        margin:15px;
+        line-height: 24px;
+        span {
             cursor: pointer;
         }
     }
-    .viewIcon{
-        border:1px solid #0C099C;
+    .viewIcon {
+        border: 1px solid #0c099c;
         border-radius: 20px;
         display: inline-block;
         padding: 2px 8px;
@@ -147,12 +153,12 @@ border-radius: 0px 30px 30px 30px;
         span {
             padding: 0;
         }
-        svg{ 
+        svg {
             font-size: 18px;
         }
     }
-    .thumbUp{
-        border:1px solid #2AC141;
+    .thumbUp {
+        border: 1px solid #2ac141;
         border-radius: 20px;
         display: inline-block;
         padding: 2px 8px;
@@ -167,22 +173,22 @@ border-radius: 0px 30px 30px 30px;
         span {
             padding: 0;
         }
-            svg{
-                color:#2AC141;
-                transform:rotate(0) translate(0);
-                font-size: 18px;
-            }
-        &:hover{
-            background-color: #2AC141;
-            color:#fff;
-            svg{
-                color:#fff;
-                transform:rotate(-5deg) translate(0px, -1px);
+        svg {
+            color: #2ac141;
+            transform: rotate(0) translate(0);
+            font-size: 18px;
+        }
+        &:hover {
+            background-color: #2ac141;
+            color: #fff;
+            svg {
+                color: #fff;
+                transform: rotate(-5deg) translate(0px, -1px);
             }
         }
     }
-    .thumbDown{
-        border:1px solid #FF453A;
+    .thumbDown {
+        border: 1px solid #ff453a;
         border-radius: 20px;
         display: inline-block;
         padding: 2px 8px;
@@ -199,38 +205,57 @@ border-radius: 0px 30px 30px 30px;
             padding: 0;
         }
 
-        svg{
-            color:#FF453A;
+        svg {
+            color: #ff453a;
             font-size: 18px;
         }
-        &:hover{
-            background-color: #FF453A;
-            color:#fff;
-            svg{
-                color:#fff
+        &:hover {
+            background-color: #ff453a;
+            color: #fff;
+            svg {
+                color: #fff;
             }
+        }
+    }
+    .showMore-spacer{
+        text-align: center;
+        display: block;
+        padding:20px;
+    }
+    .showMore-link{       
+        color:#0C099C;
+        font-weight: bold;
+        font-size:12px;
+        text-decoration: none;
+        cursor: pointer;
+        &:hover{
+            border:1px solid #0C099C;
+            padding:5px 8px;
+            border-radius: 30px;;
+            background-color: white;
+
         }
     }
 }
 
-.iconText{
+.iconText {
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
     letter-spacing: 0em;
     text-align: left;
-    color: rgba(12, 9, 156, 1);
+    color: var(--active-themes);
 }
 
-.asked-question-top-box{
+.asked-question-top-box {
     display: flex;
     justify-content: right;
     align-items: center;
 }
-.IconElemt{
+.IconElemt {
     cursor: pointer;
 }
-.liked-ans-top-box{
+.liked-ans-top-box {
     display: flex;
     justify-content: right;
     align-items: center;

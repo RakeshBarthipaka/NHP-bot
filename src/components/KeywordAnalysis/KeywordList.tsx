@@ -5,7 +5,7 @@ import "react-tabs/style/react-tabs.css";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
-import styles from "./KeywordList.module.css";
+import "./KeywordList.scss";
 import { Avatar, Stack } from "@mui/material";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
@@ -22,19 +22,15 @@ const KeywordList = (props: any) => {
     const [activeBackground, setActiveBackground] = useState<false>();
 
     const toggleAnswerDisplay = (id: any) => {
-        if(isDisplayAnswer === id  && isDisplayAnswerToggle === true){
+        if (isDisplayAnswer === id && isDisplayAnswerToggle === true) {
             setIsDisplayAnswerToggle(false);
-        }
-        else if(isDisplayAnswer === undefined && isDisplayAnswerToggle === false){
+        } else if (isDisplayAnswer === undefined && isDisplayAnswerToggle === false) {
+            setIsDisplayAnswerToggle(true);
+        } else if (isDisplayAnswer !== id && isDisplayAnswerToggle !== true) {
+            setIsDisplayAnswerToggle(true);
+        } else if (isDisplayAnswer === id && isDisplayAnswerToggle !== true) {
             setIsDisplayAnswerToggle(true);
         }
-        else if (isDisplayAnswer !== id && isDisplayAnswerToggle !== true){
-            setIsDisplayAnswerToggle(true);
-        }
-        else if (isDisplayAnswer === id && isDisplayAnswerToggle !== true){
-            setIsDisplayAnswerToggle(true);
-        }
-        
     };
 
     const tagsData = [
@@ -104,22 +100,24 @@ const KeywordList = (props: any) => {
             {tagsData?.map(tag => {
                 return (
                     <>
-                        <Box className="question-box" onClick={() => {setIsDisplayAnswer(tag.id);
-                        //setIsDisplayAnswerToggle(!isDisplayAnswerToggle);
-                        toggleAnswerDisplay(tag.id);
-                        }}
-                        
-                        sx={{
-                            backgroundColor: isDisplayAnswerToggle && isDisplayAnswer === tag.id ?  "rgba(83, 118, 240, 1)" : "rgba(83, 118, 240, 0.2)",
-                            color: isDisplayAnswerToggle && isDisplayAnswer === tag.id ?  "rgba(255, 255, 255, 1) !important" : "rgba(51, 51, 51, 1) !important",
-                                                }}
+                        <Box
+                            className="keyword-widget"
+                            onClick={() => {
+                                setIsDisplayAnswer(tag.id);
+                                //setIsDisplayAnswerToggle(!isDisplayAnswerToggle);
+                                toggleAnswerDisplay(tag.id);
+                            }}
+                            sx={{
+                                backgroundColor:
+                                    isDisplayAnswerToggle && isDisplayAnswer === tag.id
+                                        ? "var(--bg-secondary) !important"
+                                        : "var(--bg-primary-light) !important",
+                                color: isDisplayAnswerToggle && isDisplayAnswer === tag.id ? "var(--white-color) !important" : "var(--black-color) !important"
+                            }}
                         >
                             <Box
-                                sx={{
-                                    width: "23px",
-                                    float: "left",
-                                    paddingRight: "2px"
-                                }}
+                                width={'23px'}
+                                paddingRight={1}
                             >
                                 {isDisplayAnswer === tag.id && isDisplayAnswerToggle ? (
                                     <RemoveCircleOutlineOutlinedIcon
@@ -136,18 +134,37 @@ const KeywordList = (props: any) => {
                                 )}
                             </Box>
                             <Box className="question-text">
-                                <Typography sx={{
-                                    color: isDisplayAnswerToggle && isDisplayAnswer === tag.id ?  "rgba(255, 255, 255, 1) !important" : "rgba(51, 51, 51, 1) !important",
-                                }} className="question">{tag.query}</Typography>
-                                <Typography sx={{
-                                    color: isDisplayAnswerToggle && isDisplayAnswer === tag.id ?  "rgba(30, 255, 241, 0.8) !important" : "rgba(12, 9, 156, 1) !important",
-                                    
-                                }} className="otherInfo">
+                                <Typography
+                                    sx={{
+                                        color:
+                                            isDisplayAnswerToggle && isDisplayAnswer === tag.id
+                                                ? "var(--white-color) !important"
+                                                : "var(--black-color) !important"
+                                    }}
+                                    className="question"
+                                >
+                                    {tag.query}
+                                </Typography>
+                                <Typography
+                                    sx={{
+                                        color:
+                                            isDisplayAnswerToggle && isDisplayAnswer === tag.id
+                                                ? "var(--white-color)!important"
+                                                : "var(--active-themes) !important"
+                                    }}
+                                    className="otherInfoKL"
+                                >
                                     requested by: {tag.requestedBy} requested on: {tag.requestedDate}
                                     <span>
-                                        <RemoveRedEyeOutlinedIcon sx={{
-                                            color: isDisplayAnswerToggle && isDisplayAnswer === tag.id ?  "rgba(30, 255, 241, 0.8) !important" : "rgba(12, 9, 156, 1) !important",
-                                        }}  className="viewIcon" />
+                                        <RemoveRedEyeOutlinedIcon
+                                            sx={{
+                                                color:
+                                                    isDisplayAnswerToggle && isDisplayAnswer === tag.id
+                                                        ? "var(--white-color) !important"
+                                                        : "var(--active-themes) !important"
+                                            }}
+                                            className="viewIconKL"
+                                        />
                                     </span>{" "}
                                     9
                                 </Typography>
@@ -155,92 +172,45 @@ const KeywordList = (props: any) => {
                         </Box>
                         {isDisplayAnswer === tag.id && isDisplayAnswerToggle && (
                             <div className="answer-container">
-                                    <Stack className={styles.iconContainer} direction={"row"} alignItems={"center"} justifyContent={"space-between"}>
-                                        <Box
-                                            sx={{
-                                                display: "flex"
-                                            }}
-                                        >
-                                            <span onClick={() => {}}>
-                                                <Avatar
-                                                    sx={{
-                                                        bgcolor: "#E1E5F2",
-                                                        color: "rgba(12, 9, 156, 1)",
-                                                        "&:hover": {
-                                                            backgroundColor: "#0027B0",
-                                                            color: " rgba(30, 255, 241, 0.8)"
-                                                        }
-                                                    }}
-                                                >
-                                                    <RateReviewOutlinedIcon />
-                                                </Avatar>
-                                            </span>
-                                            <span onClick={copyTableToClipboard}>
-                                                <Avatar
-                                                    sx={{
-                                                        bgcolor: "#E1E5F2",
-                                                        color: "rgba(12, 9, 156, 1)",
-                                                        "&:hover": {
-                                                            backgroundColor: "#0027B0",
-                                                            color: " rgba(30, 255, 241, 0.8)"
-                                                        }
-                                                    }}
-                                                >
-                                                    <ContentCopyOutlinedIcon />
-                                                </Avatar>
-                                            </span>
+                                <Stack className="iconContainer" direction={"row"} alignItems={"center"} justifyContent={"space-between"}>
+                                    <Box
+                                       display={"flex"}
+                                    >
+                                        <span onClick={() => {}}>
+                                            <Avatar className="avatarIcons">
+                                                <RateReviewOutlinedIcon />
+                                            </Avatar>
+                                        </span>
+                                        <span onClick={copyTableToClipboard}>
+                                            <Avatar className="avatarIcons">
+                                                <ContentCopyOutlinedIcon />
+                                            </Avatar>
+                                        </span>
 
-                                            <span onClick={downloadAsPdf}>
-                                                <Avatar
-                                                    sx={{
-                                                        bgcolor: "#E1E5F2",
-                                                        color: "rgba(12, 9, 156, 1)",
-                                                        "&:hover": {
-                                                            backgroundColor: "#0027B0",
-                                                            color: " rgba(30, 255, 241, 0.8)"
-                                                        }
-                                                    }}
-                                                >
-                                                    {" "}
-                                                    <FileDownloadOutlinedIcon />
-                                                </Avatar>
-                                            </span>
-                                            {/* <span onClick={() => {}}>
-                                                <Avatar
-                                                    sx={{
-                                                        bgcolor: "#E1E5F2",
-                                                        color: "rgba(12, 9, 156, 1)",
-                                                        "&:hover": {
-                                                            backgroundColor: "#0027B0",
-                                                            color: " rgba(30, 255, 241, 0.8)"
-                                                        }
-                                                    }}
-                                                >
-                                                    <ShareOutlinedIcon />
-                                                </Avatar>
-                                            </span> */}
-                                        </Box>
-                                        <Box gap={1} display={"flex"}>
-                                            <div className={styles.viewIcon}>
-                                                    <RemoveRedEyeOutlinedIcon fontSize="small" />
-                                                    <div>9</div>
-                                            </div>
-                                            <div className={styles.thumbUp}>
-                                          
-                                                    <ThumbUpOutlinedIcon fontSize="small" />
-                                               
-                                                <div>9</div>
-                                            </div>
-                                            <div className={styles.thumbDown}>
-                                                
-                                                    <ThumbDownAltOutlinedIcon fontSize="small" />
-                                               
-                                                <div>9</div>
-                                            </div>
-                                        </Box>
-                                    </Stack>
-                                    <Typography padding={2} className="tagAnswers">{tag.answer}</Typography>
+                                        <span onClick={downloadAsPdf}>
+                                            <Avatar className="avatarIcons">
+                                                {" "}
+                                                <FileDownloadOutlinedIcon />
+                                            </Avatar>
+                                        </span>
+                                    </Box>
+                                    <Box gap={1} display={"flex"}>
+                                        <div className="viewIconAnswer">
+                                            <RemoveRedEyeOutlinedIcon fontSize="small" />
+                                            <div>9</div>
+                                        </div>
+                                        <div className="thumbUp">
+                                            <ThumbUpOutlinedIcon fontSize="small" />
+                                            <div>9</div>
+                                        </div>
+                                        <div className="thumbDown">
+                                            <ThumbDownAltOutlinedIcon fontSize="small" />
 
+                                            <div>9</div>
+                                        </div>
+                                    </Box>
+                                </Stack>
+                                <Typography className="tagAnswers" padding={2}>{tag.answer}</Typography>
                             </div>
                         )}
                     </>

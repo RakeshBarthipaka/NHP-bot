@@ -8,8 +8,9 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Stack, IStackProps } from "@fluentui/react";
 import { DefaultButton } from "@fluentui/react/lib/Button";
 import { useState } from "react";
-import styles from "./Answer.module.css";
+//import styles from "./Answer.module.css";
 import { AskResponse, feedBackApi, feedbackRequest } from "../../api";
+import "./Answer.scss";
 
 export default function FormDialog(props: any) {
     const [offensiveStyle, setOffensiveStyle] = useState<any>({
@@ -129,54 +130,28 @@ export default function FormDialog(props: any) {
     return (
         <div>
             <Dialog open={props.showCommentBox} onClose={handleClose}>
-                <DialogContent
-                    sx={{
-                        marginTop: "50px",
-                        marginLeft: "15px",
-                        marginRight: "15px",
-                        padding: "10px",
-                        borderRadius: "30px",
-                        backgroundColor: "rgba(242, 242, 247, 1)"
-                    }}
-                >
-                    <h2 style={{ textAlign: "center", fontSize: "24px", fontWeight: 400, marginBottom: "5px" }}>Feedback</h2>
-                    <p
-                        style={{
-                            fontSize: "12px",
-                            fontStyle: "italic",
-                            fontWeight: 400,
-                            letterSpacing: "0em",
-                            textAlign: "center",
-                            marginTop: 0,
-                            marginBottom: "px",
-                        }}
-                    >
-                        Please provide your feedback for UN-liking as option
-                    </p>
-                    <p style={{ color: "black", margin: "1rem 0", textAlign: "center" }}>Why did you choose this rating? (optional)</p>
-                    <div className={styles.feedbackButtonList}>
+                <DialogContent className="dialog-content-container">
+                    <h2 className="feedback-text-heading">Feedback</h2>
+                    <p className="un-link-p">Please provide your feedback for UN-liking as option</p>
+                    <p className="opt-question-p">Why did you choose this rating? (optional)</p>
+                    <div className="feedbackButtonList">
                         <DefaultButton text="Offensive / Unsafe" style={offensiveStyle} onClick={() => offensiveClick()} allowDisabledFocus />
                         <DefaultButton text="Irrelevant" style={irrelevantStyle} onClick={() => irrelevantClick()} allowDisabledFocus />
                         <DefaultButton text="Not factually correct" style={notFunctionalStyle} onClick={() => notFunctionalClick()} allowDisabledFocus />
                     </div>
                     <input
-                        className={styles.feedbackTextInput}
+                        className="feedbackTextInput"
                         type="text"
                         value={additionalComments}
                         onChange={(e: any) => additional(e.target.value)}
                         placeholder="Provide additional feedback"
                     ></input>
                 </DialogContent>
-                <DialogActions className={styles.feedbackTextAction}>
-                    <Button sx={{
-                      backgroundColor: "rgba(83, 118, 240, 1)",borderRadius: "18px",
-                      padding: "10px 30px"
-                    }}   variant="contained" onClick={handleClose}>
+                <DialogActions className="feedbackTextAction">
+                    <Button className="feedback-cancel-btn" variant="contained" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button sx={{
-                      backgroundColor: "rgba(12, 9, 156, 1)",  padding: "10px 30px",borderRadius: "18px"
-                    }} variant="contained" onClick={() => likeDisLikeAnswer("DISLIKE")}>
+                    <Button className="feedback-submit-btn" variant="contained" onClick={() => likeDisLikeAnswer("DISLIKE")}>
                         Submit
                     </Button>
                 </DialogActions>

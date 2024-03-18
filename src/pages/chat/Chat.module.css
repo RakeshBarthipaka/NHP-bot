@@ -8,7 +8,7 @@
     padding-right: 24px;
     display: flex;
     flex-direction: column;
-    padding: 1.5rem;
+    padding: 1.5rem 0.5rem;
 }
 
 .chatMessageGpt {
@@ -31,7 +31,7 @@
     width: 100%;
     /* max-width: 1248px; */
     z-index: 1;
-    margin-top: 2.2rem;
+    margin-top: 1.4rem;
 }
 
 .chatInput input[type="text"] {
@@ -248,12 +248,7 @@ p {
     z-index: 11;
 }
 
-.chatRightContent {
-    position: relative; 
-    min-height: 100%;
-    transition: 0.7s;
-    padding: 0 24px;
-}
+
 /* .chatRightContent::before {
     content: ' ';
     position: absolute;
@@ -278,6 +273,9 @@ p {
 
 .chatEmptyState {
     align-items: center;
+    height: 100%;
+    overflow-y: scroll;
+    padding: 15px 0;
 }
 .chatEmptyState > div:nth-child(1) {
     padding: 10px 15px;
@@ -324,4 +322,21 @@ p {
 .featuresContentDiv {
     max-height: calc(100vh - 170px);
     overflow-y: scroll;
+    background: #fff;
+}
+
+@media (max-width: 900px ) {
+    .featuresContentDiv {
+        max-height: calc(100vh - 220px); 
+    }
+
+    .chatEmptyState > div:nth-child(1) {
+        padding: 35px 15px;
+    }
+
+    .chatContainer {
+        max-height: calc(100vh - 378px);
+        overflow-y: scroll;
+    
+    }
 }

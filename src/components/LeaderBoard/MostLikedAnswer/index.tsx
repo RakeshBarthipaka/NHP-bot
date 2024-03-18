@@ -5,24 +5,35 @@ import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import SortOutlinedIcon from "@mui/icons-material/SortOutlined";
+import { Button, ButtonGroup } from "@mui/material";
 
 const MostLikedAnswer = () => {
     return (
         <>
             <Box className="liked-ans-top-box">
-                <span className="iconText">
-                    <ThumbUpOutlinedIcon />
-                </span>
-                <span className="iconText">By Likes</span>
-                <span className="iconText">
-                    <RemoveRedEyeOutlinedIcon className="viewIcon IconElemt" />
-                </span>
-                <span className="iconText">By Views</span>
-                <span className="iconText">
-                    <SortOutlinedIcon className="ShortByIcon IconElemt" />
-                </span>
-                <span className="iconText">By Date</span>
+            <ButtonGroup className="mui-custom-toggle" variant="outlined" aria-label="Basic button group">
+                    <Button className="mui-toggle-active">
+                        <span className="iconText">
+                        <ThumbUpOutlinedIcon className="viewIcon IconElemt" />
+                        </span>
+                        <span>By Likes</span>
+                    </Button>
+                    <Button>
+                        <span className="iconText">
+                        <RemoveRedEyeOutlinedIcon className="viewIcon IconElemt" />
+                        </span>
+                        <span>By Vies</span>
+                    </Button>
+                    <Button>
+                        <span className="iconText">
+                            <SortOutlinedIcon className="ShortByIcon IconElemt" />
+                        </span>
+                        <span>By Date</span>
+                    </Button>
+                </ButtonGroup>
+               
             </Box>
+            <br></br>
             <Box className="LikedAnswerpanel">
                 <Box>
                     <Box className="likedQuestion">
@@ -60,6 +71,7 @@ const MostLikedAnswer = () => {
                         that you are attempting to jump start financial growth. Make an initial assessment of all of your outstanding debts and then make a plan
                         to tackle each one. Starting with the lowest balance is best because that debt can be paid off quick and easy. Attempt to pay off a
                         couple at a time, depending on your debt load so that you can get out of your debts much faster.
+                        <div className="showMore-spacer"><a className="showMore-link">Show more.</a></div>
                     </Typography>
                 </Box>
             </Box>

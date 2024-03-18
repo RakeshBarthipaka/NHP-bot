@@ -1,4 +1,4 @@
-import styles from "./FAQ.module.css";
+import "./FAQ.scss";
 import * as React from 'react';
 import { useState, useEffect } from "react";
 import Accordion from '@mui/material/Accordion';
@@ -47,22 +47,22 @@ export const RecommendedFAQ = ({ onExampleClicked }: Props) => {
 
     return (
         <>
-            <Accordion className={`${styles.recommendedFAQBlock}`} sx={{border: "1px solid var(--border-color)", boxShadow: "none" }} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+            <Accordion className='recommendedFAQBlock' expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon sx={{color:colorCode}}/>}
                     aria-controls="panel1bh-content"
                     id="panel1bh-header"
                 >
-                    <div className={`${styles.recommendedFAQTitle}`}>
+                    <div className='recommendedFAQTitle'>
                         <i className="material-icons" style={{color:colorCode}}>quiz</i>
                         <p style={{color:colorCode}}>Recommended Queries</p>
                     </div>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <div className={`${styles.recommendedFAQList}`}  >
+                    <div className='recommendedFAQList'  >
                         {
                             faqList.map((item: any, i: any) => (
-                                <div className={`${styles.recommendedFAQItem}`} key={i} onClick={() => onExampleClicked(item)}>
+                                <div className='recommendedFAQItem' key={i} onClick={() => onExampleClicked(item)}>
                                     <p>{item}</p>
                                 </div>
                             ))

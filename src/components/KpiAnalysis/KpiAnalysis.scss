@@ -1,0 +1,101 @@
+.kpiAnalysis {
+    width: 100%; 
+    padding: 5px 15px;
+
+
+    h4 {
+        font-size: 16px;
+    }
+}
+.kpi-analysis-heading {
+    display: flex;
+    align-items: center;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid rgba(83, 118, 240, 0.2);
+
+    svg {
+        font-size: 28px;
+        color: var(--active-themes);
+        margin-right: 6px;
+    }
+
+    .disply-page-title {
+        text-transform: uppercase;
+        color: var(--active-themes);
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 40px;
+        margin: 0;
+    }
+}
+
+.stackDataOptions { 
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: space-between;
+    background: #F2F2F7;
+    padding: 5px 10px 7px;
+
+    .MuiButtonGroup-root {
+       
+        // .secondButton {
+        //     font-size: 12px;
+        //     padding: 6px 12px;
+        //     border: none;
+        //     border-radius: 6px; 
+        //     margin: 0 3px;
+        //     color: rgba(12, 9, 156, 1);
+        //     background-color: rgba(255, 255, 255, 1);
+        //     &.MuiButtonBase-root:hover {
+        //         background-color: rgba(255, 255, 255, 1);
+        //     }
+        //   }
+
+        //    .firstButton {
+        //     border-radius: 6px;
+        //     font-size: 12px;
+        //     padding: 12px 24px;
+        //     margin: 1px 3px 0;
+        //     height: 24px;
+        //     background: rgba(12, 9, 156, 1);
+        //     &:hover {
+        //       background-color: rgba(12, 9, 156, 1);
+        //     }
+        //   }
+    }
+
+
+    .disabledButtonStyle {
+        border-radius: 10px;
+        border: 1px;
+    }
+
+    .iconsBtns {
+        background-color: #E1E5F2;
+        color: rgba(12, 9, 156, 1);
+        width: 34px;
+        height: 34px;
+        cursor: pointer;
+        
+        &:hover {
+          background-color: #0027B0;
+          color: rgba(30, 255, 241, 0.8);
+        }
+
+        svg {
+            font-size: 18px;
+        }
+    }
+}
+
+
+.kpiAnalysisText {
+    ul {
+        margin: 0 0 25px;
+        padding-left: 20px;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+}
+

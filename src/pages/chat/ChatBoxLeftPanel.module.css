@@ -90,7 +90,7 @@
     /* position: relative; */
     /* background: white; */
     padding-left: 22px;
-    width: 120px;
+    width: 105px;
     height: 100%;
     top: 60px;
     /* border: 1px solid var(--border-color); */
@@ -99,8 +99,8 @@
     z-index: 999;
     transition: 0.7s;
     /* transform: translateX(120px); */
-    transform: translateX(98px);
-    right: 0;
+    transform: translateX(94px);
+    right: 10px;
 }
 
 .leftSidePanel::before { 
@@ -167,19 +167,14 @@
     color: var(--white-color) !important;
     fill: var(--white-color);
 }
+.leftSidePanel ul li a.active{
+    background: red;
+  
+}
 
 .hideFullLeftPanel {
     width: 50px;
 }
-
-@media only screen and (max-width: 780px) {
-    .leftSidePanel {
-        width: 200px;
-        margin-top: 50px;
-        background: var(--primary-color);
-    }
-}
-
 
 
 .leftSidePanelSubmenu ul {
@@ -222,21 +217,6 @@
 }
 .temperatureTokenBlock p{
     font-size: 14px;
-}
-
-
-@media (max-width: 724px) {
-    .leftSidePanel {
-        display: none;
-    }
-    .temperatureTokenBlock{
-        display: none !important;
-    }
-   
-
-    .textleftPanelconLogo {
-        padding: 0 10px !important;
-    }
 }
 
 
@@ -287,8 +267,8 @@
     font-size: 28px;
     color: var(--active-themes);
 }
-@media only screen and (max-width: 900px) {
-    .leftSidePanel {
-        display: none;
-    }
+
+.featuresIconList {
+    height: 100%;
+    background: #fff;
 }

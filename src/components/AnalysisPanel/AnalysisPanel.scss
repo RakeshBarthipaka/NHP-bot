@@ -35,9 +35,17 @@
 } */
 
 .drawerContent {
-  padding: 25px 30px;
+  padding: 15px 20px;
   background: #F2F2F7;
   margin: 15px;
   border-radius: 15px;
   font-size: 14px;
+}
+.drawerContent ul{
+  overflow:auto;
+  height:100vh;
+}
+
+.iconAnalysis {
+  margin-right: 10px;
 }

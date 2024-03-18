@@ -1,5 +1,5 @@
 import { Avatar, Box, Button, ButtonGroup, Grid, Stack } from "@mui/material";
-import styles from "./KeywordAnalysis.module.css";
+import "./KeywordAnalysis.scss";
 import TroubleshootIcon from "@mui/icons-material/Troubleshoot";
 import { Icon, IconButton } from "@fluentui/react";
 import { GenerateTable } from "../Tables/GenerateTable";
@@ -16,32 +16,22 @@ import html2canvas from "html2canvas";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import SortOutlinedIcon from "@mui/icons-material/SortOutlined";
 import KeywordList from "./KeywordList";
+import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 
 interface Props {
     tagName: string;
 }
 
 export const KeywordAnalysis = ({ tagName }: Props) => {
-    const shareIconStyles = {};
-
-    const IconStyles = { color: "blue", borderRadius: "8px" };
-    const IconActiveStyles = { backgroundColor: "lightgray", borderRadius: "8px" };
-
     return (
         <Grid xs={12} padding={3}>
-            <div
-                className="forMakingPdf"
-                style={{
-                    width: "100%",
-                    paddingBottom: "24px"
-                }}
-            >
-                <Box paddingLeft={3} className={styles.header}>
+            <div className="forMakingPdf">
+                <Box paddingLeft={3} paddingBottom={1} className="headerKA">
                     {" "}
-                    <TroubleshootIcon className={styles.headerIcon} /> <span className={styles.headerText}>KEYWORD ANALYSIS</span>{" "}
+                    <TroubleshootIcon className="headerIcon" /> <span className="headerText">KEYWORD ANALYSIS</span>{" "}
                 </Box>
                 <Box>
-                    <hr className={styles.verticalLineStyle} />
+                    <hr className="verticalLineStyle" />
                 </Box>
 
                 <Box paddingLeft={3} paddingTop={2}>
@@ -54,56 +44,14 @@ export const KeywordAnalysis = ({ tagName }: Props) => {
                         justifyItems={"center"}
                         paddingLeft={2}
                         gap={2}
-                        sx={{
-                            padding: "15px 15px"
-                        }}
                     >
-                        <Box
-                            sx={{
-                                display: "flex",
-                                gap: "10px",
-                            }}
-                        >
-                            <ButtonGroup
-                                disableElevation
-                                size="small"
-                                variant="contained"
-                                aria-label="Disabled button group"
-                                sx={{
-                                    border: "1px",
-                                    background: "rgba(12, 9, 156, 1)",
-                                    borderRadius: "20px",
-                                    paddingTop: '1px',
-                                    paddingBottom: '1px',
-                                    '& .firstButton':{
-                                        fontSize: '12px !important',
-                                        padding: '6px 14px',
-                                        "&.MuiButtonBase-root:hover": {
-                                            bgcolor: "transparent"
-                                          }
-                                    },
-                                    '& .secondButton':{
-                                        fontSize: '12px !important',
-                                        padding: '2px 4px !important',
-                                        marginTop: '2px',
-                                        marginRight: '2px',
-                                        height: '28px !important',
-                                        "&:hover": {
-                                            bgcolor: "rgba(255, 255, 255, 1) !important"
-                                          },
-                                    }
-                                }}
-                            >
-                                <Button className="firstButton" sx={{
-                                    borderRadius: "20px !important",
-                                    background: "rgba(12, 9, 156, 1)",
-                                    border: 'none !important',
-                                   
-                                }}>{tagName}</Button>
-                                <Button  className="secondButton" sx={{
-                                    borderRadius: "20px !important",
-                                    background: "rgba(255, 255, 255, 1)",
-                                }} variant="outlined">5</Button>
+                        <Box display={"flex"} gap={2}>                 
+
+                            <ButtonGroup disableElevation size="small" variant="contained" aria-label="Disabled button group" className="keywordBtnGrp">
+                                <Button className="firstButton">{tagName}</Button>
+                                <Button className="secondButton" variant="outlined">
+                                    5
+                                </Button>
                             </ButtonGroup>
                         </Box>
 
@@ -111,24 +59,28 @@ export const KeywordAnalysis = ({ tagName }: Props) => {
                             The keyword ‘Market’ is linked to 12 questions. Please have a quick review each question and you may get the answer what you are
                             looking for.
                         </Box>
-
                     </Stack>
-                    <Box>
-                    <hr className={styles.verticalLineStyle} />
+                    <Box paddingTop={2}>
+                        <hr className="verticalLineStyle" />
+                    </Box>
+                    <div className="pull-right">
+                    <ButtonGroup className="mui-custom-toggle" variant="outlined" aria-label="Basic button group">
+                    <Button className="mui-toggle-active">
+                        <span className="iconText">
+                            <RemoveRedEyeOutlinedIcon className="viewIcon IconElemt" />
+                        </span>
+                        <span>By Views</span>
+                    </Button>
+                    <Button>
+                        <span className="iconText">
+                            <SortOutlinedIcon className="ShortByIcon IconElemt" />
+                        </span>
+                        <span>By Date</span>
+                    </Button>
+                </ButtonGroup>
+                </div>
                 </Box>
-                    <Stack alignContent="center" alignItems="center" justifyItems={"center"} justifyContent={"end"} direction={"row"}>
-                        <Box display={"flex"} justifyContent={"center"}>
-                            <span className={styles.iconText}>
-                                <VisibilityOutlinedIcon />
-                            </span>
-                            <span className={styles.iconText}>By Views</span>
-                            <span className={styles.iconText}>
-                                <SortOutlinedIcon />
-                            </span>
-                            <span className={styles.iconText}>By Date</span>
-                        </Box>
-                    </Stack>
-                </Box>
+                <div className="clear-path"></div>
                 <Box paddingLeft={3} paddingTop={4}>
                     <KeywordList />
                 </Box>

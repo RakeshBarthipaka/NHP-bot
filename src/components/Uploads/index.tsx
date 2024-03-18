@@ -14,17 +14,20 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import SearchBar from "../Common/SearchBar";
-
+import { Button, ButtonGroup } from "@mui/material";
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
+import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import SortOutlinedIcon from "@mui/icons-material/SortOutlined";
 const Uploads = (props: any) => {
     const card = (
         <>
-            <CardContent>
+            <CardContent className="upload-outer-box">
                 <Box className="upload-box">
                     <Box className="plus-icon-cont">
                         <AddIcon />
                     </Box>
                     <Typography sx={{ color: "#000000" }}>
-                        Drag and Drop or Browse to<span style={{ color: "#0C099C" }}>Upload a File</span>
+                        Drag and Drop or Browse to<span style={{ color: "var(--active-themes)" }}>Upload a File</span>
                     </Typography>
                     <Typography className="allowed-text">Allowed Formats: PDF</Typography>
                 </Box>
@@ -35,12 +38,12 @@ const Uploads = (props: any) => {
     const fileItems = (
         <>
             <Box className="file-row">
-                <Typography sx={{ color: "#0027B0", display: "flex", fontSize: "14px" }}>
-                    <PictureAsPdfOutlinedIcon sx={{ color: "#EB5757" }} />
+                <Typography sx={{ display: "flex", fontSize: "14px" }}>
+                    <PictureAsPdfOutlinedIcon className="pdf-icon" />
                     &nbsp;unilever_chat_1706852987594.pdf
                 </Typography>
-                <Typography sx={{ color: "#5376F0", fontSize: "12px" }}>10 min ago</Typography>
-                <DeleteOutlinedIcon sx={{ color: "#0C099C" }} />
+                <Typography sx={{ color: "var(--active-themes)", fontSize: "12px" }}>10 min ago</Typography>
+                <DeleteOutlinedIcon className="delete-icon" />
             </Box>
         </>
     );
@@ -52,17 +55,39 @@ const Uploads = (props: any) => {
                     <CloudUploadOutlinedIcon />
                     <h3 className="disply-page-title">UPLOADS & ATTACHMENTS</h3>
                 </Box>
-                <Divider />
-                <Card variant="outlined" sx={{ marginTop: "10px", backgroundColor: "#F2F2F7" }}>
+              
+                <Card>
                     {card}
                 </Card>
-                <Divider sx={{ marginTop: "10px", marginBottom: "10px", borderColor: "#5376F0" }} />
+                <br></br>
+           
+                <Divider sx={{ marginTop: "10px", marginBottom: "10px", borderColor: "var(--active-themes)" }} />
+               
+                <Box sx={{ display: 'flex' }}>
                 <Box className="search-row">
                     <SearchBar />
+                   
+                    <ButtonGroup className="mui-custom-toggle" variant="outlined" aria-label="Basic button group">
+                        <Button className="mui-toggle-active">
+                            <span className="iconText">
+                                <RemoveRedEyeOutlinedIcon className="viewIcon IconElemt" />
+                            </span>
+                            <span>By Views</span>
+                        </Button>
+                        <Button>
+                            <span className="iconText">
+                                <SortOutlinedIcon className="ShortByIcon IconElemt" />
+                            </span>
+                            <span>By Date</span>
+                        </Button>
+                    </ButtonGroup>
                     <Box className="file-count">
-                        Total no.of files &nbsp;<Box>8</Box>
+                            Total no.of files &nbsp;<Box>8</Box>
+                        </Box>
                     </Box>
                 </Box>
+               
+               
                 {fileItems}
                 {fileItems}
                 {fileItems}
