@@ -14,9 +14,8 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import SearchBar from "../Common/SearchBar";
-import {  deleteApiFile, postApiFiles } from "../../api";
+import {  deleteApiFile, postApiFiles, fileUpload } from "../../api";
 import { format, parseISO } from "date-fns";
-
 
 const Uploads = (props: any) => {
     const [UploadFileList, setUploadFileList] = useState<any>([]);
@@ -62,28 +61,13 @@ const Uploads = (props: any) => {
         }
     };
 
-
-
-    // const handleFileChange = async (event: any) => {
-    //     const file = event.target.files[0];
-    //     const formData = new FormData();
-    //     formData.append("files", file);
-    //     setSelectedFile(file.name);
-    //     setLoading(true);
-    //     console.log(file, "formData");
-    //     try {
-    //         const resp = await postApi(formData, `file/upload/`);
-    //         if (resp.status === 200) {
-    //             setLoading(false);
-    //             setIsLoaded(false);
-    //             setIsFileDeleted(false);
-    //         } else {
-    //             setLoading(false);
-    //         }
-    //     } catch (err) {
-    //         setLoading(false);
-    //     }
-    // };
+    const handleFileChange = async (event: any) => {
+        const file = event.target.files[0];
+        const formData = new FormData();
+        formData.append("file", file);
+        const upload = await fileUpload(formData, "file/upload/");
+        console.log("upload:", upload);
+    };
 
     useEffect(() => {
         if (!isLoaded) {
@@ -115,7 +99,7 @@ const Uploads = (props: any) => {
                                 type="file"
                                 accept=".pdf"
                                 //style={{ display: 'none' }}
-                                //onChange={handleFileChange}
+                                onChange={handleFileChange}
                                 disabled={loading}
                             />
                         </span>
