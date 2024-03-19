@@ -146,11 +146,14 @@ const Uploads = (props: any) => {
 
     // const handleFileChange = async (event: any) => {
     //     const file = event.target.files[0];
-    //     const formData = new FormData();
-    //     formData.append("file", file);
-    //     const upload = await fileUpload(formData, "file/upload/");
-    //     console.log("upload:", upload); 
-    //     console.log(formData);
+    //     if (file.type == "application/pdf") {
+    //         const formData = new FormData();
+    //         formData.append("file", file);
+    //         const upload = await fileUpload(formData, "file/upload/");
+    //         console.log("upload:", upload);
+    //     } else {
+    //         console.log("Invalid file type"); //Toast message will be shown
+    //     }
     // };
 
     useEffect(() => {

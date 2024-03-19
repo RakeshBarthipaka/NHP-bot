@@ -31,40 +31,37 @@ export type AskResponse = {
     error?: string;
     status: string;
     order_status: string;
-    product_list:any,
-    doctorlist:any,
-    recommended_question:string[];
-    appointmentlist:any,
-    patientemail:any
-    patientemailconfirm:boolean
-    hospitallist:any,
-    appointmentlimit:boolean
+    product_list: any;
+    doctorlist: any;
+    recommended_question: string[];
+    appointmentlist: any;
+    patientemail: any;
+    patientemailconfirm: boolean;
+    hospitallist: any;
+    appointmentlimit: boolean;
 };
 
 export type ChatTurn = {
     user: string;
-    bot?: string
+    bot?: string;
 };
 
 export type ChatRequest = {
     history: ChatTurn[];
     approach: Approaches;
     overrides?: AskRequestOverrides;
-    temperature:string,
-    token:string,
-    language:string,
-    userID:string,
-    appointmentData:any
-    patientemail:any
-    patientemailconfirm:boolean,
+    temperature: string;
+    token: string;
+    language: string;
+    userID: string;
+    appointmentData: any;
+    patientemail: any;
+    patientemailconfirm: boolean;
+    chatID: any;
     // latitude:any,
     // longitude:any,
     // userLocation:any,
 };
-
-      
-
-
 
 export type feedbackRequest = {
     exchange_id: string;
