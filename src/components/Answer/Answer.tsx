@@ -181,15 +181,14 @@ export const Answer = ({
                 </Stack.Item>
                 <Stack className={`answerContainer ${isSelected && "selected"}`} verticalAlign="space-between">
                     <Stack.Item grow>
-
-                        <div className={styles.answerText} dangerouslySetInnerHTML={{ __html: sanitizedAnswerHtml }}></div>
+                        <div className="answerText" dangerouslySetInnerHTML={{ __html: sanitizedAnswerHtml }}></div>
                         {answer.isChartRequired &&
                             (answer.chart ? (
                                 <DrawChart chart={answer.chart}></DrawChart>
                             ) : (
-                                <p className={styles.answerText}>
+                                <p className="answerText">
                                     Generating Chart
-                                    <span className={styles.loadingdots} />
+                                    <span className="loadingdots" />
                                 </p>
                             ))}
                     </Stack.Item>
@@ -235,7 +234,6 @@ export const Answer = ({
                                         "&:hover": {
                                             backgroundColor: "var(--bg-secondary)",
                                             color: "#fff"
-
                                         }
                                     }}
                                 >
@@ -257,13 +255,11 @@ export const Answer = ({
                             <span onClick={() => copyChatData()}>
                                 <Avatar
                                     sx={{
-
                                         bgcolor: "var(--bg-primary-light)",
                                         color: "var(--active-themes)",
                                         "&:hover": {
                                             backgroundColor: "var(--bg-secondary)",
                                             color: "#fff"
-
                                         }
                                     }}
                                 >
@@ -327,7 +323,6 @@ export const Answer = ({
                                     //         color: "#fff"
                                     //     }
                                     // }}
-
                                 >
                                     {" "}
                                     <PsychologyOutlinedIcon />
@@ -362,13 +357,11 @@ export const Answer = ({
                                     //         color: "#fff"
                                     //     }
                                     // }}
-
                                 >
                                     {" "}
                                     <AssignmentOutlinedIcon />
                                 </Avatar>
                             </span>
-
 
                             <span onClick={() => onLogsContentClicked()} className="hideInMobileXs">
                                 <Avatar
@@ -395,7 +388,6 @@ export const Answer = ({
                                         "&:hover": {
                                             backgroundColor: "var(--active-themes)",
                                             color: "#fff"
-
                                         }
                                     }}
                                 >
