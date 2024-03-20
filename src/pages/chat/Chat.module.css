@@ -1,7 +1,7 @@
 .chatMessageStream {
     flex-grow: 1;
     /* max-width: 1028px; */
-    width: 100%;
+    width: 99%;
     overflow-y: auto;
     /* height: 500px; */
     padding-left: 24px;
@@ -12,10 +12,11 @@
 }
 
 .chatMessageGpt {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     max-width: calc(100% - 40px);
     display: flex;
     min-width: 500px;
+    margin-top:-40px;
 }
 
 .chatMessageGptMinWidth {
@@ -320,9 +321,10 @@ p {
     line-height: 1.65;
 }
 .featuresContentDiv {
-    max-height: calc(100vh - 170px);
+    max-height: calc(100vh - 140px);
     overflow-y: scroll;
     background: #fff;
+    padding-left:10px;
 }
 
 @media (max-width: 900px ) {

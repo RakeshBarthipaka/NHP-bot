@@ -20,13 +20,27 @@ import "./SearchBar.scss";
     return <FormHelperText>{helperText}</FormHelperText>;
 } */
 
-const SearchBar = () => {
+interface Props {
+    searchKey: string,
+    setSearchKey: (value: any) => void;
+}
+
+const SearchBar = ({searchKey, setSearchKey} : Props ) => {
     return (
         <form noValidate autoComplete="off">
             <FormControl hiddenLabel sx={{ width: "100%" }} className="searchBar">
                 {/* <OutlinedInput placeholder="Please enter text" /> */}
                 {/* <MyFormHelperText /> */}
-                <TextField variant="standard" placeholder="Search" sx={{ width: "100%" }} InputProps={{ disableUnderline: true }} />
+                <TextField
+                    value={searchKey}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        setSearchKey(event.target.value);
+                    }}
+                    variant="standard"
+                    placeholder="Search"
+                    sx={{ width: "100%" }}
+                    InputProps={{ disableUnderline: true }}
+                />
                 <span className="searchIcon">
                     <SearchOutlinedIcon />
                 </span>

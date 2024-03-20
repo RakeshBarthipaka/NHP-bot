@@ -12,6 +12,7 @@
   height: 100%;
   align-items: center;
   justify-content: flex-start;
+  
 }
 
 .KpisDrawer {
@@ -23,11 +24,15 @@
 
 .addKpiBtn {
   position: absolute;
-  right: -5px;
-  top: 25%;
-  color: #E5E5EA;
-  font-size: 64px !important;
-  /* color: "#F1F1F1", fontSize: "50px"  */
+      right: -5px;
+      top: 28%;
+      color:#F2F2F7;      
+      font-size: 64px !important;
+      cursor: pointer;
+      /* color: "#F1F1F1", fontSize: "50px"  */
+      &:hover{
+        color: #E1E5F2 ;
+      }
 }
 
 .emptykpiCard {

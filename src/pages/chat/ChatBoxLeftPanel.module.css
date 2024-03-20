@@ -235,14 +235,18 @@
         position: absolute;
         left: 0px;
         top: 45%;
-        background: var(--active-themes);
-        color: #fff;
+        background: #E1E5F2;
+        color:  var(--active-themes);
         width: 22px;
         height: 48px;
         align-items: center;
         cursor: pointer;
 }
 
+.sidePanelBtn:hover {
+    background: var(--active-themes);;
+    color: #fff;
+}
 .leftSidePanel.show .sidePanelBtn svg{
     transform: rotate(180deg);
 }
@@ -272,3 +276,14 @@
     height: 100%;
     background: #fff;
 }
+
+.activeRightMenuItem {
+    background-color:#5376f0;
+}
+.activeRightMenuItem svg{
+    color: #fff !important;
+}
+.activeRightMenuItem p{
+    color: #fff !important;
+}
+

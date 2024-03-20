@@ -34,6 +34,10 @@ interface Props {
     chatData: Array<Object>;
     showThreads: (value: any) => void;
     toggleChatThreads: () => void;
+    isLeaderBoard: boolean;
+    isDeepAnalysis: boolean;
+    isChatThread: boolean;
+    isUpload: boolean;
 }
 
 const ChatBoxLeftPanel = ({
@@ -47,7 +51,11 @@ const ChatBoxLeftPanel = ({
     toggleLeaderBoard,
     toggleUploads,
     toggleDeepAnalysis,
-    toggleChatThreads
+    toggleChatThreads,
+    isLeaderBoard,
+    isDeepAnalysis,
+    isChatThread,
+    isUpload
 }: Props) => {
     let chatGPTToken = localStorage.getItem("chatGPTToken") ? localStorage.getItem("chatGPTToken") : 0;
     let chatTemperature = localStorage.getItem("chatTemperature") ? localStorage.getItem("chatTemperature") : 0;
@@ -102,49 +110,50 @@ const ChatBoxLeftPanel = ({
                 </div>
                 <div className={styles.featuresIconList}>
                     <div
-                        className={styles.iconContainer}
+                        className={`${styles.iconContainer} ${isLeaderBoard ? styles.activeRightMenuItem : ""}`}
                         onClick={() => {
                             toggleisRightPanelOpen();
                             toggleLeaderBoard();
                         }}
                     >
-                        {/* <img src={LeaderBoard} alt="Leader Board" /> */}
                         <LeaderboardOutlinedIcon />
                         <p className={styles.labelName}>Leader Board</p>
                     </div>
-                    <div onClick={()=> {
-                        toggleisRightPanelOpen();
-                        toggleDeepAnalysis();
-                    }} className={styles.iconContainer}>
-                        <TroubleshootOutlinedIcon sx={{
-                            color: '#0C099C',
-                        }} />
-                        {/* <img src={DeepAnalysis} alt="Deep Analysis" /> */}
+                    <div
+                        onClick={() => {
+                            toggleisRightPanelOpen();
+                            toggleDeepAnalysis();
+                        }}
+                        className={`${styles.iconContainer} ${isDeepAnalysis ? styles.activeRightMenuItem : ""}`}
+                    >
+                        <TroubleshootOutlinedIcon
+                            sx={{
+                                color: "#0C099C"
+                            }}
+                        />
                         <p className={styles.labelName}>Deep Analysis</p>
                     </div>
                     <div className={styles.iconContainer}>
-                        {/* <img src={Analytics} alt="Analytics" /> */}
                         <TimelineOutlinedIcon />
                         <p className={styles.labelName}>Analytics</p>
                     </div>
                     <div
-                        className={styles.iconContainer}
                         onClick={() => {
                             toggleisRightPanelOpen();
                             toggleChatThreads();
                         }}
+                        className={`${styles.iconContainer} ${isChatThread ? styles.activeRightMenuItem : ""}`}
                     >
                         <ForumOutlinedIcon />
                         <p className={styles.labelName}>Chat Threads</p>
                     </div>
                     <div
-                        className={styles.iconContainer}
                         onClick={() => {
                             toggleisRightPanelOpen();
                             toggleUploads();
                         }}
+                        className={`${styles.iconContainer} ${isUpload ? styles.activeRightMenuItem : ""}`}
                     >
-                        {/* <img src={Uploads} alt="Uploads" /> */}
                         <CloudUploadOutlinedIcon />
                         <p className={styles.labelName}>Uploads</p>
                     </div>

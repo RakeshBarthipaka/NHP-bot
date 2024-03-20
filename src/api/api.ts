@@ -1,4 +1,4 @@
-import { AskRequest, AskResponse, ChatRequest, ChartJSResponse, userInfoResponse, ChartJSRequest, feedbackRequest, exportPdfRequest, } from "./models";
+import { AskRequest, AskResponse, ChatRequest, ChartJSResponse, userInfoResponse, ChartJSRequest, feedbackRequest, exportPdfRequest } from "./models";
 
 export async function askApi(options: AskRequest): Promise<AskResponse> {
     const response = await fetch("/ask", {
@@ -33,7 +33,7 @@ export async function askApi(options: AskRequest): Promise<AskResponse> {
 export async function chatApi(options: ChatRequest, signal?: AbortSignal): Promise<AskResponse> {
     const controller = new AbortController();
     const mergedSignal = signal || controller.signal;
- 
+
     const response = await fetch("/chat", {
         method: "POST",
         headers: {
@@ -57,16 +57,17 @@ export async function chatApi(options: ChatRequest, signal?: AbortSignal): Promi
             token: options.temperature,
             personalization: false,
             language: options.language,
-            userID: options.userID
+            userID: options.userID,
+            chatID: options.chatID
         }),
         signal: mergedSignal
     });
- 
+
     const parsedResponse: AskResponse = await response.json();
     if (response.status > 299 || !response.ok) {
         throw Error(parsedResponse.error || "Unknown error");
     }
- 
+
     return parsedResponse;
 }
 
@@ -173,7 +174,6 @@ export async function fecthApi(apiName: string) {
             throw Error(parsedResponse.error || "Unknown error");
         }
         return parsedResponse;
-        
     } catch (err) {
         return [];
     }
@@ -226,17 +226,40 @@ export async function UpdateAppointemtApi(options: any, apiName: any) {
     return parsedResponse;
 }
 
-
-const BASE_API_URL = '';
-
+const BASE_API_URL = "";
 
 export async function postApi(options: any, apiName: string): Promise<any> {
     try {
         const response = await fetch(`${BASE_API_URL}/${apiName}`, {
             method: "POST",
-            body: options
+            body: JSON.stringify(options),
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            }
         });
 
+        const parsedResponse = await response.json();
+        if (!response.ok) {
+            throw Error(parsedResponse.error || "Unknown error");
+        }
+
+        return parsedResponse;
+    } catch (err) {
+        return [];
+    }
+}
+
+export async function postApiFiles(options: any, apiName: string, headers?: any): Promise<any> {
+    try {
+        const response = await fetch(`${BASE_API_URL}/${apiName}`, {
+            method: "POST",
+            mode: "cors",
+            headers: headers,
+            body: JSON.stringify(options)
+        });
+
+        console.log(response, "response in postapi");
         const parsedResponse = await response.json();
         if (!response.ok) {
             throw Error(parsedResponse.error || "Unknown error");
@@ -308,3 +331,28 @@ export async function deleteApi(apiName: any) {
     }
     return parsedResponse;
 }
+
+export async function deleteApiFile(apiName: any) {
+    const response = await fetch(`${BASE_API_URL}/${apiName}`, {
+        method: "delete"
+    });
+
+    return response;
+}
+export const fileUpload = (formData: any, apiName: any) => {
+    const response = fetch(`${BASE_API_URL}/${apiName}`, {
+        method: "POST",
+        body: formData
+    })
+        .then(response => {
+            // Handle response
+            console.log("response:", response);
+            return response;
+        })
+        .catch(error => {
+            // Handle error
+            console.log("error:", error);
+        });
+
+    return response;
+};

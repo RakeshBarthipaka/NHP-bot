@@ -101,19 +101,19 @@ const KeywordList = (props: any) => {
                 return (
                     <>
                         <Box
-                            className="keyword-widget"
+                            className={`question-box ${isDisplayAnswer && isDisplayAnswer === tag.id ? 'active-tab' : ''}`} 
                             onClick={() => {
                                 setIsDisplayAnswer(tag.id);
                                 //setIsDisplayAnswerToggle(!isDisplayAnswerToggle);
                                 toggleAnswerDisplay(tag.id);
                             }}
-                            sx={{
-                                backgroundColor:
-                                    isDisplayAnswerToggle && isDisplayAnswer === tag.id
-                                        ? "var(--bg-secondary) !important"
-                                        : "var(--bg-primary-light) !important",
-                                color: isDisplayAnswerToggle && isDisplayAnswer === tag.id ? "var(--white-color) !important" : "var(--black-color) !important"
-                            }}
+                            // sx={{
+                            //     backgroundColor:
+                            //         isDisplayAnswerToggle && isDisplayAnswer === tag.id
+                            //             ? "var(--theme-blue) !important"
+                            //             : "var(--white-color) !important",
+                            //     color: isDisplayAnswerToggle && isDisplayAnswer === tag.id ? "var(--white-color) !important" : "var(--black-color) !important"
+                            // }}
                         >
                             <Box
                                 width={'23px'}
@@ -135,34 +135,34 @@ const KeywordList = (props: any) => {
                             </Box>
                             <Box className="question-text">
                                 <Typography
-                                    sx={{
-                                        color:
-                                            isDisplayAnswerToggle && isDisplayAnswer === tag.id
-                                                ? "var(--white-color) !important"
-                                                : "var(--black-color) !important"
-                                    }}
+                                    // sx={{
+                                    //     color:
+                                    //         isDisplayAnswerToggle && isDisplayAnswer === tag.id
+                                    //             ? "var(--white-color) !important"
+                                    //             : "var(--black-color) !important"
+                                    // }}
                                     className="question"
                                 >
                                     {tag.query}
                                 </Typography>
                                 <Typography
-                                    sx={{
-                                        color:
-                                            isDisplayAnswerToggle && isDisplayAnswer === tag.id
-                                                ? "var(--white-color)!important"
-                                                : "var(--active-themes) !important"
-                                    }}
+                                    // sx={{
+                                    //     color:
+                                    //         isDisplayAnswerToggle && isDisplayAnswer === tag.id
+                                    //             ? "var(--white-color)!important"
+                                    //             : "var(--active-themes) !important"
+                                    // }}
                                     className="otherInfoKL"
                                 >
                                     requested by: {tag.requestedBy} requested on: {tag.requestedDate}
                                     <span>
                                         <RemoveRedEyeOutlinedIcon
-                                            sx={{
-                                                color:
-                                                    isDisplayAnswerToggle && isDisplayAnswer === tag.id
-                                                        ? "var(--white-color) !important"
-                                                        : "var(--active-themes) !important"
-                                            }}
+                                            // sx={{
+                                            //     color:
+                                            //         isDisplayAnswerToggle && isDisplayAnswer === tag.id
+                                            //             ? "var(--white-color) !important"
+                                            //             : "var(--active-themes) !important"
+                                            // }}
                                             className="viewIconKL"
                                         />
                                     </span>{" "}
