@@ -31,10 +31,9 @@ import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import CropOutlinedIcon from "@mui/icons-material/CropOutlined";
 import pdfFile from "../../assets/uploadedFileView.pdf";
 
-import {useDropzone} from 'react-dropzone'
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
-
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import { useDropzone } from "react-dropzone";
 
 const Uploads = (props: any) => {
     const [UploadFileList, setUploadFileList] = useState<any>([]);
@@ -51,13 +50,13 @@ const Uploads = (props: any) => {
     const [scale, setScale] = useState<number>(1.0);
     const [containerWidth, setContainerWidth] = useState<number>(250);
     const [openSnackBar, setOpenSnackBar] = useState(false);
-    const [snackBarText, setSnackBarText] = useState('');
-    const [severity, setSeverity] = useState<any>('info');
-    const {acceptedFiles, open, getRootProps, getInputProps} = useDropzone({
+    const [snackBarText, setSnackBarText] = useState("");
+    const [severity, setSeverity] = useState<any>("info");
+    const { acceptedFiles, open, getRootProps, getInputProps } = useDropzone({
         accept: {
-            'application/pdf': ['.pdf'],
+            "application/pdf": [".pdf"]
         },
-        onDropAccepted: (acceptedFiles) => {
+        onDropAccepted: (acceptedFiles: any) => {
             handleFileChange(acceptedFiles);
             console.log(acceptedFiles);
         },
@@ -65,11 +64,11 @@ const Uploads = (props: any) => {
         noKeyboard: true
     });
 
-    const Dropedfiles = acceptedFiles.map((file:any) => (
+    const Dropedfiles = acceptedFiles.map((file: any) => (
         <li key={file.path}>
-          {file.path} - {file.size} bytes
+            {file.path} - {file.size} bytes
         </li>
-      ));
+    ));
 
     function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
         setNumPages(numPages);
@@ -119,30 +118,29 @@ const Uploads = (props: any) => {
         }
     };
 
-    const handleFileChange = async (file:any) => {
+    const handleFileChange = async (file: any) => {
         const formData = new FormData();
         formData.append("file", file[0]);
-        const upload:any = await fileUpload(formData, "file/upload/");
-        console.log("upload:", upload); 
+        const upload: any = await fileUpload(formData, "file/upload/");
+        console.log("upload:", upload);
 
-        if (upload.status === 200) { 
-            setSnackBarText('File uploaded Successfully !');
-            setSeverity('success');
+        if (upload.status === 200) {
+            setSnackBarText("File uploaded Successfully !");
+            setSeverity("success");
             setOpenSnackBar(true);
-        } else { 
-            setSnackBarText('File uploaded Faild !');
-            setSeverity('error');
+        } else {
+            setSnackBarText("File uploaded Faild !");
+            setSeverity("error");
             setOpenSnackBar(true);
         }
-    }
+    };
 
-    
-      const handleSnackBarClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-        if (reason === 'clickaway') {
-          return;
+    const handleSnackBarClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === "clickaway") {
+            return;
         }
         setOpenSnackBar(false);
-      };
+    };
 
     // const handleFileChange = async (event: any) => {
     //     const file = event.target.files[0];
@@ -171,36 +169,34 @@ const Uploads = (props: any) => {
     }, [isLoaded, searchKey]);
 
     const card = (
-        <> 
+        <>
             <CardContent className="upload-outer-box">
-                <div className="upload-box" >
-                <Box 
-                
-                {...getRootProps({ className: 'dropzone' })}>
-                    <Box className="plus-icon-cont"  onClick={open}>
-                        <AddIcon />
+                <div className="upload-box">
+                    <Box {...getRootProps({ className: "dropzone" })}>
+                        <Box className="plus-icon-cont" onClick={open}>
+                            <AddIcon />
+                        </Box>
+                        <Typography sx={{ color: "#000000" }}>
+                            Drag and Drop or Browse to
+                            <span style={{ color: "var(--active-themes)" }}>
+                                Upload a File
+                                <input
+                                    id="file-upload"
+                                    type="file"
+                                    // onChange={handleFileChange}
+                                    disabled={loading}
+                                    {...getInputProps()}
+                                />
+                            </span>
+                        </Typography>
+                        {selectedFile && (
+                            <div>
+                                {/* <p>Selected File: {selectedFile}</p> */}
+                                {/* <p>Selected File: {Dropedfiles}</p> */}
+                            </div>
+                        )}
+                        <Typography className="allowed-text">Allowed Formats: PDF</Typography>
                     </Box>
-                    <Typography sx={{ color: "#000000" }}>
-                        Drag and Drop or Browse to
-                        <span style={{ color: "var(--active-themes)" }}>
-                            Upload a File
-                            <input
-                                id="file-upload"
-                                type="file" 
-                                // onChange={handleFileChange}
-                                disabled={loading}
-                                {...getInputProps()}
-                            />
-                        </span>
-                    </Typography>
-                    {selectedFile && (
-                        <div>
-                            {/* <p>Selected File: {selectedFile}</p> */}
-                            {/* <p>Selected File: {Dropedfiles}</p> */}
-                        </div>
-                    )}
-                    <Typography className="allowed-text">Allowed Formats: PDF</Typography>
-                </Box>
                 </div>
             </CardContent>
         </>
@@ -236,17 +232,9 @@ const Uploads = (props: any) => {
 
     return (
         <>
-              
-             <Snackbar open={openSnackBar}  
-             anchorOrigin={{ vertical: 'top', horizontal: 'right',}}  
-             autoHideDuration={6000} onClose={handleSnackBarClose}>
-                <Alert
-                onClose={handleSnackBarClose}
-                severity={severity}
-                variant="filled" 
-                sx={{ width: '100%' }}
-                >
-                 {snackBarText}
+            <Snackbar open={openSnackBar} anchorOrigin={{ vertical: "top", horizontal: "right" }} autoHideDuration={6000} onClose={handleSnackBarClose}>
+                <Alert onClose={handleSnackBarClose} severity={severity} variant="filled" sx={{ width: "100%" }}>
+                    {snackBarText}
                 </Alert>
             </Snackbar>
 
