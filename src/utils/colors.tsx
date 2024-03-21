@@ -21,5 +21,10 @@ export const ColorList = [
         color:"Green",
         colorCode: "#32D74B",
         class : "theme-green"
+    },
+    {
+        color:"transparent",
+        colorCode: "#0027B0",
+        class : "theme-transparent"
     }
 ]
