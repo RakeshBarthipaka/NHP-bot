@@ -277,3 +277,13 @@
     background: #fff;
 }
 
+.activeRightMenuItem {
+    background-color:#5376f0;
+}
+.activeRightMenuItem svg{
+    color: #fff !important;
+}
+.activeRightMenuItem p{
+    color: #fff !important;
+}
+

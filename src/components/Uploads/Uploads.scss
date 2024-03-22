@@ -103,3 +103,15 @@
 .css-1r69dlr-MuiPaper-root-MuiCard-root{
     border-radius: 30px!important;;
 }
+
+.file-row .uploadedFileName {
+    display: block;
+    font-size: 14px;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    svg {
+        margin-right: 5px;
+    }
+}

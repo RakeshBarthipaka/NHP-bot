@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect, useContext } from "react";
 import { Checkbox, Panel, DefaultButton, TextField, SpinButton, Stack, Sticky } from "@fluentui/react";
+import { v4 as uuid } from "uuid";
 import { chatApi, Approaches, AskResponse, ChatRequest, ChatTurn, ChartJSApi } from "../../api";
 import { Answer, AnswerError, AnswerLoading } from "../../components/Answer";
 import { QuestionInput } from "../../components/QuestionInput";
@@ -58,7 +59,7 @@ const Chat = (props: any) => {
     const [threads, scrollThreads] = useState(false);
     const chatMessageStreamEnd = useRef<HTMLDivElement | null>(null);
     const [localChatData, setLocalChatData] = useState([]);
-    const resetChatBox=useSelector((state:any)=>state.chat.resetChat)
+    const resetChatBox = useSelector((state: any) => state.chat.resetChat);
 
     const [isChatThreadStart, setIsChatThreadStart] = useState(false);
     const [activeChatThreadDetails, setActiveChatThreadDetails] = useState<activeChatThread>();
@@ -80,9 +81,8 @@ const Chat = (props: any) => {
     const [isChatThread, setIsChatThread] = useState<boolean>(false);
     const [isKpiAnalysis, setIsKpiAnalysis] = useState<boolean>(false);
 
-    
     const abortControllerRef = useRef(new AbortController());
-    
+
     const [isReplyDisplay, setIsReplyDisplay] = useState<boolean>(false);
 
     let getDisclaimer = localStorage.getItem("Disclaimer") || false;
@@ -206,7 +206,7 @@ const Chat = (props: any) => {
     };
 
     const makeApiRequest = async (question: string) => {
-        abortControllerRef.current=new AbortController();
+        abortControllerRef.current = new AbortController();
 
         lastQuestionRef.current = question;
         dispatch(set_latestQuestion(lastQuestionRef.current as any));
@@ -254,12 +254,13 @@ const Chat = (props: any) => {
                 userID: `${userID}`,
                 appointmentData: appointmentData,
                 patientemail: patientemail,
-                patientemailconfirm: patientemailconfirm
+                patientemailconfirm: patientemailconfirm,
+                chatID: uuid()
                 // longitude: longitude,
                 // latitude: latitude,
                 // userLocation: userLocation
             };
-            const result = await chatApi(request,abortControllerRef.current.signal);
+            const result = await chatApi(request, abortControllerRef.current.signal);
             if (result.exchange_id) {
                 let answersList = [...answers, [question, result]];
                 let qnAList = [
@@ -367,7 +368,6 @@ const Chat = (props: any) => {
             setShowLogsView(false);
         }
     };
-
 
     const onRecommendedQuestionClicked = (recommendedQuestion: string) => {
         makeApiRequest(recommendedQuestion);
@@ -509,12 +509,12 @@ const Chat = (props: any) => {
         setIsReplyDisplay(true);
     };
 
-    useEffect(()=>{
-        if(resetChatBox){
-            clearChat()
-            dispatch(resetChatList(false as any))
+    useEffect(() => {
+        if (resetChatBox) {
+            clearChat();
+            dispatch(resetChatList(false as any));
         }
-    },[resetChatBox])
+    }, [resetChatBox]);
 
     return (
         <>
@@ -524,9 +524,15 @@ const Chat = (props: any) => {
             {FileViewerURL && <FileViewer fileURL={FileViewerURL} onFileViewURLClicked={onFileViewURLClicked} />}
 
             {!showHistory && (
-                <Grid container item direction="row" justifyContent="center" alignItems="flex-start" sx={{ height: "100%" }} display={{ xs: "block", md: "flex" }}>
-                   
-
+                <Grid
+                    container
+                    item
+                    direction="row"
+                    justifyContent="center"
+                    alignItems="flex-start"
+                    sx={{ height: "100%" }}
+                    display={{ xs: "block", md: "flex" }}
+                >
                     <Grid container item justifyContent="center" xs={12} md={12} lg={11} className="shiftingContainer" order={{ xs: 1, md: 2 }}>
                         {!latestQuestion ? (
                             <>
@@ -744,7 +750,7 @@ const Chat = (props: any) => {
                         )} */}
                     </Grid>
 
-                    <Grid item xs={12}  md={12} lg={11} className={styles.chatInputBlock} order={{ xs: 2, md: 1 }}>
+                    <Grid item xs={12} md={12} lg={11} className={styles.chatInputBlock} order={{ xs: 2, md: 1 }}>
                         <div className={styles.chatInput}>
                             {/* <h1 style={{ marginTop: "100px", marginBottom:"50px" }} className={styles.chatEmptyStateTitle}>Get started with CGLense</h1> */}
                             <QuestionInput
@@ -785,6 +791,10 @@ const Chat = (props: any) => {
                     toggleUploads={toggleUploads}
                     toggleDeepAnalysis={toggleDeepAnalysis}
                     toggleChatThreads={toggleChatThreads}
+                    isLeaderBoard={isLeaderBoard}
+                    isDeepAnalysis={isDeepAnalysis}
+                    isChatThread={isChatThread}
+                    isUpload={isUpload}
                 />
             )}
         </>

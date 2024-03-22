@@ -34,7 +34,7 @@ export async function chatApi(options: ChatRequest, signal?: AbortSignal): Promi
     const controller = new AbortController();
     const mergedSignal = signal || controller.signal;
 
-    const response = await fetch("http://20.193.133.240:8544/chat", {
+    const response = await fetch("/chat", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -57,7 +57,8 @@ export async function chatApi(options: ChatRequest, signal?: AbortSignal): Promi
             token: options.temperature,
             personalization: false,
             language: options.language,
-            userID: options.userID
+            userID: options.userID,
+            chatID: options.chatID
         }),
         signal: mergedSignal
     });
@@ -161,7 +162,7 @@ export async function ChartJSApi(options: ChartJSRequest): Promise<ChartJSRespon
 
 export async function fecthApi(apiName: string) {
     try {
-        const response = await fetch(`http://20.193.133.240:8544/${apiName}`, {
+        const response = await fetch(`/${apiName}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -224,7 +225,7 @@ export async function UpdateAppointemtApi(options: any, apiName: any) {
     return parsedResponse;
 }
 
-const BASE_API_URL = "http://20.193.133.240:8544";
+const BASE_API_URL = "";
 
 export async function postApi(options: any, apiName: string): Promise<any> {
     try {
@@ -257,7 +258,6 @@ export async function postApiFiles(options: any, apiName: string, headers?: any)
             body: JSON.stringify(options)
         });
 
-        console.log(response, "response in postapi");
         const parsedResponse = await response.json();
         if (!response.ok) {
             throw Error(parsedResponse.error || "Unknown error");
@@ -273,6 +273,7 @@ export async function getApi(apiName: string) {
     try {
         const response = await fetch(`${BASE_API_URL}/${apiName}`, {
             method: "GET",
+            mode: "cors",
             headers: {
                 "Content-Type": "application/json"
             }
@@ -344,7 +345,6 @@ export const fileUpload = (formData: any, apiName: any) => {
     })
         .then(response => {
             // Handle response
-            console.log("response:", response);
             return response;
         })
         .catch(error => {
@@ -354,3 +354,21 @@ export const fileUpload = (formData: any, apiName: any) => {
 
     return response;
 };
+
+
+export async function getApiDownload(apiName: string) {
+    try {
+        const response = await fetch(`${BASE_API_URL}/${apiName}`, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/pdf'
+            }
+        });
+       
+        return response;
+    } catch (err) {
+        return [];
+    }
+}
+

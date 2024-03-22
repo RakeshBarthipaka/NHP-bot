@@ -312,7 +312,10 @@ const Layout = (props: any) => {
                                                         toggleSettings(false);
                                                     }}
                                                 >
-                                                    <span style={{ background: color.colorCode }}></span>
+                                                    {color.color == 'transparent' ?
+                                                    <span className="transparent"></span> :
+                                                    <span style={{ background: color.colorCode }}></span> 
+                                                    }
                                                 </p>
                                             ))}
                                         </div>
