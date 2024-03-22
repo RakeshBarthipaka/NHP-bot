@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 //import _ from "lodash";
 import { Avatar, Box, Button, ButtonGroup, Grid, Stack } from "@mui/material";
 
@@ -14,37 +14,58 @@ import Typography from "@mui/material/Typography";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
-import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
+//import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import ReplyAllIcon from "@mui/icons-material/ReplyAll";
 import { Threads } from "../../utils/MockData";
 // import SortOutlinedIcon from "@mui/icons-material/SortOutlined";
 //import KeywordList from "./KeywordList";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import { getApi } from "../../api";
 
 const ChatThreads = (props: any) => {
+    let userID = localStorage.getItem("userID") ? localStorage.getItem("userID") : 0; //needs to be change
+    const [allThreads, setThreads] = useState<any[]>([]);
+    const [isThreadDataLoaded, setIsThreadDataLoaded] = useState(false);
+
+    console.log("allThreads=====:", allThreads);
+
+    const getThreadData = async () => {
+        try {
+            const response = await getApi(`chat_sessions/?user=${"user"}`); //need to pass `userID` here
+            if (response) {
+                setThreads(response);
+                setIsThreadDataLoaded(true);
+            }
+        } catch (error) {
+            setThreads([]);
+        }
+    };
+
     const ThreadElements = (item: any) => {
+        console.log("ThreadElements===:", item);
         return (
             <>
                 <Box
                     className={`thread-box ${props.activeChatThreadDetails?.id === item.id ? "active-thread-box" : ""}`}
                     onClick={() => props.runChatThread(item)}
                 >
-                    <Typography className="questionText">{item.question}</Typography>
+                    {/* <Typography className="questionText">{item.question}</Typography> */}
+                    <Typography className="questionText">{item.sesion_data[0].text}</Typography>
                     <Box className="thread-icon-container">
                         <Typography className="otherOptions">{item.time} hour ago</Typography>
                         <div className="d-flex justify-content-end">
                             <div className="p-2 bd-highlight">
-                                <span className="replyIcon" onClick={props.handleReplyClick}>
+                                {/* <span className="replyIcon" onClick={props.handleReplyClick}>
                                     <span>
                                         <ReplyAllIcon />
                                     </span>
                                     <span>{item.likeCount}</span>
-                                </span>
-                                <span className="viewIcon" onClick={event => event.stopPropagation()}>
+                                </span> */}
+                                {/* <span className="viewIcon" onClick={event => event.stopPropagation()}>
                                     <span>
                                         <ShareOutlinedIcon />
                                     </span>
-                                </span>
+                                </span> */}
                                 <span className="viewIcon" onClick={event => event.stopPropagation()}>
                                     <span>
                                         <FileDownloadOutlinedIcon />
@@ -56,13 +77,13 @@ const ChatThreads = (props: any) => {
                                     <span>
                                         <ThumbUpOutlinedIcon />
                                     </span>
-                                    <span>{item.likeCount}</span>
+                                    <span>{item.like_counts}</span>
                                 </span>
                                 <span className="thumbDown" onClick={event => event.stopPropagation()}>
                                     <span>
                                         <ThumbDownAltOutlinedIcon />
                                     </span>
-                                    <span>{item.dislikeCount}</span>
+                                    <span>{item.dislike_counts}</span>
                                 </span>
                             </div>
                         </div>
@@ -111,6 +132,12 @@ const ChatThreads = (props: any) => {
         );
     };
 
+    useEffect(() => {
+        if (!isThreadDataLoaded) {
+            getThreadData();
+        }
+    }, [isThreadDataLoaded]);
+
     return (
         <>
             <Box className="chat-thread-container">
@@ -158,8 +185,13 @@ const ChatThreads = (props: any) => {
                 <Box className="grid-container">
                     {(!props.isReplyDisplay && (
                         <>
-                            {Threads.map((item, index) => {
+                            {/* {Threads.map((item, index) => {
                                 return <React.Fragment key={index}>{ThreadElements(item)}</React.Fragment>;
+                            })} */}
+
+                            {allThreads.map((item, index) => {
+                                console.log("item===:", item);
+                                return <React.Fragment key={index}>{ThreadElements(item[123])}</React.Fragment>;
                             })}
                         </>
                     )) || <ReplyComp />}
