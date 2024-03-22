@@ -2,10 +2,11 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    // align-items: center;
     border: 1px solid rgba(216, 216, 220, 1) !important;
     border-radius: 25px;
     padding: 0px 10px !important;
+    background-color: #fff;;
 }
 .searchIcon {
     background: var(--active-themes);

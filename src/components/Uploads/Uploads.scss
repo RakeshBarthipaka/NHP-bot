@@ -54,7 +54,7 @@
     cursor: pointer;
     margin-bottom: 6px;
     padding: 0 10px;
-    border:1px solid #efefef;
+    border:1px solid #e1e1e1;
     &:hover{
         background-color: #dde4fc;
     }
@@ -99,4 +99,7 @@
         max-height: calc(100vh - 114px);
         overflow-y: scroll;
     }
+}
+.css-1r69dlr-MuiPaper-root-MuiCard-root{
+    border-radius: 30px!important;;
 }

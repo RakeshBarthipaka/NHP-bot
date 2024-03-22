@@ -45,11 +45,15 @@ const AssignForm = (props: any) => {
                             <Box component="span" fontWeight="bold">
                                 Comments:
                             </Box>{" "}
-                            Let us discuss on this point
+                            <textarea className="discussion-subject">
+                                 Let us discuss on this point
+                            </textarea>
+                            
                         </Typography>
+                        
                         <Typography>
-                            <Box component="span" fontWeight="bold">
-                                Tag to:
+                            <Box component="span" fontWeight="bold" className="tagTo">
+                                <span>Tag to:</span>
                                 <Box className="user-box">abc@gmail.com</Box>
                                 <Box className="user-box">xyz@gmail.com</Box>
                             </Box>
@@ -81,7 +85,7 @@ const AssignForm = (props: any) => {
                 </>
             )) || (
                 <>
-                    <Typography className="success-msg-container">Your post has been sent successfully</Typography>
+                    <span className="success-msg-container">Your post has been sent successfully</span>
                 </>
             )}
         </>
