@@ -1,6 +1,8 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 
+
+// Define slice
 const chatSlice = createSlice({
   name: 'theme',
   initialState: {
@@ -32,6 +34,6 @@ const chatSlice = createSlice({
     }
   },
 });
-
+// Export actions and reducer
 export const { set_history,set_answers,set_QnA,set_recommendedQnA,set_latestQuestion,resetChatList } = chatSlice.actions;
 export default chatSlice.reducer;
