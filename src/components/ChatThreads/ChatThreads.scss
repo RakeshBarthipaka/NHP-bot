@@ -58,7 +58,7 @@
         padding: 10px 20px 0px 20px;
         border-radius: 30px 30px 30px 30px;
         margin-bottom: 5px;
-        border:1px solid #efefef;
+        border:1px solid #e1e1e1;
         // box-shadow:0px 0px 10px rgba(0, 0, 0, 0.14), 0px 0px 2px rgba(0, 0, 0, 0.12);
         
         cursor: pointer;
@@ -238,7 +238,7 @@
 }
 .chatThreadAssignedBox{
     border: 1px solid var(--active-themes);
-    margin-top: 0px;
+    margin-top: -47px;
     margin-bottom: 5px;
     //border-radius: 10px;
     // margin-top: 12px;
@@ -246,6 +246,14 @@
     padding: 10px;
     margin-bottom:20px;
     font-size:14px!important;
+    padding-top:55px;
+    .discussion-subject{
+        width:100%;
+        padding:5px;
+        border-radius: 4px;
+        border:1px solid #aaa;
+    
+    }
 }
 
 .chatThreadAssignedBox p{
@@ -291,19 +299,22 @@
 }
 .addedTopicsBox{
     background-color: #5376F033;
-    padding: 7px;
+    padding: 7px 15px;
     color: #0C099C;
     border-radius:15px;
     margin-left: 5px;
 }
 
 .user-box{
-    background-color: #C8C8C8;
+    background-color: #F2F2F7;
     padding: 7px 10px;
     color: #0C099C;
-    border-radius:15px;
+    border-radius: 15px;
     margin-left: 5px;
     display: inline-block;
+    font-size: 12px;
+    font-weight: normal;
+    border:1px solid #F2F2F7;    
 }
 .add-topic-search-container{
     margin-bottom:10px;
@@ -335,6 +346,9 @@
             // color:#fff;
         }
     }
+}
+.tagTo{
+    display: flex;
 }
 .reply-box-top{
     display: flex;

@@ -1,7 +1,7 @@
 .chatMessageStream {
     flex-grow: 1;
     /* max-width: 1028px; */
-    width: 99%;
+    width: 97%;
     overflow-y: auto;
     /* height: 500px; */
     padding-left: 24px;
@@ -323,7 +323,7 @@ p {
 .featuresContentDiv {
     max-height: calc(100vh - 140px);
     overflow-y: scroll;
-    background: #fff;
+    /* background: #fff; */
     padding-left:10px;
 }
 

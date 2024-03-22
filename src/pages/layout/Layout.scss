@@ -266,7 +266,7 @@
 }
 .profileMenu {
     border-left: 1px solid rgb(255 255 255 / 51%);
-    background-color: var(--active-themes);
+    // background-color: var(--active-themes);
     margin-right:-15px;
 }
 
@@ -331,6 +331,9 @@
     width: 24px;
     height: 24px;
     border-radius: 50%;
+}
+.colorsList span.transparent {
+    background: conic-gradient(in hsl longer hue,red 0 0);
 }
 
 .layoutStyle {
