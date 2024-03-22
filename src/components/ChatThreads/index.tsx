@@ -25,7 +25,6 @@ import { getApi } from "../../api";
 const ChatThreads = (props: any) => {
     let userID = localStorage.getItem("userID") ? localStorage.getItem("userID") : 0; //needs to be change
     const [allThreads, setThreads] = useState<any[]>([]);
-    const [isThreadDataLoaded, setIsThreadDataLoaded] = useState(false);
 
     console.log("allThreads=====:", allThreads);
 
@@ -34,15 +33,13 @@ const ChatThreads = (props: any) => {
             const response = await getApi(`chat_sessions/?user=${"user"}`); //need to pass `userID` here
             if (response) {
                 setThreads(response);
-                setIsThreadDataLoaded(true);
             }
         } catch (error) {
             setThreads([]);
         }
     };
 
-    const ThreadElements = (item: any) => {
-        console.log("ThreadElements===:", item);
+    const ThreadElements = ({ item }: any) => {
         return (
             <>
                 <Box
@@ -50,7 +47,7 @@ const ChatThreads = (props: any) => {
                     onClick={() => props.runChatThread(item)}
                 >
                     {/* <Typography className="questionText">{item.question}</Typography> */}
-                    <Typography className="questionText">{item.sesion_data[0].text}</Typography>
+                    <Typography className="questionText">{item.session_data[0].text}</Typography>
                     <Box className="thread-icon-container">
                         <Typography className="otherOptions">{item.time} hour ago</Typography>
                         <div className="d-flex justify-content-end">
@@ -133,10 +130,8 @@ const ChatThreads = (props: any) => {
     };
 
     useEffect(() => {
-        if (!isThreadDataLoaded) {
-            getThreadData();
-        }
-    }, [isThreadDataLoaded]);
+        getThreadData();
+    }, []);
 
     return (
         <>
@@ -189,10 +184,11 @@ const ChatThreads = (props: any) => {
                                 return <React.Fragment key={index}>{ThreadElements(item)}</React.Fragment>;
                             })} */}
 
-                            {allThreads.map((item, index) => {
-                                console.log("item===:", item);
-                                return <React.Fragment key={index}>{ThreadElements(item[123])}</React.Fragment>;
-                            })}
+                            {allThreads &&
+                                allThreads.length > 0 &&
+                                allThreads.map((item, index) => {
+                                    return <React.Fragment key={index}>{<ThreadElements key={index} {...{ item }} />}</React.Fragment>;
+                                })}
                         </>
                     )) || <ReplyComp />}
                 </Box>
