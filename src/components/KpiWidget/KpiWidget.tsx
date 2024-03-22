@@ -18,6 +18,7 @@ import {
   MRT_RowSelectionState,
   MRT_Icons,
 } from 'material-react-table';
+import { getApi } from "../../api";
 
 interface Props {
   toggleChatRightContent: () => void;
@@ -25,29 +26,31 @@ interface Props {
 }
 
 type KpiRow = {
-  id: string;
-  select: boolean;
-  kpiname: string;
-  kpivalue: string;
+  id: number;
+  sort_order: number;
+  status: boolean;
+  title: string;
+  value : string;
+  kpi: string;
 };
 
-const initData = [
-  { id: 1, kpiname: 'Gross Margin', kpivalue: '15 k', select: true },
-  { id: 2, kpiname: 'Sales Growth ', kpivalue: '6234', select: true },
-  { id: 3, kpiname: 'Net Sales', kpivalue: '8234', select: true },
-  { id: 4, kpiname: 'Revenue', kpivalue: '5234', select: true },
-  { id: 5, kpiname: 'Profit Margin', kpivalue: '15 k', select: true },
-  { id: 6, kpiname: 'Revenue ', kpivalue: '6234', select: true },
-  { id: 7, kpiname: 'Working Capital', kpivalue: '8234', select: true },
-  { id: 8, kpiname: 'Cash Inflow', kpivalue: '5234', select: true },
-  { id: 9, kpiname: 'Interest earned', kpivalue: '15 k', select: true },
-  { id: 10, kpiname: 'Annual Return', kpivalue: '6234' },
-  { id: 11, kpiname: 'Operating Profit Margin', kpivalue: '8234', select: true },
-  { id: 12, kpiname: 'Turnover', kpivalue: '5234', select: true },
-  { id: 13, kpiname: 'Budget Variance', kpivalue: '15 k', select: true },
-  { id: 14, kpiname: 'Current Ratio', kpivalue: '6234', select: true },
-  { id: 15, kpiname: 'Quick Ratio', kpivalue: '8234', select: true },
-];
+// const initData = [
+//   { id: 1, kpiname: 'Gross Margin', kpivalue: '15 k', select: true },
+//   { id: 2, kpiname: 'Sales Growth ', kpivalue: '6234', select: true },
+//   { id: 3, kpiname: 'Net Sales', kpivalue: '8234', select: true },
+//   { id: 4, kpiname: 'Revenue', kpivalue: '5234', select: true },
+//   { id: 5, kpiname: 'Profit Margin', kpivalue: '15 k', select: true },
+//   { id: 6, kpiname: 'Revenue ', kpivalue: '6234', select: true },
+//   { id: 7, kpiname: 'Working Capital', kpivalue: '8234', select: true },
+//   { id: 8, kpiname: 'Cash Inflow', kpivalue: '5234', select: true },
+//   { id: 9, kpiname: 'Interest earned', kpivalue: '15 k', select: true },
+//   { id: 10, kpiname: 'Annual Return', kpivalue: '6234' },
+//   { id: 11, kpiname: 'Operating Profit Margin', kpivalue: '8234', select: true },
+//   { id: 12, kpiname: 'Turnover', kpivalue: '5234', select: true },
+//   { id: 13, kpiname: 'Budget Variance', kpivalue: '15 k', select: true },
+//   { id: 14, kpiname: 'Current Ratio', kpivalue: '6234', select: true },
+//   { id: 15, kpiname: 'Quick Ratio', kpivalue: '8234', select: true },
+// ];
 
 const result = [
   {
@@ -166,13 +169,13 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis }: Props) => {
   const columns = useMemo(
     () => [
       {
-        accessorKey: 'kpiname',
-        header: 'KPI',
+        accessorKey: 'title',
+        header: 'kpi',
         grow: false,
         size: 150,
       },
       {
-        accessorKey: 'kpivalue',
+        accessorKey: 'value',
         header: 'Value',
         grow: false,
         size: 150,
@@ -181,8 +184,8 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis }: Props) => {
     [],
   );
 
-  const initialKpis = [1, 2, 3, 4]
-  const [data, setData] = useState(() => initData);
+  const initialKpis = [ 2, 3, 4, 5]
+  const [data, setData] = useState([]);
   const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({}); 
   const [disableSelection, setDisableSelection] = useState(false);
   const [openKpiModal, setOpenKpiModal] = useState(false);
@@ -200,7 +203,6 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis }: Props) => {
 
   useEffect(() => {
     setRowSelection({
-      1: true,
       2: true,
       3: true,
       4: true,
@@ -217,6 +219,14 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis }: Props) => {
     } 
  
   }, [rowSelection]);
+
+  useEffect(()=>{
+    async function getKpiList () {
+      const response = await getApi('kpi/get_kpi_list/');
+      setData(response);
+    }
+    getKpiList();
+  }, [])
 
 
 
@@ -238,7 +248,7 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis }: Props) => {
 
     enableRowSelection: true,
     enableSelectAll: false,
-    getRowId: (row): any => row.id,
+    getRowId: (row: any) => row?.id,
     onRowSelectionChange: setRowSelection,
     state: { rowSelection, showGlobalFilter: true },
 
@@ -252,13 +262,15 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis }: Props) => {
             0,
             data.splice(draggingRow.index, 1)[0],
           );
+          data?.forEach((row: any , index)=> {
+            row.sort_order = index + 1
+          })
           setData([...data]); 
         }
       },
     }),
 
   });
-
 
   function getKpiSlides(ids: any[], result: any[]) {
     return result.filter((e) => {
@@ -271,7 +283,7 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis }: Props) => {
   }
 
   const saveSelectedKpis = () => {
-    const selectedRowsData = table.getSelectedRowModel().rows.map((row) => row.original.id)
+    const selectedRowsData = table.getSelectedRowModel().rows.map((row: any) => row.original.id)
     setKpiSlides(getKpiSlides(selectedRowsData, result));
     setOpenKpiModal(false)
   }
