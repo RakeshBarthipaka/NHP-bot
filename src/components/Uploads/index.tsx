@@ -16,10 +16,13 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import SearchBar from "../Common/SearchBar";
-import { deleteApiFile, postApiFiles, fileUpload } from "../../api";
+import { deleteApiFile, postApiFiles, fileUpload, getApiDownload } from "../../api";
 import { format, parseISO } from "date-fns";
 import { Avatar, Drawer, Toolbar } from "@mui/material";
 import { Stack } from "@fluentui/react";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
@@ -30,6 +33,8 @@ import StackedBarChart from "../BarChart/BarChart";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import CropOutlinedIcon from "@mui/icons-material/CropOutlined";
 import pdfFile from "../../assets/uploadedFileView.pdf";
+import "react-pdf/dist/esm/Page/TextLayer.css";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
@@ -49,6 +54,9 @@ const Uploads = (props: any) => {
     const [numPages, setNumPages] = useState<number | null>(null);
     const [scale, setScale] = useState<number>(1.0);
     const [containerWidth, setContainerWidth] = useState<number>(250);
+    const [dataID, setDataID] = useState("");
+    const [dataFilename, setDataFilename] = useState("");
+    const [pdfUrlData, setPdfUrlData] = useState("");
     const [openSnackBar, setOpenSnackBar] = useState(false);
     const [snackBarText, setSnackBarText] = useState("");
     const [severity, setSeverity] = useState<any>("info");
@@ -83,6 +91,18 @@ const Uploads = (props: any) => {
         return Math.max(pageWidth, defaultPageWidth);
     }
 
+    function copyTableToClipboard() {
+        window?.getSelection()?.removeAllRanges();
+        let range = document.createRange();
+        const gridContainer: any = document.querySelectorAll(".react-pdf__Page__textContent span");
+       const  ga = Array.from(gridContainer);
+       // navigator.clipboard.writeText(gridContainer);
+       var captionsText = ga.map(function(caption: any) {
+        return caption.textContent;
+      });
+        navigator.clipboard.writeText(captionsText.join().replace(/,/g, '\n'));
+    }
+
     const getUploadFileData = async () => {
         try {
             const response = await postApiFiles(
@@ -99,8 +119,6 @@ const Uploads = (props: any) => {
                     "Content-Type": "application/json"
                 }
             );
-
-            // console.log(response.items, "response");
             setUploadFileList(response.items);
             setIsLoaded(true);
         } catch (error) {
@@ -110,7 +128,6 @@ const Uploads = (props: any) => {
 
     const deleteUploadFileData = async (id: any) => {
         try {
-            // console.log("delete response inside", id);
             const response = await deleteApiFile(`file/delete/${id}`);
             setIsLoaded(false);
         } catch (error) {
@@ -120,6 +137,8 @@ const Uploads = (props: any) => {
 
     const handleFileChange = async (file: any) => {
         const formData = new FormData();
+        // formData.append("file", file);
+        // const upload = await fileUpload(formData, "file/upload/");
         formData.append("file", file[0]);
         const upload: any = await fileUpload(formData, "file/upload/");
         console.log("upload:", upload);
@@ -132,6 +151,37 @@ const Uploads = (props: any) => {
             setSnackBarText("File uploaded Faild !");
             setSeverity("error");
             setOpenSnackBar(true);
+        }
+    };
+
+    const downloadPDF = async (id: any, filename: any) => {
+        try {
+            const response: any = getApiDownload(`file/download/${id}`);
+            response.then((response: any) => {
+                const url = response.url;
+                const link = document.createElement("a");
+                link.href = url;
+                link.setAttribute("download", `${filename}.pdf`); //or any other extension
+                document.body.appendChild(link);
+                link.click();
+            });
+            setIsLoaded(false);
+        } catch (error) {
+            setIsFileDeleted(false);
+        }
+    };
+
+    const viewdownloadPDF = async (id: any, filename: any) => {
+        try {
+            const response: any = getApiDownload(`file/download/${id}`);
+            response.then((response: any) => {
+                const url = response.url;
+                setPdfUrlData(url);
+            });
+
+            setIsLoaded(false);
+        } catch (error) {
+            setIsFileDeleted(false);
         }
     };
 
@@ -208,12 +258,14 @@ const Uploads = (props: any) => {
                 <Box
                     className="file-row"
                     onClick={() => {
+                        setDataID(data?.id);
+                        setDataFilename(data?.filename);
+                        viewdownloadPDF(data?.id, data?.filename);
                         setUploadFileViewer(true);
                     }}
                 >
                     <Typography flex={2} className="uploadedFileName">
                         <PictureAsPdfOutlinedIcon sx={{ color: "var(--active-themes)" }} />
-                        {/* {data?.filename?.length < 40 ? data?.filename :  data?.filename.substring(0,40)+ '...pdf' } */}
                         {data?.filename}
                     </Typography>
                     <Typography flex={1} sx={{ color: "var(--active-themes)", fontSize: "12px" }}>
@@ -283,17 +335,22 @@ const Uploads = (props: any) => {
                     <div className="uploadedFileViewDiv">
                         <Stack className="stackDataOptions">
                             <Box display={"flex"} gap={1}>
-                                unilever_chat_1706852987594.pdf
+                                {`${dataFilename}`}
                             </Box>
                             <Box display={"flex"}>
-                                <span>
+                                <span onClick={copyTableToClipboard}>
                                     <Avatar className="iconsBtns">
                                         <ContentCopyOutlinedIcon />
                                     </Avatar>
                                 </span>
 
                                 <span>
-                                    <Avatar className="iconsBtns">
+                                    <Avatar
+                                        onClick={() => {
+                                            downloadPDF(dataID, dataFilename);
+                                        }}
+                                        className="iconsBtns"
+                                    >
                                         <FileDownloadOutlinedIcon />
                                     </Avatar>
                                 </span>
@@ -305,17 +362,19 @@ const Uploads = (props: any) => {
                             </Box>
                         </Stack>
                         <div className="uploadedFileView">
-                            <Document file={pdfUrl} onLoadSuccess={onDocumentLoadSuccess}>
+                            <Document file={pdfUrlData} onLoadSuccess={onDocumentLoadSuccess}>
                                 {Array.from(new Array(numPages || 0), (_, index) => (
                                     <Page
+                                        renderTextLayer={true}
+                                        renderAnnotationLayer={true}
                                         key={`page_${index + 1}`}
                                         pageNumber={index + 1}
                                         width={calculatePageWidth()} // Adjust the width dynamically
                                         scale={scale}
-                                        // className={styles.pdfPage}
                                         data-page-number={index + 1}
-                                        customTextRenderer={() => null || ""}
+                                        //customTextRenderer={() => null || ""}
                                     />
+                                    
                                 ))}
                             </Document>
                         </div>
