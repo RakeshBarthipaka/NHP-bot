@@ -57,7 +57,8 @@ export async function chatApi(options: ChatRequest, signal?: AbortSignal): Promi
             token: options.temperature,
             personalization: false,
             language: options.language,
-            userID: options.userID
+            userID: options.userID,
+            chatID: options.chatID
         }),
         signal: mergedSignal
     });

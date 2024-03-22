@@ -18,7 +18,7 @@ import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import ReplyAllIcon from "@mui/icons-material/ReplyAll";
 import { Threads } from "../../utils/MockData";
 // import SortOutlinedIcon from "@mui/icons-material/SortOutlined";
-import KeywordList from "./KeywordList";
+//import KeywordList from "./KeywordList";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 
 const ChatThreads = (props: any) => {
@@ -33,10 +33,7 @@ const ChatThreads = (props: any) => {
                     <Box className="thread-icon-container">
                         <Typography className="otherOptions">{item.time} hour ago</Typography>
                         <div className="d-flex justify-content-end">
-
-
                             <div className="p-2 bd-highlight">
-
                                 <span className="replyIcon" onClick={props.handleReplyClick}>
                                     <span>
                                         <ReplyAllIcon />
@@ -69,7 +66,6 @@ const ChatThreads = (props: any) => {
                                 </span>
                             </div>
                         </div>
-
                     </Box>
                 </Box>
             </>
@@ -123,7 +119,12 @@ const ChatThreads = (props: any) => {
                     <h3 className="disply-page-title">CHAT THREADS & ARCHIVES</h3>
                 </Box>
                 <Box className="search-row">
-                    <SearchBar />
+                    <SearchBar
+                        searchKey={""}
+                        setSearchKey={function (value: any): void {
+                            throw new Error("Function not implemented.");
+                        }}
+                    />
                     {/* <Box className="file-count">
                         <span>
                         Total no.of topics &nbsp;
@@ -137,23 +138,21 @@ const ChatThreads = (props: any) => {
                             marginTop: "10px"
                         }}
                     >
-
-<ButtonGroup className="mui-custom-toggle" variant="outlined" aria-label="Basic button group">
-                    <Button className="mui-toggle-active">
-                        <span className="iconText">
-                            <RemoveRedEyeOutlinedIcon className="viewIcon IconElemt" />
-                        </span>
-                        <span>By Views</span>
-                    </Button>
-                    <Button>
-                        <span className="iconText">
-                            <SortOutlinedIcon className="ShortByIcon IconElemt" />
-                        </span>
-                        <span>By Date</span>
-                    </Button>
-                </ButtonGroup>
-                </Box>
-                   
+                        <ButtonGroup className="mui-custom-toggle" variant="outlined" aria-label="Basic button group">
+                            <Button className="mui-toggle-active">
+                                <span className="iconText">
+                                    <RemoveRedEyeOutlinedIcon className="viewIcon IconElemt" />
+                                </span>
+                                <span>By Views</span>
+                            </Button>
+                            <Button>
+                                <span className="iconText">
+                                    <SortOutlinedIcon className="ShortByIcon IconElemt" />
+                                </span>
+                                <span>By Date</span>
+                            </Button>
+                        </ButtonGroup>
+                    </Box>
                 </Box>
                 <Divider sx={{ marginTop: "10px", marginBottom: "10px", borderColor: "var(--active-themes)" }} />
                 <Box className="grid-container">

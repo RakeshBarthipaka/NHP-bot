@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./Uploads.scss";
 
 import { Document, Page, pdfjs } from "react-pdf";
@@ -36,6 +36,10 @@ import pdfFile from "../../assets/uploadedFileView.pdf";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import { useDropzone } from "react-dropzone";
+
 const Uploads = (props: any) => {
     const [UploadFileList, setUploadFileList] = useState<any>([]);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -53,6 +57,26 @@ const Uploads = (props: any) => {
     const [dataID, setDataID] = useState("");
     const [dataFilename, setDataFilename] = useState("");
     const [pdfUrlData, setPdfUrlData] = useState("");
+    const [openSnackBar, setOpenSnackBar] = useState(false);
+    const [snackBarText, setSnackBarText] = useState("");
+    const [severity, setSeverity] = useState<any>("info");
+    const { acceptedFiles, open, getRootProps, getInputProps } = useDropzone({
+        accept: {
+            "application/pdf": [".pdf"]
+        },
+        onDropAccepted: (acceptedFiles: any) => {
+            handleFileChange(acceptedFiles);
+            console.log(acceptedFiles);
+        },
+        noClick: true,
+        noKeyboard: true
+    });
+
+    const Dropedfiles = acceptedFiles.map((file: any) => (
+        <li key={file.path}>
+            {file.path} - {file.size} bytes
+        </li>
+    ));
 
     function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
         setNumPages(numPages);
@@ -111,11 +135,23 @@ const Uploads = (props: any) => {
         }
     };
 
-    const handleFileChange = async (event: any) => {
-        const file = event.target.files[0];
+    const handleFileChange = async (file: any) => {
         const formData = new FormData();
-        formData.append("file", file);
-        const upload = await fileUpload(formData, "file/upload/");
+        // formData.append("file", file);
+        // const upload = await fileUpload(formData, "file/upload/");
+        formData.append("file", file[0]);
+        const upload: any = await fileUpload(formData, "file/upload/");
+        console.log("upload:", upload);
+
+        if (upload.status === 200) {
+            setSnackBarText("File uploaded Successfully !");
+            setSeverity("success");
+            setOpenSnackBar(true);
+        } else {
+            setSnackBarText("File uploaded Faild !");
+            setSeverity("error");
+            setOpenSnackBar(true);
+        }
     };
 
     const downloadPDF = async (id: any, filename: any) => {
@@ -149,6 +185,25 @@ const Uploads = (props: any) => {
         }
     };
 
+    const handleSnackBarClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === "clickaway") {
+            return;
+        }
+        setOpenSnackBar(false);
+    };
+
+    // const handleFileChange = async (event: any) => {
+    //     const file = event.target.files[0];
+    //     if (file.type == "application/pdf") {
+    //         const formData = new FormData();
+    //         formData.append("file", file);
+    //         const upload = await fileUpload(formData, "file/upload/");
+    //         console.log("upload:", upload);
+    //     } else {
+    //         console.log("Invalid file type"); //Toast message will be shown
+    //     }
+    // };
+
     useEffect(() => {
         if (!isLoaded) {
             getUploadFileData();
@@ -166,31 +221,33 @@ const Uploads = (props: any) => {
     const card = (
         <>
             <CardContent className="upload-outer-box">
-                <Box className="upload-box">
-                    <Box className="plus-icon-cont">
-                        <AddIcon />
+                <div className="upload-box">
+                    <Box {...getRootProps({ className: "dropzone" })}>
+                        <Box className="plus-icon-cont" onClick={open}>
+                            <AddIcon />
+                        </Box>
+                        <Typography sx={{ color: "#000000" }}>
+                            Drag and Drop or Browse to
+                            <span style={{ color: "var(--active-themes)" }}>
+                                Upload a File
+                                <input
+                                    id="file-upload"
+                                    type="file"
+                                    // onChange={handleFileChange}
+                                    disabled={loading}
+                                    {...getInputProps()}
+                                />
+                            </span>
+                        </Typography>
+                        {selectedFile && (
+                            <div>
+                                {/* <p>Selected File: {selectedFile}</p> */}
+                                {/* <p>Selected File: {Dropedfiles}</p> */}
+                            </div>
+                        )}
+                        <Typography className="allowed-text">Allowed Formats: PDF</Typography>
                     </Box>
-                    <Typography sx={{ color: "#000000" }}>
-                        Drag and Drop or Browse to
-                        <span style={{ color: "var(--active-themes)" }}>
-                            Upload a File
-                            <input
-                                id="file-upload"
-                                type="file"
-                                accept=".pdf"
-                                //style={{ display: 'none' }}
-                                onChange={handleFileChange}
-                                disabled={loading}
-                            />
-                        </span>
-                    </Typography>
-                    {selectedFile && (
-                        <div>
-                            <p>Selected File: {selectedFile}</p>
-                        </div>
-                    )}
-                    <Typography className="allowed-text">Allowed Formats: PDF</Typography>
-                </Box>
+                </div>
             </CardContent>
         </>
     );
@@ -207,14 +264,10 @@ const Uploads = (props: any) => {
                         setUploadFileViewer(true);
                     }}
                 >
-                    {/* <Box }> */}
-                        <Typography flex={2} sx={{ display: "flex", fontSize: "14px" }}>
-                            <PictureAsPdfOutlinedIcon sx={{ color: "var(--active-themes)" }} />
-                            {/* {data?.filename?.length < 40 ? data?.filename :  data?.filename.substring(0,40)+ '...pdf' } */}
-                            {data?.filename}
-                        </Typography>
-                    {/* </Box> */}
-
+                    <Typography flex={2} className="uploadedFileName">
+                        <PictureAsPdfOutlinedIcon sx={{ color: "var(--active-themes)" }} />
+                        {data?.filename}
+                    </Typography>
                     <Typography flex={1} sx={{ color: "var(--active-themes)", fontSize: "12px" }}>
                         {format(parseISO(data?.date), "dd-MM-yyyy h:mm a")}
                     </Typography>
@@ -231,6 +284,12 @@ const Uploads = (props: any) => {
 
     return (
         <>
+            <Snackbar open={openSnackBar} anchorOrigin={{ vertical: "top", horizontal: "right" }} autoHideDuration={6000} onClose={handleSnackBarClose}>
+                <Alert onClose={handleSnackBarClose} severity={severity} variant="filled" sx={{ width: "100%" }}>
+                    {snackBarText}
+                </Alert>
+            </Snackbar>
+
             <Box className="upload-container" sx={{ boxShadow: "none" }}>
                 <Box className="upload-heading">
                     {/* <img src={UploadsIcon} alt="Uploads" /> */}

@@ -17,7 +17,12 @@ const AddTopicsModal = (props: any) => {
                 </Typography>
                 <Typography sx={{ fontSize: "12px", textAlign: "center" }}>Choose any topic and tag to conversation</Typography>
                 <Box className="add-topic-search-container">
-                    <SearchBar />
+                    <SearchBar
+                        searchKey={""}
+                        setSearchKey={function (value: any): void {
+                            throw new Error("Function not implemented.");
+                        }}
+                    />
                 </Box>
                 {Threads.map((item, index) => (
                     <Box key={index} className="topicsBoxMain" onClick={() => props.handleAddTopics(item)}>
