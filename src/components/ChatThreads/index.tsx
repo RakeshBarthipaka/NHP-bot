@@ -21,6 +21,8 @@ import { Threads } from "../../utils/MockData";
 //import KeywordList from "./KeywordList";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import { getApi } from "../../api";
+import jsPDF from "jspdf";
+import DownloadPDFThreads from "../Answer/GeneratePDFThreads";
 
 const ChatThreads = (props: any) => {
     let userID = localStorage.getItem("userID") ? localStorage.getItem("userID") : 0; //needs to be change
@@ -38,6 +40,7 @@ const ChatThreads = (props: any) => {
             setThreads([]);
         }
     };
+
 
     const ThreadElements = ({ item }: any) => {
         return (
@@ -63,10 +66,13 @@ const ChatThreads = (props: any) => {
                                         <ShareOutlinedIcon />
                                     </span>
                                 </span> */}
-                                <span className="viewIcon" onClick={event => event.stopPropagation()}>
+                                <span className="viewIcon">
+                                    
                                     <span>
-                                        <FileDownloadOutlinedIcon />
+                                    <DownloadPDFThreads pdfData={item.session_data} />
+                                        {/* <FileDownloadOutlinedIcon /> */}
                                     </span>
+                                    {/* <DownloadThread threads={item.session_data} /> */}
                                 </span>
                             </div>
                             <div className="p-2 bd-highlight">
