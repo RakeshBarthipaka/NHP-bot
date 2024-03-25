@@ -22,7 +22,7 @@
     display: inline-flex;
     margin-bottom: 5px;
     // border:1px solid #d1d1d1;
-    border:1px solid #efefef;
+    border:1px solid #e1e1e1;
     // box-shadow:0px 0px 10px rgba(0, 0, 0, 0.14), 0px 0px 2px rgba(0, 0, 0, 0.12);
     
     .question-text {
@@ -32,14 +32,14 @@
             font-size:14px;
         }
         .otherInfoKL{
-            font-size: 12px;
+            font-size: 12px!important;
             font-weight: bold;
             display: flex;
             padding-top: 5px;
             align-items: center;
             line-height: 20px;
             margin-bottom: 10px;
-            color:#0C099C;
+            color:#0C099C!important;
         }
         .viewIconKL{
             color:#0C099C;
@@ -50,6 +50,12 @@
             margin-left:10px;
             color:#0C099C;
             
+        }
+        p :last-child span{
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 2.0;
+            color:#0C099C;
         }
     }
     &:hover{

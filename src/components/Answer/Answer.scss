@@ -22,8 +22,8 @@
     height: 50px;
     background: #F2F2F7; 
     clip-path: polygon(38% 0, 100% 0%, 100% 72%, 76% 73%, 47% 72%, 47% 25%, 0 0);
-    left: -20px;
-    top: -2px;
+    left: -18px;
+    top: -0px;
 }
 .answerLogo {
     width: 44px;
@@ -42,7 +42,15 @@
     padding-bottom: 16px;
     white-space: pre-line;
     color: #000000; 
+    ul, b{
+        margin-top:20px;
+        li{
+            padding:0px;
+            line-height: 10px;
+          }
+    }
 }
+
 .answerText a {
     word-break: break-all;
 }

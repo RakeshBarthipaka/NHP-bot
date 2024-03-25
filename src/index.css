@@ -84,6 +84,15 @@
     --bg-primary-light: var(--primary-green-light);
     --primary-border-color: var(--border-green-color);
 }
+.theme-transparent {
+    --bg-primary: var(--active-themes);
+    --bg-secondary: var(--secondary-blue-color);
+    --bg-primary-light: var(--primary-blue-light);
+    --primary-border-color: var(--border-blue-color);
+    --bg-primary-gray: var(--active-themes-gray);
+    --bg-visited-state:var(--active-tag);
+}
+
 
 html,
 body {
@@ -91,6 +100,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Inter";
+    /* background-image: url(assets/bh.jpg); */
+    background-size: 120%;;
 }
 
 html {
@@ -425,12 +436,14 @@ border:1px solid  rgba(83, 118, 240, 0.2);
     border:1px solid #5376F0;
     font-size:12px;
     text-transform: none;
+    background-color: #fff;
 }
 .mui-custom-toggle button:last-child{
     border-radius:0px 30px 30px 0px;
     border:1px solid #5376F0;
     font-size:12px;
     text-transform: none;
+    background-color: #fff;
 }
 .mui-custom-toggle button span{
     padding:0px 3px; 
@@ -461,6 +474,14 @@ border:1px solid  rgba(83, 118, 240, 0.2);
 }
 .clear-path{
     clear:both;
+}
+
+.theme-transparent.layout {
+    background: linear-gradient(115.58deg, #00FC19 0%, #1700A4 100.22%), radial-gradient(92.72% 100% at 50% 0%, #EBFFCB 0%, #651200 100%), radial-gradient(92.72% 100% at 50% 0%, #FAFF00 0%, #820000 100%), radial-gradient(109.21% 213.32% at 100% 0%, #FF4D00 0%, #00C2FF 100%), linear-gradient(127.43deg, #D50000 0%, #7856FF 100%);
+    background-blend-mode: lighten, overlay, lighten, screen, normal;
+}
+.theme-transparent .header {
+    background: transparent;
 }
 
 
@@ -499,3 +520,6 @@ border:1px solid  rgba(83, 118, 240, 0.2);
     }
 }
 
+.modal-body{
+    padding:1.6rem;
+}

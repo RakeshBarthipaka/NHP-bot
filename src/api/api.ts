@@ -259,7 +259,6 @@ export async function postApiFiles(options: any, apiName: string, headers?: any)
             body: JSON.stringify(options)
         });
 
-        console.log(response, "response in postapi");
         const parsedResponse = await response.json();
         if (!response.ok) {
             throw Error(parsedResponse.error || "Unknown error");
@@ -275,6 +274,7 @@ export async function getApi(apiName: string) {
     try {
         const response = await fetch(`${BASE_API_URL}/${apiName}`, {
             method: "GET",
+            mode: "cors",
             headers: {
                 "Content-Type": "application/json"
             }
@@ -346,7 +346,6 @@ export const fileUpload = (formData: any, apiName: any) => {
     })
         .then(response => {
             // Handle response
-            console.log("response:", response);
             return response;
         })
         .catch(error => {
@@ -356,3 +355,21 @@ export const fileUpload = (formData: any, apiName: any) => {
 
     return response;
 };
+
+
+export async function getApiDownload(apiName: string) {
+    try {
+        const response = await fetch(`${BASE_API_URL}/${apiName}`, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/pdf'
+            }
+        });
+       
+        return response;
+    } catch (err) {
+        return [];
+    }
+}
+
