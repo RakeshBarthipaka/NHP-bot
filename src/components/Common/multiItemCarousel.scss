@@ -97,9 +97,10 @@
     cursor: pointer;
     max-height:140px;
 }
+
 .kpiCard:hover {
   border: 2px solid var(--active-themes);
-  box-shadow:2px 2px 2px 2px #ccc;
+  box-shadow:4px 4px 0px 0px var(--active-themes);
 }
 
 .kpiCard p {

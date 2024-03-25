@@ -37,6 +37,7 @@ import KpiAnalysis from "../../components/KpiAnalysis/KpiAnalysis";
 import ChatThreadSession from "../../components/ChatThreads/ChatThreadSession";
 import CglenseInsightLogo from "../../assets/cglense_icon_logo.png";
 import CglenseInsightFullLogo from "../../assets/CGLense_app_logo_v3.png";
+import DrawChartURL from "../../components/Charts/DrawChartURL";
 
 interface activeChatThread {
     id: number;
@@ -80,6 +81,7 @@ const Chat = (props: any) => {
     const [isUpload, setIsUpload] = useState<boolean>(false);
     const [isChatThread, setIsChatThread] = useState<boolean>(false);
     const [isKpiAnalysis, setIsKpiAnalysis] = useState<boolean>(false);
+    const [isChartGeneration, setIsChartGeneration] = useState(false);
 
     const abortControllerRef = useRef(new AbortController());
 
@@ -219,9 +221,6 @@ const Chat = (props: any) => {
         //let latitude = localStorage.getItem("latitude") ? localStorage.getItem("latitude") : 0;
         // let longitude = localStorage.getItem("longitude") ? localStorage.getItem("longitude") : 0;
         //let userLocation = localStorage.getItem("userLocation") ? localStorage.getItem("userLocation") : "Auckland";
-
-        console.log(chatGPTToken, "chatgpttokens");
-
         dispatch(set_recommendedQnA([] as any));
         error && setError(undefined);
         setIsLoading(true);
@@ -263,20 +262,45 @@ const Chat = (props: any) => {
             const result = await chatApi(request, abortControllerRef.current.signal);
             if (result.exchange_id) {
                 let answersList = [...answers, [question, result]];
-                let qnAList = [
-                    ...questionAnswersList,
-                    {
-                        question: question,
-                        answer: result
-                    }
-                ];
-                dispatch(set_answers(answersList as any));
-                dispatch(set_QnA(qnAList as any));
+                if (result.isChartRequired) {
+                    setIsChartGeneration(true);
+                    let chartReq = {
+                        chart_data: result,
+                        data: answersList
+                    };
+                    const chartResult = await ChartJSApi(chartReq);
+                    setIsChartGeneration(true);
+                    result["chart"] = chartResult.chart;
+                    let chartUrl = await DrawChartURL(cleanChartData(chartResult.chart));
+                    let qnAList = [
+                        ...questionAnswersList,
+                        {
+                            question: question,
+                            answer: result,
+                            chart: chartUrl
+                        }
+                    ];
+                    dispatch(set_answers(answersList as any));
+                    dispatch(set_QnA(qnAList as any));
+                    setIsChartGeneration(false);
+                } else {
+                    // If chart is not required
+                    let qnAListWithoutChart = [
+                        ...questionAnswersList,
+                        {
+                            question: question,
+                            answer: result
+                        }
+                    ];
+                    dispatch(set_answers(answersList as any));
+                    dispatch(set_QnA(qnAListWithoutChart as any));
+                }
                 if (isSpeakerOn) {
                     speakText([result.answer], chatBotVoice.value);
                 }
                 dispatch(set_recommendedQnA(result.recommended_question as any));
                 let qAndA = [...localChatData];
+
                 //@ts-ignore
                 qAndA.push({ question: question, answer: result });
                 setLocalChatData(qAndA);

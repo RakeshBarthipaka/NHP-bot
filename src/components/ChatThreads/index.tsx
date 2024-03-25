@@ -108,7 +108,7 @@ const ChatThreads = (props: any) => {
             {
                 name: "BharatBellamkonda",
                 nameIcon: "B",
-                commentDate: "25 Feb 2024, 10:30 AM",
+                commentDate: "25 Feb 2024, 11:30 AM",
                 commentText:
                     "Yes, Last year also we had same numbers on this season. I have observed values based on sales progress and which is very low in Europe region. We need to focus on improving sales. I suggest we will provide discounts and best offers to get what we expected for the next quarter."
             }

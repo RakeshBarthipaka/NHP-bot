@@ -12,6 +12,7 @@ import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
+import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
@@ -154,7 +155,7 @@ const KeywordList = (props: any) => {
                                     // }}
                                     className="otherInfoKL"
                                 >
-                                    requested by: {tag.requestedBy} requested on: {tag.requestedDate}
+                                    <span>requested by: {tag.requestedBy}</span><span> requested on: {tag.requestedDate}</span>
                                     <span>
                                         <RemoveRedEyeOutlinedIcon
                                             // sx={{
@@ -176,11 +177,7 @@ const KeywordList = (props: any) => {
                                     <Box
                                        display={"flex"}
                                     >
-                                        <span onClick={() => {}}>
-                                            <Avatar className="avatarIcons">
-                                                <RateReviewOutlinedIcon />
-                                            </Avatar>
-                                        </span>
+                                       
                                         <span onClick={copyTableToClipboard}>
                                             <Avatar className="avatarIcons">
                                                 <ContentCopyOutlinedIcon />
@@ -191,6 +188,12 @@ const KeywordList = (props: any) => {
                                             <Avatar className="avatarIcons">
                                                 {" "}
                                                 <FileDownloadOutlinedIcon />
+                                            </Avatar>
+                                        </span>
+                                        <span onClick={() => {}}>
+                                            <Avatar className="avatarIcons">
+                                                {/* <RateReviewOutlinedIcon /> */}
+                                                <MailOutlineOutlinedIcon />
                                             </Avatar>
                                         </span>
                                     </Box>
