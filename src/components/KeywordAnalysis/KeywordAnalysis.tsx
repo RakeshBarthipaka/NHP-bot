@@ -56,33 +56,17 @@ export const KeywordAnalysis = ({ tagName }: Props) => {
                         </Box>
 
                         <Box>
-                            The keyword ‘Market’ is linked to 12 questions. Please have a quick review each question and you may get the answer what you are
+                            The keyword {tagName} is linked to 12 questions. Please have a quick review each question and you may get the answer what you are
                             looking for.
                         </Box>
                     </Stack>
                     <Box paddingTop={2}>
                         <hr className="verticalLineStyle" />
                     </Box>
-                    <div className="pull-right">
-                    <ButtonGroup className="mui-custom-toggle" variant="outlined" aria-label="Basic button group">
-                    <Button className="mui-toggle-active">
-                        <span className="iconText">
-                            <RemoveRedEyeOutlinedIcon className="viewIcon IconElemt" />
-                        </span>
-                        <span>By Views</span>
-                    </Button>
-                    <Button>
-                        <span className="iconText">
-                            <SortOutlinedIcon className="ShortByIcon IconElemt" />
-                        </span>
-                        <span>By Date</span>
-                    </Button>
-                </ButtonGroup>
-                </div>
                 </Box>
                 <div className="clear-path"></div>
                 <Box paddingLeft={3} paddingTop={4}>
-                    <KeywordList />
+                    <KeywordList tagName={tagName} />
                 </Box>
             </div>
         </Grid>

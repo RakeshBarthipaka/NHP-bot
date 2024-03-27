@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import "react-tabs/style/react-tabs.css";
@@ -9,23 +9,57 @@ import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOut
 import { MostAskedQuestion as Questions } from "../../../utils/MockData";
 import SortOutlinedIcon from "@mui/icons-material/SortOutlined";
 import { Button, ButtonGroup } from "@mui/material";
+import { getApi } from "../../../api";
+import DOMPurify from "dompurify";
 
 const MostAskedQuestion = (props: any) => {
-    const [isDisplayAnswer, setIsDisplayAnswer] = useState<boolean>(false);
     const [displayAnsId, setDisplayAnsId] = useState<number>(0);
+    const [mostAskedData, setMostAskedData] = useState([]);
+    const [showMore, setShowMore] = useState(false);
+    const [showText, setShowText] = useState(false);
+    const [isDisplayAnswer, setIsDisplayAnswer] = useState<string>();
+    const [isDisplayAnswerToggle, setIsDisplayAnswerToggle] = useState<boolean>(false);
+
+    useEffect(() => {
+        async function getMostAskedQuestions() {
+            const response = await getApi("get_most_asked_questions");
+            setMostAskedData(response);
+        }
+        getMostAskedQuestions();
+    }, []);
 
     const toggleAnswerDisplay = (id: any) => {
-        if (isDisplayAnswer && id === displayAnsId) {
-            setIsDisplayAnswer(false);
-        } else {
-            setIsDisplayAnswer(true);
+        console.log(id, isDisplayAnswer,isDisplayAnswerToggle,'id');
+        if (isDisplayAnswer === id && isDisplayAnswerToggle === true) {
+            setIsDisplayAnswerToggle(false);
+        } else if (isDisplayAnswer === undefined && isDisplayAnswerToggle === false) {
+            setIsDisplayAnswerToggle(true);
+        } else if (isDisplayAnswer !== id && isDisplayAnswerToggle !== true) {
+            setIsDisplayAnswerToggle(true);
+        } else if (isDisplayAnswer === id && isDisplayAnswerToggle !== true) {
+            setIsDisplayAnswerToggle(true);
         }
-        setDisplayAnsId(id);
+    };
+
+    // const toggleAnswerDisplay = (id: any) => {
+    //     if (isDisplayAnswer && id === displayAnsId) {
+    //         setIsDisplayAnswer(false);
+    //     } else {
+    //         setIsDisplayAnswer(true);
+    //     }
+    //     setDisplayAnsId(id);
+    // };
+
+    const sanitizedAnswerHtml = (response: any) => {
+        const responses: any = DOMPurify.sanitize(response).replace(/href/g, "target='_blank' href");
+        return {
+            __html: responses
+        };
     };
 
     return (
         <>
-            <Box className="asked-question-top-box">
+            {/* <Box className="asked-question-top-box">
                 <ButtonGroup className="mui-custom-toggle" variant="outlined" aria-label="Basic button group">
                     <Button className="mui-toggle-active">
                         <span className="iconText">
@@ -44,12 +78,19 @@ const MostAskedQuestion = (props: any) => {
                     <Button className="mui-toggle-active">Top 10</Button>
                     <Button>ALL</Button>
                 </ButtonGroup>
-            </Box>
+            </Box> */}
             <br></br>
-            {Questions.map((item, index) => {
+            {mostAskedData?.slice(0, 10)?.map((item: any, index) => {
                 return (
                     <React.Fragment key={index}>
-                        <Box className={`question-box ${isDisplayAnswer && displayAnsId === item.id ? 'active-tab' : ''}`} onClick={() => toggleAnswerDisplay(item.id)}>
+                        <Box
+                            className={`question-box ${isDisplayAnswer && isDisplayAnswer === item?.text ? "active-tab" : ""}`}
+                            onClick={() => {
+                                setIsDisplayAnswer(item?.text);
+                                //setIsDisplayAnswerToggle(!isDisplayAnswerToggle);
+                                toggleAnswerDisplay(item?.text);
+                            }}
+                        >
                             <Box
                                 sx={{
                                     width: "23px",
@@ -57,7 +98,7 @@ const MostAskedQuestion = (props: any) => {
                                     paddingRight: "2px"
                                 }}
                             >
-                                {isDisplayAnswer && displayAnsId === item.id ? (
+                                {isDisplayAnswer && isDisplayAnswer === item?.text ? (
                                     <RemoveCircleOutlineOutlinedIcon
                                         sx={{
                                             fontSize: 20
@@ -72,28 +113,37 @@ const MostAskedQuestion = (props: any) => {
                                 )}
                             </Box>
                             <Box className="question-text">
-                                <Typography className="question">{item.question}</Typography>
+                                <Typography className="question">{item?.text}</Typography>
                                 <Typography className="otherInfo">
-                                    requested by: {item.requestedBy} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requested on: {item.requestedOn}
+                                    requested by: {item?.requested_by} requested on: {item?.requested_on}
                                     <span>
                                         <RemoveRedEyeOutlinedIcon className="viewIcon" />
                                     </span>{" "}
-                                    {item.views}
+                                    {item?.asked_count}
                                 </Typography>
                             </Box>
                         </Box>
-                        {isDisplayAnswer && displayAnsId === item.id && (
+                        {isDisplayAnswer && isDisplayAnswer === item?.text && (
                             <div className="answer-container">
                                 <Box>
                                     <Typography>
-                                        Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are in
-                                        the process of improving your finances, there are a few other approaches to your lifestyle that you can implement that
-                                        will improve your financial position further. Financial growth is an aspect of improving your personal finances and
-                                        becoming more financially stable. When you are in the process of improving your finances, there are a few other
-                                        approaches to your lifestyle that you can implement that will improve your financial position further. These approaches
-                                        are meant to advance your financial standing and be a boost to your financial improvements. Your plan for paying off
-                                        your outstanding debts is similar to your plan for paying off your loans. Debts should be one of your top priorities now
-                                        that you are attempting to jump start financial growth.
+                                        {showMore && showText === item?.text ? (
+                                            <div dangerouslySetInnerHTML={sanitizedAnswerHtml(item?.response)} />
+                                        ) : (
+                                            <div dangerouslySetInnerHTML={sanitizedAnswerHtml(item?.response.substring(0, 200))} />
+                                        )}
+
+                                        {showText !== item?.text && item?.response?.length > 200 && (
+                                            <div
+                                                onClick={() => {
+                                                    setShowMore(true);
+                                                    setShowText(item?.text);
+                                                }}
+                                                className="showMore-spacer"
+                                            >
+                                                <a className="showMore-link">Show more.</a>
+                                            </div>
+                                        )}
                                     </Typography>
                                 </Box>
                             </div>

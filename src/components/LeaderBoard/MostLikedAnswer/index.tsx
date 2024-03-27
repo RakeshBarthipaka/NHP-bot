@@ -60,7 +60,7 @@ const MostLikedAnswer = () => {
                 </ButtonGroup>
             </Box>
             <br></br>
-            {likedAnswerData.map((like: any) => {
+            {likedAnswerData?.slice(0,10)?.map((like: any) => {
                 return (
                     <>
                     <br></br>

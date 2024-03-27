@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import "react-tabs/style/react-tabs.css";
@@ -16,11 +16,23 @@ import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import {  getApiQuery } from "../../api";
+import { format, parseISO } from "date-fns";
 
 const KeywordList = (props: any) => {
     const [isDisplayAnswer, setIsDisplayAnswer] = useState<number>();
     const [isDisplayAnswerToggle, setIsDisplayAnswerToggle] = useState<boolean>(false);
     const [activeBackground, setActiveBackground] = useState<false>();
+    const [tagsData, setTagsData] = useState([]);
+
+
+    useEffect(()=>{
+        async function getKeywordsList() {
+            const response = await getApiQuery('get_chats_from_keyword', props.tagName.toLowerCase());
+            setTagsData(response);
+        }
+        getKeywordsList();
+    }, [])
 
     const toggleAnswerDisplay = (id: any) => {
         if (isDisplayAnswer === id && isDisplayAnswerToggle === true) {
@@ -34,44 +46,44 @@ const KeywordList = (props: any) => {
         }
     };
 
-    const tagsData = [
-        {
-            id: 1,
-            query: "Show me the best sales region in European market",
-            answer: "Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are in the process of improving your finances, there are a few other approaches to your lifestyle that you can implement that will improve your  financial position further. Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are in the process of improving your finances, there are a few other approaches to your lifestyle that you can implement that will improve your financial position further. These approaches are meant to advance your financial standing and be a boost to your financial improvements. Your plan for paying off your outstanding debts is similar to your plan for paying off your loans.Debts should be one of your top priorities now that you are attempting to jump start financial growth.",
+    // const tagsData = [
+    //     {
+    //         id: 1,
+    //         query: "Show me the best sales region in European market",
+    //         answer: "Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are in the process of improving your finances, there are a few other approaches to your lifestyle that you can implement that will improve your  financial position further. Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are in the process of improving your finances, there are a few other approaches to your lifestyle that you can implement that will improve your financial position further. These approaches are meant to advance your financial standing and be a boost to your financial improvements. Your plan for paying off your outstanding debts is similar to your plan for paying off your loans.Debts should be one of your top priorities now that you are attempting to jump start financial growth.",
 
-            requestedBy: "Vishnu",
-            requestedDate: "22/01/2024"
-        },
-        {
-            id: 2,
-            query: "What is the current trend in the Germany market",
-            answer: "Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are in the process of improving your finances, there are a few other approaches to your lifestyle that you can implement that will improve your  financial position further. Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are in the process of improving your finances, there are a few other approaches to your lifestyle that you can implement that will improve your financial position further. These approaches are meant to advance your financial standing and be a boost to your financial improvements. Your plan for paying off your outstanding debts is similar to your plan for paying off your loans.Debts should be one of your top priorities now that you are attempting to jump start financial growth.",
-            requestedBy: "Vishnu",
-            requestedDate: "22/01/2024"
-        },
-        {
-            id: 3,
-            query: "When was the Budget is introduced in Indian Parliament and how was the stock market effected?",
-            answer: "When you are in the process of improving your finances, there are a few other approaches to your lifestyle that you can implement that will improve your  financial position further. Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are in the process of improving your finances, there are a few other approaches to your lifestyle that you can implement that will improve your financial position further. These approaches are meant to advance your financial standing and be a boost to your financial improvements. Your plan for paying off your outstanding debts is similar to your plan for paying off your loans.Debts should be one of your top priorities now that you are attempting to jump start financial growth.Financial growth is an aspect of improving your personal finances and becoming more financially stable.",
-            requestedBy: "Vishnu",
-            requestedDate: "22/01/2024"
-        },
-        {
-            id: 4,
-            query: "What is the LATAM growth percentage in Europe market for the last 5 years",
-            answer: "There are a few other approaches to your lifestyle that you can implement that will improve your  financial position further. Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are in the process of improving your finances, there are a few other approaches to your lifestyle that you can implement that will improve your financial position further. These approaches are meant to advance your financial standing and be a boost to your financial improvements. Your plan for paying off your outstanding debts is similar to your plan for paying off your loans.Debts should be one of your top priorities now that you are attempting to jump start financial growth.Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are in the process of improving your finances, ",
-            requestedBy: "Vishnu",
-            requestedDate: "22/01/2024"
-        },
-        {
-            id: 5,
-            query: "Can you help me, how can I manage my financial Budget? current market trends?",
-            answer: "Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are in the process of improving your finances, there are a few other approaches to your lifestyle that you can implement that will improve your financial position further. These approaches are meant to advance your financial standing and be a boost to your financial improvements. Your plan for paying off your outstanding debts is similar to your plan for paying off your loans.Debts should be one of your top priorities now that you are attempting to jump start financial growth.Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are in the process of improving your finances, there are a few other approaches to your lifestyle that you can implement that will improve your  financial position further. ",
-            requestedBy: "Vishnu",
-            requestedDate: "22/01/2024"
-        }
-    ];
+    //         requestedBy: "Vishnu",
+    //         requestedDate: "22/01/2024"
+    //     },
+    //     {
+    //         id: 2,
+    //         query: "What is the current trend in the Germany market",
+    //         answer: "Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are in the process of improving your finances, there are a few other approaches to your lifestyle that you can implement that will improve your  financial position further. Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are in the process of improving your finances, there are a few other approaches to your lifestyle that you can implement that will improve your financial position further. These approaches are meant to advance your financial standing and be a boost to your financial improvements. Your plan for paying off your outstanding debts is similar to your plan for paying off your loans.Debts should be one of your top priorities now that you are attempting to jump start financial growth.",
+    //         requestedBy: "Vishnu",
+    //         requestedDate: "22/01/2024"
+    //     },
+    //     {
+    //         id: 3,
+    //         query: "When was the Budget is introduced in Indian Parliament and how was the stock market effected?",
+    //         answer: "When you are in the process of improving your finances, there are a few other approaches to your lifestyle that you can implement that will improve your  financial position further. Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are in the process of improving your finances, there are a few other approaches to your lifestyle that you can implement that will improve your financial position further. These approaches are meant to advance your financial standing and be a boost to your financial improvements. Your plan for paying off your outstanding debts is similar to your plan for paying off your loans.Debts should be one of your top priorities now that you are attempting to jump start financial growth.Financial growth is an aspect of improving your personal finances and becoming more financially stable.",
+    //         requestedBy: "Vishnu",
+    //         requestedDate: "22/01/2024"
+    //     },
+    //     {
+    //         id: 4,
+    //         query: "What is the LATAM growth percentage in Europe market for the last 5 years",
+    //         answer: "There are a few other approaches to your lifestyle that you can implement that will improve your  financial position further. Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are in the process of improving your finances, there are a few other approaches to your lifestyle that you can implement that will improve your financial position further. These approaches are meant to advance your financial standing and be a boost to your financial improvements. Your plan for paying off your outstanding debts is similar to your plan for paying off your loans.Debts should be one of your top priorities now that you are attempting to jump start financial growth.Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are in the process of improving your finances, ",
+    //         requestedBy: "Vishnu",
+    //         requestedDate: "22/01/2024"
+    //     },
+    //     {
+    //         id: 5,
+    //         query: "Can you help me, how can I manage my financial Budget? current market trends?",
+    //         answer: "Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are in the process of improving your finances, there are a few other approaches to your lifestyle that you can implement that will improve your financial position further. These approaches are meant to advance your financial standing and be a boost to your financial improvements. Your plan for paying off your outstanding debts is similar to your plan for paying off your loans.Debts should be one of your top priorities now that you are attempting to jump start financial growth.Financial growth is an aspect of improving your personal finances and becoming more financially stable. When you are in the process of improving your finances, there are a few other approaches to your lifestyle that you can implement that will improve your  financial position further. ",
+    //         requestedBy: "Vishnu",
+    //         requestedDate: "22/01/2024"
+    //     }
+    // ];
 
     function copyTableToClipboard() {
         window?.getSelection()?.removeAllRanges();
@@ -98,7 +110,7 @@ const KeywordList = (props: any) => {
 
     return (
         <>
-            {tagsData?.map(tag => {
+            {tagsData?.map((tag: any) => {
                 return (
                     <>
                         <Box
@@ -144,7 +156,7 @@ const KeywordList = (props: any) => {
                                     // }}
                                     className="question"
                                 >
-                                    {tag.query}
+                                    {tag?.text}
                                 </Typography>
                                 <Typography
                                     // sx={{
@@ -155,23 +167,12 @@ const KeywordList = (props: any) => {
                                     // }}
                                     className="otherInfoKL"
                                 >
-                                    <span>requested by: {tag.requestedBy}</span><span> requested on: {tag.requestedDate}</span>
-                                    <span>
-                                        <RemoveRedEyeOutlinedIcon
-                                            // sx={{
-                                            //     color:
-                                            //         isDisplayAnswerToggle && isDisplayAnswer === tag.id
-                                            //             ? "var(--white-color) !important"
-                                            //             : "var(--active-themes) !important"
-                                            // }}
-                                            className="viewIconKL"
-                                        />
-                                    </span>{" "}
-                                    9
+                                    <span>requested by: {tag?.role}</span><span> requested on:  {format(parseISO(tag?.time), "dd-MM-yyyy")}</span>
+                                   
                                 </Typography>
                             </Box>
                         </Box>
-                        {isDisplayAnswer === tag.id && isDisplayAnswerToggle && (
+                        {isDisplayAnswer === tag?.id && isDisplayAnswerToggle && (
                             <div className="answer-container">
                                 <Stack className="iconContainer" direction={"row"} alignItems={"center"} justifyContent={"space-between"}>
                                     <Box
@@ -198,22 +199,18 @@ const KeywordList = (props: any) => {
                                         </span>
                                     </Box>
                                     <Box gap={1} display={"flex"}>
-                                        <div className="viewIconAnswer">
-                                            <RemoveRedEyeOutlinedIcon fontSize="small" />
-                                            <div>9</div>
-                                        </div>
                                         <div className="thumbUp">
                                             <ThumbUpOutlinedIcon fontSize="small" />
-                                            <div>9</div>
+                                            <div>{tag?.like}</div>
                                         </div>
                                         <div className="thumbDown">
                                             <ThumbDownAltOutlinedIcon fontSize="small" />
 
-                                            <div>9</div>
+                                            <div>{tag?.dislike}</div>
                                         </div>
                                     </Box>
                                 </Stack>
-                                <Typography className="tagAnswers" padding={2}>{tag.answer}</Typography>
+                                <Typography className="tagAnswers" padding={2}>{tag.response}</Typography>
                             </div>
                         )}
                     </>
