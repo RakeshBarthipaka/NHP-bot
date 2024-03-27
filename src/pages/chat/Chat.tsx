@@ -262,7 +262,7 @@ const Chat = (props: any) => {
             const result = await chatApi(request, abortControllerRef.current.signal);
             if (result.exchange_id) {
                 let answersList = [...answers, [question, result]];
-                if (result.isChartRequired) {
+                if (!result.isChartRequired) {
                     setIsChartGeneration(true);
                     let chartReq = {
                         chart_data: result,
