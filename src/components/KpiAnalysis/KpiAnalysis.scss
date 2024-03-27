@@ -101,3 +101,13 @@
     }
 }
 
+.kpiSelectFilter {
+    margin-top: 5px;
+    .MuiSelect-outlined {
+        padding: 2px 5px 5px;
+        font-size: 12px;
+    }
+    legend {
+        display: none;
+    }
+}

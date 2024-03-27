@@ -182,7 +182,7 @@ export const Answer = ({
                 <Stack className={`answerContainer ${isSelected && "selected"}`} verticalAlign="space-between">
                     <Stack.Item grow>
                         <div className="answerText" dangerouslySetInnerHTML={{ __html: sanitizedAnswerHtml }}></div>
-                         {answer.isChartRequired &&
+                         {/* {answer.isChartRequired &&
                             (answer.chart ? (
                                 <DrawChart chart={answer.chart}></DrawChart>
                             ) : (
@@ -190,7 +190,7 @@ export const Answer = ({
                                     Generating Chart
                                     <span className="loadingdots" />
                                 </p>
-                            ))} 
+                            ))}  */}
                     </Stack.Item>
                     <Stack>
                         <div className="IconCustomColor answerActionIconBtns">

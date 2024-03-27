@@ -264,20 +264,20 @@ const Chat = (props: any) => {
                 let answersList = [...answers, [question, result]];
                 if (result.isChartRequired) {
                     setIsChartGeneration(true);
-                    let chartReq = {
-                        chart_data: result,
-                        data: answersList
-                    };
-                    const chartResult = await ChartJSApi(chartReq);
-                    setIsChartGeneration(true);
-                    result["chart"] = chartResult.chart;
-                    let chartUrl = await DrawChartURL(cleanChartData(chartResult.chart));
+                    // let chartReq = {
+                    //     chart_data: result,
+                    //     data: answersList
+                    // };
+                    // const chartResult = await ChartJSApi(chartReq);
+                    // setIsChartGeneration(true);
+                    // result["chart"] = chartResult.chart;
+                    // let chartUrl = await DrawChartURL(cleanChartData(chartResult.chart));
                     let qnAList = [
                         ...questionAnswersList,
                         {
                             question: question,
                             answer: result,
-                            chart: chartUrl
+                            // chart: chartUrl
                         }
                     ];
                     dispatch(set_answers(answersList as any));
