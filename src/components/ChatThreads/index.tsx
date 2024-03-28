@@ -20,17 +20,19 @@ import { Threads } from "../../utils/MockData";
 // import SortOutlinedIcon from "@mui/icons-material/SortOutlined";
 //import KeywordList from "./KeywordList";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
+import StarOutlineIcon from "@mui/icons-material/StarOutline";
+import StarIcon from "@mui/icons-material/Star";
 import { getApi } from "../../api";
+import moment from "moment";
 
 const ChatThreads = (props: any) => {
     let userID = localStorage.getItem("userID") ? localStorage.getItem("userID") : 0; //needs to be change
     const [allThreads, setThreads] = useState<any[]>([]);
 
-    console.log("allThreads=====:", allThreads);
-
     const getThreadData = async () => {
         try {
-            const response = await getApi(`chat_sessions/?user=${"user"}`); //need to pass `userID` here
+            const response = await getApi(`chat_sessions/?user=${"user@unilever.com"}`); //need to pass `userID` here
             if (response) {
                 setThreads(response);
             }
@@ -47,9 +49,15 @@ const ChatThreads = (props: any) => {
                     onClick={() => props.runChatThread(item)}
                 >
                     {/* <Typography className="questionText">{item.question}</Typography> */}
-                    <Typography className="questionText">{item.session_data[0].text}</Typography>
+                    <Typography className="questionText">
+                        {item.session_data[0].question}
+                        <Box component="span" className="edit-icon" onClick={event => event.stopPropagation()}>
+                            <BorderColorOutlinedIcon />
+                            <StarOutlineIcon />
+                        </Box>
+                    </Typography>
                     <Box className="thread-icon-container">
-                        <Typography className="otherOptions">{item.time} hour ago</Typography>
+                        <Typography className="otherOptions">{moment(item.session_data[0].time).format("DD/MM/YYYY LT")}</Typography>
                         <div className="d-flex justify-content-end">
                             <div className="p-2 bd-highlight">
                                 {/* <span className="replyIcon" onClick={props.handleReplyClick}>
