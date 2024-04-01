@@ -128,9 +128,9 @@ const MostAskedQuestion = (props: any) => {
                                 <Box>
                                     <Typography>
                                         {showMore && showText === item?.text ? (
-                                            <div dangerouslySetInnerHTML={sanitizedAnswerHtml(item?.response)} />
+                                            <div dangerouslySetInnerHTML={sanitizedAnswerHtml(item?.answer?.answer)} />
                                         ) : (
-                                            <div dangerouslySetInnerHTML={sanitizedAnswerHtml(item?.response.substring(0, 200))} />
+                                            <div dangerouslySetInnerHTML={sanitizedAnswerHtml(item?.answer?.answer?.substring(0, 200))} />
                                         )}
 
                                         {showText !== item?.text && item?.response?.length > 200 && (

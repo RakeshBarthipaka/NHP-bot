@@ -37,13 +37,13 @@ export const TagsList = ({ setTagClicked, setTagName, toggleKeywordAnalysis, tag
     //       console.log(`${key}: ${tags[key]}`);
     //     }
     //   }
-    let tagsArr = Object.keys(tags);
+    let tagsArr = Object?.keys(tags);
 
     return (
         <Stack className="TagsListDiv">
 
 
-            {tagsArr.map((tag: any) => {
+            {tagsArr?.map((tag: any) => {
                 return (
                     <Item
                         onClick={() => {

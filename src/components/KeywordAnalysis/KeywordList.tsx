@@ -28,7 +28,7 @@ const KeywordList = (props: any) => {
 
     useEffect(()=>{
         async function getKeywordsList() {
-            const response = await getApiQuery('get_chats_from_keyword', props.tagName.toLowerCase());
+            const response = await getApiQuery('get_chats_from_keyword','keyword' ,props.tagName.toLowerCase());
             setTagsData(response);
         }
         getKeywordsList();
@@ -167,7 +167,7 @@ const KeywordList = (props: any) => {
                                     // }}
                                     className="otherInfoKL"
                                 >
-                                    <span>requested by: {tag?.role}</span><span> requested on:  {format(parseISO(tag?.time), "dd-MM-yyyy")}</span>
+                                    <span>requested by: {tag?.email}</span><span> requested on:  {format(parseISO(tag?.time), "dd-MM-yyyy")}</span>
                                    
                                 </Typography>
                             </Box>
@@ -201,16 +201,16 @@ const KeywordList = (props: any) => {
                                     <Box gap={1} display={"flex"}>
                                         <div className="thumbUp">
                                             <ThumbUpOutlinedIcon fontSize="small" />
-                                            <div>{tag?.like}</div>
+                                            <div>{tag?.like_count}</div>
                                         </div>
                                         <div className="thumbDown">
                                             <ThumbDownAltOutlinedIcon fontSize="small" />
 
-                                            <div>{tag?.dislike}</div>
+                                            <div>{tag?.dislike_count}</div>
                                         </div>
                                     </Box>
                                 </Stack>
-                                <Typography className="tagAnswers" padding={2}>{tag.response}</Typography>
+                                <Typography className="tagAnswers" padding={2}>{tag?.answer?.answer}</Typography>
                             </div>
                         )}
                     </>

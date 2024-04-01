@@ -12,8 +12,9 @@ import StackedBarChart from "../BarChart/BarChart";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./DeepAnalysis.scss";
+import { getApi } from "../../api";
 
 // interface Props {
 //     text: string;
@@ -36,125 +37,176 @@ const getColor = (value: any) => {
 
 export const DeepAnalysis = () => {
     const [isValue, setIsValue] = useState<boolean>(false);
+    const [isData, setIsData] = useState([]);
+    // const columns: GridColDef[] = [
+    //     {
+    //         field: "Country",
+    //         headerName: "Country",
+    //         sortable: false,
+    //         width: 130,
+    //         disableColumnMenu: true,
+    //         cellClassName: (params: GridCellParams<any, number>) => {
+    //             if (params.value == null) {
+    //                 return "";
+    //             }
+
+    //             return clsx("first-column", {
+    //                 cell: true
+    //             });
+    //         }
+    //     },
+    //     {
+    //         field: "2019",
+    //         headerName: "2019",
+    //         sortable: false,
+    //         width: 130,
+    //         disableColumnMenu: true,
+    //         renderCell: (params: GridRenderCellParams) => {
+    //             const color: any = getColor(params.value);
+
+    //             return (
+    //                 <Box
+    //                     sx={{
+    //                         color: color
+    //                     }}
+    //                 >
+    //                     {params.value}
+    //                 </Box>
+    //             );
+    //         }
+    //     },
+    //     {
+    //         field: "2020",
+    //         headerName: "2020",
+    //         sortable: false,
+    //         width: 130,
+    //         disableColumnMenu: true,
+    //         renderCell: (params: GridRenderCellParams) => {
+    //             const color: any = getColor(params.value);
+
+    //             return (
+    //                 <Box
+    //                     sx={{
+    //                         color: color
+    //                     }}
+    //                 >
+    //                     {params.value}
+    //                 </Box>
+    //             );
+    //         }
+    //     },
+    //     {
+    //         field: "2021",
+    //         headerName: "2021",
+    //         sortable: false,
+    //         width: 130,
+    //         disableColumnMenu: true,
+    //         renderCell: (params: GridRenderCellParams) => {
+    //             const color: any = getColor(params.value);
+
+    //             return (
+    //                 <Box
+    //                     sx={{
+    //                         color: color
+    //                     }}
+    //                 >
+    //                     {params.value}
+    //                 </Box>
+    //             );
+    //         }
+    //     },
+    //     {
+    //         field: "2022",
+    //         headerName: "2022",
+    //         sortable: false,
+    //         width: 130,
+    //         disableColumnMenu: true,
+    //         renderCell: (params: GridRenderCellParams) => {
+    //             const color: any = getColor(params.value);
+
+    //             return (
+    //                 <Box
+    //                     sx={{
+    //                         color: color
+    //                     }}
+    //                 >
+    //                     {params.value}
+    //                 </Box>
+    //             );
+    //         }
+    //     },
+    //     {
+    //         field: "2023",
+    //         headerName: "2023",
+    //         sortable: false,
+    //         width: 130,
+    //         disableColumnMenu: true,
+    //         renderCell: (params: GridRenderCellParams) => {
+    //             const color: any = getColor(params.value);
+
+    //             return (
+    //                 <Box
+    //                     sx={{
+    //                         color: color
+    //                     }}
+    //                 >
+    //                     {params.value}
+    //                 </Box>
+    //             );
+    //         }
+    //     }
+    // ];
+
     const columns: GridColDef[] = [
         {
-            field: "Country",
+            field: "country",
             headerName: "Country",
             sortable: false,
             width: 130,
             disableColumnMenu: true,
-            cellClassName: (params: GridCellParams<any, number>) => {
-                if (params.value == null) {
-                    return "";
-                }
+            // cellClassName: (params: GridCellParams<any, number>) => {
+            //     if (params.value == null) {
+            //         return "";
+            //     }
 
-                return clsx("first-column", {
-                    cell: true
-                });
-            }
+            //     return clsx("first-column", {
+            //         cell: true
+            //     });
+            // }
         },
         {
-            field: "2019",
-            headerName: "2019",
+            field: "uom",
+            headerName: "UOM",
             sortable: false,
             width: 130,
             disableColumnMenu: true,
-            renderCell: (params: GridRenderCellParams) => {
-                const color: any = getColor(params.value);
+            // cellClassName: (params: GridCellParams<any, number>) => {
+            //     if (params.value == null) {
+            //         return "";
+            //     }
 
-                return (
-                    <Box
-                        sx={{
-                            color: color
-                        }}
-                    >
-                        {params.value}
-                    </Box>
-                );
-            }
+            //     return clsx("first-column", {
+            //         cell: true
+            //     });
+            // }
         },
         {
-            field: "2020",
-            headerName: "2020",
+            field: "year",
+            headerName: "Year",
             sortable: false,
             width: 130,
             disableColumnMenu: true,
-            renderCell: (params: GridRenderCellParams) => {
-                const color: any = getColor(params.value);
+            // cellClassName: (params: GridCellParams<any, number>) => {
+            //     if (params.value == null) {
+            //         return "";
+            //     }
 
-                return (
-                    <Box
-                        sx={{
-                            color: color
-                        }}
-                    >
-                        {params.value}
-                    </Box>
-                );
-            }
+            //     return clsx("first-column", {
+            //         cell: true
+            //     });
+            // }
         },
-        {
-            field: "2021",
-            headerName: "2021",
-            sortable: false,
-            width: 130,
-            disableColumnMenu: true,
-            renderCell: (params: GridRenderCellParams) => {
-                const color: any = getColor(params.value);
-
-                return (
-                    <Box
-                        sx={{
-                            color: color
-                        }}
-                    >
-                        {params.value}
-                    </Box>
-                );
-            }
-        },
-        {
-            field: "2022",
-            headerName: "2022",
-            sortable: false,
-            width: 130,
-            disableColumnMenu: true,
-            renderCell: (params: GridRenderCellParams) => {
-                const color: any = getColor(params.value);
-
-                return (
-                    <Box
-                        sx={{
-                            color: color
-                        }}
-                    >
-                        {params.value}
-                    </Box>
-                );
-            }
-        },
-        {
-            field: "2023",
-            headerName: "2023",
-            sortable: false,
-            width: 130,
-            disableColumnMenu: true,
-            renderCell: (params: GridRenderCellParams) => {
-                const color: any = getColor(params.value);
-
-                return (
-                    <Box
-                        sx={{
-                            color: color
-                        }}
-                    >
-                        {params.value}
-                    </Box>
-                );
-            }
-        }
-    ];
-
+    ]
     const rows = [
         { id: 1, Country: "India", 2019: "15", 2020: "10", 2021: "43", 2022: "77", 2023: "36" },
         { id: 2, Country: "India", 2019: "28", 2020: "10", 2021: "-43", 2022: "77", 2023: "36" },
@@ -217,6 +269,15 @@ export const DeepAnalysis = () => {
             pdf.save("datagrid.pdf");
         });
     };
+
+    useEffect(()=>{
+        async function getDeepData() {
+            const response = await getApi('deep_analysis');
+            setIsData(response);
+            console.log(response,'daaa')
+        }
+        getDeepData();
+    }, [])
 
     return (
         <Grid xs={12}>
@@ -299,17 +360,18 @@ export const DeepAnalysis = () => {
                             </span>
                         </Box>
                     </Stack>
-
-                    <DataGrid
+                            {isData?.length > 0 && <DataGrid
                         hideFooter
                         className="deepAnalysisTable"
-                        rows={isValue ? rows : rowsPercentage}
+                        getRowId={()=>  Math.random() * 100}
+                        rows={isData}
                         columns={columns}
                         disableRowSelectionOnClick
                         disableColumnFilter
                         hideFooterSelectedRowCount
                         hideFooterPagination
-                    />
+                    /> }
+                    
                 </Box>
                 <Box paddingLeft={2} paddingTop={3}>
                     <span>In summary the yearly trend UOM in </span>

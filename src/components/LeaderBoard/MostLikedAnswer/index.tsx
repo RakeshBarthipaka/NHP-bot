@@ -6,7 +6,7 @@ import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import SortOutlinedIcon from "@mui/icons-material/SortOutlined";
 import { Button, ButtonGroup } from "@mui/material";
-import { getApi } from "../../../api/api";
+import { getApiQuery } from "../../../api/api";
 import DOMPurify from "dompurify";
 import { parseAnswerToHtml } from "../../Answer/AnswerParser";
 
@@ -17,14 +17,15 @@ const MostLikedAnswer = () => {
     const [likedAnswerData, setLikedAnswerData] = useState([]);
     const [showMore,setShowMore] = useState(false);
     const [showText,setShowText] = useState(false);
+    const [orderBySort,setOrderBySort] = useState("like");
 
     useEffect(() => {
         async function getLikedAnswers() {
-            const response = await getApi("get_most_liked_questions_feedback");
+            const response = await getApiQuery("get_most_liked_questions_feedback","order_by", orderBySort);
             setLikedAnswerData(response);
         }
         getLikedAnswers();
-    }, []);
+    }, [orderBySort]);
 
     const sanitizedAnswerHtml = (response: any) => {
 
@@ -39,19 +40,13 @@ const MostLikedAnswer = () => {
         <>
             <Box className="liked-ans-top-box">
                 <ButtonGroup className="mui-custom-toggle" variant="outlined" aria-label="Basic button group">
-                    <Button className="mui-toggle-active">
+                    <Button className={ orderBySort === 'like' ?  `mui-toggle-active`: ""} onClick={()=> setOrderBySort("like")}>
                         <span className="iconText">
                             <ThumbUpOutlinedIcon className="viewIcon IconElemt" />
                         </span>
                         <span>By Likes</span>
                     </Button>
-                    <Button>
-                        <span className="iconText">
-                            <RemoveRedEyeOutlinedIcon className="viewIcon IconElemt" />
-                        </span>
-                        <span>By Views</span>
-                    </Button>
-                    <Button>
+                    <Button className={ orderBySort === 'time' ?  `mui-toggle-active`: ""} onClick={()=> setOrderBySort("time")}>
                         <span className="iconText">
                             <SortOutlinedIcon className="ShortByIcon IconElemt" />
                         </span>
@@ -95,9 +90,9 @@ const MostLikedAnswer = () => {
                             </Box>
                             <Typography className="answerText">
                             
-                                {showMore && showText === like?.text ? <div dangerouslySetInnerHTML={ sanitizedAnswerHtml(like?.response)} />  :  <div dangerouslySetInnerHTML={sanitizedAnswerHtml(like?.response.substring(0, 200))} />  }
+                                {showMore && showText === like?.text ? <div dangerouslySetInnerHTML={ sanitizedAnswerHtml(like?.answer?.answer)} />  :  <div dangerouslySetInnerHTML={sanitizedAnswerHtml(like?.answer?.answer.substring(0, 200))} />  }
                                 
-                                {showText !== like?.text && like?.response?.length > 200 && <div onClick={()=> {setShowMore(true); setShowText(like?.text) }} className="showMore-spacer">
+                                {showText !== like?.text && like?.answer?.answer?.length > 200 && <div onClick={()=> {setShowMore(true); setShowText(like?.text) }} className="showMore-spacer">
                                     <a className="showMore-link">Show more.</a>
                                 </div>}
                             </Typography>
