@@ -373,3 +373,22 @@ export async function getApiDownload(apiName: string) {
     }
 }
 
+export async function getApiQuery(apiName: string,queryName: string ,tagName: string) {
+    try {
+        const response = await fetch(`${BASE_API_URL}/${apiName}?${queryName}=${tagName}`, {
+            method: "GET",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        const parsedResponse = await response.json();
+        if (response.status > 299 || !response.ok) {
+            throw Error(parsedResponse.error || "Unknown error");
+        }
+        return parsedResponse;
+    } catch (err) {
+        return [];
+    }
+}
+
