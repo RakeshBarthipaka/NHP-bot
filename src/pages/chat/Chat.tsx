@@ -111,8 +111,6 @@ const Chat = (props: any) => {
     const [keywords, setKeywords] = useState();
     const dispatch = useDispatch();
 
-    //console.log("answers=======:", answers);
-
     let handleMicClick = () => {
         if (!isListen) {
             speechToTextStart({ setTranscriptValue, setisListen });
@@ -520,6 +518,12 @@ const Chat = (props: any) => {
     };
 
     const runChatThread = (obj: any) => {
+        //Get active thread data
+        const activeThreadData = obj.session_data.map((item: any) => ({
+            question: item.question,
+            answer: item.answer
+        }));
+        updateQandA(activeThreadData);
         setIsAssignClick(false);
         setIsChatThreadStart(true);
         setActiveChatThreadDetails(obj);

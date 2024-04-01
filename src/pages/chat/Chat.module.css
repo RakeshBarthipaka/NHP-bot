@@ -293,7 +293,7 @@ p {
 }
 
 .chatEmptyState > div:nth-child(2) {
-    padding: 10px 15px;
+    padding: 10px 15px 10px 60px;
     border-left: 2px solid rgba(83, 118, 240, 0.2);
 }
 
