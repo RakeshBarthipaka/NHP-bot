@@ -32,7 +32,7 @@ const ChatThreads = (props: any) => {
 
     const getThreadData = async () => {
         try {
-            const response = await getApi(`chat_sessions/?user=${"user@unilever.com"}`); //need to pass `userID` here
+            const response = await getApi(`chat_sessions/?user=${"user"}`); //need to pass `userID` here
             if (response) {
                 setThreads(response);
             }
