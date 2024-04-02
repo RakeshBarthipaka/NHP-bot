@@ -23,14 +23,16 @@ import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import StarIcon from "@mui/icons-material/Star";
-import { getApi } from "../../api";
+import { getApi, postApiQuery } from "../../api";
 import jsPDF from "jspdf";
 import DownloadPDFThreads from "../Answer/GeneratePDFThreads";
 import moment from "moment";
+import GradeIcon from "@mui/icons-material/Grade";
 
 const ChatThreads = (props: any) => {
     let userID = localStorage.getItem("userID") ? localStorage.getItem("userID") : 0; //needs to be change
     const [allThreads, setThreads] = useState<any[]>([]);
+    const [isStarred, setIsStarred] = useState(false);
 
     const getThreadData = async () => {
         try {
@@ -43,6 +45,15 @@ const ChatThreads = (props: any) => {
         }
     };
 
+    const sendStarredThread = async (chatID: any) =>{
+        try {
+            const response = await postApiQuery(`star`, 'chat_id', chatID); //need to pass `userID` here
+            setIsStarred(!isStarred);
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const ThreadElements = ({ item }: any) => {
         return (
@@ -56,8 +67,8 @@ const ChatThreads = (props: any) => {
                         {item.session_data[0].question}
                         <Box component="span" className="edit-icon" onClick={event => event.stopPropagation()}>
                             <BorderColorOutlinedIcon />
-                            <StarOutlineIcon />
                         </Box>
+                       <span onClick={() => sendStarredThread(item?.chatID)}> {item.session_data[0].is_stared ? <GradeIcon className="grade" /> : <StarOutlineIcon color="success" />}</span>
                     </Typography>
                     <Box className="thread-icon-container">
                         <Typography className="otherOptions">{moment(item.session_data[0].time).format("DD/MM/YYYY LT")}</Typography>
@@ -75,9 +86,8 @@ const ChatThreads = (props: any) => {
                                     </span>
                                 </span> */}
                                 <span className="viewIcon">
-                                    
                                     <span>
-                                    <DownloadPDFThreads pdfData={item.session_data} />
+                                        <DownloadPDFThreads pdfData={item.session_data} />
                                         {/* <FileDownloadOutlinedIcon /> */}
                                     </span>
                                     {/* <DownloadThread threads={item.session_data} /> */}
@@ -145,7 +155,7 @@ const ChatThreads = (props: any) => {
 
     useEffect(() => {
         getThreadData();
-    }, []);
+    }, [isStarred]);
 
     return (
         <>
@@ -187,6 +197,13 @@ const ChatThreads = (props: any) => {
                                 </span>
                                 <span>By Date</span>
                             </Button>
+                            <Button>
+                                <span className="iconText">
+                                <GradeIcon className="grade ShortByIcon IconElemt" />
+                                </span>
+                                <span>By Star</span>
+                            </Button>
+                            
                         </ButtonGroup>
                     </Box>
                 </Box>
