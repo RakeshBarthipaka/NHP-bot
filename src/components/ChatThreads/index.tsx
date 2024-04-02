@@ -24,6 +24,8 @@ import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import StarIcon from "@mui/icons-material/Star";
 import { getApi } from "../../api";
+import jsPDF from "jspdf";
+import DownloadPDFThreads from "../Answer/GeneratePDFThreads";
 import moment from "moment";
 
 const ChatThreads = (props: any) => {
@@ -40,6 +42,7 @@ const ChatThreads = (props: any) => {
             setThreads([]);
         }
     };
+
 
     const ThreadElements = ({ item }: any) => {
         return (
@@ -71,10 +74,13 @@ const ChatThreads = (props: any) => {
                                         <ShareOutlinedIcon />
                                     </span>
                                 </span> */}
-                                <span className="viewIcon" onClick={event => event.stopPropagation()}>
+                                <span className="viewIcon">
+                                    
                                     <span>
-                                        <FileDownloadOutlinedIcon />
+                                    <DownloadPDFThreads pdfData={item.session_data} />
+                                        {/* <FileDownloadOutlinedIcon /> */}
                                     </span>
+                                    {/* <DownloadThread threads={item.session_data} /> */}
                                 </span>
                             </div>
                             <div className="p-2 bd-highlight">

@@ -108,6 +108,7 @@ const Chat = (props: any) => {
     const recommenededQuestionList = useSelector((state: any) => state.chat.recommendedQuestions);
     const latestQuestion = useSelector((state: any) => state.chat.latestQuestion);
     const lastQuestionRef = useRef<string>("");
+    const [keywords, setKeywords] = useState();
     const dispatch = useDispatch();
 
     let handleMicClick = () => {
@@ -257,25 +258,27 @@ const Chat = (props: any) => {
                 // latitude: latitude,
                 // userLocation: userLocation
             };
-            const result = await chatApi(request, abortControllerRef.current.signal);
+            const result: any = await chatApi(request, abortControllerRef.current.signal);
+            setKeywords(result?.keywords);
+            // capure keywords in progress
             if (result.exchange_id) {
                 let answersList = [...answers, [question, result]];
-                if (!result.isChartRequired) {
+                if (result.isChartRequired) {
                     setIsChartGeneration(true);
-                    let chartReq = {
-                        chart_data: result,
-                        data: answersList
-                    };
-                    const chartResult = await ChartJSApi(chartReq);
-                    setIsChartGeneration(true);
-                    result["chart"] = chartResult.chart;
-                    let chartUrl = await DrawChartURL(cleanChartData(chartResult.chart));
+                    // let chartReq = {
+                    //     chart_data: result,
+                    //     data: answersList
+                    // };
+                    // const chartResult = await ChartJSApi(chartReq);
+                    // setIsChartGeneration(true);
+                    // result["chart"] = chartResult.chart;
+                    // let chartUrl = await DrawChartURL(cleanChartData(chartResult.chart));
                     let qnAList = [
                         ...questionAnswersList,
                         {
                             question: question,
                             answer: result,
-                            chart: chartUrl
+                            // chart: chartUrl
                         }
                     ];
                     dispatch(set_answers(answersList as any));
@@ -614,6 +617,7 @@ const Chat = (props: any) => {
                                                 <div key={index}>
                                                     <UserChatMessage message={answer[0]} />
                                                     <TagsList
+                                                        tags={keywords}
                                                         toggleKeywordAnalysis={toggleKeywordAnalysis}
                                                         setTagName={setTagName}
                                                         setTagClicked={setTagClicked}

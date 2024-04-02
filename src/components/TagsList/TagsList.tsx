@@ -30,20 +30,30 @@ const tagsList = [
     }
 ];
 
-export const TagsList = ({ setTagClicked, setTagName, toggleKeywordAnalysis }: any) => {
+export const TagsList = ({ setTagClicked, setTagName, toggleKeywordAnalysis, tags }: any) => {
+    console.log(tags, 'tags');
+    // for (const key in tags) {
+    //     if (tags.hasOwnProperty(key)) {
+    //       console.log(`${key}: ${tags[key]}`);
+    //     }
+    //   }
+    let tagsArr = Object?.keys(tags);
+
     return (
         <Stack className="TagsListDiv">
-            {tagsList.map(tag => {
+
+
+            {tagsArr?.map((tag: any) => {
                 return (
                     <Item
                         onClick={() => {
-                            setTagName(tag.tagName);
+                            setTagName(tag);
                             setTagClicked(true);
                             toggleKeywordAnalysis();
                         }}
                         className="tagsStyle"
                     >
-                        {tag.tagName} <b className="tagCount">{tag.tagCount}</b>
+                        {tag} <b className="tagCount">{tags[tag]}</b>
                     </Item>
                 );
             })}

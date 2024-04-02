@@ -220,15 +220,42 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis }: Props) => {
  
   }, [rowSelection]);
 
-  useEffect(()=>{
-    async function getKpiList () {
-      const response = await getApi('kpi/get_kpi_list/');
-      setData(response);
+  // useEffect(()=>{
+  //   async function getKpiList () {
+  //     const response = await getApi('kpi/get_kpi_list/');
+  //     setData(response);
+  //   }
+  //   getKpiList();
+  // }, [])
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        // Fetch KPI list
+        const kpiListResponse = await getApi('kpi/get_kpi_list/');
+        const kpiList = kpiListResponse;
+  
+        // Fetch KPI values
+        const kpiValuesResponse = await getApi('kpi/get_kpi/');
+        const kpiValues = kpiValuesResponse;
+  
+        // Combine KPI values with KPI list
+        const updatedKpiArray = kpiList.map((kpiObject:any) => {
+          const kpiKey = kpiObject.kpi;
+          if (kpiValues.hasOwnProperty(kpiKey)) {
+            kpiObject.value = kpiValues[kpiKey];
+          }
+          return kpiObject;
+        });
+  
+        setData(updatedKpiArray);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     }
-    getKpiList();
-  }, [])
-
-
+  
+    fetchData();
+  }, []);
 
 
   const table = useMaterialReactTable({

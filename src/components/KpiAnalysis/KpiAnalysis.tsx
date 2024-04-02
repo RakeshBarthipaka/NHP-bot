@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Avatar, Box, Button, ButtonGroup, Stack } from "@mui/material";
+import { useEffect, useState } from "react";
+import { Avatar, Box, Button, ButtonGroup, FormControl, InputLabel, MenuItem, Select, Stack } from "@mui/material";
 import "./KpiAnalysis.scss";
-
+import { getApi } from "../../api";
 import TroubleshootOutlinedIcon from '@mui/icons-material/TroubleshootOutlined';
 
 import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
@@ -14,6 +14,7 @@ import clsx from "clsx";
 
 import React from 'react';
 import { Line } from 'react-chartjs-2';
+import { Any } from "@react-spring/web";
 
 const getColor = (value: any) => {
 
@@ -31,8 +32,65 @@ const getColor = (value: any) => {
 
 };
 
+const FilterComponent = ({ data, label, value, handleChange }:any) => {
+  return (
+    <FormControl fullWidth>
+      {/* <InputLabel>{label}</InputLabel> */}
+      <Select
+        value={value}
+        className="kpiSelectFilter"
+        onChange={handleChange}
+        displayEmpty
+        renderValue={(selected) => {
+          if (selected.length === 0) {
+            return <em>{label}</em>;
+          }
+
+          return selected;
+        }}
+      >
+        <MenuItem disabled value="">
+          <em>{label}</em>
+        </MenuItem>
+        {data.map((item:any, index:any) => (
+          <MenuItem key={index} value={item}>{item}</MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+  );
+};
+
 const KpiAnalysis = () => {
   const [isValue, setIsValue] = useState<boolean>(false);
+
+  const [filtersData, setFiltersData] = useState({country: [], productcategory: [], bg: [], last_5_years: [], months: []});
+  const [selectedCountry, setSelectedCountry] = useState('');
+  const [selectedProductCategory, setSelectedProductCategory] = useState('');
+  const [selectedBusinessGroup, setSelectedBusinessGroup] = useState('');
+  const [selectedYear, setSelectedYear] = useState('');
+  const [selectedPeriod, setSelectedPeriod] = useState('');
+
+  const handleCountryChange = (event:any) => {
+    setSelectedCountry(event.target.value);
+  };
+
+  const handleProductCategoryChange = (event:any) => {
+    setSelectedProductCategory(event.target.value);
+  };
+  const handleBusinessGroupChange = (event:any) => {
+    setSelectedBusinessGroup(event.target.value);
+  };
+  const handleYearChange = (event:any) => {
+    setSelectedYear(event.target.value);
+  };
+  const handlePeriodChange = (event:any) => {
+    setSelectedPeriod(event.target.value);
+  };
+
+  const handleFiltersChange = () => {
+  console.log(selectedCountry, selectedProductCategory, selectedBusinessGroup, selectedYear, selectedPeriod);
+  };
+  
 
   const columns: GridColDef[] = [
     {
@@ -234,6 +292,16 @@ const KpiAnalysis = () => {
     ],
   };
 
+  useEffect(()=>{
+    async function getKpiList () {
+      const response = await getApi('kpi/get_filter_params/');
+      setFiltersData(response); 
+    }
+    getKpiList();
+  }, [])
+
+  
+
   return (
     <>
       <Box className="kpiAnalysis">
@@ -243,6 +311,43 @@ const KpiAnalysis = () => {
         </Box>
         <Box>
           <h4 className="">Gross Margin</h4>
+
+          <Box display={"flex"} gap={1} sx={{ marginBottom: '15px', marginTop: '10px'}}>
+           
+            <FilterComponent
+              data={filtersData?.country}
+              label="Country"
+              value={selectedCountry}
+              handleChange={handleCountryChange}
+            />
+ 
+            <FilterComponent
+              data={filtersData.productcategory}
+              label="Product Category"
+              value={selectedProductCategory}
+              handleChange={handleProductCategoryChange}
+            />
+
+            <FilterComponent
+              data={filtersData.bg}
+              label="Business Group"
+              value={selectedBusinessGroup}
+              handleChange={handleBusinessGroupChange}
+            />
+             <FilterComponent
+              data={filtersData.last_5_years}
+              label="Year"
+              value={selectedYear}
+              handleChange={handleYearChange}
+            />
+            <FilterComponent
+              data={filtersData.months}
+              label="Period"
+              value={selectedPeriod}
+              handleChange={handlePeriodChange}
+            />
+            <Button variant="contained" color="primary" onClick={handleFiltersChange}>Go</Button>
+          </Box>
 
           <Stack className="stackDataOptions">
             <Box  display={"flex"} gap={1}>
