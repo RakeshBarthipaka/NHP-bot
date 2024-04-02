@@ -35,9 +35,28 @@ const getColor = (value: any) => {
     }
 };
 
+const getUniqueKeys = (array: any) => {
+    // Initialize an empty Set to store unique keys
+    const uniqueKeys = new Set();
+
+    // Iterate over each object in the array
+    array.forEach((obj: any) => {
+        // Get keys of the current object
+        const keys = Object.keys(obj);
+
+        // Add keys to the Set
+        keys.forEach(key => uniqueKeys.add(key));
+    });
+
+    // Convert Set to an array and return
+    return Array.from(uniqueKeys);
+};
 export const DeepAnalysis = () => {
     const [isValue, setIsValue] = useState<boolean>(false);
     const [isData, setIsData] = useState([]);
+    const [columnsData, setColumnsData] = useState<any>([]);
+    const [isGraphData, setIsGraphData] = useState<any>();
+    const [analysisText, setAnalysisText] = useState<any>();
     // const columns: GridColDef[] = [
     //     {
     //         field: "Country",
@@ -157,75 +176,75 @@ export const DeepAnalysis = () => {
     //     }
     // ];
 
-    const columns: GridColDef[] = [
-        {
-            field: "country",
-            headerName: "Country",
-            sortable: false,
-            width: 130,
-            disableColumnMenu: true,
-            // cellClassName: (params: GridCellParams<any, number>) => {
-            //     if (params.value == null) {
-            //         return "";
-            //     }
+    // const columns: GridColDef[] = [
+    //     {
+    //         field: "country",
+    //         headerName: "Country",
+    //         sortable: false,
+    //         width: 130,
+    //         disableColumnMenu: true
+    //         // cellClassName: (params: GridCellParams<any, number>) => {
+    //         //     if (params.value == null) {
+    //         //         return "";
+    //         //     }
 
-            //     return clsx("first-column", {
-            //         cell: true
-            //     });
-            // }
-        },
-        {
-            field: "uom",
-            headerName: "UOM",
-            sortable: false,
-            width: 130,
-            disableColumnMenu: true,
-            // cellClassName: (params: GridCellParams<any, number>) => {
-            //     if (params.value == null) {
-            //         return "";
-            //     }
+    //         //     return clsx("first-column", {
+    //         //         cell: true
+    //         //     });
+    //         // }
+    //     },
+    //     {
+    //         field: "uom",
+    //         headerName: "UOM",
+    //         sortable: false,
+    //         width: 130,
+    //         disableColumnMenu: true
+    //         // cellClassName: (params: GridCellParams<any, number>) => {
+    //         //     if (params.value == null) {
+    //         //         return "";
+    //         //     }
 
-            //     return clsx("first-column", {
-            //         cell: true
-            //     });
-            // }
-        },
-        {
-            field: "year",
-            headerName: "Year",
-            sortable: false,
-            width: 130,
-            disableColumnMenu: true,
-            // cellClassName: (params: GridCellParams<any, number>) => {
-            //     if (params.value == null) {
-            //         return "";
-            //     }
+    //         //     return clsx("first-column", {
+    //         //         cell: true
+    //         //     });
+    //         // }
+    //     },
+    //     {
+    //         field: "year",
+    //         headerName: "Year",
+    //         sortable: false,
+    //         width: 130,
+    //         disableColumnMenu: true
+    //         // cellClassName: (params: GridCellParams<any, number>) => {
+    //         //     if (params.value == null) {
+    //         //         return "";
+    //         //     }
 
-            //     return clsx("first-column", {
-            //         cell: true
-            //     });
-            // }
-        },
-    ]
-    const rows = [
-        { id: 1, Country: "India", 2019: "15", 2020: "10", 2021: "43", 2022: "77", 2023: "36" },
-        { id: 2, Country: "India", 2019: "28", 2020: "10", 2021: "-43", 2022: "77", 2023: "36" },
-        { id: 3, Country: "India", 2019: "-10", 2020: "10", 2021: "43", 2022: "77", 2023: "36" },
-        { id: 4, Country: "India", 2019: "33", 2020: "-10", 2021: "43", 2022: "-77", 2023: "36" },
-        { id: 5, Country: "India", 2019: "22", 2020: "10", 2021: "43", 2022: "77", 2023: "36" },
-        { id: 6, Country: "India", 2019: "-64", 2020: "10", 2021: "43", 2022: "77", 2023: "-36" },
-        { id: 7, Country: "India", 2019: "56", 2020: "10", 2021: "43", 2022: "77", 2023: "36" }
-    ];
+    //         //     return clsx("first-column", {
+    //         //         cell: true
+    //         //     });
+    //         // }
+    //     }
+    // ];
+    // const rows = [
+    //     { id: 1, Country: "India", 2019: "15", 2020: "10", 2021: "43", 2022: "77", 2023: "36" },
+    //     { id: 2, Country: "India", 2019: "28", 2020: "10", 2021: "-43", 2022: "77", 2023: "36" },
+    //     { id: 3, Country: "India", 2019: "-10", 2020: "10", 2021: "43", 2022: "77", 2023: "36" },
+    //     { id: 4, Country: "India", 2019: "33", 2020: "-10", 2021: "43", 2022: "-77", 2023: "36" },
+    //     { id: 5, Country: "India", 2019: "22", 2020: "10", 2021: "43", 2022: "77", 2023: "36" },
+    //     { id: 6, Country: "India", 2019: "-64", 2020: "10", 2021: "43", 2022: "77", 2023: "-36" },
+    //     { id: 7, Country: "India", 2019: "56", 2020: "10", 2021: "43", 2022: "77", 2023: "36" }
+    // ];
 
-    const rowsPercentage = [
-        { id: 1, Country: "India", 2019: "15%", 2020: "10%", 2021: "43%", 2022: "77%", 2023: "36%" },
-        { id: 2, Country: "India", 2019: "28%", 2020: "10%", 2021: "-43%", 2022: "77%", 2023: "36%" },
-        { id: 3, Country: "India", 2019: "-10%", 2020: "10%", 2021: "43%", 2022: "77%", 2023: "36%" },
-        { id: 4, Country: "India", 2019: "33%", 2020: "-10%", 2021: "43%", 2022: "-77%", 2023: "36%" },
-        { id: 5, Country: "India", 2019: "22%", 2020: "10%", 2021: "43%", 2022: "77%", 2023: "36%" },
-        { id: 6, Country: "India", 2019: "-64%", 2020: "10%", 2021: "43%", 2022: "77%", 2023: "-36%" },
-        { id: 7, Country: "India", 2019: "56%", 2020: "10%", 2021: "43%", 2022: "77%", 2023: "36%" }
-    ];
+    // const rowsPercentage = [
+    //     { id: 1, Country: "India", 2019: "15%", 2020: "10%", 2021: "43%", 2022: "77%", 2023: "36%" },
+    //     { id: 2, Country: "India", 2019: "28%", 2020: "10%", 2021: "-43%", 2022: "77%", 2023: "36%" },
+    //     { id: 3, Country: "India", 2019: "-10%", 2020: "10%", 2021: "43%", 2022: "77%", 2023: "36%" },
+    //     { id: 4, Country: "India", 2019: "33%", 2020: "-10%", 2021: "43%", 2022: "-77%", 2023: "36%" },
+    //     { id: 5, Country: "India", 2019: "22%", 2020: "10%", 2021: "43%", 2022: "77%", 2023: "36%" },
+    //     { id: 6, Country: "India", 2019: "-64%", 2020: "10%", 2021: "43%", 2022: "77%", 2023: "-36%" },
+    //     { id: 7, Country: "India", 2019: "56%", 2020: "10%", 2021: "43%", 2022: "77%", 2023: "36%" }
+    // ];
 
     const summary = [
         {
@@ -241,11 +260,6 @@ export const DeepAnalysis = () => {
             text: "Thailand has shown some generally increasing trend in UOM with slight decline in 2022."
         }
     ];
-
-    const copyChatData = async (e: any) => {
-        e.stopPropagation();
-        navigator.clipboard.writeText("tessss");
-    };
 
     function copyTableToClipboard() {
         window?.getSelection()?.removeAllRanges();
@@ -270,14 +284,21 @@ export const DeepAnalysis = () => {
         });
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         async function getDeepData() {
-            const response = await getApi('deep_analysis');
-            setIsData(response);
-            console.log(response,'daaa')
+            const response = await getApi("deep_analysis");
+            setIsData(response?.table_data);
+            setIsGraphData(response?.graph_data);
+            setAnalysisText(response?.analysis_text);
+            const uniqueColumns = getUniqueKeys(response?.table_data);
+            const isColumns = uniqueColumns?.map((col: any) => {
+                return { field: col, headerName: col?.charAt(0)?.toUpperCase() + col?.slice(1), sortable: false, disableColumnMenu: true, flex: 1 };
+            });
+            setColumnsData(isColumns?.reverse());
         }
         getDeepData();
-    }, [])
+    }, []);
+
 
     return (
         <Grid xs={12}>
@@ -343,45 +364,46 @@ export const DeepAnalysis = () => {
 
                         <Box display="flex">
                             <span onClick={copyTableToClipboard}>
-                                <Avatar
-                                    className="avatarDA"
-                                >
+                                <Avatar className="avatarDA">
                                     <ContentCopyOutlinedIcon />
                                 </Avatar>
                             </span>
 
                             <span onClick={downloadAsPdf}>
-                                <Avatar
-                                    className="avatarDA"
-                                >
+                                <Avatar className="avatarDA">
                                     {" "}
                                     <FileDownloadOutlinedIcon />
                                 </Avatar>
                             </span>
                         </Box>
                     </Stack>
-                            {isData?.length > 0 && <DataGrid
-                        hideFooter
-                        className="deepAnalysisTable"
-                        getRowId={()=>  Math.random() * 100}
-                        rows={isData}
-                        columns={columns}
-                        disableRowSelectionOnClick
-                        disableColumnFilter
-                        hideFooterSelectedRowCount
-                        hideFooterPagination
-                    /> }
-                    
+                    {isData?.length > 0 && (
+                        <DataGrid
+                            hideFooter
+                            className="deepAnalysisTable"
+                            getRowId={() => Math.random() * 100}
+                            rows={isData}
+                            columns={columnsData}
+                            disableRowSelectionOnClick
+                            disableColumnFilter
+                            hideFooterSelectedRowCount
+                            hideFooterPagination
+                        />
+                    )}
                 </Box>
                 <Box paddingLeft={2} paddingTop={3}>
                     <span>In summary the yearly trend UOM in </span>
                 </Box>
                 <Box paddingLeft={4} paddingTop={2}>
-                    {summary?.map(data => <li className="summary">{data.text}</li>)}
+                    {analysisText?.split(".")?.filter((el:any)=> el !== null || el !== undefined).map((data: any )=> {
+        if(data){
+          return ( <li className="summary">{data}</li>)
+        }
+    })}
                 </Box>
                 <Box paddingLeft={4} paddingTop={2}>
                     <span>Graph Analytics by Region </span>
-                    <StackedBarChart />
+                    { isGraphData?.labels?.length > 0 && <StackedBarChart barchartData={isGraphData} />}
                 </Box>
             </div>
         </Grid>
