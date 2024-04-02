@@ -31,7 +31,7 @@ const tagsList = [
 ];
 
 export const TagsList = ({ setTagClicked, setTagName, toggleKeywordAnalysis, tags }: any) => {
-    console.log(tags, 'tags');
+    // console.log(tags, 'tags');
     // for (const key in tags) {
     //     if (tags.hasOwnProperty(key)) {
     //       console.log(`${key}: ${tags[key]}`);

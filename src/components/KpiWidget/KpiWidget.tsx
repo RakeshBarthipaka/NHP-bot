@@ -241,7 +241,7 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis, setKpiName }: Pr
         const kpiValues = kpiValuesResponse;
   
         // Combine KPI values with KPI list
-        const updatedKpiArray = kpiList.map((kpiObject:any) => {
+        const updatedKpiArray = kpiList?.map((kpiObject:any) => {
           const kpiKey = kpiObject.kpi;
           if (kpiValues.hasOwnProperty(kpiKey)) {
             kpiObject.value = kpiValues[kpiKey];
@@ -257,7 +257,7 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis, setKpiName }: Pr
           }
         });
         setRowSelection(newObj)
-        console.log(newObj);
+        // console.log(newObj);
 
         setData(updatedKpiArray);
       } catch (error) {
@@ -328,12 +328,12 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis, setKpiName }: Pr
     const selectedRowsData = Object.keys(rowSelection);
 
     const selectedRowsDataSet = new Set(selectedRowsData);
-    const newDataWithEnable = newData.map((item: { id: any }) => ({
+    const newDataWithEnable = newData?.map((item: { id: any }) => ({
       ...item,
       enable: selectedRowsDataSet.has(item.id.toString()) ? 1 : 0
     }));
 
-    const newArray = newDataWithEnable.map((item: any) => ({
+    const newArray = newDataWithEnable?.map((item: any) => ({
       kpi: item.kpi,
       sort_order: item.sort_order,
       enable: item.enable

@@ -52,7 +52,7 @@ const FilterComponent = ({ data, label, value, handleChange }:any) => {
         <MenuItem disabled value="">
           <em>{label}</em>
         </MenuItem>
-        {data.map((item:any, index:any) => (
+        {data?.map((item:any, index:any) => (
           <MenuItem key={index} value={item}>{item}</MenuItem>
         ))}
       </Select>
@@ -91,7 +91,7 @@ const KpiAnalysis = (kpiName:any) => {
   };
 
   const handleFiltersChange = () => {
-  console.log(selectedCountry, selectedProductCategory, selectedBusinessGroup, selectedYear, selectedPeriod);
+  // console.log(selectedCountry, selectedProductCategory, selectedBusinessGroup, selectedYear, selectedPeriod);
   const payLoad = {
     "kpi": "uom",
     "country": selectedCountry ? [selectedCountry] : [],
