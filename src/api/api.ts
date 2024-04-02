@@ -149,8 +149,8 @@ export async function ChartJSApi(options: ChartJSRequest): Promise<ChartJSRespon
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-           chart_data: options.chart_data,
-           data:options.data
+            chart_data: options.chart_data,
+            data: options.data
         })
     });
 
@@ -226,6 +226,7 @@ export async function UpdateAppointemtApi(options: any, apiName: any) {
     return parsedResponse;
 }
 
+//const BASE_API_URL = "http://20.193.133.240:8544";
 const BASE_API_URL = "";
 
 export async function postApi(options: any, apiName: string): Promise<any> {
@@ -356,39 +357,18 @@ export const fileUpload = (formData: any, apiName: any) => {
     return response;
 };
 
-
 export async function getApiDownload(apiName: string) {
     try {
         const response = await fetch(`${BASE_API_URL}/${apiName}`, {
             method: "GET",
             headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/pdf'
+                "Content-Type": "application/json",
+                Accept: "application/pdf"
             }
         });
-       
+
         return response;
     } catch (err) {
         return [];
     }
 }
-
-export async function getApiQuery(apiName: string,queryName: string ,tagName: string) {
-    try {
-        const response = await fetch(`${BASE_API_URL}/${apiName}?${queryName}=${tagName}`, {
-            method: "GET",
-            mode: "cors",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        const parsedResponse = await response.json();
-        if (response.status > 299 || !response.ok) {
-            throw Error(parsedResponse.error || "Unknown error");
-        }
-        return parsedResponse;
-    } catch (err) {
-        return [];
-    }
-}
-
