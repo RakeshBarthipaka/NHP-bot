@@ -13,7 +13,7 @@ const ChatThreadSession = (props: any) => {
                     <Box component="span" fontWeight="bold">
                         Topic Name:&nbsp;
                     </Box>
-                    {props.activeChatThreadDetails.question}
+                    {props.activeChatThreadDetails.session_data[0].question}
                 </Typography>
                 <Box className="assignBtn" onClick={props.handleAssign}>
                     Assign

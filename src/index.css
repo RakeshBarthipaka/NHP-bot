@@ -100,7 +100,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Inter";
-    /* background-image: url(assets/bh.jpg); */
+    /* background-image: url(assets/bg-banner.png); */
     background-size: 120%;;
 }
 
@@ -369,7 +369,7 @@ border:1px solid  rgba(83, 118, 240, 0.2);
     border: none;
 
     .first-column.cell {
-        background-color: #F2F2F7;
+        /* background-color: #F2F2F7; */
         font-weight: 600;
     }
 
@@ -477,8 +477,9 @@ border:1px solid  rgba(83, 118, 240, 0.2);
 }
 
 .theme-transparent.layout {
-    background: linear-gradient(115.58deg, #00FC19 0%, #1700A4 100.22%), radial-gradient(92.72% 100% at 50% 0%, #EBFFCB 0%, #651200 100%), radial-gradient(92.72% 100% at 50% 0%, #FAFF00 0%, #820000 100%), radial-gradient(109.21% 213.32% at 100% 0%, #FF4D00 0%, #00C2FF 100%), linear-gradient(127.43deg, #D50000 0%, #7856FF 100%);
-    background-blend-mode: lighten, overlay, lighten, screen, normal;
+    /* background: linear-gradient(115.58deg, #00FC19 0%, #1700A4 100.22%), radial-gradient(92.72% 100% at 50% 0%, #EBFFCB 0%, #651200 100%), radial-gradient(92.72% 100% at 50% 0%, #FAFF00 0%, #820000 100%), radial-gradient(109.21% 213.32% at 100% 0%, #FF4D00 0%, #00C2FF 100%), linear-gradient(127.43deg, #D50000 0%, #7856FF 100%);
+    background-blend-mode: lighten, overlay, lighten, screen, normal; */
+    background-image: url(assets/bh.jpg);
 }
 .theme-transparent .header {
     background: transparent;

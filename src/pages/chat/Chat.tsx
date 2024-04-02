@@ -109,9 +109,8 @@ const Chat = (props: any) => {
     const recommenededQuestionList = useSelector((state: any) => state.chat.recommendedQuestions);
     const latestQuestion = useSelector((state: any) => state.chat.latestQuestion);
     const lastQuestionRef = useRef<string>("");
+    const [keywords, setKeywords] = useState();
     const dispatch = useDispatch();
-
-    //console.log("answers=======:", answers);
 
     let handleMicClick = () => {
         if (!isListen) {
@@ -260,7 +259,9 @@ const Chat = (props: any) => {
                 // latitude: latitude,
                 // userLocation: userLocation
             };
-            const result = await chatApi(request, abortControllerRef.current.signal);
+            const result: any = await chatApi(request, abortControllerRef.current.signal);
+            setKeywords(result?.keywords);
+            // capure keywords in progress
             if (result.exchange_id) {
                 let answersList = [...answers, [question, result]];
                 if (result.isChartRequired) {
@@ -518,6 +519,12 @@ const Chat = (props: any) => {
     };
 
     const runChatThread = (obj: any) => {
+        //Get active thread data
+        const activeThreadData = obj.session_data.map((item: any) => ({
+            question: item.question,
+            answer: item.answer
+        }));
+        updateQandA(activeThreadData);
         setIsAssignClick(false);
         setIsChatThreadStart(true);
         setActiveChatThreadDetails(obj);
@@ -611,6 +618,7 @@ const Chat = (props: any) => {
                                                 <div key={index}>
                                                     <UserChatMessage message={answer[0]} />
                                                     <TagsList
+                                                        tags={keywords}
                                                         toggleKeywordAnalysis={toggleKeywordAnalysis}
                                                         setTagName={setTagName}
                                                         setTagClicked={setTagClicked}
