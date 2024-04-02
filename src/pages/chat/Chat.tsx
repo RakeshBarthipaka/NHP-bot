@@ -81,6 +81,7 @@ const Chat = (props: any) => {
     const [isUpload, setIsUpload] = useState<boolean>(false);
     const [isChatThread, setIsChatThread] = useState<boolean>(false);
     const [isKpiAnalysis, setIsKpiAnalysis] = useState<boolean>(false);
+    const [kpiName, setKpiName] = useState<any>(); 
     const [isChartGeneration, setIsChartGeneration] = useState(false);
 
     const abortControllerRef = useRef(new AbortController());
@@ -600,7 +601,7 @@ const Chat = (props: any) => {
                         ) : (
                             <>
                                 <Grid item xs={12} sm={12} md={ischatRightContent ? 6 : 8}>
-                                    <KpiWidget toggleChatRightContent={toggleChatRightContent} toggleKpiAnalysis={toggleKpiAnalysis} />
+                                    <KpiWidget toggleChatRightContent={toggleChatRightContent} toggleKpiAnalysis={toggleKpiAnalysis} setKpiName={setKpiName}/>
                                     <div className={styles.chatContainer}>
                                         <div className={styles.chatMessageStream}>
                                             {isChatThreadStart && activeChatThreadDetails !== undefined && (
@@ -676,7 +677,7 @@ const Chat = (props: any) => {
                                                     handleReplyClick={handleReplyClick}
                                                 />
                                             )}
-                                            {isKpiAnalysis && <KpiAnalysis />}
+                                            {isKpiAnalysis && <KpiAnalysis kpiName={kpiName}/>}
                                         </div>
                                     </Grid>
                                 )}

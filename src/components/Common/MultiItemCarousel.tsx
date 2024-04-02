@@ -11,9 +11,10 @@ interface Props {
     KpiSlides: any;
     toggleChatRightContent: () => void;
     toggleKpiAnalysis: () => void;
+    setKpiName: any;
 }
 
-const MultiItemCarousel = ({ KpiSlides, toggleChatRightContent, toggleKpiAnalysis }: Props) => {
+const MultiItemCarousel = ({ KpiSlides, toggleChatRightContent, toggleKpiAnalysis, setKpiName }: Props) => {
     // const Slides: any[] = KpiSlides
     const [slides, setSlides] = useState<any[]>(KpiSlides);
     let sliderRef = React.useRef<Slider>(null);
@@ -106,6 +107,7 @@ const MultiItemCarousel = ({ KpiSlides, toggleChatRightContent, toggleKpiAnalysi
                         onClick={() => {
                             toggleisRightPanelOpen();
                             toggleKpiAnalysis();
+                            setKpiName(card.kpiname); 
                         }}
                     >
                         <h5>{card.kpiname}</h5>
