@@ -45,15 +45,19 @@ const ChatThreads = (props: any) => {
         }
     };
 
-    const sendStarredThread = async (chatID: any) =>{
+    const sendStarredThread = async (chatID: any) => {
         try {
-            const response = await postApiQuery(`star`, 'chat_id', chatID); //need to pass `userID` here
+            const response = await postApiQuery(`star`, "chat_id", chatID); //need to pass `userID` here
             setIsStarred(!isStarred);
-
         } catch (error) {
             console.log(error);
         }
-    }
+    };
+
+    const handleEdit = (event: any, chatID: any) => {
+        event.stopPropagation();
+        console.log("chatID:", chatID);
+    };
 
     const ThreadElements = ({ item }: any) => {
         return (
@@ -65,10 +69,13 @@ const ChatThreads = (props: any) => {
                     {/* <Typography className="questionText">{item.question}</Typography> */}
                     <Typography className="questionText">
                         {item.session_data[0].question}
-                        <Box component="span" className="edit-icon" onClick={event => event.stopPropagation()}>
+                        <Box component="span" className="edit-icon" onClick={event => handleEdit(event, item?.chatID)}>
                             <BorderColorOutlinedIcon />
                         </Box>
-                       <span onClick={() => sendStarredThread(item?.chatID)}> {item.session_data[0].is_stared ? <GradeIcon className="grade" /> : <StarOutlineIcon color="success" />}</span>
+                        <span onClick={() => sendStarredThread(item?.chatID)}>
+                            {" "}
+                            {item.session_data[0].is_stared ? <GradeIcon className="grade" /> : <StarOutlineIcon color="success" />}
+                        </span>
                     </Typography>
                     <Box className="thread-icon-container">
                         <Typography className="otherOptions">{moment(item.session_data[0].time).format("DD/MM/YYYY LT")}</Typography>
@@ -199,11 +206,10 @@ const ChatThreads = (props: any) => {
                             </Button>
                             <Button>
                                 <span className="iconText">
-                                <GradeIcon className="grade ShortByIcon IconElemt" />
+                                    <GradeIcon className="grade ShortByIcon IconElemt" />
                                 </span>
                                 <span>By Star</span>
                             </Button>
-                            
                         </ButtonGroup>
                     </Box>
                 </Box>

@@ -34,7 +34,7 @@ export async function chatApi(options: ChatRequest, signal?: AbortSignal): Promi
     const controller = new AbortController();
     const mergedSignal = signal || controller.signal;
 
-    const response = await fetch("http://20.193.133.240:8613/chat", {
+    const response = await fetch("/chat", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -373,7 +373,7 @@ export async function getApiDownload(apiName: string) {
     }
 }
 
-export async function getApiQuery(apiName: string,queryName: string ,tagName: string) {
+export async function getApiQuery(apiName: string, queryName: string, tagName: string) {
     try {
         const response = await fetch(`${BASE_API_URL}/${apiName}?${queryName}=${tagName}`, {
             method: "GET",
@@ -392,7 +392,7 @@ export async function getApiQuery(apiName: string,queryName: string ,tagName: st
     }
 }
 
-export async function postApiQuery(apiName: string,queryName: string ,tagName: any) {
+export async function postApiQuery(apiName: string, queryName: string, tagName: any) {
     try {
         const response = await fetch(`${BASE_API_URL}/${apiName}?${queryName}=${tagName}`, {
             method: "POST",
