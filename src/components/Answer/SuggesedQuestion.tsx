@@ -10,7 +10,7 @@ export const SuggesedQuestion = ({ recommenededQuestionList, onRecommendedQuesti
     return (
         <Stack className="recommendedQuestionBlock">
             <Stack horizontal horizontalAlign="space-between">
-                <h3>Tell me what’s on your mind, or pick a suggestion </h3>
+                <h3>Recommended Questions </h3>
             </Stack>
             <Stack className="recommendedQuestionList">
                 {recommenededQuestionList.map((x, i) => {

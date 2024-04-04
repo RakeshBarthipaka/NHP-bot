@@ -21,6 +21,7 @@ import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import InfoIcon from "@mui/icons-material/Info";
 import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
 import ThermostatIcon from "@mui/icons-material/Thermostat";
+import CloseIcon from '@mui/icons-material/Close';
 
 const Layout = (props: any) => {
     const [isFullLeftPanelOpen, setIsFullLeftPanelOpen] = useState(false);
@@ -283,7 +284,7 @@ const Layout = (props: any) => {
                                                         setDropdwonLanguage(false);
                                                     }}
                                                 >
-                                                    <img src={langItem.icon} width={20} height={20} />
+                                                    {/* <img src={langItem.icon} width={20} height={20} /> */}
                                                     <p style={{ color: themesColor }}>{langItem.lang}</p>
                                                 </div>
                                             ))}
@@ -303,6 +304,7 @@ const Layout = (props: any) => {
                                 </NavLink>
                                 {settings && (
                                     <div className="settingsDropdown">
+                                        <span className="closeBtn" onClick={() => {toggleSettings(!settings);}}> <CloseIcon /> </span>
                                         <div className="colorsList">
                                             <h6>Themes</h6>
                                             {ColorList.map((color, i) => (

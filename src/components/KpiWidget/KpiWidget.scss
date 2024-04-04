@@ -80,3 +80,18 @@
   padding: 16px 0 0 16px; 
   margin-bottom: 32px;
 }
+
+.KpisDrawer .MuiInputBase-root::before {
+  content: '';
+  position: absolute;
+  width: 46px;
+  height: 44px;
+  background: var(--active-themes);
+  right: 0px;
+  top: -4px;
+  border-radius: 0 25px 25px 0;
+}
+
+.KpisDrawer svg[data-testid="SearchIcon"] {
+  color: #fff;
+}
