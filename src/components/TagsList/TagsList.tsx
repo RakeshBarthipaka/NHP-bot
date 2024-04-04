@@ -7,42 +7,12 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary
 }));
 
-const tagsList = [
-    {
-        tagName: "Finance",
-        tagCount: 12
-    },
-    {
-        tagName: "Market",
-        tagCount: 5
-    },
-    {
-        tagName: "Investment",
-        tagCount: 2
-    },
-    {
-        tagName: "Business",
-        tagCount: 7
-    },
-    {
-        tagName: "Plans",
-        tagCount: 6
-    }
-];
-
 export const TagsList = ({ setTagClicked, setTagName, toggleKeywordAnalysis, tags }: any) => {
-    console.log(tags, 'tags');
-    // for (const key in tags) {
-    //     if (tags.hasOwnProperty(key)) {
-    //       console.log(`${key}: ${tags[key]}`);
-    //     }
-    //   }
+
     let tagsArr = Object?.keys(tags);
 
     return (
         <Stack className="TagsListDiv">
-
-
             {tagsArr?.map((tag: any) => {
                 return (
                     <Item

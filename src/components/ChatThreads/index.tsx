@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 //import _ from "lodash";
-import { Avatar, Box, Button, ButtonGroup, Grid, Stack } from "@mui/material";
+import { Avatar, Box, Button, ButtonGroup, Grid, Stack, TextField } from "@mui/material";
 
 // import Box from "@mui/material/Box";
 import "./ChatThreads.scss";
@@ -23,16 +23,157 @@ import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import StarIcon from "@mui/icons-material/Star";
-import { getApi, postApiQuery } from "../../api";
+import { getApi, postApiQuery, postApiQueryText } from "../../api";
 import jsPDF from "jspdf";
 import DownloadPDFThreads from "../Answer/GeneratePDFThreads";
 import moment from "moment";
 import GradeIcon from "@mui/icons-material/Grade";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+
+const ThreadElements = ({ item, props, makeStar, isStarred }: any) => {
+    const [isEdit, setIsEdit] = useState(false);
+    const [isText, setIsText] = useState("");
+    const [isChatID, setChatID] = useState("");
+    const [activeThread, setActiveThread] = useState("");
+
+    const sendStarredThread = async (chatID: any) => {
+        try {
+            const response = await postApiQuery(`star`, "chat_id", chatID); //need to pass `userID` here
+            makeStar();
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleEdit = (text: any, chatId: any) => {
+        setChatID(chatId);
+        setIsText(text);
+        setIsEdit(!isEdit);
+    };
+
+    const saveText = (id: any) => {
+        const response = postApiQueryText("edit_session_title", "exchange_id", id, "title", isText);
+        makeStar();
+        setIsEdit(!isEdit);
+    };
+
+    const handleEnterKey = (event: any, id: any) => {
+        if (event.key === "Enter") {
+            const response = postApiQueryText("edit_session_title", "exchange_id", id, "title", isText);
+            makeStar();
+            setIsEdit(!isEdit);
+        }
+    };
+    return (
+        <>
+            <Box
+                //key={item?.chatID}
+                className={`thread-box ${activeThread === item.chatID ? "active-thread-box" : ""}`}
+                onClick={e => {
+                    props.runChatThread(item);
+                    setActiveThread(item?.chatID);
+                }}
+            
+            >
+                {/* <Typography className="questionText">{item.question}</Typography> */}
+                <Typography className="questionText">
+                    {!isEdit && item.session_data[0].question}
+                    {isEdit && item?.chatID === isChatID && (
+                        <TextField
+                            value={isText}
+                            onChange={(e: any) => {
+                                setIsText(e.target.value);
+                            }}
+                            onKeyDown={e => handleEnterKey(e, item.session_data[0].id)}
+                            onBlur={() => saveText(item.session_data[0].id)}
+                        />
+                    )}
+                </Typography>
+                {!isEdit ? (
+                    <Box
+                        component="span"
+                        className="edit-icon"
+                        onClick={e => {
+                            handleEdit(item.session_data[0].question, item?.chatID);
+                        }}
+                    >
+                        <BorderColorOutlinedIcon />
+                    </Box>
+                ) : (
+                    <Box
+                        component="span"
+                        className="edit-icon"
+                        // onClick={(e) => {
+                        //     handleEdit(item.session_data[0].question, item?.chatID);
+                        //     }}
+                    >
+                        <CheckCircleOutlineIcon color="success" />
+                    </Box>
+                )}
+
+                <span
+                    onClick={(e: any) => {
+                        sendStarredThread(item?.chatID);
+                    }}
+                >
+                    {item.session_data[0]?.is_stared ? <GradeIcon className="grade" /> : <StarOutlineIcon color="success" />}
+                </span>
+
+                <Box className="thread-icon-container">
+                    <Typography className="otherOptions">{moment(item.session_data[0].time).format("DD/MM/YYYY LT")}</Typography>
+                    <div className="d-flex justify-content-end">
+                        <div className="p-2 bd-highlight">
+                            {/* <span className="replyIcon" onClick={props.handleReplyClick}>
+                                <span>
+                                    <ReplyAllIcon />
+                                </span>
+                                <span>{item.likeCount}</span>
+                            </span> */}
+                            {/* <span className="viewIcon" onClick={event => event.stopPropagation()}>
+                                <span>
+                                    <ShareOutlinedIcon />
+                                </span>
+                            </span> */}
+                            {/* <span className="viewIcon"> */}
+                            {/* <span onClick={event => event.stopPropagation()}> */}
+                            {/* <DownloadPDFThreads pdfData={item?.session_data} /> */}
+                            {/* <FileDownloadOutlinedIcon /> */}
+                            {/* </span> */}
+                            {/* <DownloadThread threads={item.session_data} /> */}
+                            {/* </span> */}
+                        </div>
+                        <div className="p-2 bd-highlight">
+                            <span className="thumbUp" onClick={event => event.stopPropagation()}>
+                                <span>
+                                    <ThumbUpOutlinedIcon />
+                                </span>
+                                <span>{item.like_counts}</span>
+                            </span>
+                            <span className="thumbDown" onClick={event => event.stopPropagation()}>
+                                <span>
+                                    <ThumbDownAltOutlinedIcon />
+                                </span>
+                                <span>{item.dislike_counts}</span>
+                            </span>
+                        </div>
+                    </div>
+                </Box>
+            </Box>
+        </>
+    );
+};
 
 const ChatThreads = (props: any) => {
-    let userID = localStorage.getItem("userID") ? localStorage.getItem("userID") : 0; //needs to be change
+    //let userID = localStorage.getItem("userID") ? localStorage.getItem("userID") : 0; //needs to be change
     const [allThreads, setThreads] = useState<any[]>([]);
     const [isStarred, setIsStarred] = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
+    const [isText, setIsText] = useState("");
+    const [isChatID, setChatID] = useState("");
+
+    const makeStar = () => {
+        setIsStarred(!isStarred);
+    };
 
     const getThreadData = async () => {
         try {
@@ -45,81 +186,20 @@ const ChatThreads = (props: any) => {
         }
     };
 
-    const sendStarredThread = async (chatID: any) => {
-        try {
-            const response = await postApiQuery(`star`, "chat_id", chatID); //need to pass `userID` here
-            setIsStarred(!isStarred);
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    // const sendStarredThread = async (chatID: any) => {
+    //     try {
+    //         const response = await postApiQuery(`star`, "chat_id", chatID); //need to pass `userID` here
+    //         setIsStarred(!isStarred);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
 
-    const handleEdit = (event: any, chatID: any) => {
-        event.stopPropagation();
-        console.log("chatID:", chatID);
-    };
-
-    const ThreadElements = ({ item }: any) => {
-        return (
-            <>
-                <Box
-                    className={`thread-box ${props.activeChatThreadDetails?.id === item.id ? "active-thread-box" : ""}`}
-                    onClick={() => props.runChatThread(item)}
-                >
-                    {/* <Typography className="questionText">{item.question}</Typography> */}
-                    <Typography className="questionText">
-                        {item.session_data[0].question}
-                        <Box component="span" className="edit-icon" onClick={event => handleEdit(event, item?.chatID)}>
-                            <BorderColorOutlinedIcon />
-                        </Box>
-                        <span onClick={() => sendStarredThread(item?.chatID)}>
-                            {" "}
-                            {item.session_data[0].is_stared ? <GradeIcon className="grade" /> : <StarOutlineIcon color="success" />}
-                        </span>
-                    </Typography>
-                    <Box className="thread-icon-container">
-                        <Typography className="otherOptions">{moment(item.session_data[0].time).format("DD/MM/YYYY LT")}</Typography>
-                        <div className="d-flex justify-content-end">
-                            <div className="p-2 bd-highlight">
-                                {/* <span className="replyIcon" onClick={props.handleReplyClick}>
-                                    <span>
-                                        <ReplyAllIcon />
-                                    </span>
-                                    <span>{item.likeCount}</span>
-                                </span> */}
-                                {/* <span className="viewIcon" onClick={event => event.stopPropagation()}>
-                                    <span>
-                                        <ShareOutlinedIcon />
-                                    </span>
-                                </span> */}
-                                <span className="viewIcon">
-                                    <span>
-                                        <DownloadPDFThreads pdfData={item.session_data} />
-                                        {/* <FileDownloadOutlinedIcon /> */}
-                                    </span>
-                                    {/* <DownloadThread threads={item.session_data} /> */}
-                                </span>
-                            </div>
-                            <div className="p-2 bd-highlight">
-                                <span className="thumbUp" onClick={event => event.stopPropagation()}>
-                                    <span>
-                                        <ThumbUpOutlinedIcon />
-                                    </span>
-                                    <span>{item.like_counts}</span>
-                                </span>
-                                <span className="thumbDown" onClick={event => event.stopPropagation()}>
-                                    <span>
-                                        <ThumbDownAltOutlinedIcon />
-                                    </span>
-                                    <span>{item.dislike_counts}</span>
-                                </span>
-                            </div>
-                        </div>
-                    </Box>
-                </Box>
-            </>
-        );
-    };
+    // const handleEdit = (text: any, chatId: any) => {
+    //     setChatID(chatId);
+    //     setIsText(text);
+    //     setIsEdit(true);
+    // };
 
     const ReplyComp = () => {
         const CommentData = [
@@ -222,9 +302,9 @@ const ChatThreads = (props: any) => {
                             })} */}
 
                             {allThreads &&
-                                allThreads.length > 0 &&
-                                allThreads.map((item, index) => {
-                                    return <React.Fragment key={index}>{<ThreadElements key={index} {...{ item }} />}</React.Fragment>;
+                                allThreads?.length > 0 &&
+                                allThreads?.map(item => {
+                                    return <Box>{<ThreadElements {...{ item, props, setIsStarred, makeStar }} />}</Box>;
                                 })}
                         </>
                     )) || <ReplyComp />}

@@ -410,3 +410,22 @@ export async function postApiQuery(apiName: string, queryName: string, tagName: 
         return [];
     }
 }
+
+export async function postApiQueryText(apiName: string, queryName: string, tagName: any, queryNameText: string, tagText: any) {
+    try {
+        const response = await fetch(`${BASE_API_URL}/${apiName}?${queryName}=${tagName}&${queryNameText}=${tagText}`, {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        const parsedResponse = await response.json();
+        if (response.status > 299 || !response.ok) {
+            throw Error(parsedResponse.error || "Unknown error");
+        }
+        return parsedResponse;
+    } catch (err) {
+        return [];
+    }
+}

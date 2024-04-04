@@ -99,7 +99,7 @@ const MyDocument: React.FC<MyDocumentProps> = ({ pdfData }) => {
     );
 
     const extractTextFromHTML = (htmlContent: any) => {
-        const doc = new DOMParser().parseFromString(htmlContent, "text/html");
+        const doc = new DOMParser()?.parseFromString(htmlContent, "text/html");
         return doc.body.textContent || "";
     };
 
@@ -107,10 +107,10 @@ const MyDocument: React.FC<MyDocumentProps> = ({ pdfData }) => {
         <Document>
             <Page size="A4" style={styles.page}>
                 <Header />
-                {pdfData.map((item: any, i: any) => (
+                {pdfData?.map((item: any, i: any) => (
                     <View style={[styles.section, styles.textOverflow]} key={i}>
-                        <Text style={styles.questionText} wrap={false}>{`Q${i + 1}: ${item.text}`}</Text>
-                        <Text style={styles.answerText}>{extractTextFromHTML(item.response)}</Text>
+                        <Text style={styles.questionText} wrap={false}>{`Q${i + 1}: ${item?.question}`}</Text>
+                        <Text style={styles.answerText}>{extractTextFromHTML(item?.answer?.answer)}</Text>
                     </View>
                 ))}
             </Page>
@@ -131,7 +131,7 @@ const DownloadPDFThreads: React.FC<{ pdfData: any }> = ({ pdfData }) => (
         <PDFDownloadLink className="pdfDownload" document={<MyDocument pdfData={pdfData} />} fileName={`cglense_chat_${Date.now()}.pdf`}>
             {({ loading }) =>
                 loading ? (
-                    "Loading"
+                    <FileDownloadOutlinedIcon />
                 ) : (
                     <>
                         <FileDownloadOutlinedIcon />
