@@ -1,8 +1,11 @@
 import React from "react";
 import { PDFDownloadLink, Page, Text, View, Document, StyleSheet, Font, Image, Link } from "@react-pdf/renderer";
-import { IconButton } from "@fluentui/react";
-import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
+// import { IconButton } from "@fluentui/react";
 import { Avatar, Box } from "@mui/material";
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import {Typography, Stack, Button, Dialog, DialogContent,IconButton } from "@mui/material";
+import Html from 'react-pdf-html';
+import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 
 // Define styles with types
 const styles = StyleSheet.create({
@@ -119,30 +122,32 @@ const MyDocument: React.FC<MyDocumentProps> = ({ pdfData }) => {
 };
 
 // Create a function to trigger the download
-const DownloadPDFThreads: React.FC<{ pdfData: any }> = ({ pdfData }) => (
-    <Box
-        sx={{
-            "& a:hover": {
-                backgroundColor: "var(--active-themes)",
-                color: "#fff !important"
-            }
-        }}
-    >
-        <PDFDownloadLink className="pdfDownload" document={<MyDocument pdfData={pdfData} />} fileName={`cglense_chat_${Date.now()}.pdf`}>
-            {({ loading }) =>
-                loading ? (
-                    <FileDownloadOutlinedIcon />
-                ) : (
-                    <>
-                        <FileDownloadOutlinedIcon />
-
-                        {/* <IconButton title="Export" iconProps={{ iconName: 'FileDownloadOutlinedIcon' }} />
-           Export PDF */}
-                    </>
-                )
-            }
-        </PDFDownloadLink>
-    </Box>
-);
+const DownloadPDFThreads: React.FC<{ pdfData: MyDocumentProps[] }> = ({ pdfData }) => {
+    const [open, setOpen] = React.useState(false);
+    const handleClickOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+  
+    return (
+      <>
+        <IconButton aria-label="duplicate" color="inherit" onClick={handleClickOpen}>
+      <FileDownloadOutlinedIcon color="primary" />
+        </IconButton>
+        <Dialog open={open} onClose={handleClose} maxWidth="md">
+          <DialogContent>
+            <Stack gap={3} alignItems="center">
+              <Typography variant='h4'>Confirm Download</Typography>
+              <Typography variant='body2' marginBottom={1}>Are you sure you want to download the PDF?</Typography>
+              <Stack direction="row" gap={2}>
+                <Button variant="contained" color='error' onClick={handleClose}>Cancel</Button>
+                <PDFDownloadLink document={<MyDocument pdfData={open ? pdfData : []} />} fileName={`finLense_${Date.now()}.pdf`}>
+                  <Button variant="contained" color='primary' onClick={handleClose}>Yes</Button>
+                </PDFDownloadLink>
+              </Stack>
+            </Stack>
+          </DialogContent>
+        </Dialog>
+      </>
+    );
+  };
 
 export default DownloadPDFThreads;

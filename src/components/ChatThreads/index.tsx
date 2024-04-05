@@ -35,6 +35,7 @@ const ThreadElements = ({ item, props, makeStar, isStarred }: any) => {
     const [isText, setIsText] = useState("");
     const [isChatID, setChatID] = useState("");
     const [activeThread, setActiveThread] = useState("");
+    
 
     const sendStarredThread = async (chatID: any) => {
         try {
@@ -134,11 +135,11 @@ const ThreadElements = ({ item, props, makeStar, isStarred }: any) => {
                                     <ShareOutlinedIcon />
                                 </span>
                             </span> */}
-                            {/* <span className="viewIcon"> */}
-                            {/* <span onClick={event => event.stopPropagation()}> */}
-                            {/* <DownloadPDFThreads pdfData={item?.session_data} /> */}
+                            
+                             <span onClick={event => event.stopPropagation()}>
+                            <DownloadPDFThreads pdfData={item?.session_data} /> 
                             {/* <FileDownloadOutlinedIcon /> */}
-                            {/* </span> */}
+                            </span> 
                             {/* <DownloadThread threads={item.session_data} /> */}
                             {/* </span> */}
                         </div>
