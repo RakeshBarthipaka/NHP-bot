@@ -304,10 +304,18 @@
     top: 55px; 
     right: 55px;
     width: 300px;
-    padding: 0px;
+    padding: 10px 0px 0px;
     box-shadow: 2px 4px 12px rgb(0,0,0,0.15);
     border-radius: 5px;
     z-index: 11;
+}
+
+span.closeBtn {
+    position: absolute;
+    right: 5px;
+    top: 0;
+    cursor: pointer;
+    color: #a0a0a0;
 }
 .colorsList {
     display: flex;

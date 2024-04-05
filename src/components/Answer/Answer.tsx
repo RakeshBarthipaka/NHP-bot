@@ -98,8 +98,27 @@ export const Answer = ({
         }
     };
 
+    const unsecuredCopyToClipboard = (text:any) => {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+          document.execCommand('copy');
+        } catch (err) {
+          console.error('Unable to copy to clipboard', err);
+        }
+        document.body.removeChild(textArea);
+      }
+
     const copyChatData = async () => {
-        navigator.clipboard.writeText(answer.answer);
+        if (window.isSecureContext && navigator.clipboard) {
+            navigator.clipboard.writeText(answer.answer); 
+          } else {
+            unsecuredCopyToClipboard(answer.answer); 
+          }
+        // navigator.clipboard.writeText(answer.answer);
         setShareIconStyle({ display: "none" });
     };
 
@@ -182,7 +201,7 @@ export const Answer = ({
                 <Stack className={`answerContainer ${isSelected && "selected"}`} verticalAlign="space-between">
                     <Stack.Item grow>
                         <div className="answerText" dangerouslySetInnerHTML={{ __html: sanitizedAnswerHtml }}></div>
-                         {/* {answer.isChartRequired &&
+                         {answer.isChartRequired &&
                             (answer.chart ? (
                                 <DrawChart chart={answer.chart}></DrawChart>
                             ) : (
@@ -190,7 +209,7 @@ export const Answer = ({
                                     Generating Chart
                                     <span className="loadingdots" />
                                 </p>
-                            ))}  */}
+                            ))} 
                     </Stack.Item>
                     <Stack>
                         <div className="IconCustomColor answerActionIconBtns">
@@ -203,13 +222,13 @@ export const Answer = ({
                             onClick={() => likeDisLikeAnswerToggle("LIKE")}
                         /> */}
                             {/* <span onClick={downloadAsPdf}></span> */}
-                            <span onClick={() => likeDisLikeAnswerToggle("LIKE")}>
+                            <span title="Like" onClick={() => likeDisLikeAnswerToggle("LIKE")}>
                                 <Avatar className="thumbUp">
                                     {" "}
                                     <ThumbUpAltOutlinedIcon />
                                 </Avatar>
                             </span>
-                            <span onClick={() => likeDisLikeAnswerToggle("DISLIKE")}>
+                            <span title="Dislike" onClick={() => likeDisLikeAnswerToggle("DISLIKE")}>
                                 <Avatar className="thumbDown">
                                     {" "}
                                     <ThumbDownAltOutlinedIcon />
@@ -249,10 +268,10 @@ export const Answer = ({
                                 // disabled={true}
                                 onClick={() => copyChatData()}
                             /> */}
-                            <span>
+                            <span title="Download">
                                 <DownloadPDF pdfData={questionAnswersList} />
                             </span>
-                            <span onClick={() => copyChatData()}>
+                            {/* <span title="Mail" onClick={() => copyChatData()}>
                                 <Avatar
                                     sx={{
                                         bgcolor: "var(--bg-primary-light)",
@@ -266,7 +285,7 @@ export const Answer = ({
                                     {" "}
                                     <MailOutlineOutlinedIcon />
                                 </Avatar>
-                            </span>
+                            </span> */}
 
                             {/* <IconButton
                             //     iconProps={{ iconName: "Mail" }}
@@ -305,7 +324,7 @@ export const Answer = ({
                             </div>
                         </div> */}
 
-                            <span onClick={() => onThoughtProcessClicked()} className="hideInMobileXs">
+                            <span title="Thought Process" onClick={() => onThoughtProcessClicked()} className="hideInMobileXs">
                                 <Avatar
                                     sx={{
                                         bgcolor: "var(--bg-secondary)",
@@ -329,7 +348,7 @@ export const Answer = ({
                                 </Avatar>
                             </span>
 
-                            <span onClick={() => onSupportingContentClicked()} className="hideInMobileXs">
+                            <span title="Supporting Content" onClick={() => onSupportingContentClicked()} className="hideInMobileXs">
                                 <Avatar
                                     // sx={{
                                     //     bgcolor: "rgba(83, 118, 240, 1)",
@@ -363,7 +382,7 @@ export const Answer = ({
                                 </Avatar>
                             </span>
 
-                            <span onClick={() => onLogsContentClicked()} className="hideInMobileXs">
+                            <span title="Logs Data" onClick={() => onLogsContentClicked()} className="hideInMobileXs">
                                 <Avatar
                                     // sx={{
                                     //     bgcolor: "rgba(83, 118, 240, 1)",

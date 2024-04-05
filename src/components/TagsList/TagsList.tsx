@@ -8,7 +8,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export const TagsList = ({ setTagClicked, setTagName, toggleKeywordAnalysis, tags }: any) => {
-
     let tagsArr = Object?.keys(tags);
 
     return (

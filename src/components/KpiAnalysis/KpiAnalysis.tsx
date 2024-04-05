@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Avatar, Box, Button, ButtonGroup, FormControl, InputLabel, MenuItem, Select, Stack } from "@mui/material";
 import "./KpiAnalysis.scss";
-import { getApi } from "../../api";
+import { getApi, postApi } from "../../api";
 import TroubleshootOutlinedIcon from '@mui/icons-material/TroubleshootOutlined';
 
 import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
@@ -52,7 +52,7 @@ const FilterComponent = ({ data, label, value, handleChange }:any) => {
         <MenuItem disabled value="">
           <em>{label}</em>
         </MenuItem>
-        {data.map((item:any, index:any) => (
+        {data?.map((item:any, index:any) => (
           <MenuItem key={index} value={item}>{item}</MenuItem>
         ))}
       </Select>
@@ -60,15 +60,18 @@ const FilterComponent = ({ data, label, value, handleChange }:any) => {
   );
 };
 
-const KpiAnalysis = () => {
+const KpiAnalysis = (kpiName:any) => {
+  const kpiAnalysisName = kpiName.kpiName; 
   const [isValue, setIsValue] = useState<boolean>(false);
 
+  const [kpiAnalysisData, setKpiAnalysisData] = useState({});
   const [filtersData, setFiltersData] = useState({country: [], productcategory: [], bg: [], last_5_years: [], months: []});
   const [selectedCountry, setSelectedCountry] = useState('');
   const [selectedProductCategory, setSelectedProductCategory] = useState('');
   const [selectedBusinessGroup, setSelectedBusinessGroup] = useState('');
   const [selectedYear, setSelectedYear] = useState('');
   const [selectedPeriod, setSelectedPeriod] = useState('');
+
 
   const handleCountryChange = (event:any) => {
     setSelectedCountry(event.target.value);
@@ -88,7 +91,22 @@ const KpiAnalysis = () => {
   };
 
   const handleFiltersChange = () => {
-  console.log(selectedCountry, selectedProductCategory, selectedBusinessGroup, selectedYear, selectedPeriod);
+  // console.log(selectedCountry, selectedProductCategory, selectedBusinessGroup, selectedYear, selectedPeriod);
+  const payLoad = {
+    "kpi": "uom",
+    "country": selectedCountry ? [selectedCountry] : [],
+    "bg": selectedBusinessGroup ? [selectedBusinessGroup] : [],
+    "productcategory": selectedProductCategory ? [ selectedProductCategory ] : [],
+    "year": selectedYear ? [ selectedYear ] : [],
+    "period": selectedPeriod ? [ selectedPeriod ] : []
+  }
+
+  async function getKpiAnalysis () {
+    const resp = await postApi(payLoad, 'kpi/kpi_analysis/');
+    setKpiAnalysisData(resp);  
+  }
+  getKpiAnalysis();
+
   };
   
 
@@ -293,11 +311,11 @@ const KpiAnalysis = () => {
   };
 
   useEffect(()=>{
-    async function getKpiList () {
+    async function getKpiFilters () {
       const response = await getApi('kpi/get_filter_params/');
       setFiltersData(response); 
     }
-    getKpiList();
+    getKpiFilters();
   }, [])
 
   
@@ -310,7 +328,7 @@ const KpiAnalysis = () => {
           <h3 className="disply-page-title">KPI Analysis</h3>
         </Box>
         <Box>
-          <h4 className="">Gross Margin</h4>
+          <h4 className="">{kpiAnalysisName}</h4>
 
           <Box display={"flex"} gap={1} sx={{ marginBottom: '15px', marginTop: '10px'}}>
            
@@ -382,7 +400,7 @@ const KpiAnalysis = () => {
                   <FileDownloadOutlinedIcon />
                 </Avatar>
               </span>
-            </Box>
+            </Box> 
           </Stack>
           <Stack>
             <DataGrid
@@ -396,7 +414,7 @@ const KpiAnalysis = () => {
 
             />
           </Stack>
-          <Stack className="kpiAnalysisText">
+          {/* <Stack className="kpiAnalysisText">
             <h4>Summary of Gross Margin</h4>
             <ul>
               <li>
@@ -407,12 +425,12 @@ const KpiAnalysis = () => {
               <li>Thailand has shown some generally increasing trend in UOM with slight decline in 2022.</li>
 
             </ul>
-          </Stack>
+          </Stack> */}
         </Box>
 
-        <Box className="chartsBox">
+        {/* <Box className="chartsBox">
           <Line options={options} data={data} />
-        </Box>
+        </Box> */}
       </Box>
     </>
   );

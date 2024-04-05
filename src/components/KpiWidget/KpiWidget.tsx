@@ -18,11 +18,12 @@ import {
   MRT_RowSelectionState,
   MRT_Icons,
 } from 'material-react-table';
-import { getApi } from "../../api";
+import { getApi, postApi } from "../../api";
 
 interface Props {
   toggleChatRightContent: () => void;
   toggleKpiAnalysis: () => void;
+  setKpiName: any;
 }
 
 type KpiRow = {
@@ -164,13 +165,13 @@ const result = [
 ];
 
 
-const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis }: Props) => {
+const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis, setKpiName }: Props) => {
 
   const columns = useMemo(
     () => [
       {
         accessorKey: 'title',
-        header: 'kpi',
+        header: 'Kpi',
         grow: false,
         size: 150,
       },
@@ -240,7 +241,7 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis }: Props) => {
         const kpiValues = kpiValuesResponse;
   
         // Combine KPI values with KPI list
-        const updatedKpiArray = kpiList.map((kpiObject:any) => {
+        const updatedKpiArray = kpiList?.map((kpiObject:any) => {
           const kpiKey = kpiObject.kpi;
           if (kpiValues.hasOwnProperty(kpiKey)) {
             kpiObject.value = kpiValues[kpiKey];
@@ -248,6 +249,16 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis }: Props) => {
           return kpiObject;
         });
   
+
+        const newObj: MRT_RowSelectionState = {};
+        updatedKpiArray.forEach((item:any) => {
+          if(item.status) {
+            newObj[item.id] = item.status;
+          }
+        });
+        setRowSelection(newObj)
+        // console.log(newObj);
+
         setData(updatedKpiArray);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -266,6 +277,7 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis }: Props) => {
     enableHiding: false,
     globalFilterFn: 'contains',
     icons: customTableIcons,
+    enableColumnActions: false, 
 
     muiSearchTextFieldProps: {
       placeholder: 'Search by KPI Name',
@@ -309,9 +321,33 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis }: Props) => {
     });
   }
 
-  const saveSelectedKpis = () => {
-    const selectedRowsData = table.getSelectedRowModel().rows.map((row: any) => row.original.id)
-    setKpiSlides(getKpiSlides(selectedRowsData, result));
+
+
+  const saveSelectedKpis = async () => {
+    const newData = data;
+    const selectedRowsData = Object.keys(rowSelection);
+
+    const selectedRowsDataSet = new Set(selectedRowsData);
+    const newDataWithEnable = newData?.map((item: { id: any }) => ({
+      ...item,
+      enable: selectedRowsDataSet.has(item.id.toString()) ? 1 : 0
+    }));
+
+    const newArray = newDataWithEnable?.map((item: any) => ({
+      kpi: item.kpi,
+      sort_order: item.sort_order,
+      enable: item.enable
+    }));
+
+    const payLoad = {
+      "param": newArray
+    }
+
+    async function updateKpiOrder() {
+      const resp = await postApi(payLoad, 'kpi/order_kpi/');
+    }
+    updateKpiOrder();
+
     setOpenKpiModal(false)
   }
 
@@ -320,7 +356,7 @@ const KpiWidget = ({ toggleChatRightContent, toggleKpiAnalysis }: Props) => {
       <div className="carouselContainer">
         {(kpiSlides.length > 0) ?
           <>
-            <MultiItemCarousel KpiSlides={kpiSlides} toggleChatRightContent={toggleChatRightContent} toggleKpiAnalysis={toggleKpiAnalysis} />
+            <MultiItemCarousel KpiSlides={kpiSlides} toggleChatRightContent={toggleChatRightContent} toggleKpiAnalysis={toggleKpiAnalysis} setKpiName={setKpiName}/>
             <AddCircleOutlineOutlinedIcon className="addKpiBtn" onClick={() => setOpenKpiModal(true)} />
           </>
           :
