@@ -171,6 +171,7 @@ const ChatThreads = (props: any) => {
     const [isEdit, setIsEdit] = useState(false);
     const [isText, setIsText] = useState("");
     const [isChatID, setChatID] = useState("");
+    const [isSort, setSort] = useState("star");
 
     const makeStar = () => {
         setIsStarred(!isStarred);
@@ -178,7 +179,7 @@ const ChatThreads = (props: any) => {
 
     const getThreadData = async () => {
         try {
-            const response = await getApi(`chat_sessions/?user=${"user"}`); //need to pass `userID` here
+            const response = await getApi(`chat_sessions/?user=${"user"}&&order_by=${isSort}`); //need to pass `userID` here
             if (response) {
                 setThreads(response);
             }
@@ -243,7 +244,7 @@ const ChatThreads = (props: any) => {
 
     useEffect(() => {
         getThreadData();
-    }, [isStarred]);
+    }, [isStarred, isSort]);
 
     return (
         <>
@@ -273,19 +274,20 @@ const ChatThreads = (props: any) => {
                         }}
                     >
                         <ButtonGroup className="mui-custom-toggle" variant="outlined" aria-label="Basic button group">
-                            <Button className="mui-toggle-active">
+                            <Button className={isSort ==="like" ? "mui-toggle-active" : ""} onClick={()=> setSort("like")}>
                                 <span className="iconText">
-                                    <RemoveRedEyeOutlinedIcon className="viewIcon IconElemt" />
+                                    
+                                    <ThumbUpOutlinedIcon className="viewIcon IconElemt"/>
                                 </span>
-                                <span>By Views</span>
+                                <span>By Likes</span>
                             </Button>
-                            <Button>
+                            <Button className={isSort ==="time" ? "mui-toggle-active" : ""} onClick={()=> setSort("time")}>
                                 <span className="iconText">
                                     <SortOutlinedIcon className="ShortByIcon IconElemt" />
                                 </span>
                                 <span>By Date</span>
                             </Button>
-                            <Button>
+                            <Button className={isSort ==="star" ? "mui-toggle-active" : ""} onClick={()=> setSort("star")}>
                                 <span className="iconText">
                                     <GradeIcon className="grade ShortByIcon IconElemt" />
                                 </span>

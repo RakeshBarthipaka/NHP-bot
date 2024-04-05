@@ -32,7 +32,7 @@ const KeywordList = (props: any) => {
             setTagsData(response);
         }
         getKeywordsList();
-    }, [])
+    }, [props?.tagName]);
 
     const toggleAnswerDisplay = (id: any) => {
         if (isDisplayAnswer === id && isDisplayAnswerToggle === true) {
