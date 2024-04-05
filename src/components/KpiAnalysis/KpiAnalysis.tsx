@@ -414,7 +414,7 @@ const KpiAnalysis = (kpiName:any) => {
 
             />
           </Stack>
-          <Stack className="kpiAnalysisText">
+          {/* <Stack className="kpiAnalysisText">
             <h4>Summary of Gross Margin</h4>
             <ul>
               <li>
@@ -425,12 +425,12 @@ const KpiAnalysis = (kpiName:any) => {
               <li>Thailand has shown some generally increasing trend in UOM with slight decline in 2022.</li>
 
             </ul>
-          </Stack>
+          </Stack> */}
         </Box>
 
-        <Box className="chartsBox">
+        {/* <Box className="chartsBox">
           <Line options={options} data={data} />
-        </Box>
+        </Box> */}
       </Box>
     </>
   );
