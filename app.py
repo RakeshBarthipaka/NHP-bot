@@ -8,10 +8,15 @@ from langchain import hub
 from datetime import datetime
 import os
 import time
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+
+
 
 os.environ["OPENAI_API_KEY"] = "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"
 
 langchain_prompt = hub.pull("rlm/rag-prompt")
+
 
 def get_index(data, index_name):
     index = None
@@ -72,6 +77,13 @@ report_engine.update_prompts(
 )
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/chat")
 async def chat(payload: dict):
@@ -90,7 +102,7 @@ async def chat(payload: dict):
         formatted_response = {
             "data_points": [user_input_str],
             "thoughts": "thoughts",
-            "exchange_id": 0,
+            "exchange_id": 92,
             "question": user_input_str,
             "answer": result,
             "tokens": 0,
@@ -104,6 +116,8 @@ async def chat(payload: dict):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+app.mount("/", StaticFiles(directory="static", html=True), name="static")
 
 if __name__ == "__main__":
     import uvicorn
