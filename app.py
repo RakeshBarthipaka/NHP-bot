@@ -14,10 +14,43 @@ from fastapi.staticfiles import StaticFiles
 import uvicorn
  
  
-os.environ["OPENAI_API_KEY"] = "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"
+# os.environ["OPENAI_API_KEY"] = "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"
+# azureopenai_client = AzureOpenAI(
+#     # https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#rest-api-versioning
+#     api_version="2023-07-01-preview",
+#     azure_endpoint="https://covalenseopenaieastus2.openai.azure.com/",
+#     api_key="17b15c9c0c3643368bb8e9e2c5ada06f",
+# )
  
+from llama_index.llms.azure_openai import AzureOpenAI
+from llama_index.embeddings.azure_openai import AzureOpenAIEmbedding
+from llama_index.core import Settings
+ 
+api_key= "17b15c9c0c3643368bb8e9e2c5ada06f"
+api_version="2023-07-01-preview"
+azure_endpoint="https://covalenseopenaieastus2.openai.azure.com/"
+ 
+llm = AzureOpenAI(
+    model="gpt-35-turbo-16k",
+    deployment_name="gpt-35-turbo-16k",
+    api_key=api_key,
+    azure_endpoint=azure_endpoint,
+    api_version=api_version,
+)
+ 
+# You need to deploy your own embedding model as well as your own chat completion model
+embed_model = AzureOpenAIEmbedding(
+    model="text-embedding-ada-002",
+    deployment_name="text-embedding-ada-002",
+    api_key=api_key,
+    azure_endpoint=azure_endpoint,
+    api_version=api_version,
+)
+ 
+ 
+Settings.llm = llm
+Settings.embed_model = embed_model
 langchain_prompt = hub.pull("rlm/rag-prompt")
- 
  
 def get_index(data, index_name):
     index = None
@@ -41,7 +74,6 @@ def load_data():
     report_pdf = SimpleDirectoryReader("data").load_data()
     return report_pdf
  
-gpt35_llm = OpenAI(model="gpt-3.5-turbo")
  
 if not os.path.exists("test_data_embeddings"):
     report_pdf = load_data()
@@ -49,7 +81,7 @@ if not os.path.exists("test_data_embeddings"):
 else:
     report_index, time_stamp = load_index("test_data_embeddings")
  
-report_engine = report_index.as_query_engine(response_mode="tree_summarize", similarity_top_k=4, llm=gpt35_llm)
+report_engine = report_index.as_query_engine(response_mode="tree_summarize", similarity_top_k=4, llm=llm)
  
 new_summary_tmpl_str = (
     "Context information is below.\n"
@@ -58,7 +90,7 @@ new_summary_tmpl_str = (
     "---------------------\n"
     "Given the context information and not prior knowledge\n"
     "First answer the user query\n"
-    "Then give at most 3 recommended products similar to the user query\n"
+    "Then give at most 3 best recommended products of same or different brands similar to the user query.\n"
     "Query: {query_str}\n"
     "Answer: "
 )
@@ -122,5 +154,4 @@ async def chat(payload: dict):
 app.mount("/", StaticFiles(directory="static", html=True), name="static")
  
 if __name__ == "__main__":
-    uvicorn.run("app:app", host="0.0.0.0", port=8541, reload=True, workers=2)
- 
+    uvicorn.run("app:app", host="0.0.0.0", port=8920, reload=True, workers=2)
